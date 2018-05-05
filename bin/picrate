@@ -1,0 +1,8 @@
+#!/usr/bin/env jruby
+unless defined? PICRATE_ROOT
+  $LOAD_PATH << File.expand_path(File.dirname(__FILE__))
+  PICRATE_ROOT = File.expand_path(File.dirname(__FILE__) + '/../')
+end
+
+require "#{PICRATE_ROOT}/lib/picrate/runner"
+Processing::Runner.execute

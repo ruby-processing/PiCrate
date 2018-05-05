@@ -12276,7 +12276,7 @@ public class PApplet implements PConstants {
      * <pre>class MySketch(PApplet):
      *     pass
      *
-     *MySketch().runPropane();</pre>
+     *MySketch().runPicrate();</pre>
      * @param args
      */
     protected void runSketch(final String[] args) {
@@ -12297,7 +12297,7 @@ public class PApplet implements PConstants {
     /**
      * Convenience method for propane with public access for jdk9
      */
-    public void runPropane() {
+    public void runPicrate() {
         runSketch(new String[0]);
     }
 

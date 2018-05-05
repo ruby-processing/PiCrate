@@ -69,7 +69,7 @@ project 'picrate', 'http://maven.apache.org' do
           { groupId:  'org.jogamp.jogl',
             artifactId:  'jogl-all',
             version:  '${jogl.version}',
-            classifier: 'natives-macosx-universal',
+            classifier: 'natives-linux-armv6hf',
             type:  'jar',
             outputDirectory: '${picrate.basedir}/lib'
           },
@@ -77,7 +77,7 @@ project 'picrate', 'http://maven.apache.org' do
             artifactId:  'gluegen-rt',
             version:  '${jogl.version}',
             type:  'jar',
-            classifier: 'natives-macosx-universal',
+            classifier: 'natives-linux-armv6hf',
             outputDirectory: '${picrate.basedir}/lib'
           }
         ]
