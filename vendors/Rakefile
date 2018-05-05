@@ -1,0 +1,127 @@
+# frozen_string_literal: true
+require 'rake/clean'
+
+WARNING = <<-EOS
+   WARNING: you may not have wget installed, you could just download
+   the correct version of picrate-examples (see EXAMPLES vendors directory)
+EOS
+SOUND = 'sound.zip'.freeze
+SOUND_VERSION = 'v1.3.2' # version 1.3.2
+GLVIDEO = 'processing-glvideo.zip'
+VIDEO = 'video-2.zip'
+VIDEO_VERSION = '2' # version 1.0.1
+EXAMPLES = '0.0.1'.freeze
+HOME_DIR = ENV['HOME']
+MAC_OR_LINUX = /linux|mac|darwin/ =~ RbConfig::CONFIG['host_os']
+
+CLOBBER.include(EXAMPLES, SOUND, GLVIDEO, VIDEO)
+
+desc 'download, and copy picrate examples'
+task default: [:download_and_copy_samples]
+
+desc 'download and copy examples to user home'
+task download_and_copy_samples: [:download_examples, :copy_examples]
+
+task :download_examples
+file_name = PI_OR_LINUX.nil? ? "#{EXAMPLES}.zip" : "#{EXAMPLES}.tar.gz"
+wget_base = 'wget https://github.com/ruby-processing/picrate-examples'
+wget_string = [wget_base, 'archive', file_name].join('/')
+file file_name do
+  begin
+    sh wget_string
+  rescue
+    warn(WARNING)
+  end
+end
+
+desc 'download and copy sound library to ~/.picrate'
+task download_and_copy_sound: [:init_dir, :download_sound, :copy_sound, :clobber]
+
+desc 'download and copy video library to ~/.picrate'
+task download_and_copy_video: [:init_dir, :download_video, :copy_video, :clobber]
+
+desc 'download and copy glvideo library to ~/.picrate'
+task download_and_copy_glvideo: [:init_dir, :download_glvideo, :copy_glvideo, :clobber]
+
+
+desc 'download sound library'
+task :download_sound do
+  wget_base = 'wget https://github.com/processing/processing-sound'
+  wget_string = [wget_base, 'releases/download', SOUND_VERSION, SOUND].join('/')
+  begin
+    sh wget_string
+  rescue
+    warn(WARNING)
+  end
+end
+
+desc 'download glvideo library'
+task :download_glvideo do
+  wget_base = 'wget https://github.com/gohai/processing-glvideo'
+  wget_string = [wget_base, 'releases/download/latest', GLVIDEO].join('/')
+  begin
+    sh wget_string
+  rescue
+    warn(WARNING)
+  end
+end
+
+desc 'download video library'
+task :download_video do
+  wget_base = 'wget https://github.com/processing/processing-video'
+  wget_string = [wget_base, 'releases/download', VIDEO_VERSION, VIDEO].join('/')
+  begin
+    sh wget_string
+  rescue
+    warn(WARNING)
+  end
+end
+
+desc 'initialize ~/.picrate directories'
+task :init_dir do
+  unless File.exist? "#{HOME_DIR}/.picrate/libraries"
+    sh "mkdir -p ~/.picrate"
+    sh "mkdir -p ~/.picrate/libraries"
+  end
+end
+
+
+desc 'copy examples'
+task :copy_examples => file_name do
+  if PI_OR_LINUX.nil?
+    sh "unzip #{EXAMPLES}.zip"
+  else
+    sh "tar xzvf #{EXAMPLES}.tar.gz"
+  end
+  sh "rm -r #{HOME_DIR}/picrate_samples" if File.exist? "#{HOME_DIR}/picrate_samples"
+  sh "cp -r picrate-examples-#{EXAMPLES} #{HOME_DIR}/picrate_samples"
+  sh "rm -r picrate-examples-#{EXAMPLES}"
+end
+
+desc 'copy sound library'
+task :copy_sound => SOUND do
+  directory "~/.picrate"
+  directory "~/.picrate/libraries"
+  sh "unzip #{SOUND}"
+  sh "rm -r #{HOME_DIR}/.picrate/libraries/sound" if File.exist? "#{HOME_DIR}/.picrate/libraries/sound"
+  sh "cp -r sound #{HOME_DIR}/.picrate/libraries"
+  sh 'rm -r sound'
+  sh 'rm -r __MACOSX'
+end
+
+desc 'copy video library'
+task :copy_video => VIDEO do
+  sh "unzip #{VIDEO}"
+  sh "rm -r #{HOME_DIR}/.picrate/libraries/video" if File.exist? "#{HOME_DIR}/.picrate/libraries/video"
+  sh "cp -r video #{HOME_DIR}/.picrate/libraries/video"
+  sh 'rm -r video'
+end
+
+desc 'copy glvideo library'
+task :copy_glvideo => GLVIDEO do
+  directory "~/.picrate/libraries/glvideo"
+  sh "unzip #{GLVIDEO}"
+  sh "rm -r #{HOME_DIR}/.picrate/libraries/glvideo" if File.exist? "#{HOME_DIR}/.picrate/libraries/glvideo"
+  sh "cp -r glvideo #{HOME_DIR}/.picrate/libraries/glvideo"
+  sh 'rm -r glvideo'
+end
