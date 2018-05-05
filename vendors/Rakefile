@@ -12,7 +12,7 @@ VIDEO = 'video-2.zip'
 VIDEO_VERSION = '2' # version 1.0.1
 EXAMPLES = '0.0.1'.freeze
 HOME_DIR = ENV['HOME']
-MAC_OR_LINUX = /linux|mac|darwin/ =~ RbConfig::CONFIG['host_os']
+PI_OR_LINUX = /linux|arm/ =~ RbConfig::CONFIG['host_os']
 
 CLOBBER.include(EXAMPLES, SOUND, GLVIDEO, VIDEO)
 
