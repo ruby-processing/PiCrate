@@ -19,9 +19,9 @@ Gem::Specification.new do |gem|
   gem.files << 'lib/gluegen-rt-2.3.2.jar'
   gem.files << 'lib/jogl-all-2.3.2.jar'
   gem.files << 'lib/gluegen-rt-2.3.2-natives-linux-amd64.jar'
-  gem.files << 'lib/gluegen-rt-2.3.2-natives-macosx-universal.jar'
+  gem.files << 'lib/gluegen-rt-2.3.2-natives-armv6hf.jar'
   gem.files << 'lib/jogl-all-2.3.2-natives-linux-amd64.jar'
-  gem.files << 'lib/jogl-all-2.3.2-natives-macosx-universal.jar'
+  gem.files << 'lib/jogl-all-2.3.2-natives-linux-armv6hf.jar'
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.add_development_dependency 'rake', '~> 12.3'
