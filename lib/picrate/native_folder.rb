@@ -6,7 +6,8 @@ class NativeFolder
 
   WIN_FORMAT = 'windows%d'.freeze
   LINUX_FORMAT = 'linux%d'.freeze
-  ARM32 = '-armv6hf'
+  ARM32 = '-armv6hf'.freeze
+  ARM64 = '-aarch64'.freeze
   # WIN_PATTERNS = [
   #   /bccwin/i,
   #   /cygwin/i,
