@@ -6,6 +6,7 @@ class NativeFolder
 
   WIN_FORMAT = 'windows%d'.freeze
   LINUX_FORMAT = 'linux%d'.freeze
+  ARM32 = '-armv6hf'
   # WIN_PATTERNS = [
   #   /bccwin/i,
   #   /cygwin/i,
@@ -22,7 +23,7 @@ class NativeFolder
 
   def name
     return 'macosx' if os =~ /darwin/ || os =~ /mac/
-    # return format(WIN_FORMAT, bit) if WIN_PATTERNS.include? os
+    return format(LINUX_FORMAT, ARM32) if os =~ /^arm/
     return format(LINUX_FORMAT, bit) if os =~ /linux/
   end
 
