@@ -34,9 +34,9 @@ creates file my_sketch.rb
 ```ruby
 #!/usr/bin/env jruby
 # frozen_string_literal: false
-require 'propane'
+require 'picrate'
 
-class MySketch < Propane::App
+class MySketch < Processing::App
   def settings
     size 200, 200
   end
