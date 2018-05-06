@@ -31,3 +31,5 @@ export PATH="${PATH}:${GEM_PATH}/bin"
 ```
 
 If you know better please post on wiki
+
+[download]:https://s3.amazonaws.com/jruby.org/downloads/9.1.17.0/jruby-bin-9.1.17.0.tar.gz
