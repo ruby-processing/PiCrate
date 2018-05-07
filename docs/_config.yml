@@ -41,7 +41,7 @@ collections:
   #   permalink: /gems/:path
   libraries:
     output: true
-    permalink: /libraries/:path
+    permalink: /libraries/
   # modules:
   #   output: true
   #   permalink: /modules/:path
