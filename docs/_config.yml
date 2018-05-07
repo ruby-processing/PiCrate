@@ -29,32 +29,32 @@ gems:
   - jekyll-feed
   - jekyll-seo-tag
 
-  include: [collections]
-  collections:
-    # blocks:
-    #   output: true
-    #   permalink: /blocks/:path
-    # classes:
-    #   output: true
-    #   permalink: /classes/:path
-    # editors:
-    #   output: true
-    #   permalink: /editors/:path
-    # methods:
-    #   output: true
-    #   permalink: /methods/:path
-    # gems:
-    #   output: true
-    #   permalink: /gems/:path
-    libraries:
-      output: true
-      permalink: /libraries/:path
-    # modules:
-    #   output: true
-    #   permalink: /modules/:path
-    # magic:
-    #   output: true
-    #   permalink: /magic/:path
-    # objects:
-    #   output: true
-    #   permalink: /objects/:path
+include: [collections]
+collections:
+  # blocks:
+  #   output: true
+  #   permalink: /blocks/:path
+  # classes:
+  #   output: true
+  #   permalink: /classes/:path
+  # editors:
+  #   output: true
+  #   permalink: /editors/:path
+  # methods:
+  #   output: true
+  #   permalink: /methods/:path
+  # gems:
+  #   output: true
+  #   permalink: /gems/:path
+  libraries:
+    output: true
+    permalink: /libraries/:path
+  # modules:
+  #   output: true
+  #   permalink: /modules/:path
+  # magic:
+  #   output: true
+  #   permalink: /magic/:path
+  # objects:
+  #   output: true
+  #   permalink: /objects/:path
