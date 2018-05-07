@@ -52,8 +52,8 @@ collections:
   #   output: true
   #   permalink: /objects/:path
 
-  syntax-highlighting:
-    enabled: true
+syntax-highlighting:
+  enabled: true
 
-  sass:
-    sass_dir: _sass
+sass:
+  sass_dir: _sass
