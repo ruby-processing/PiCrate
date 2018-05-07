@@ -184,7 +184,7 @@ METHODS = %i(
   width
 )
 
-class TestSketch < Propane::App
+class TestSketch < Processing::App
   def settings
     size 100, 100
   end
@@ -200,16 +200,16 @@ end
 
 class SpecTest < Minitest::Test
   def setup
-    @propane_sketch = TestSketch.new
+    @picrate_sketch = TestSketch.new
   end
 
   def test_respond
     METHODS.each do |method_string|
-      assert_respond_to @propane_sketch, method_string
+      assert_respond_to @picrate_sketch, method_string
     end
   end
 
   def tear_down
-    @propane_sketch = nil?
+    @picrate_sketch = nil?
   end
 end

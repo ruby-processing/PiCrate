@@ -9,7 +9,7 @@ import processing.core.PShape;
 import processing.core.PSurface;
 
 public class PGraphicsFX2D extends PGraphics{
-    final String message = "FX2D renderer not supported in this version of propane";
+    final String message = "FX2D renderer not supported in this version of picrate";
     public PGraphicsFX2D(){
     }
 

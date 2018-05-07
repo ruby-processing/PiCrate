@@ -2371,7 +2371,7 @@ public class PApplet implements PConstants {
                 } else {
                     printStackTrace(e);
                     String msg = renderer + " may need to be updated "
-                            + "for the current release of propane.";
+                            + "for the current release of picrate.";
                     throw new RuntimeException(msg);
                 }
             } else {
@@ -12270,7 +12270,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * Convenience method for propane to run an already-constructed sketch.
+     * Convenience method for picrate to run an already-constructed sketch.
      * This makes it makes it easy to launch a sketch in jruby:
      *
      * <pre>class MySketch(PApplet):
@@ -12295,7 +12295,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * Convenience method for propane with public access for jdk9
+     * Convenience method for picrate with public access for jdk9
      */
     public void runPicrate() {
         runSketch(new String[0]);

@@ -1,5 +1,5 @@
 /**
- * The purpose of this tool is to allow propane users to use an alternative
+ * The purpose of this tool is to allow picrate users to use an alternative
  * to processing.org map, lerp and norm methods in their sketches
  * Copyright (c) 2018 Martin Prout. This tool is free software; you can
  * redistribute it and/or modify it under the terms of the GNU Lesser General
@@ -204,7 +204,7 @@ public class MathToolModule {
     }
 
     /**
-     * Provides propane grid method as a ruby module method
+     * Provides picrate grid method as a ruby module method
      *
      * @param context ThreadContext
      * @param recv IRubyObject

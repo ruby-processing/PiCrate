@@ -23,7 +23,7 @@ import processing.video.Movie;
 import processing.video.Capture;
 /**
  * This interface makes it easier/possible to use the reflection methods
- * from Movie and Capture classes in Propane::App in propane
+ * from Movie and Capture classes in Processing::App in picrate
  *
  */
 public interface VideoInterface {
