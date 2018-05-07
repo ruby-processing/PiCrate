@@ -2,7 +2,7 @@
 layout: post
 title:  "Control Panel<sup>2</sup>"
 keywords: library, framework, gui, processing
-
+permalink: libraries/control_panel.html
 ---
 Inspired by Nodebox, picrate (copied from ruby-processing) provides a way to control the instance variables of your sketch with a control panel. You can create sliders, buttons, menus and checkboxes that set instance variables on your sketch. Since ruby-processing-2.0 you need to explicitly set the panel visible from the processing sketch (see included examples). Start by loading in the `control_panel` library, and then define your panel like so:-
 NB: revised version for picrate-2.7.2+

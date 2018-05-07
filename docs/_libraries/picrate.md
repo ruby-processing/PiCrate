@@ -2,7 +2,7 @@
 layout: post
 title:  "picrate<sup>1, 2</sup>"
 keywords: library, boids, control_panel
-
+permalink: libraries/picrate.html
 ---
 Propane provides a number of libraries that you can use _out of the box_, but which still need to be loaded to use them in you sketches see examples below:-
 

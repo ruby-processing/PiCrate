@@ -2,7 +2,7 @@
 layout: post
 title:  "custom java library<sup>4</sup>"
 keywords: library, ruby, custom
-
+permalink: libraries/custom_java.html
 ---
 <sup>4</sup><i>A custom java library</i>
 

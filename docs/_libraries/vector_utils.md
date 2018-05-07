@@ -2,6 +2,7 @@
 layout: post
 title:  "vector_utils<sup>2</sup>"
 keywords: processing, vector, library
+permalink: libraries/vector_utils.html
 ---
 We have created a `vector_utils` library that implements a number of vector methods see sample usage:-
 

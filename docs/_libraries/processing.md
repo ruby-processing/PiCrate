@@ -2,7 +2,7 @@
 layout: post
 title:  "processing<sup>5</sup>"
 keywords: library, boids, control_panel
-
+permalink: libraries/processing.html
 ---
 ### Sound library ###
 

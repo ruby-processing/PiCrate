@@ -2,7 +2,7 @@
 layout: post
 title:  "gems<sup>4</sup>"
 keywords: library, gem
-
+permalink: libraries/gems.html
 ---
 The most convenient library to use in `ruby` is a `gem`, and `picrate` is no different, however in addition to pure `ruby gems` there are a number of `gems` that are wrappers for `java` libraries that can be used in `picrate`:-
 
