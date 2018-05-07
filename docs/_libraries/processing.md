@@ -12,6 +12,8 @@ First load the sound library (assumes it was installed using `picrate --install 
 
 You might just as well `include_package` to get namespace access to the `processing.sound` package.
 
+Note processing currently supports only 32 bit drivers on raspberrypi, and we assume 64 bit on regular linux.
+
 ```ruby
 # This is a simple pink noise generator. It can be started with .play(amp).
 # In this example it is started and stopped by clicking into the renderer window.
@@ -55,7 +57,7 @@ wget http://download.processing.org/contribs/contribs.txt
 
 ### Installing contributed vanilla processing libraries ###
 
-Install libraries to your `~/.picrate/libraries` folder.  NB: this created for you when you install the `glvideo`, `sound` or `video` libraries. The one unfortunate / fortunate thing is that you will be responsible for updating versions manually (can be good / bad thing).
+Install libraries to your `~/.picrate/libraries` folder.  NB: this created for you when you install the `glvideo` or `sound` libraries. The one unfortunate / fortunate thing is that you will be responsible for updating versions manually (can be good / bad thing).
 
 ```bash
 picrate -i Sound
