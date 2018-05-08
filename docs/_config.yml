@@ -24,33 +24,33 @@ gems:
 
 include: [collections]
 collections:
-  # blocks:
-  #   output: true
-  #   permalink: /blocks/:path
-  # classes:
-  #   output: true
-  #   permalink: /classes/:path
+  blocks:
+    output: true
+    permalink: /blocks/:path
+  classes:
+    output: true
+    permalink: /classes/:path
   editors:
     output: true
     permalink: /editors/:path
-  # methods:
-  #   output: true
-  #   permalink: /methods/:path
+  methods:
+    output: true
+    permalink: /methods/:path
   gems:
     output: true
     permalink: /gems/:path
   libraries:
     output: true
     permalink: /libraries/index.html
-  # modules:
-  #   output: true
-  #   permalink: /modules/:path
-  # magic:
-  #   output: true
-  #   permalink: /magic/:path
-  # objects:
-  #   output: true
-  #   permalink: /objects/:path
+  modules:
+    output: true
+    permalink: /modules/:path
+  magic:
+    output: true
+    permalink: /magic/:path
+  objects:
+    output: true
+    permalink: /objects/:path
 
 syntax-highlighting:
   enabled: true
