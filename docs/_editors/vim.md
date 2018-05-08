@@ -2,7 +2,7 @@
 layout: post
 title:  "Vim"
 permalink: /editors/vim/
-keywords: editor, ide, ruby, propane, vim, emacs, jedit
+keywords: editor, ide, ruby, picrate, vim, emacs, jedit
 ---
 
 Is an excellent choice for linux and mac users, it is lighweight (runs from the console) commands available from vim:-
@@ -37,7 +37,7 @@ At the pry prompt:-
 load 'my_sketch'
 ```
 
-Creating `my_sketch` is a easy as `propane -c my_sketch 300 300`
+Creating `my_sketch` is a easy as `picrate -c my_sketch 300 300`
 
 To get full listing of sketch in pry enter `$` at the prompt, to edit the `draw` method at the prompt do:-
 
@@ -57,7 +57,7 @@ this allows you to edit your changes which are saved in a `.tmp` file. Read more
 
 Also because vim is run from the console it is so easy to run old friends like `rubocop` or `reek` on your sketch code.
 
-If you are millenial and allergic to the command line install [atom][atom], emacs is only for hardcore geeks. As yet I don't think pry supports `atom` as a editor.
+If you are millenial and allergic to the command line install use an editor that supports ruby syntax, emacs is only for hardcore geeks. As yet I don't think the raspberrypi supports `atom` as an editor.
 
 [atom]:{{ site.github.url }}/atom/
 [pry-wiki]:https://github.com/pry/pry/wiki/Editor-integration/
