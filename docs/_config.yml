@@ -36,9 +36,9 @@ collections:
   # methods:
   #   output: true
   #   permalink: /methods/:path
-  # gems:
-  #   output: true
-  #   permalink: /gems/:path
+  gems:
+    output: true
+    permalink: /gems/:path
   libraries:
     output: true
     permalink: /libraries/index.html
