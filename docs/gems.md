@@ -2,7 +2,7 @@
 layout: page
 title: Gems
 ---
-{% for gem in site.libraries %}
+{% for gem in site.gems %}
   <h2>{{ item.title }}</h2>
   <p>{{ item.description }}</p>
   <p><h2><a href="{{ gem.url | prepend: site.github.url }}">{{ gem.title }}</a></h2></p>
