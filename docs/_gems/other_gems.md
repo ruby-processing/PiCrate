@@ -8,9 +8,9 @@ keywords: gem, library, picrate
 #####################################################################
 # Using the ai4r gem in picrate.
 # A simple example that demonstrates using
-# a backpropagation neural network. Use the drop box menu to
-# select a prebuilt shape. To draw a test shape tick drawing checkbox,
-# release the mouse when drawing a discontinous shape eg cross.
+# a back-propagation neural network. Use the drop box menu to
+# select a pre-built shape. To draw a test shape tick drawing check-box,
+# release the mouse when drawing a discontinuous shape eg cross.
 # Clear the sketch with clear button.
 # Press evaluate and result is printed to the console....
 ####################################################################
