@@ -30,9 +30,9 @@ collections:
   # classes:
   #   output: true
   #   permalink: /classes/:path
-  # editors:
-  #   output: true
-  #   permalink: /editors/:path
+  editors:
+    output: true
+    permalink: /editors/:path
   # methods:
   #   output: true
   #   permalink: /methods/:path
