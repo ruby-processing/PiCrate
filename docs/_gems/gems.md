@@ -3,7 +3,7 @@ layout: post
 title:  "Gems Built For picrate"
 date:   2015-11-21 20:55:13
 categories: picrate update
-permalink: /gems/
+permalink: /gems/gems.html
 keywords: gem, library, picrate
 ---
 
