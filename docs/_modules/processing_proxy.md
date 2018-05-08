@@ -2,6 +2,7 @@
 layout: post
 title:  "Processing::Proxy"
 keywords: processing, module, namespace
+permalink: modules/processing_proxy.html
 ---
 The sole purpose of the `Processing::Proxy` module is to provide access to the `Processing::App` variables and methods similar to the access to [Inner classes][inner] afforded by vanilla processing. To do this your class should `include Processing::Proxy` as below:-
 

@@ -2,6 +2,7 @@
 layout: post
 title:  "Propane::HelperMethods"
 keywords: Propane, module
+permalink: modules/helper_methods.html
 ---
 The [HelperMethods][HelperMethods] module provides additional methods to the propane sketch.
 

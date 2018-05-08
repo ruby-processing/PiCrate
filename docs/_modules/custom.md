@@ -2,6 +2,7 @@
 layout: post
 title:  "Custom"
 keywords: using, module
+permalink: modules/custom.html
 ---
 Ruby users will be familiar with the use of modules, but may not be aware that they can be of particular use in propane (and jruby generally)
 
