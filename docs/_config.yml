@@ -26,31 +26,31 @@ include: [collections]
 collections:
   blocks:
     output: true
-    permalink: /blocks/:path
+    permalink: /blocks/index.html
   classes:
     output: true
-    permalink: /classes/:path
+    permalink: /classes/index.html
   editors:
     output: true
-    permalink: /editors/:path
+    permalink: /editors/index.html
   methods:
     output: true
-    permalink: /methods/:path
+    permalink: /methods/index.html
   gems:
     output: true
-    permalink: /gems/:path
+    permalink: /gems/index.html
   libraries:
     output: true
     permalink: /libraries/index.html
   modules:
     output: true
-    permalink: /modules/:path
+    permalink: /modules/index.html
   magic:
     output: true
-    permalink: /magic/:path
+    permalink: /magic/index.html
   objects:
     output: true
-    permalink: /objects/:path
+    permalink: /objects/index.html
 
 syntax-highlighting:
   enabled: true
