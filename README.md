@@ -13,7 +13,7 @@ Requires maven, jdk8 (can be openjdk), and a jruby install.
 ```bash
 cd PiCrate
 rake
-jgem install picrate-0.0.1-java.gem
+jgem install picrate-0.0.2-java.gem
 ```
 To create a template sketch:-
 ```bash
