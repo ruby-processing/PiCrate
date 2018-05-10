@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "sketch_title"
+permalink: methods/sketch_title.html
 ---
 The `sketch_title` method is probably unique to propane and JRubyArt, it is a convenient way to set the title of the sketch frame. Normally you only want to set the title once, so sensible it belongs in the setup definition.
 

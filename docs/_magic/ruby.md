@@ -2,6 +2,7 @@
 layout: post
 title:  "Ruby"
 keywords: ruby, java, meta
+permalink: magic/custom.html
 ---
 Here will go stuff about [meta programming][meta] etc, which is how we bring you Processing::Proxy etc see `app.rb`.
 

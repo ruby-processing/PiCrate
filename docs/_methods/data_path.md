@@ -2,12 +2,12 @@
 layout: post
 title:  "data_path"
 date:   2016-05-23 05:04:00
-categories: jruby_art update
-permalink: /data_path/
+categories: picrate update
+permalink: methods/data_path.html
 ---
-The purpose of the `data_path` wrapper is to provide the absolute data path to a sketches `data` folder. In vanilla processing the direct use of this method is discouraged, owing to the way it has been implemented (it is used internally and may be the cause file access issues in JRubyArt). The `data_path` method is implemented in JRubyArt, and does not rely on the vanilla-processing version.
+The purpose of the `data_path` wrapper is to provide the absolute data path to a sketches `data` folder. In vanilla processing the direct use of this method is discouraged, owing to the way it has been implemented (it is used internally and may be the cause file access issues in PiCrate). The `data_path` method is implemented in PiCrate, and does not rely on the vanilla-processing version.
 
-It should be used to get around the need to provide an absolute data path on macosx to run sketches that contain `load_image`, `load_shader` etc that otherwise could not find the data. However it should also be used on Windows and Linux to avoid the need to use jruby-complete when running such sketches.
+It should be used to get around the need to provide an absolute data path on macosx to run sketches that contain `load_image`, `load_shader` etc that otherwise could not find the data.
 
 ### Simple usage ###
 
@@ -46,7 +46,7 @@ You can use your ruby knowledge to 'dry up' vanilla processing sketches and to r
 require 'picrate'
 # Earth model with bump mapping, specular texture and dynamic cloud layer.
 # Adapted from the THREE.js tutorial to processing by Andres Colubri,
-# translated to JRubyArt by Martin Prout:
+# translated to PiCrate by Martin Prout:
 # http://learningthreejs.com/blog/2013/09/16/how-to-make-the-earth-in-webgl/
 class BlueMarble < Processing::App
   attr_reader :earth, :clouds, :earth_shader, :cloud_shader, :earth_rotation

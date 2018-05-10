@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "setup"
+permalink: methods/setup.html
 ---
 All sketches will propably have a user defined [setup][setup] method. This is where you define the sketch title and where static code belongs.
 

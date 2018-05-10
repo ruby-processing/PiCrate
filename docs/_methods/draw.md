@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "draw"
+permalink: methods/draw.html
 ---
 Called directly after setup, the draw function continuously executes the lines of code contained inside its block until the program is stopped or no_loop is called. The number of times draw executes in each second may be controlled with the frame_rate(xxx).
 

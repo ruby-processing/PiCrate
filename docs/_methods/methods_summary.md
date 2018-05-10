@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "summary"
+permalink: methods/summary.html
 ---
 
 The MathTool and HelperMethods modules implement some of the processing convenience methods

@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "map1d in detail"
+permalink: methods/map1d.html
 ---
 
 ### Name ###

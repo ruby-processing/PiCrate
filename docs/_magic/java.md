@@ -2,6 +2,7 @@
 layout: post
 title:  "Java"
 keywords: ruby, java, jruby
+permalink: magic/java.html
 ---
 Here is some information about java [inner][inner] classes and [reflection][reflection]. Also see how the pre-processing of the [pde][pde] sketches to valid java creates [java inner classes][pde]. This is all magic stuff that gets hidden from the average user.
 

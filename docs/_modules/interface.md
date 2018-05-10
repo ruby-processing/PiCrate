@@ -2,7 +2,7 @@
 layout: post
 title:  "Implementing java interfaces"
 keywords: using, module
-permalink: modules/interface.md
+permalink: modules/interface.html
 ---
 Java interfaces are mapped to modules in JRuby. This means that you can also reopen the corresponding module and add further methods on the JRuby side. JRuby classes can now implement more than one Java interface. Since Java interfaces are mapped to modules in JRuby, you implement them not by subclassing, but by mixing them in.
 

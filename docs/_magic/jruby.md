@@ -2,6 +2,7 @@
 layout: post
 title:  "JRuby"
 keywords: ruby, java, jruby
+permalink: magic/jruby.html
 ---
 ### java interfaces ###
 JRuby classes can mixin Java interfaces as modules in order to implement them.

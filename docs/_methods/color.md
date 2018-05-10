@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "color explained"
+permalink: methods/color.html
 ---
 ### processing ###
 The `*.pde` files get pre-processed to `java` before compiling, allowing you to write this:-

@@ -2,6 +2,7 @@
 layout: post
 title:  "Processing"
 keywords: pde, java, processing
+permalink: magic/processing.html
 ---
 ## __pde__ sketches get pre-processed to __java__ ##
 ------
