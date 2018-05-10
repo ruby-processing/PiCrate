@@ -2,7 +2,7 @@
 layout: post
 title:  'Using Gems in picrate'
 keywords: gem, library, picrate
-/gems/other_gems.html
+permalink: gems/other_gems.html
 ---
 ```ruby
 #####################################################################

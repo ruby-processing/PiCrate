@@ -1,7 +1,8 @@
 ---
 layout: post
 title:  "Instance Variable"
-keywords: attr_reader, @, instane
+keywords: attr_reader, @, instance
+permalink: objects/instance.html
 ---
 A instance variable in ruby has a name beginning with `@`.  It often makes sense for it to be initialised at `setup` (not necessarily in the loop could be called method).
 

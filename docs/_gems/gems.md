@@ -3,8 +3,8 @@ layout: post
 title:  "Gems Built For picrate"
 date:   2015-11-21 20:55:13
 categories: picrate update
-permalink: /gems/gems.html
 keywords: gem, library, picrate
+permalink: gems/gems.html
 ---
 
 ### Processing libraries ported as ruby-gems

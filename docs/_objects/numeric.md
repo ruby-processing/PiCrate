@@ -2,6 +2,7 @@
 layout: post
 title:  "Numeric Objects"
 keywords: numeric, float, fixnum, rational
+permalink: objects/numeric.html
 ---
 
 In a sense this section is only required because of `OO` languages that support the concept of a `primitive` type (Java, C++) in languages like ruby and smalltalk and even python everything is an object. So you should prefer ruby `x.abs` to vanilla processings `abs(x)` etc.
