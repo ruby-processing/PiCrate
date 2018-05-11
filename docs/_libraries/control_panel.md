@@ -134,4 +134,4 @@ class JWishy < Processing::App
 ```
 ![JWishy]({{site.github.url}}/assets/jwishy.png)
 
-See also [penrose](https://github.com/ruby-processing/picrate-examples/blob/master/processing_app/library/vecmath/vec2d/penrose.rb) and [bezier playground](https://github.com/ruby-processing/picrate-examples/blob/master/contributed/bezier_playground.rb) sketches. See ruby code [here](https://github.com/ruby-processing/picrate/blob/master/library/control_panel/control_panel.rb).
+See also [penrose](https://github.com/ruby-processing/picrate-examples/blob/master/library/vecmath/vec2d/penrose.rb) and [bezier playground](https://github.com/ruby-processing/picrate-examples/blob/master/contributed/bezier_playground.rb) sketches. See ruby code [here](https://github.com/ruby-processing/picrate/blob/master/library/control_panel/control_panel.rb).

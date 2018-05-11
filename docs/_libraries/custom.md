@@ -123,4 +123,4 @@ end
 Fire.new
 ```
 
-See also this [example](https://github.com/ruby-processing/picrate-examples/blob/master/processing_app/topics/vectors/cubes_in_cube.rb), makes most sense when you might re-use your library for several sketches.
+See also this [example](https://github.com/ruby-processing/picrate-examples/blob/master/topics/vectors/cubes_in_cube.rb), makes most sense when you might re-use your library for several sketches.

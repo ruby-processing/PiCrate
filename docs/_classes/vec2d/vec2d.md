@@ -50,4 +50,4 @@ Note: normalize on zero vector returns a zero vector for simplicities sake (like
 
 Example Usages: [Examples][Vec2D]
 
-[Vec2D]: https://github.com/ruby-processing/propane-examples/blob/master/processing_app/library/vecmath/vec2d/
+[Vec2D]: https://github.com/ruby-processing/picrate-examples/blob/master/library/vecmath/vec2d/

@@ -360,7 +360,7 @@ JWishy.new
 ```
 ![JWishy]({{site.github.url}}/assets/jwishy.png)
 
-See also [penrose](https://github.com/ruby-processing/picrate-examples/blob/master/processing_app/library/vecmath/vec2d/penrose.rb) and [bezier playground](https://github.com/ruby-processing/picrate-examples/blob/master/contributed/bezier_playground.rb) sketches. See ruby code [here](https://github.com/ruby-processing/picrate/blob/master/library/control_panel/control_panel.rb).
+See also [penrose](https://github.com/ruby-processing/picrate-examples/blob/master/library/vecmath/vec2d/penrose.rb) and [bezier playground](https://github.com/ruby-processing/picrate-examples/blob/master/contributed/bezier_playground.rb) sketches. See ruby code [here](https://github.com/ruby-processing/picrate/blob/master/library/control_panel/control_panel.rb).
 
 ### Video Event Library ###
 
@@ -508,4 +508,4 @@ See also [these examples](https://github.com/ruby-processing/picrate-examples/tr
 [vec3d]:https://ruby-processing.github.io/classes/vec3d/
 [vec2d]:https://ruby-processing.github.io/classes/vec2d/
 [forwardable]:https://ruby-doc.org/stdlib-2.0.0/libdoc/forwardable/rdoc/Forwardable.html
-[example]:https://github.com/ruby-processing/picrate-examples/blob/master/processing_app/library/boids/boids_example.rb
+[example]:https://github.com/ruby-processing/picrate-examples/blob/master/library/boids/boids_example.rb

@@ -16,5 +16,5 @@ DegLut.cos(deg)
 
 Example Usages: [Analog Clock][clock], [Function Grapher][grapher]
 
-[clock]: https://github.com/ruby-processing/propane-examples/blob/master/processing_app/library/fastmath/clock.rb
-[grapher]: https://github.com/ruby-processing/propane-examples/blob/master/contributed/grapher.rb
+[clock]: https://github.com/ruby-processing/picrate-examples/blob/master/library/fastmath/clock.rb
+[grapher]: https://github.com/ruby-processing/picrate-examples/blob/master/contributed/grapher.rb

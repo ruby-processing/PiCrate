@@ -27,7 +27,7 @@ Holds Integer values that can be represented in a native machine word (minus 1 b
 
 A rational number can be represented as a paired integer number; `a/b` (b>0). Where `a` is numerator and `b` is denominator. Integer `a` equals rational `a/1` mathematically.  A [rational object][rational] is an exact number, which helps you to write program without any rounding errors.
 
-### propane ###
+### PiCrate ###
 
 We have re-opened the `Numeric` class to implement `radians` and `degree` methods, which means that instead of using `radians(x)` a processing method, you should use `x.radians` in propane. But this should not be so necessary now we have `DegLut.cos` and `DegLut.sin` methods.
 

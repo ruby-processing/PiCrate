@@ -294,4 +294,4 @@ Read more about java [reflection here][reflection].
 [callback]:https://processing.org/reference/selectInput_.html
 [library]:{{ site.github.url }}/libraries/video_event.html
 [reflection]:https://docs.oracle.com/javase/tutorial/reflect/
-[bw]:https://github.com/ruby-processing/propane-examples/blob/master/processing_app/library/video/capture/black_white_capture.rb
+[bw]:https://github.com/ruby-processing/picrate-examples/blob/master/library/video/capture/black_white_capture.rb

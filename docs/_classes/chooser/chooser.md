@@ -53,4 +53,4 @@ end
 
 See more [examples here][examples]
 
-[examples]:https://github.com/ruby-processing/propane-examples/tree/master/processing_app/library/file_chooser
+[examples]:https://github.com/ruby-processing/picrate-examples/tree/master/processing_app/library/file_chooser
