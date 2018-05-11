@@ -92,8 +92,8 @@ map1d
 p5map
 ```
 
-[palette]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/external_library/gem/toxiclibs/color_utils/palette_generator.rb
-[wordcram]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/external_library/gem/ruby_wordcram/fruits.rb
+[palette]:https://github.com/ruby-processing/picrate-examples/blob/master/gems/toxiclibs/color_utils/palette_generator.rb
+[wordcram]:https://github.com/ruby-processing/picrate-examples/blob/master/gems/ruby_wordcram/fruits.rb
 [bezier]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/form/bezier_ellipse.rb
 [brick_tower]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/form/brick_tower.rb
 [mandelbrot]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/contributed/mandelbrot.rb

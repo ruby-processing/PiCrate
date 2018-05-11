@@ -103,7 +103,7 @@ web_to_color_array(WEB)
 
 For creation and use of a hash / dictionary of web colors see this [Wordcram sketch][wordcram]. If you need to convert an array of `color` int (say from ColorHarmony) to ruby string, then use `p52ruby` method that returns a web string of the form '%w(#CC6600 #CC9900 #FFFFFF)' from `[-3381760, -3368704, -1]`. Or if you are more sophisticated and using the `toxiclibs` gem to explore color theory, we have created a method `to_ruby_string` for the `ColorList` class see [palette genertor example][palette]
 
-[palette]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/external_library/gem/toxiclibs/color_utils/palette_generator.rb
-[wordcram]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/external_library/gem/ruby_wordcram/fruits.rb
+[palette]:https://github.com/ruby-processing/picrate-examples/blob/master/gems/toxiclibs/color_utils/palette_generator.rb
+[wordcram]:https://github.com/ruby-processing/picrate-examples/blob/master/gems/ruby_wordcram/fruits.rb
 [web]:{{site.github.url}}/summary/
 [processing]:https://processing.org/reference/color_datatype.html
