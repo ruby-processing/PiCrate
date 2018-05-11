@@ -63,6 +63,6 @@ NB: if you have any trouble with `save` or `save_frame` then use the option of p
 [data_path]:{{site.github.url}}/data_path/
 [time]:https://monkstone.github.io/time
 [timestamp]:https://monkstone.github.io/timestamp/
-[clock]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/library/fastmath/clock.rb
-[kamera]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/camera/kmove_eye.rb
+[clock]:https://github.com/ruby-processing/picrate-examples/blob/master//library/fastmath/clock.rb
+[kamera]:https://github.com/ruby-processing/picrate-examples/blob/master//basics/camera/kmove_eye.rb
 [processing]:https://processing.org/reference/

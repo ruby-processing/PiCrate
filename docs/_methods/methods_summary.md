@@ -94,10 +94,10 @@ p5map
 
 [palette]:https://github.com/ruby-processing/picrate-examples/blob/master/gems/toxiclibs/color_utils/palette_generator.rb
 [wordcram]:https://github.com/ruby-processing/picrate-examples/blob/master/gems/ruby_wordcram/fruits.rb
-[bezier]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/form/bezier_ellipse.rb
-[brick_tower]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/form/brick_tower.rb
+[bezier]:https://github.com/ruby-processing/picrate-examples/blob/master//basics/form/bezier_ellipse.rb
+[brick_tower]:https://github.com/ruby-processing/picrate-examples/blob/master//basics/form/brick_tower.rb
 [mandelbrot]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/contributed/mandelbrot.rb
-[conway]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/topics/shaders/conway.rb
-[color]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/color/creating.rb
-[blend_color]:https://github.com/ruby-processing/JRubyArt-examples/blob/master/processing_app/basics/color/blend_color.rb
+[conway]:https://github.com/ruby-processing/picrate-examples/blob/master//topics/shaders/conway.rb
+[color]:https://github.com/ruby-processing/picrate-examples/blob/master//basics/color/creating.rb
+[blend_color]:https://github.com/ruby-processing/picrate-examples/blob/master//basics/color/blend_color.rb
 [enumerable]:http://apidock.com/ruby/Enumerable/max
