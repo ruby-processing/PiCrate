@@ -21,7 +21,7 @@ end
 desc 'Install'
 task :install do
   sh 'mvn dependency:copy'
-  sh 'mv target/picrate-0.0.2.jar lib'
+  sh 'mv target/picrate-0.0.3.jar lib'
 end
 
 desc 'Gem'
