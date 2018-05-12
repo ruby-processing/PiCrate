@@ -42,7 +42,7 @@ class Tree < Processing::App
 Tree.new
 ```
 
-For a variable that gets called quite a lot in a propane sketch it makes sense to create a getter using `attr_reader`. This has the fortunate side effect of making it blindingly obvious when you are assigning it to a new value/instance (it also makes the sketch variable readable by external classes).
+For a variable that gets called quite a lot in a PiCrate sketch it makes sense to create a getter using `attr_reader`. This has the fortunate side effect of making it blindingly obvious when you are assigning it to a new value/instance (it also makes the sketch variable readable by external classes).
 
 ```ruby
 #!/usr/bin/env jruby -w

@@ -29,7 +29,7 @@ end
 
 Sketch.new
 ```
-You should be aware that all vanilla processing sketches are similary wrapped prior to java compilation.  The idea of processing and also propane is to make it easy to create sketches, so this is all you need to know, and you should probably look at [propane][propane] if you really prefer class wrapped sketches.
+You should be aware that all vanilla processing sketches are similarly wrapped prior to java compilation.  The idea of processing and also PiCrate is to make it easy to create sketches, so this is all you need to know, and you should probably look at [propane][propane] if you really prefer class wrapped sketches.
 
 For propane see also [Processing][processing] module for more details, you could also see [magic][magic] (_but it 'really' is not necessary_)
 

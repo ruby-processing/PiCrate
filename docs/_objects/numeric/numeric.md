@@ -29,7 +29,7 @@ A rational number can be represented as a paired integer number; `a/b` (b>0). Wh
 
 ### PiCrate ###
 
-We have re-opened the `Numeric` class to implement `radians` and `degree` methods, which means that instead of using `radians(x)` a processing method, you should use `x.radians` in propane. But this should not be so necessary now we have `DegLut.cos` and `DegLut.sin` methods.
+We have re-opened the `Numeric` class to implement `radians` and `degree` methods, which means that instead of using `radians(x)` a processing method, you should use `x.radians` in PiCrate. But this should not be so necessary now we have `DegLut.cos` and `DegLut.sin` methods.
 
 [float]:https://ruby-doc.org/core-2.2.0/Float.html
 [fixnum]:https://ruby-doc.org/core-2.2.0/Fixnum.html

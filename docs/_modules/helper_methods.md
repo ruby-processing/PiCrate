@@ -4,7 +4,7 @@ title:  "Propane::HelperMethods"
 keywords: Propane, module
 permalink: modules/helper_methods.html
 ---
-The [HelperMethods][HelperMethods] module provides additional methods to the propane sketch.
+The [HelperMethods][HelperMethods] module provides additional methods to the PiCrate sketch.
 
 
-[HelperMethods]:https://github.com/ruby-processing/propane/blob/master/lib/propane/helper_methods.rb
+[HelperMethods]:https://github.com/ruby-processing/PiCrate/blob/master/lib/picrate/helper_methods.rb

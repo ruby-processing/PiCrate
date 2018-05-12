@@ -4,7 +4,7 @@ title:  "Custom"
 keywords: using, module
 permalink: modules/custom.html
 ---
-Ruby users will be familiar with the use of modules, but may not be aware that they can be of particular use in propane (and jruby generally)
+Ruby users will be familiar with the use of modules, but may not be aware that they can be of particular use in PiCrate (and jruby generally)
 
 ### Namespace to wrap java packages ###
 
@@ -33,9 +33,9 @@ end
 
 Now you can prefix the desired Java Class name with `JavaLangDemo::` to access the included class
 
-__Example__: Simpler form available in a propane sketch
+__Example__: Simpler form available in a PiCrate sketch
 
-But we have made this even easier for you because since we wrap the processing sketch in a `Processing` module so you are able to just use `include_package` in your propane sketches. See below
+But we have made this even easier for you because since we wrap the processing sketch in a `Processing` module so you are able to just use `include_package` in your PiCrate sketches. See below
 example where include several `ddf.minim` packages in a sketch:-
 
 ```ruby
