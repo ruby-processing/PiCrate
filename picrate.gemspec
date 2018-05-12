@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.summary       = %q{ruby wrapper for processing-3.3.7 on raspberrypi and linux64}
   gem.homepage      = 'https://ruby-processing.github.io/PiCrate/'
   gem.files         = `git ls-files`.split($/)
-  gem.files << 'lib/picrate-0.0.2.jar'
+  gem.files << 'lib/picrate-0.0.3.jar'
   gem.files << 'lib/gluegen-rt-2.3.2.jar'
   gem.files << 'lib/jogl-all-2.3.2.jar'
   gem.files << 'lib/gluegen-rt-2.3.2-natives-linux-amd64.jar'
