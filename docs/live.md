@@ -1,6 +1,6 @@
 ---
 layout: page
-title: live
+title: Live
 ---
 Spoiler alert, initially a least it is better just to accept the live works...
 
