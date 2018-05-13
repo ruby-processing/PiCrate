@@ -42,6 +42,9 @@ collections:
   libraries:
     output: true
     permalink: /libraries/index.html
+  live:
+    output: true
+    permalink: /live/index.html
   modules:
     output: true
     permalink: /modules/index.html
