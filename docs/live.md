@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Magic
+title: live
 ---
 Spoiler alert, initially a least it is better just to accept the live works...
 
