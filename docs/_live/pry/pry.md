@@ -18,6 +18,8 @@ Then firing up pry with jruby is as simple as
 ```bash
 jpry
 ```
+The easiest way to start is to created a template sketch eg `picrate -c fred 200 200`
+
 For live editing with vim (there is is an emacs alternative see [pry wiki][prywiki])
 
 You should also create or edit `~/.pryrc` to set the live editor
@@ -27,8 +29,8 @@ Pry.config.editor = 'vim'
 ```
 Fire up the pry console then at pry prompt:-
 
-```ruby
-"load 'fred_sketch.rb'"
+```bash
+load 'fred_sketch.rb'
 fred = FredSketch.new
 edit FredSketch
 ```
