@@ -8,7 +8,7 @@ Create processing sketches in ruby on raspberry-pi and linux (this project is a 
 
 Clone this repo:-
 
-Requires maven, jdk8 (can be openjdk), and a jruby install.
+Requires maven, [jdk8][oracle] (but could be openjdk), and a jruby install.
 
 ```bash
 cd PiCrate
@@ -50,3 +50,4 @@ jruby my_sketch.rb
 
 
 [propane]:https://ruby-processing.github.io/propane/
+[oracle]:http://www.rpiblog.com/2014/03/installing-oracle-jdk-8-on-raspberry-pi.html
