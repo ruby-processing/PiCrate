@@ -4,7 +4,8 @@ title:  "Getting Started"
 date:   2018-05-24 07:34:13
 categories: PiCrate update
 ---
-You need to install jdk8, there's probably easy ways to do it, if you have more that one version of java installed you could use `update-alternatives` tool to control them.
+You need to install [jdk8](https://www.raspinews.com/2017/07/02/installing-oracle-java-jdk-8-on-raspberry-pi/), there's probably easy ways to do it, if you have more that one version of java installed you could use `update-alternatives` tool to control them.
+
 Then install JRuby.
 
 ```bash
