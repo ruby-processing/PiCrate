@@ -75,4 +75,5 @@ Or even `chmod +x my_sketch.rb` to make an executable script.
 ### Circle Collision Sketch Running on RaspberryPI
 
 ![circle_collisions]({{ site.github.url }}/assets/circle_collisions.png)
+
 [jruby]:{{ site.github.url }}/install_jruby/
