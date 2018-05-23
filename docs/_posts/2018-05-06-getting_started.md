@@ -3,13 +3,17 @@ layout: post
 title:  "Getting Started"
 date:   2018-05-24 07:34:13
 categories: PiCrate update
+permalink: /getting/
 ---
-You need to install [jdk8](https://www.raspinews.com/2017/07/02/installing-oracle-java-jdk-8-on-raspberry-pi/), there's probably easy ways to do it, if you have more that one version of java installed you could use `update-alternatives` tool to control them (NB: the latest version of raspbian installs a version of jdk8).
+The current version of raspbian installs jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to control them.
 
-Then install JRuby.
+Then install JRuby see [jruby][jruby].
+
+There is something wrong with jgem install from rubygems (involving `flock` and possibly wrong bit) so currently the best approach is to download the gems and install locally
 
 ```bash
-jgem install picrate # also installs arcball dependency
+jgme install arcball-1.0.1-java.gem
+jgem install picrate-0.0.3-java.gem
 ```
 
 Install samples
@@ -67,3 +71,6 @@ jruby my_sketch.rb
 ```
 
 Or even `chmod +x my_sketch.rb` to make an executable script.
+
+![circle_collisions]({{ site.github.url }}/assets/circle_collisions.png)
+[jruby]({{ site.github.url }}/install_jruby)

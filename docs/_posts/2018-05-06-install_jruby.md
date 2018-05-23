@@ -3,6 +3,7 @@ layout: post
 title:  "Installing JRuby"
 date:   2018-05-24 07:34:13
 categories: PiCrate update
+permalink: /install_jruby/
 ---
 Pure installation Debian linux (should work raspbian) no need for `rbenv` or `rvm`
 
