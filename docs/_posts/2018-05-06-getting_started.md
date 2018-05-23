@@ -12,7 +12,7 @@ Then install JRuby see [jruby][jruby].
 There is something wrong with jgem install from rubygems (involving `flock` and possibly wrong bit) so currently the best approach is to download the gems and install locally
 
 ```bash
-jgme install arcball-1.0.1-java.gem
+jgem install arcball-1.0.1-java.gem
 jgem install picrate-0.0.3-java.gem
 ```
 
