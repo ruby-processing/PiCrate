@@ -4,7 +4,7 @@ title:  "picrate<sup>1, 2</sup>"
 keywords: library, boids, control_panel
 permalink: libraries/picrate.html
 ---
-Propane provides a number of libraries that you can use _out of the box_, but which still need to be loaded to use them in you sketches see examples below:-
+PiCrate provides a number of libraries that you can use _out of the box_, but which still need to be loaded to use them in you sketches see examples below:-
 
 
 ### Boids library ###
@@ -232,7 +232,7 @@ Here is the re-factored Flight Patterns Sketch:-
 #!/usr/bin/env jruby -v -w
 # Description:
 # Flight Patterns is that ol' Euruko 2008 demo.
-# Reworked version for Propane
+# Reworked version for PiCrate
 # Usage:
 # Drag mouse to steer 'invisible' flock attractor, use 'f' key to toggle flee
 # Mouse 'click' to toggle 'sphere' or 'circle' display
@@ -311,7 +311,7 @@ Start by loading in the control_panel library, and then define your panel in set
 #!/usr/bin/env jruby -v -W2
 # frozen_string_literal: true
 require 'picrate'
-# Iconic ruby-processing example for Propane
+# Iconic ruby-processing example for PiCrate
 class JWishy < Processing::App
   load_library :control_panel
 
