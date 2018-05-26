@@ -14,7 +14,7 @@ class NativeFolder
   end
 
   def name
-    return format(LINUX_FORMAT, bit) if os =~ /linux/ && bit =~ '64'
+    return format(LINUX_FORMAT, bit) if os =~ /linux/ && bit =~ /64/
     format(LINUX_FORMAT, ARM32)
   end
 
