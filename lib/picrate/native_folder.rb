@@ -14,12 +14,12 @@ class NativeFolder
   end
 
   def name
-    return format(LINUX_FORMAT, bit) if os =~ /linux/ && bit =~ /64/
+    return format(LINUX_FORMAT, '64') if /linux/.match?(os) && /amd64/.match?(bit)
     format(LINUX_FORMAT, ARM32)
   end
 
   def extension
-    '*.so' if os =~ /linux/
+    return '*.so' if /linux/.match?(os)
     raise RuntimeError, "Unsupported Archicture"
   end
 end
