@@ -4,17 +4,17 @@ require 'rbconfig'
 class NativeFolder
   attr_reader :os, :bit
 
-  LINUX_FORMAT = 'linux%d'.freeze
+  LINUX_FORMAT = 'linux%s'.freeze
   ARM32 = '-armv6hf'.freeze
   # ARM64 = '-aarch64'.freeze
 
   def initialize
     @os = RbConfig::CONFIG['host_os'].downcase
-    @bit = java.lang.System.get_property('os.arch') =~ /64/ ? 64 : 32
+    @bit = java.lang.System.get_property('os.arch') =~ /64/ ? '64' : '32'
   end
 
   def name
-    return format(LINUX_FORMAT, bit) if os =~ /linux/ && bit =~ 64
+    return format(LINUX_FORMAT, bit) if os =~ /linux/ && bit =~ '64'
     format(LINUX_FORMAT, ARM32)
   end
 
