@@ -35,7 +35,7 @@ module Processing
 
         # Define the options, and what they do
         options[:version] = false
-        opts.on('-v', '--version', 'Processing Version') do
+        opts.on('-v', '--version', 'PiCrate Version') do
           options[:version] = true
         end
 
@@ -68,7 +68,7 @@ module Processing
 
     def show_version
       v_format = "Processing version %s\nJRuby version %s"
-      puts format(v_format, Processing::VERSION, JRUBY_VERSION)
+      puts format(v_format, PiCrate::VERSION, JRUBY_VERSION)
     end
 
     def install(library)
