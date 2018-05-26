@@ -10,7 +10,7 @@ class NativeFolder
 
   def initialize
     @os = RbConfig::CONFIG['host_os'].downcase
-    @bit = java.lang.System.get_property('os.arch') =~ /64/ ? '64' : '32'
+    @bit = java.lang.System.get_property('os.arch')
   end
 
   def name
