@@ -4,18 +4,9 @@ require 'rbconfig'
 class NativeFolder
   attr_reader :os, :bit
 
-  WIN_FORMAT = 'windows%d'.freeze
   LINUX_FORMAT = 'linux%d'.freeze
   ARM32 = '-armv6hf'.freeze
-  ARM64 = '-aarch64'.freeze
-  # WIN_PATTERNS = [
-  #   /bccwin/i,
-  #   /cygwin/i,
-  #   /djgpp/i,
-  #   /ming/i,
-  #   /mswin/i,
-  #   /wince/i
-  # ].freeze
+  # ARM64 = '-aarch64'.freeze
 
   def initialize
     @os = RbConfig::CONFIG['host_os'].downcase
@@ -23,13 +14,12 @@ class NativeFolder
   end
 
   def name
-    return 'macosx' if os =~ /darwin/ || os =~ /mac/
-    return format(LINUX_FORMAT, ARM32) if os =~ /^arm/
-    return format(LINUX_FORMAT, bit) if os =~ /linux/
+    return format(LINUX_FORMAT, bit) if os =~ /linux/ && bit =~ 64
+    format(LINUX_FORMAT, ARM32)
   end
 
   def extension
-    return '*.so' if os =~ /linux/
-    '*.dylib' # MacOS
+    '*.so' if os =~ /linux/
+    raise RuntimeError, "Unsupported Archicture"
   end
 end
