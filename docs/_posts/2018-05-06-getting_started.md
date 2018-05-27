@@ -13,7 +13,7 @@ There is something wrong with jgem install from rubygems (involving `flock` and 
 
 ```bash
 jgem install arcball-1.0.1-java.gem
-jgem install picrate-0.0.3-java.gem
+jgem install picrate-0.1.0-java.gem
 ```
 
 Install samples
