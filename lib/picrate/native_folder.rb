@@ -1,6 +1,7 @@
 require 'rbconfig'
 
 # Utility to load native binaries on Java CLASSPATH
+#HACK until jruby returns a more specific 'host_os' than 'linux'
 class NativeFolder
   attr_reader :os, :bit
 
@@ -14,12 +15,14 @@ class NativeFolder
   end
 
   def name
-    return format(LINUX_FORMAT, '64') if /linux/.match?(os) && /amd64/.match?(bit)
-    format(LINUX_FORMAT, ARM32)
+    if /linux/.match?(os)
+      return format(LINUX_FORMAT, '64') if /amd64/.match?(bit)
+      return format(LINUX_FORMAT, ARM32) if /arm/.match?(bit)
+    end
+    raise RuntimeError, "Unsupported Archicture"
   end
 
   def extension
-    return '*.so' if /linux/.match?(os)
-    raise RuntimeError, "Unsupported Archicture"
+    '*.so'
   end
 end
