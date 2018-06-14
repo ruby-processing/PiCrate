@@ -7,7 +7,7 @@ def create_manifest
   File.open('MANIFEST.MF', 'w') do |f|
     f.puts(title)
     f.puts(version)
-    f.puts('Class-Path: gluegen-rt-2.3.2.jar jog-all-2.3.2.jar')
+    f.puts('Class-Path: gluegen-rt.jar jog-all.jar')
   end
 end
 
@@ -20,8 +20,7 @@ end
 
 desc 'Install'
 task :install do
-  sh 'mvn dependency:copy'
-  sh 'mv target/picrate-0.1.0.jar lib'
+  sh 'mv target/picrate-0.2.0.jar lib'
 end
 
 desc 'Gem'
