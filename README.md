@@ -5,7 +5,7 @@ Create processing sketches in ruby on raspberry-pi and linux (this project is a 
 
 ### To install from rubygems ###
 
-Unfortunately jgem will not currently download the gem (jruby issue on raspberrypi) so download the gem and install locally.
+Unfortunately jgem will not currently download the gem (see #2 jruby issue on raspberrypi) so download the gem and install locally.
 
 ### To Build and Test ###
 
