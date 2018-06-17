@@ -23,7 +23,7 @@ To create a template sketch:-
 ```bash
 picrate -c my_sketch 200 200
 ```
-Edit sketch (vim is good choice):-
+Edit sketch (vim is a good choice):-
 ```ruby
 #!/usr/bin/env jruby
 # frozen_string_literal: false
