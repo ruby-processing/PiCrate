@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Installing JRuby"
+title:  "Automated PiCrate Install"
 date:   2018-06-26 07:34:13
 categories: PiCrate update
 permalink: /install_picrate/
