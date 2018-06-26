@@ -15,8 +15,7 @@ Requires maven, [jdk8][oracle] (but could be openjdk), and a jruby install.
 
 ```bash
 cd PiCrate
-You need to manually copy gluegen and jogl jars (from processing-3.3.7) to lib folder (see gemspec for those to copy)
-rake
+rake # assumes an installed version of vanilla processing
 jgem install picrate-0.2.0-java.gem
 ```
 To create a template sketch:-
