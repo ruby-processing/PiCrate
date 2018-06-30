@@ -56,9 +56,14 @@ module Processing
     alias stroke_width stroke_weight
     alias rgb color
     alias gray color
+    field_reader :surface
 
     def sketch_class
       self.class.sketch_class
+    end
+
+    def sketch_title(title)
+      surface.set_title(title)
     end
 
     # Keep track of what inherits from the Processing::App, because we're
