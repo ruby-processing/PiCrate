@@ -1030,15 +1030,13 @@ public class PApplet implements PConstants {
 
             String result = trim(stdout.toString());
             if ("0".equals(result)) {
-                EventQueue.invokeLater(new Runnable() {
-                    public void run() {
-                        checkLookAndFeel();
-                        final String msg
-                                = "To use fullScreen(SPAN), first turn off “Displays have separate spaces”\n"
-                                + "in System Preferences \u2192 Mission Control. Then log out and log back in.";
-                        JOptionPane.showMessageDialog(null, msg, "Apple's Defaults Stink",
-                                JOptionPane.WARNING_MESSAGE);
-                    }
+                EventQueue.invokeLater(() -> {
+                    checkLookAndFeel();
+                    final String msg
+                            = "To use fullScreen(SPAN), first turn off “Displays have separate spaces”\n"
+                            + "in System Preferences \u2192 Mission Control. Then log out and log back in.";
+                    JOptionPane.showMessageDialog(null, msg, "Apple's Defaults Stink",
+                            JOptionPane.WARNING_MESSAGE);
                 });
             } else if (!"1".equals(result)) {
                 System.err.println("Could not check the status of “Displays have separate spaces.”");
@@ -1618,7 +1616,7 @@ public class PApplet implements PConstants {
             die("There is no public " + name + "() method in the class "
                     + o.getClass().getName());
 
-        } catch (Exception e) {
+        } catch (SecurityException e) {
             die("Could not register " + name + " + () for " + o, e);
         }
     }
@@ -1639,7 +1637,7 @@ public class PApplet implements PConstants {
             die("There is no public " + name + "() method in the class "
                     + o.getClass().getName());
 
-        } catch (Exception e) {
+        } catch (SecurityException e) {
             die("Could not register " + name + " + () for " + o, e);
         }
     }
@@ -12191,7 +12189,7 @@ public class PApplet implements PConstants {
                     surface.setVisible(visible);
                 }
 
-                public void sketchTitle(String title) {
+                public void setTitle(String title) {
                     surface.setTitle(title);
                 }
 
