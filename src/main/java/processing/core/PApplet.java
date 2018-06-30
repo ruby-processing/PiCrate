@@ -12192,7 +12192,7 @@ public class PApplet implements PConstants {
                 }
 
                 @Override
-                public void skethTitle(String title) {
+                public void sketchTitle(String title) {
                     surface.setTitle(title);
                 }
 
