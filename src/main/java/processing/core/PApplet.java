@@ -12191,7 +12191,6 @@ public class PApplet implements PConstants {
                     surface.setVisible(visible);
                 }
 
-                @Override
                 public void sketchTitle(String title) {
                     surface.setTitle(title);
                 }
