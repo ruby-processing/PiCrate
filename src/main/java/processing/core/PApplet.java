@@ -1185,7 +1185,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref environment
      * @see PApplet#pixelDensity(int)
      * @see PApplet#size(int,int)
@@ -1206,7 +1206,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param display the display number to check
-     * @return 
+     * @return
      */
     public int displayDensity(int display) {
         if (PApplet.platform == PConstants.MACOSX) {
@@ -2252,7 +2252,7 @@ public class PApplet implements PConstants {
      * <A HREF="http://dev.processing.org/reference/core/javadoc/processing/core/PImage.html#save(java.lang.String)">PImage.save()</A>.
      * </UL>
      *
-     * @return 
+     * @return
      * @webref rendering
      * @param w width in pixels
      * @param h height in pixels
@@ -2272,7 +2272,7 @@ public class PApplet implements PConstants {
      * @param h
      * @param renderer
      * @param path the name of the file (can be an absolute or relative path)
-     * @return 
+     * @return
      */
     public PGraphics createGraphics(int w, int h,
             String renderer, String path) {
@@ -2418,7 +2418,7 @@ public class PApplet implements PConstants {
      * to the parent PApplet is included, which makes save() work without
      * needing an absolute path.
      *
-     * @return 
+     * @return
      * @webref image
      * @param w width in pixels
      * @param h height in pixels
@@ -3265,7 +3265,7 @@ public class PApplet implements PConstants {
      * This is a function, rather than a variable, because it may change
      * multiple times per frame.
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#second()
      * @see PApplet#minute()
@@ -3288,7 +3288,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#millis()
      * @see PApplet#minute()
@@ -3311,7 +3311,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#millis()
      * @see PApplet#second()
@@ -3334,7 +3334,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#millis()
      * @see PApplet#second()
@@ -3361,7 +3361,7 @@ public class PApplet implements PConstants {
      * If you're looking for the day of the week (M-F or whatever) or day of the
      * year (1..365) then use java's Calendar.get()
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#millis()
      * @see PApplet#second()
@@ -3382,7 +3382,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#millis()
      * @see PApplet#second()
@@ -3406,7 +3406,7 @@ public class PApplet implements PConstants {
      * ( end auto-generated ) The <b>year()</b> function returns the current
      * year as an integer (2003, 2004, 2005, etc).
      *
-     * @return 
+     * @return
      * @webref input:time_date
      * @see PApplet#millis()
      * @see PApplet#second()
@@ -3544,7 +3544,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:files
      * @param args arguments to the launcher, eg. a filename.
      * @usage Application
@@ -3679,7 +3679,7 @@ public class PApplet implements PConstants {
      * @param stdout
      * @param stderr
      * @param args
-     * @return 
+     * @return
      */
     static public int shell(StringList stdout, StringList stderr, String... args) {
         String shell;
@@ -3990,7 +3990,7 @@ public class PApplet implements PConstants {
      * be ignored, under the assumption that it's probably not intended to be
      * the frame number.
      * @param what
-     * @return 
+     * @return
      */
     public String insertFrame(String what) {
         int first = what.indexOf('#');
@@ -4488,7 +4488,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n number to compute
      */
@@ -4514,7 +4514,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n number to square
      * @see PApplet#sqrt(float)
@@ -4533,7 +4533,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n non-negative number
      * @see PApplet#pow(float, float)
@@ -4551,7 +4551,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n number greater than 0.0
      */
@@ -4567,7 +4567,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n exponent to raise
      */
@@ -4586,7 +4586,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n base of the exponential expression
      * @param e power by which to raise the base
@@ -4603,7 +4603,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param a first number to compare
      * @param b second number to compare
@@ -4632,7 +4632,7 @@ public class PApplet implements PConstants {
      * @param a
      * @param c third number to compare
      * @param b
-     * @return 
+     * @return
      */
     static public final int max(int a, int b, int c) {
         return (a > b) ? ((a > c) ? a : c) : ((b > c) ? b : c);
@@ -4651,7 +4651,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param list array of numbers to compare
-     * @return 
+     * @return
      */
     static public final int max(int[] list) {
         if (list.length == 0) {
@@ -4749,7 +4749,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param a first number
      * @param b second number
@@ -4767,7 +4767,7 @@ public class PApplet implements PConstants {
      */
     /**
      * @param list array of numbers to compare
-     * @return 
+     * @return
      */
     static public final int min(int[] list) {
         if (list.length == 0) {
@@ -4839,7 +4839,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param amt the value to constrain
      * @param low minimum limit
@@ -4860,7 +4860,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param angle an angle in radians
      * @see PApplet#cos(float)
@@ -4880,7 +4880,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param angle an angle in radians
      * @see PApplet#sin(float)
@@ -4901,7 +4901,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param angle an angle in radians
      * @see PApplet#cos(float)
@@ -4921,7 +4921,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param value the value whose arc sine is to be returned
      * @see PApplet#sin(float)
@@ -4941,7 +4941,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param value the value whose arc cosine is to be returned
      * @see PApplet#cos(float)
@@ -4962,7 +4962,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param value -Infinity to Infinity (exclusive)
      * @see PApplet#tan(float)
@@ -4986,7 +4986,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param y y-coordinate of the point
      * @param x x-coordinate of the point
@@ -5007,7 +5007,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param radians radian value to convert to degrees
      * @see PApplet#radians(float)
@@ -5027,7 +5027,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:trigonometry
      * @param degrees degree value to convert to radians
      * @see PApplet#degrees(float)
@@ -5045,7 +5045,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n number to round up
      * @see PApplet#floor(float)
@@ -5063,7 +5063,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n number to round down
      * @see PApplet#ceil(float)
@@ -5081,7 +5081,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param n number to round
      * @see PApplet#floor(float)
@@ -5112,7 +5112,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param a first value
      * @param b second value
@@ -5142,7 +5142,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param x1 x-coordinate of the first point
      * @param y1 y-coordinate of the first point
@@ -5167,7 +5167,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param start first value
      * @param stop second value
@@ -5193,7 +5193,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param value the incoming value to be converted
      * @param start lower bound of the value's current range
@@ -5218,7 +5218,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:calculation
      * @param value the incoming value to be converted
      * @param start1 lower bound of the value's current range
@@ -5266,7 +5266,7 @@ public class PApplet implements PConstants {
     /**
      *
      * @param high
-     * @return 
+     * @return
      */
     public final float random(float high) {
         // avoid an infinite loop when 0 or NaN are passed in
@@ -5301,7 +5301,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:random
      * @see PApplet#random(float,float)
      * @see PApplet#noise(float, float, float)
@@ -5329,7 +5329,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:random
      * @param low lower limit
      * @param high upper limit
@@ -5402,7 +5402,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param x
-     * @return 
+     * @return
      */
     public float noise(float x) {
         // is this legit? it's a dumb way to do it (but repair it later)
@@ -5412,7 +5412,7 @@ public class PApplet implements PConstants {
     /**
      * @param x
      * @param y
-     * @return 
+     * @return
      */
     public float noise(float x, float y) {
         return noise(x, y, 0f);
@@ -5449,7 +5449,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref math:random
      * @param x x-coordinate in noise space
      * @param y y-coordinate in noise space
@@ -5664,7 +5664,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref image:loading_displaying
      * @param filename name of file to load, can be .gif, .jpg, .tga, or a
      * handful of other image types depending on your platform
@@ -5693,7 +5693,7 @@ public class PApplet implements PConstants {
     /**
      * @param filename
      * @param extension type of image to load, for example "png", "gif", "jpg"
-     * @return 
+     * @return
      */
     public PImage loadImage(String filename, String extension) { //, Object params) {
 
@@ -5852,7 +5852,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref image:loading_displaying
      * @param filename name of the file to load, can be .gif, .jpg, .tga, or a
      * handful of other image types depending on your platform
@@ -5965,7 +5965,7 @@ public class PApplet implements PConstants {
     /**
      * Use Java 1.4 ImageIO methods to load an image.
      * @param filename
-     * @return 
+     * @return
      */
     protected PImage loadImageIO(String filename) {
         InputStream stream = createInput(filename);
@@ -6014,7 +6014,7 @@ public class PApplet implements PConstants {
      * Known issue with RLE encoding and odd behavior in some apps:
      * https://github.com/processing/processing/issues/2096 Please help!
      * @param filename
-     * @return 
+     * @return
      * @throws java.io.IOException
      */
     protected PImage loadImageTGA(String filename) throws IOException {
@@ -6037,13 +6037,13 @@ public class PApplet implements PConstants {
             3  (0x03) - Uncompressed, black and white images.
             10 (0x0A) - Run-length encoded RGB images.
             11 (0x0B) - Compressed, black and white images. (grayscale?)
-            
+
             header[16] is the bit depth (8, 24, 32)
-            
+
             header[17] image descriptor (packed bits)
             0x20 is 32 = origin upper-left
             0x28 is 32 + 8 = origin upper-left + 32 bits
-            
+
             7  6  5  4  3  2  1  0
             128 64 32 16  8  4  2  1
             */
@@ -6054,14 +6054,14 @@ public class PApplet implements PConstants {
                     && // 8 bits
                     ((header[17] == 0x8) || (header[17] == 0x28))) {  // origin, 32 bit
                 format = ALPHA;
-                
+
             } else if (((header[2] == 2) || (header[2] == 10))
                     && // RGB, RLE or not
                     (header[16] == 24)
                     && // 24 bits
                     ((header[17] == 0x20) || (header[17] == 0))) {  // origin
                 format = RGB;
-                
+
             } else if (((header[2] == 2) || (header[2] == 10))
                     && (header[16] == 32)
                     && ((header[17] == 0x8) || (header[17] == 0x28))) {  // origin, 32
@@ -6136,11 +6136,11 @@ public class PApplet implements PConstants {
                             break;
                     }
                 }
-                
+
             } else {  // header[2] is 10 or 11
                 int index = 0;
                 int px[] = outgoing.pixels;
-                
+
                 while (index < px.length) {
                     int num = is.read();
                     boolean isRLE = (num & 0x80) != 0;
@@ -6193,7 +6193,7 @@ public class PApplet implements PConstants {
                         }
                     }
                 }
-                
+
                 if (!reversed) {
                     int[] temp = new int[w];
                     for (int y = 0; y < h / 2; y++) {
@@ -6229,7 +6229,7 @@ public class PApplet implements PConstants {
 //    }
 //  }
     /**
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of a file in the data folder or a URL.
      * @see XML
@@ -6247,7 +6247,7 @@ public class PApplet implements PConstants {
     /**
      * @param filename
      * @param options
-     * @return 
+     * @return
      * @nowebref
      */
     public XML loadXML(String filename, String options) {
@@ -6290,7 +6290,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref output:files
      * @param xml the XML object to save to disk
      * @param filename name of the file to write to
@@ -6306,7 +6306,7 @@ public class PApplet implements PConstants {
      * @param xml
      * @param filename
      * @param options
-     * @return 
+     * @return
      * @nowebref
      */
     public boolean saveXML(XML xml, String filename, String options) {
@@ -6314,7 +6314,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref input:files
      * @param input String to parse as a JSONObject
      * @see PApplet#loadJSONObject(String)
@@ -6325,7 +6325,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of a file in the data folder or a URL
      * @see JSONObject
@@ -6340,7 +6340,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref
      */
     static public JSONObject loadJSONObject(File file) {
@@ -6348,7 +6348,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref output:files
      * @param json the JSONObject to save
      * @param filename the name of the file to save to
@@ -6367,14 +6367,14 @@ public class PApplet implements PConstants {
      * @param options "compact" and "indent=N", replace N with the number of
      * spaces
      * @param filename
-     * @return 
+     * @return
      */
     public boolean saveJSONObject(JSONObject json, String filename, String options) {
         return json.save(saveFile(filename), options);
     }
 
     /**
-     * @return 
+     * @return
      * @webref input:files
      * @param input String to parse as a JSONArray
      * @see JSONObject
@@ -6386,7 +6386,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of a file in the data folder or a URL
      * @see JSONArray
@@ -6408,7 +6408,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref output:files
      * @param json the JSONArray to save
      * @param filename the name of the file to save to
@@ -6427,7 +6427,7 @@ public class PApplet implements PConstants {
      * @param filename
      * @param options "compact" and "indent=N", replace N with the number of
      * spaces
-     * @return 
+     * @return
      */
     public boolean saveJSONArray(JSONArray json, String filename, String options) {
         return json.save(saveFile(filename), options);
@@ -6443,7 +6443,7 @@ public class PApplet implements PConstants {
 //    return new Table();
 //  }
     /**
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of a file in the data folder or a URL.
      * @see Table
@@ -6469,7 +6469,7 @@ public class PApplet implements PConstants {
      * @param filename
      * @param options may contain "header", "tsv", "csv", or "bin" separated by
      * commas
-     * @return 
+     * @return
      */
     public Table loadTable(String filename, String options) {
         try {
@@ -6497,7 +6497,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref output:files
      * @param table the Table object to save to a file
      * @param filename the filename to which the Table should be saved
@@ -6512,7 +6512,7 @@ public class PApplet implements PConstants {
      * @param table
      * @param options can be one of "tsv", "csv", "bin", or "html"
      * @param filename
-     * @return 
+     * @return
      */
     public boolean saveTable(Table table, String filename, String options) {
 //    String ext = checkExtension(filename);
@@ -6567,7 +6567,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref typography:loading_displaying
      * @param filename name of the font to load
      * @see PFont
@@ -6593,7 +6593,7 @@ public class PApplet implements PConstants {
     /**
      * Used by PGraphics to remove the requirement for loading a font!
      * @param size
-     * @return 
+     * @return
      */
     protected PFont createDefaultFont(float size) {
 //    Font f = new Font("SansSerif", Font.PLAIN, 12);
@@ -6661,7 +6661,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref typography:loading_displaying
      * @param name name of the font to load
      * @param size point size of the font
@@ -7252,7 +7252,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of the file to be opened
      * @see BufferedReader
@@ -7273,7 +7273,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref
      */
     static public BufferedReader createReader(File file) {
@@ -7292,7 +7292,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param input
-     * @return 
+     * @return
      * @nowebref I want to read lines from a stream. If I have to type the
      * following lines any more I'm gonna send Sun my medical bills.
      */
@@ -7330,7 +7330,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref output:files
      * @param filename name of the file to be created
      * @see PrintWriter
@@ -7343,7 +7343,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref I want to print lines to a file. I have RSI from typing these
      * eight lines of code so many times.
      */
@@ -7367,7 +7367,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param output
-     * @return 
+     * @return
      * @nowebref I want to print lines to a file. Why am I always explaining
      * myself? It's the JavaSoft API engineers who need to explain themselves.
      */
@@ -7443,7 +7443,7 @@ public class PApplet implements PConstants {
      * <LI>Another file to be opened locally (when running as an application)
      * </UL>
      *
-     * @return 
+     * @return
      * @webref input:files
      * @param filename the name of the file to use as input
      * @see PApplet#createOutput(String)
@@ -7474,7 +7474,7 @@ public class PApplet implements PConstants {
     /**
      * Call openStream() without automatic gzip decompression.
      * @param filename
-     * @return 
+     * @return
      */
     public InputStream createInputRaw(String filename) {
         if (filename == null) {
@@ -7649,7 +7649,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref
      */
     static public InputStream createInput(File file) {
@@ -7690,7 +7690,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of a file in the data folder or a URL.
      * @see PApplet#loadStrings(String)
@@ -7780,7 +7780,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param input
-     * @return 
+     * @return
      * @nowebref
      */
     static public byte[] loadBytes(InputStream input) {
@@ -7804,7 +7804,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref
      */
     static public byte[] loadBytes(File file) {
@@ -7859,7 +7859,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref
      */
     static public String[] loadStrings(File file) {
@@ -7918,7 +7918,7 @@ public class PApplet implements PConstants {
      * things done in a "scripting" fashion. If you want to handle exceptions,
      * use Java methods for I/O.
      *
-     * @return 
+     * @return
      * @webref input:files
      * @param filename name of the file or url to load
      * @see PApplet#loadBytes(String)
@@ -7946,7 +7946,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param input
-     * @return 
+     * @return
      * @nowebref
      */
     static public String[] loadStrings(InputStream input) {
@@ -8019,7 +8019,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref output:files
      * @param filename name of the file to open
      * @see PApplet#createInput(String)
@@ -8031,7 +8031,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param file
-     * @return 
+     * @return
      * @nowebref
      */
     static public OutputStream createOutput(File file) {
@@ -8063,7 +8063,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref output:files
      * @param target name of the file to write to
      * @param source location to read from (a filename, path, or URL)
@@ -8081,7 +8081,7 @@ public class PApplet implements PConstants {
      * or uncompress gzip files.
      * @param target
      * @param source
-     * @return 
+     * @return
      */
     public boolean saveStream(File target, String source) {
         return saveStream(target, createInputRaw(source));
@@ -8090,7 +8090,7 @@ public class PApplet implements PConstants {
     /**
      * @param target
      * @param source
-     * @return 
+     * @return
      * @nowebref
      */
     public boolean saveStream(String target, InputStream source) {
@@ -8100,7 +8100,7 @@ public class PApplet implements PConstants {
     /**
      * @param target
      * @param source
-     * @return 
+     * @return
      * @nowebref
      */
     static public boolean saveStream(File target, InputStream source) {
@@ -8384,7 +8384,7 @@ public class PApplet implements PConstants {
      * other main() or by other code. For proper use of init(), see the examples
      * in the main description text for PApplet.
      * @param where
-     * @return 
+     * @return
      */
     public String sketchPath(String where) {
         if (sketchPath() == null) {
@@ -8425,7 +8425,7 @@ public class PApplet implements PConstants {
      * know you're running locally, and want to save to the data folder, use
      * <TT>saveXxxx("data/blah.dat")</TT>.
      * @param where
-     * @return 
+     * @return
      */
     public String savePath(String where) {
         if (where == null) {
@@ -8439,7 +8439,7 @@ public class PApplet implements PConstants {
     /**
      * Identical to savePath(), but returns a File object.
      * @param where
-     * @return 
+     * @return
      */
     public File saveFile(String where) {
         return new File(savePath(where));
@@ -8450,7 +8450,7 @@ public class PApplet implements PConstants {
     /**
      * Not a supported function. For testing use only.
      * @param what
-     * @return 
+     * @return
      */
     static public File desktopFile(String what) {
         if (desktopFolder == null) {
@@ -8471,7 +8471,7 @@ public class PApplet implements PConstants {
     /**
      * Not a supported function. For testing use only.
      * @param what
-     * @return 
+     * @return
      */
     static public String desktopPath(String what) {
         return desktopFile(what).getAbsolutePath();
@@ -8492,7 +8492,7 @@ public class PApplet implements PConstants {
      * relative locations of files. You'll be disappointed when your app runs on
      * different platforms.
      * @param where
-     * @return 
+     * @return
      */
     public String dataPath(String where) {
         return dataFile(where).getAbsolutePath();
@@ -8502,7 +8502,7 @@ public class PApplet implements PConstants {
      * Return a full path to an item in the data folder as a File object. See
      * the dataPath() method for more information.
      * @param where
-     * @return 
+     * @return
      */
     public File dataFile(String where) {
         // isAbsolute() could throw an access exception, but so will writing
@@ -8647,7 +8647,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param list array to sort
      * @see PApplet#reverse(boolean[])
@@ -8659,7 +8659,7 @@ public class PApplet implements PConstants {
     /**
      * @param list
      * @param count number of elements to sort, starting from 0
-     * @return 
+     * @return
      */
     static public byte[] sort(byte[] list, int count) {
         byte[] outgoing = new byte[list.length];
@@ -8855,7 +8855,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param list the array to expand
      * @see PApplet#shorten(boolean[])
@@ -8867,7 +8867,7 @@ public class PApplet implements PConstants {
     /**
      * @param list
      * @param newSize new size for the array
-     * @return 
+     * @return
      */
     static public boolean[] expand(boolean list[], int newSize) {
         boolean temp[] = new boolean[newSize];
@@ -9025,7 +9025,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param array
-     * @return 
+     * @return
      * @nowebref
      */
     static public Object expand(Object array) {
@@ -9062,7 +9062,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param array array to append
      * @param value new data for the array
@@ -9147,7 +9147,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param list array to shorten
      * @see PApplet#append(byte[], byte)
@@ -9226,7 +9226,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param list array to splice into
      * @param value value to be spliced in
@@ -9487,7 +9487,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param list array to extract from
      * @param start position to begin
@@ -9653,7 +9653,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param a first array to concatenate
      * @param b second array to concatenate
@@ -9756,7 +9756,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:array_functions
      * @param list booleans[], bytes[], chars[], ints[], floats[], or Strings[]
      * @see PApplet#sort(String[], int)
@@ -9866,7 +9866,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param str any string
      * @see PApplet#split(String, String)
@@ -9881,7 +9881,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param array a String array
-     * @return 
+     * @return
      */
     static public String[] trim(String[] array) {
         if (array == null) {
@@ -9906,7 +9906,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param list array of Strings
      * @param separator char or String to be placed between each item
@@ -9960,7 +9960,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param value the String to be split
      * @param delim list of individual characters that will be used as
@@ -10009,7 +10009,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @usage web_application
      * @param value the String to be split
@@ -10129,7 +10129,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param str the String to be searched
      * @param regexp the regexp to be used for matching
@@ -10180,7 +10180,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param str the String to be searched
      * @param regexp the regexp to be used for matching
@@ -10536,7 +10536,7 @@ public class PApplet implements PConstants {
     /**
      * Note that parseInt() will un-sign a signed byte value.
      * @param what
-     * @return 
+     * @return
      */
     static final public int parseInt(byte what) {
         return what & 0xff;
@@ -10547,7 +10547,7 @@ public class PApplet implements PConstants {
      * return 5, but the ascii value. This is because ((int) someChar) returns
      * the ascii value, and parseInt() is just longhand for the cast.
      * @param what
-     * @return 
+     * @return
      */
     static final public int parseInt(char what) {
         return what;
@@ -10556,7 +10556,7 @@ public class PApplet implements PConstants {
     /**
      * Same as floor(), or an (int) cast.
      * @param what
-     * @return 
+     * @return
      */
     static final public int parseInt(float what) {
         return (int) what;
@@ -10565,7 +10565,7 @@ public class PApplet implements PConstants {
     /**
      * Parse a String into an int value. Returns 0 if the value is bad.
      * @param what
-     * @return 
+     * @return
      */
     static final public int parseInt(String what) {
         return parseInt(what, 0);
@@ -10576,7 +10576,7 @@ public class PApplet implements PConstants {
      * used when the number is invalid.
      * @param what
      * @param otherwise
-     * @return 
+     * @return
      */
     static final public int parseInt(String what, int otherwise) {
         try {
@@ -10653,7 +10653,7 @@ public class PApplet implements PConstants {
      *
      * numbers will contain { 1, 300, 44 }
      * @param what
-     * @return 
+     * @return
      */
     static public int[] parseInt(String what[]) {
         return parseInt(what, 0);
@@ -10670,7 +10670,7 @@ public class PApplet implements PConstants {
      * numbers will contain { 1, 300, 9999, 44 }
      * @param what
      * @param missing
-     * @return 
+     * @return
      */
     static public int[] parseInt(String what[], int missing) {
         int output[] = new int[what.length];
@@ -10695,7 +10695,7 @@ public class PApplet implements PConstants {
      * Convert an int to a float value. Also handles bytes because of Java's
      * rules for upgrading values.
      * @param what
-     * @return 
+     * @return
      */
     static final public float parseFloat(int what) {  // also handles byte
         return what;
@@ -10964,7 +10964,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param nums the numbers to format
      * @param digits number of digits to pad with zero
@@ -10985,7 +10985,7 @@ public class PApplet implements PConstants {
     /**
      * @param num the number to format
      * @param digits
-     * @return 
+     * @return
      */
     static public String nf(int num, int digits) {
         if ((int_nf != null)
@@ -11015,7 +11015,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param nums the numbers to format
      * @see PApplet#nf(float, int, int)
@@ -11032,7 +11032,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param num the number to format
-     * @return 
+     * @return
      */
     static public String nfc(int num) {
         if ((int_nf != null)
@@ -11066,7 +11066,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param num the number to format
      * @param digits number of digits to pad with zeroes
@@ -11081,7 +11081,7 @@ public class PApplet implements PConstants {
     /**
      * @param nums the numbers to format
      * @param digits
-     * @return 
+     * @return
      */
     static public String[] nfs(int nums[], int digits) {
         String formatted[] = new String[nums.length];
@@ -11108,7 +11108,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:string_functions
      * @param num the number to format
      * @param digits number of digits to pad with zeroes
@@ -11123,7 +11123,7 @@ public class PApplet implements PConstants {
     /**
      * @param nums the numbers to format
      * @param digits
-     * @return 
+     * @return
      */
     static public String[] nfp(int nums[], int digits) {
         String formatted[] = new String[nums.length];
@@ -11143,7 +11143,7 @@ public class PApplet implements PConstants {
      * @param nums
      * @param left number of digits to the left of the decimal point
      * @param right number of digits to the right of the decimal point
-     * @return 
+     * @return
      */
     static public String[] nf(float nums[], int left, int right) {
         String formatted[] = new String[nums.length];
@@ -11187,7 +11187,7 @@ public class PApplet implements PConstants {
     /**
      * @param nums
      * @param right number of digits to the right of the decimal point
-     * @return 
+     * @return
      */
     static public String[] nfc(float nums[], int right) {
         String formatted[] = new String[nums.length];
@@ -11228,7 +11228,7 @@ public class PApplet implements PConstants {
      * @param nums
      * @param left the number of digits to the left of the decimal point
      * @param right the number of digits to the right of the decimal point
-     * @return 
+     * @return
      */
     static public String[] nfs(float nums[], int left, int right) {
         String formatted[] = new String[nums.length];
@@ -11253,7 +11253,7 @@ public class PApplet implements PConstants {
      * @param nums
      * @param left the number of digits to the left of the decimal point
      * @param right the number of digits to the right of the decimal point
-     * @return 
+     * @return
      */
     static public String[] nfp(float nums[], int left, int right) {
         String formatted[] = new String[nums.length];
@@ -11290,7 +11290,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:conversion
      * @param value the value to convert
      * @see PApplet#unhex(String)
@@ -11322,7 +11322,7 @@ public class PApplet implements PConstants {
     /**
      * @param value
      * @param digits the number of digits (maximum 8)
-     * @return 
+     * @return
      */
     static final public String hex(int value, int digits) {
         String stuff = Integer.toHexString(value).toUpperCase();
@@ -11348,7 +11348,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:conversion
      * @param value String to convert to an integer
      * @see PApplet#hex(int, int)
@@ -11365,7 +11365,7 @@ public class PApplet implements PConstants {
      * Returns a String that contains the binary value of a byte. The returned
      * value will always have 8 digits.
      * @param value
-     * @return 
+     * @return
      */
     static final public String binary(byte value) {
         return binary(value, 8);
@@ -11375,7 +11375,7 @@ public class PApplet implements PConstants {
      * Returns a String that contains the binary value of a char. The returned
      * value will always have 16 digits because chars are two bytes long.
      * @param value
-     * @return 
+     * @return
      */
     static final public String binary(char value) {
         return binary(value, 16);
@@ -11386,7 +11386,7 @@ public class PApplet implements PConstants {
      * depends on the size of the number itself. If you want a specific number
      * of digits use binary(int what, int digits) to specify how many.
      * @param value
-     * @return 
+     * @return
      */
     static final public String binary(int value) {
         return binary(value, 32);
@@ -11410,7 +11410,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:conversion
      * @param value value to convert
      * @param digits number of digits to return
@@ -11443,7 +11443,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref data:conversion
      * @param value String to convert to an integer
      * @see PApplet#binary(byte)
@@ -11470,7 +11470,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @param gray number specifying value between white and black
      * @see PApplet#colorMode(int)
@@ -11488,7 +11488,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @nowebref @param fgray number specifying value between white and black
      */
     public final int color(float fgray) {
@@ -11509,7 +11509,7 @@ public class PApplet implements PConstants {
      *
      * @param gray
      * @param alpha relative to current color range
-     * @return 
+     * @return
      */
     public final int color(int gray, int alpha) {
         if (g == null) {
@@ -11532,7 +11532,7 @@ public class PApplet implements PConstants {
     /**
      * @param fgray
      * @param falpha
-     * @return 
+     * @return
      * @nowebref
      */
     public final int color(float fgray, float falpha) {
@@ -11558,7 +11558,7 @@ public class PApplet implements PConstants {
      * @param v1 red or hue values relative to the current color range
      * @param v2 green or saturation values relative to the current color range
      * @param v3 blue or brightness values relative to the current color range
-     * @return 
+     * @return
      */
     public final int color(int v1, int v2, int v3) {
         if (g == null) {
@@ -11695,7 +11695,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param c1 interpolate from this color
@@ -12192,8 +12192,7 @@ public class PApplet implements PConstants {
                 }
 
                 @Override
-                public void setTitle(String title) {
-                    deprecationWarning("setTitle");
+                public void skethTitle(String title) {
                     surface.setTitle(title);
                 }
 
@@ -12318,7 +12317,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref output:files
      * @param renderer PDF or SVG
      * @param filename filename for output
@@ -12391,7 +12390,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref output:files
      * @param renderer for example, PDF or DXF
      * @param filename filename for output
@@ -12958,7 +12957,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref shape
      * @param filename name of file to load, can be .svg or .obj
      * @see PShape
@@ -12971,7 +12970,7 @@ public class PApplet implements PConstants {
     /**
      * @param filename
      * @param options
-     * @return 
+     * @return
      * @nowebref
      */
     public PShape loadShape(String filename, String options) {
@@ -12979,7 +12978,7 @@ public class PApplet implements PConstants {
     }
 
     /**
-     * @return 
+     * @return
      * @webref shape
      * @see PShape
      * @see PShape#endShape()
@@ -13002,7 +13001,7 @@ public class PApplet implements PConstants {
      * @param kind either POINT, LINE, TRIANGLE, QUAD, RECT, ELLIPSE, ARC, BOX,
      * SPHERE
      * @param p parameters that match the kind of shape
-     * @return 
+     * @return
      */
     public PShape createShape(int kind, float... p) {
         return g.createShape(kind, p);
@@ -13016,7 +13015,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref rendering:shaders
      * @param fragFilename name of fragment shader file
      */
@@ -13027,7 +13026,7 @@ public class PApplet implements PConstants {
     /**
      * @param fragFilename
      * @param vertFilename name of vertex shader file
-     * @return 
+     * @return
      */
     public PShader loadShader(String fragFilename, String vertFilename) {
         return g.loadShader(fragFilename, vertFilename);
@@ -13784,7 +13783,7 @@ public class PApplet implements PConstants {
      * }
      * endShape();</pre>
      *
-     * @return 
+     * @return
      * @webref shape:curves
      * @param a coordinate of first point on the curve
      * @param b coordinate of first control point
@@ -13812,7 +13811,7 @@ public class PApplet implements PConstants {
      * <h3>Advanced</h3>
      * Code submitted by Dave Bollinger (davol) for release 0136.
      *
-     * @return 
+     * @return
      * @webref shape:curves
      * @param a coordinate of first point on the curve
      * @param b coordinate of first control point
@@ -13944,7 +13943,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref shape:curves
      * @param a coordinate of first point on the curve
      * @param b coordinate of second point on the curve
@@ -13972,7 +13971,7 @@ public class PApplet implements PConstants {
      * <h3>Advanced</h3>
      * Code thanks to Dave Bollinger (Bug #715)
      *
-     * @return 
+     * @return
      * @webref shape:curves
      * @param a coordinate of first point on the curve
      * @param b coordinate of first control point
@@ -14392,7 +14391,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref typography:metrics
      * @see PGraphics#textDescent()
      */
@@ -14410,7 +14409,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref typography:metrics
      * @see PGraphics#textAscent()
      */
@@ -14553,7 +14552,7 @@ public class PApplet implements PConstants {
 
     /**
      * @param c the character to measure
-     * @return 
+     * @return
      */
     public float textWidth(char c) {
         return g.textWidth(c);
@@ -14566,7 +14565,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref typography:attributes
      * @param str the String of characters to measure
      * @see PApplet#loadFont(String)
@@ -14583,7 +14582,7 @@ public class PApplet implements PConstants {
      * @param chars
      * @param start
      * @param length
-     * @return 
+     * @return
      * @nowebref
      */
     public float textWidth(char[] chars, int start, int length) {
@@ -15320,7 +15319,7 @@ public class PApplet implements PConstants {
      * Copy the current transformation matrix into the specified target. Pass in
      * null to create a new matrix.
      * @param target
-     * @return 
+     * @return
      */
     public PMatrix2D getMatrix(PMatrix2D target) {
         return g.getMatrix(target);
@@ -15330,7 +15329,7 @@ public class PApplet implements PConstants {
      * Copy the current transformation matrix into the specified target. Pass in
      * null to create a new matrix.
      * @param target
-     * @return 
+     * @return
      */
     public PMatrix3D getMatrix(PMatrix3D target) {
         return g.getMatrix(target);
@@ -15667,7 +15666,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref lights_camera:coordinates
      * @param x 3D x-coordinate to be mapped
      * @param y 3D y-coordinate to be mapped
@@ -15686,7 +15685,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref lights_camera:coordinates
      * @param x 3D x-coordinate to be mapped
      * @param y 3D y-coordinate to be mapped
@@ -15701,7 +15700,7 @@ public class PApplet implements PConstants {
      * @param x
      * @param z 3D z-coordinate to be mapped
      * @param y
-     * @return 
+     * @return
      */
     public float screenX(float x, float y, float z) {
         return g.screenX(x, y, z);
@@ -15711,7 +15710,7 @@ public class PApplet implements PConstants {
      * @param x
      * @param z 3D z-coordinate to be mapped
      * @param y
-     * @return 
+     * @return
      */
     public float screenY(float x, float y, float z) {
         return g.screenY(x, y, z);
@@ -15725,7 +15724,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref lights_camera:coordinates
      * @param x 3D x-coordinate to be mapped
      * @param y 3D y-coordinate to be mapped
@@ -15755,7 +15754,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref lights_camera:coordinates
      * @param x 3D x-coordinate to be mapped
      * @param y 3D y-coordinate to be mapped
@@ -15785,7 +15784,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref lights_camera:coordinates
      * @param x 3D x-coordinate to be mapped
      * @param y 3D y-coordinate to be mapped
@@ -15815,7 +15814,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref lights_camera:coordinates
      * @param x 3D x-coordinate to be mapped
      * @param y 3D y-coordinate to be mapped
@@ -17007,7 +17006,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17037,7 +17036,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17067,7 +17066,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17097,7 +17096,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17120,7 +17119,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17142,7 +17141,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17164,7 +17163,7 @@ public class PApplet implements PConstants {
      *
      * ( end auto-generated )
      *
-     * @return 
+     * @return
      * @webref color:creating_reading
      * @usage web_application
      * @param rgb any value of the color datatype
@@ -17184,7 +17183,7 @@ public class PApplet implements PConstants {
      * @param c2
      * @param amt
      * @param mode
-     * @return 
+     * @return
      * @nowebref Interpolate between two colors. Like lerp(), but for the
      * individual color components of a color supplied as an int value.
      */
@@ -17281,7 +17280,7 @@ public class PApplet implements PConstants {
      * the bounds, and then has to check to see what image type it is. If you
      * want things to be more efficient, access the pixels[] array directly.
      *
-     * @return 
+     * @return
      * @webref image:pixels
      * @brief Reads the color of any pixel or grabs a rectangle of pixels
      * @usage web_application
@@ -17300,7 +17299,7 @@ public class PApplet implements PConstants {
      * @param y
      * @param w width of pixel rectangle to get
      * @param h height of pixel rectangle to get
-     * @return 
+     * @return
      */
     public PImage get(int x, int y, int w, int h) {
         return g.get(x, y, w, h);
@@ -17309,7 +17308,7 @@ public class PApplet implements PConstants {
     /**
      * Returns a copy of this PImage. Equivalent to get(0, 0, width, height).
      * Deprecated, just use copy() instead.
-     * @return 
+     * @return
      */
     public PImage get() {
         return g.get();
