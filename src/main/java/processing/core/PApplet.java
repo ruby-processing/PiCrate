@@ -12224,7 +12224,7 @@ public class PApplet implements PConstants {
             };
 
             surface.initFrame(this); //, backgroundColor, displayNum, fullScreen, spanDisplays);
-            surface.setTitle(getClass().getSimpleName());
+            surface.setTitle("PiCrate Sketch");
 
         } else {
             surface.initOffscreen(this);  // for PDF/PSurfaceNone and friends

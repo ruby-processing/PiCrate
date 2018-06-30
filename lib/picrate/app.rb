@@ -56,7 +56,6 @@ module Processing
     alias stroke_width stroke_weight
     alias rgb color
     alias gray color
-    field_reader :surface
 
     def sketch_class
       self.class.sketch_class
@@ -131,10 +130,6 @@ module Processing
     end
 
     def post_initialize(_args)
-    end
-
-    def sketch_title(title)
-      surface.set_title(title)
     end
 
     def data_path(dat)
