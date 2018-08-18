@@ -1,7 +1,7 @@
 project 'picrate', 'http://maven.apache.org' do
 
   model_version '4.0.0'
-  id 'ruby-processing:picrate:0.3.0'
+  id 'ruby-processing:picrate:0.4.0'
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -24,7 +24,7 @@ project 'picrate', 'http://maven.apache.org' do
 
   properties( 'jogl.version' => '2.3.2',
     'jruby.api' => 'http://jruby.org/apidocs/',
-    'source.directory' => 'src',
+    'source.directory' => 'src/main',
     'maven.compiler.target' => '1.8',
     'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
     'picrate.basedir' => '${project.basedir}',
@@ -48,12 +48,12 @@ project 'picrate', 'http://maven.apache.org' do
         'targetJdk' =>  '${compileSource}' )
         build do
           resource do
-            directory '${source.directory}/main/java'
+            directory '${source.directory}/java'
             includes ['**/**/*.glsl', '**/*.jnilib']
             excludes '**/**/*.java'
           end
           resource do
-            directory '${source.directory}/main/resources'
+            directory '${source.directory}/resources'
             includes ['**/*.png', '*.txt']
           end
         end

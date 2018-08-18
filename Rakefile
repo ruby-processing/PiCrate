@@ -17,18 +17,18 @@ task default: [:init, :compile, :install, :test, :gem]
 desc 'Create Manifest and Copy Jars'
 task :init do
   create_manifest
-  processing_root = File.dirname(`readlink -f $(which processing)`)
-  jar_dir = File.join(processing_root, 'core', 'library')
-  opengl = Dir.entries(jar_dir).grep(/amd64|armv6hf/).select { |jar| jar =~ /linux/ }
-  opengl.concat %w[jogl-all.jar gluegen-rt.jar]
-  opengl.each do |gl|
-	  FileUtils.cp(File.join(jar_dir, gl), File.join('.', 'lib'))
-  end
+  # processing_root = File.dirname(`readlink -f $(which processing)`)
+  # jar_dir = File.join(processing_root, 'core', 'library')
+  # opengl = Dir.entries(jar_dir).grep(/amd64|armv6hf/).select { |jar| jar =~ /linux/ }
+  # opengl.concat %w[jogl-all.jar gluegen-rt.jar]
+  # opengl.each do |gl|
+	#   FileUtils.cp(File.join(jar_dir, gl), File.join('.', 'lib'))
+  # end
 end
 
 desc 'Install'
 task :install do
-  sh 'mv target/picrate-0.3.0.jar lib'
+  sh 'mv target/picrate-0.4.0.jar lib'
 end
 
 desc 'Gem'
