@@ -52,7 +52,7 @@
       * @param web Array of web (hex) String
       * @return cols of p5 color (int)
       */
-     static public int[] webArray(String[] web) {
+     static public int[] webArray(String... web) {
          int[] result = new int[web.length];
          for (int i = 0; i < web.length; i++) {
              result[i] = java.awt.Color.decode(web[i]).getRGB();
