@@ -39,7 +39,7 @@ project 'picrate', 'http://maven.apache.org' do
 
   plugin( :resources, '2.7',
     'encoding' =>  'UTF-8' )
-    plugin( :compiler, '3.7.0',
+    plugin( :compiler, '3.8.0',
       'source' =>  '1.8',
       'target' =>  '1.8' )
       plugin( :pmd, '3.3',
