@@ -12,10 +12,10 @@ Gem::Specification.new do |gem|
   gem.description  = <<-EOS
   A batteries included version of processing in ruby, for raspberrypi and linux.
   EOS
-  gem.summary       = %q{ruby wrapper for processing-3.3.7 on raspberrypi and linux64}
+  gem.summary       = %q{ruby wrapper for processing-3.4 on raspberrypi and linux64}
   gem.homepage      = 'https://ruby-processing.github.io/PiCrate/'
   gem.files         = `git ls-files`.split($/)
-  gem.files << 'lib/picrate-0.4.0.jar'
+  gem.files << 'lib/picrate-0.4.1.jar'
   gem.files << 'lib/gluegen-rt.jar'
   gem.files << 'lib/jogl-all.jar'
   gem.files << 'lib/gluegen-rt-natives-linux-amd64.jar'
