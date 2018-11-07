@@ -1,3 +1,4 @@
+v0.4.1 Proper sensible release since we can install from rubygems with jruby-9.2.1.0
 v0.0.4 LSystem examples
 v0.0.3
 Extended Samples

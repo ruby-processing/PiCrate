@@ -31,7 +31,7 @@ project 'picrate', 'http://maven.apache.org' do
     'project.build.sourceEncoding' => 'utf-8',
     'polyglot.dump.pom' => 'pom.xml',
     'maven.compiler.source' => '1.8' )
-    pom 'org.jruby:jruby:9.2.0.0'
+    pom 'org.jruby:jruby:9.2.1.0'
     jar 'org.processing:video:3.2.3'
     jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
     jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
