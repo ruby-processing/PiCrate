@@ -17,7 +17,7 @@ task default: [:init, :compile, :install, :test, :gem]
 desc 'Create Manifest and Copy Jars'
 task :init do
   create_manifest
-  processing_root = File.dirname(`readlink -f $(which processing)`)
+  fprocessing_root = File.dirname(`readlink -f $(which processing)`)
   # processing_root = '/home/tux/processing-3.4'
   jar_dir = File.join(processing_root, 'core', 'library')
   opengl = Dir.entries(jar_dir).grep(/amd64|armv6hf/).select { |jar| jar =~ /linux/ }

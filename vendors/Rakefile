@@ -6,11 +6,11 @@ WARNING = <<-EOS
    the correct version of picrate-examples (see EXAMPLES vendors directory)
 EOS
 SOUND = 'sound.zip'.freeze
-SOUND_VERSION = 'v1.3.2' # version 1.3.2
+SOUND_VERSION = 'v1.3.2'
 GLVIDEO = 'processing-glvideo.zip'
 VIDEO = 'video-2.zip'
-VIDEO_VERSION = '2' # version 1.0.1
-EXAMPLES = '0.0.7'.freeze
+VIDEO_VERSION = '2'
+EXAMPLES = '0.0.8'.freeze
 HOME_DIR = ENV['HOME']
 PI_OR_LINUX = /linux|arm/ =~ RbConfig::CONFIG['host_os']
 
