@@ -1,4 +1,4 @@
-v0.4.2 Update to jruby-9.2.2.0
+v0.4.2 Update to jruby-9.2.3.0
 
 v0.4.1 Proper sensible release since we can install from rubygems with jruby-9.2.1.0
 

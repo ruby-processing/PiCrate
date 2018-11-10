@@ -11,7 +11,7 @@ Get the latest version from [http://jruby.org/download][download]
 
 ```bash
 cd /opt
-sudo tar xzvf /pathToDownload/jruby-bin-9.2.2.0.tar.gz
+sudo tar xzvf /pathToDownload/jruby-bin-9.2.3.0.tar.gz
 ```
 
 Then use the excellent `update-alternatives` tool to provide symbolic links to `jruby`, `jgem`, `jirb` and `rake` especially if you haven't installed `mri` ruby.
@@ -33,4 +33,4 @@ export PATH="${PATH}:${GEM_PATH}/bin"
 
 If you know better please post on wiki
 
-[download]:https://s3.amazonaws.com/jruby.org/downloads/9.2.2.0/jruby-bin-9.2.2.0.tar.gz
+[download]:https://s3.amazonaws.com/jruby.org/downloads/9.2.3.0/jruby-bin-9.2.3.0.tar.gz
