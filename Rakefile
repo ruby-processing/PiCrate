@@ -29,7 +29,7 @@ end
 
 desc 'Install'
 task :install do
-  sh 'mv target/picrate-0.4.1.jar lib'
+  sh 'mv target/picrate-0.4.3.jar lib'
 end
 
 desc 'Gem'

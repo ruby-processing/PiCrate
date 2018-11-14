@@ -11,7 +11,7 @@ DO NOT MODIFIY - GENERATED CODE
   <modelVersion>4.0.0</modelVersion>
   <groupId>ruby-processing</groupId>
   <artifactId>picrate</artifactId>
-  <version>0.4.2</version>
+  <version>0.4.3</version>
   <name>picrate</name>
   <description>An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.</description>
   <url>http://maven.apache.org</url>
@@ -78,7 +78,7 @@ DO NOT MODIFIY - GENERATED CODE
     <dependency>
       <groupId>org.jruby</groupId>
       <artifactId>jruby</artifactId>
-      <version>9.2.3.0</version>
+      <version>9.2.4.0</version>
       <type>pom</type>
     </dependency>
     <dependency>
