@@ -12,4 +12,4 @@ For a semi-automated setup and install, download and extract [this gist](https:/
 bash gem_environment.sh # sets up a local gem environment
 rake # default is to install jruby to opt, then link using update-alternatives
 ```
-Adjust script to suit needs if required, currently downloads gems and installs using downloaded copies (currently there is an issue with jgem downloads from rubygems on raspberryPI).
+Adjust script to suit needs if required, now installs `gems` with `jgem` from `rubygems`.
