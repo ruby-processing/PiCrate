@@ -6,7 +6,7 @@ categories: PiCrate update
 permalink: /install_picrate/
 ---
 
-For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/8f06529790c36f5b7f668015faadcbc5/archive/ecb46e09fd14ef52f61a02ff5eb8ddc8d2b09038.zip)
+For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/8f06529790c36f5b7f668015faadcbc5/archive/94c5262e4fbe4bfbc615a40478255b48cc1eaf8c.zip)
 
 ```bash
 bash gem_environment.sh # sets up a local gem environment
