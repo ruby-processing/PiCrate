@@ -18,7 +18,7 @@ jgem install picrate
 Install samples
 
 ```bash
-picrate -i Samples
+picrate -i Samples # also installs geany configuration files
 ```
 
 Install processing libraries
@@ -28,7 +28,7 @@ picrate -i Sound
 picrate -i glvideo # preferred over vanilla video for now
 ```
 
-Create template
+To create a template sketch from the command line:-
 
 ```bash
 picrate -c my_sketch 600 400
