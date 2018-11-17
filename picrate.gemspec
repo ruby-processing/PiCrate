@@ -11,6 +11,7 @@ Gem::Specification.new do |gem|
   gem.licenses     = %w(GPL-3.0 LGPL-2.0)
   gem.description  = <<-EOS
   A batteries included version of processing in ruby, for raspberrypi and linux.
+  Install samples to configures geany ide.
   EOS
   gem.summary       = %q{ruby wrapper for processing-3.4 on raspberrypi and linux64}
   gem.homepage      = 'https://ruby-processing.github.io/PiCrate/'
