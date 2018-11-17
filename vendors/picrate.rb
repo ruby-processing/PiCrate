@@ -1,4 +1,5 @@
 #!/usr/bin/env jruby
+require 'picrate'
 # Sketch class
 class MySketch < Processing::App
   def settings
