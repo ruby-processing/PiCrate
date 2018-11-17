@@ -74,18 +74,18 @@ end
 desc 'initialize ~/.picrate directories'
 task :init_dir do
   unless File.exist? "#{HOME_DIR}/.picrate/libraries"
-    directory "~/.picrate/libraries"
+    sh "mkdir -p #{HOME_DIR}/.picrate/libraries"
   end
 end
 
 desc 'configure geany'
 task :config_geany do
   unless File.exist? "#{HOME_DIR}/.config/geany/templates/files/picrate.rb"
-    directory "~/.config/geany/templates/files"
+    sh "mkdir -p #{HOME_DIR}/.config/geany/templates/files"
     sh "cp picrate.rb #{HOME_DIR}/.config/geany/templates/files"
   end
   unless File.exist? "#{HOME_DIR}/projects/picrate.geany"
-    directory "~/projects"
+    sh "mkdir -p #{HOME_DIR}/projects"
     sh "cp picrate.geany #{HOME_DIR}/projects"
   end
 end
