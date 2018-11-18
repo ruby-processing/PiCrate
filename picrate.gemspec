@@ -17,7 +17,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = 'https://ruby-processing.github.io/PiCrate/'
   gem.post_install_message = %q{Use 'picrate --install Samples' to install samples}
   gem.files         = `git ls-files`.split($/)
-  gem.files << 'lib/picrate-0.5.0.jar'
+  gem.files << "lib/picrate-#{PiCrate::VERSION}.jar"
   gem.files << 'lib/gluegen-rt.jar'
   gem.files << 'lib/jogl-all.jar'
   gem.files << 'lib/gluegen-rt-natives-linux-amd64.jar'

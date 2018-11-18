@@ -17,8 +17,8 @@ task default: [:init, :compile, :install, :test, :gem]
 desc 'Create Manifest and Copy Jars'
 task :init do
   create_manifest
-  fprocessing_root = File.dirname(`readlink -f $(which processing)`)
-  # processing_root = '/home/tux/processing-3.4'
+  processing_root = File.dirname(`readlink -f $(which processing)`) # for Archlinux etc
+  # processing_root = '/home/tux/processing-3.4' # alternative for debian linux etc
   jar_dir = File.join(processing_root, 'core', 'library')
   opengl = Dir.entries(jar_dir).grep(/amd64|armv6hf/).select { |jar| jar =~ /linux/ }
   opengl.concat %w[jogl-all.jar gluegen-rt.jar]
@@ -29,7 +29,7 @@ end
 
 desc 'Install'
 task :install do
-  sh 'mv target/picrate-0.5.0.jar lib'
+  sh "mv target/picrate-#{PiCrate::VERSION}.jar lib"
 end
 
 desc 'Gem'
