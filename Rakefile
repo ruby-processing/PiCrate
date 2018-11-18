@@ -50,7 +50,7 @@ end
 desc 'Test'
 task :test do
   sh 'jruby test/helper_methods_test.rb'
-  # sh 'jruby test/respond_to_test.rb' Skip test on Travis to avoid Headless fail
+  sh 'jruby test/respond_to_test.rb' # Skip this test on Travis etc
   sh 'jruby test/create_test.rb'
   sh 'jruby test/math_tool_test.rb'
   sh 'jruby test/deglut_spec_test.rb'
@@ -59,8 +59,8 @@ end
 
 desc 'clean'
 task :clean do
-  Dir['./**/*.%w{jar gem}'].each do |path|
-    puts 'Deleting #{path} ...'
+  Dir["./**/*.{jar,gem}"].each do |path|
+    puts "Deleting #{path} ..."
     File.delete(path)
   end
   FileUtils.rm_rf('./target')
