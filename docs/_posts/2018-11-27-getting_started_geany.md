@@ -32,7 +32,7 @@ See [editors][geany] geany, for how to run sketches from a gui.
 
 ### Running PiCrate sketch on RaspberryPI from geany editor
 
-![circle_collisions]({{ site.github.url }}/assets/circle_collisions.png)
+![snake_kolam]({{ site.github.url }}/assets/geany.png)
 
 [jruby]:{{ site.github.url }}/install_jruby/
 [geany]:{{ site.github.url }}/editors/geany
