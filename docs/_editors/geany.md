@@ -15,5 +15,3 @@ Use `make` to check syntax and `run` to run sketch
 See running sketch below:-
 
 ![geany]({{ site.github.url }}/assets/geany.png)
-
-[github]:https://github.com/ruby-processing/geany
