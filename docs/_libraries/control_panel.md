@@ -130,7 +130,7 @@ class JWishy < Processing::App
   def draw
     #.... rest of draw
   end
-
+end
 ```
 ![JWishy]({{site.github.url}}/assets/jwishy.png)
 

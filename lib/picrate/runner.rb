@@ -67,7 +67,7 @@ module Processing
     end
 
     def show_version
-      v_format = "Processing version %s\nJRuby version %s"
+      v_format = "PiCrate version %s\nJRuby version %s"
       puts format(v_format, PiCrate::VERSION, JRUBY_VERSION)
     end
 
