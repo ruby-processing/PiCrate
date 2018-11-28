@@ -6,12 +6,16 @@ permalink: libraries/control_panel.html
 ---
 The GLVideo library developed by [gohai][gohai] uses a more current version glstreamer library than the regular pocessing library.
 
-See [processing_wiki][glcapture]:https://pi.processing.org/technical/ 'Video library: Capture' if you want to use the `RaspberryPI` camera.
+```bash
+sudo apt-get install gstreamer1.0-tools
+```
 
-![JWishy]({{site.github.url}}/assets/jwishy.png)
+See [processing_wiki][glcapture] 'Video library: Capture' if you want to use the `RaspberryPI` camera.
+
+
 
 [glcapture]:https://pi.processing.org/technical/
 
 [gohai]:https://github.com/gohai/processing-glvideo
 
-sudo apt-get install gstreamer1.0-tools
+

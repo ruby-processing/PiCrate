@@ -132,6 +132,6 @@ class JWishy < Processing::App
   end
 end
 ```
-![JWishy]({{site.github.url}}/assets/jwishy.png)
+![JWishy]({{site.github.url}}/assets/jwishy_picrate.png)
 
 See also [penrose](https://github.com/ruby-processing/picrate-examples/blob/master/library/vecmath/vec2d/penrose.rb) and [bezier playground](https://github.com/ruby-processing/picrate-examples/blob/master/contributed/bezier_playground.rb) sketches. See ruby code [here](https://github.com/ruby-processing/picrate/blob/master/library/control_panel/control_panel.rb).
