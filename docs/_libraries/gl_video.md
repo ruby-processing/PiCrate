@@ -2,7 +2,7 @@
 layout: post
 title:  "glvideo<sup>5</sup>"
 keywords: library, video, capture, processing, glstreamer-1.x
-permalink: libraries/control_panel.html
+permalink: libraries/gl_video.html
 ---
 The GLVideo library developed by [gohai][gohai] uses a more current version glstreamer library than the regular pocessing library.
 
