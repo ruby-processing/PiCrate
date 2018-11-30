@@ -67,8 +67,12 @@ module Processing
     end
 
     def show_version
-      v_format = "PiCrate version %s\nJRuby version %s"
-      puts format(v_format, PiCrate::VERSION, JRUBY_VERSION)
+      require 'erb'
+      template = ERB.new <<-EOF
+        PiCrate version <%= PiCrate::VERSION %>
+        JRuby version <%= JRUBY_VERSION %>
+      EOF
+      puts template.result(binding)
     end
 
     def install(library)
