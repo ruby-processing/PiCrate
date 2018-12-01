@@ -9,7 +9,7 @@ import processing.core.PApplet;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public abstract class SimpleSlider implements Slider {//implements Slider {
 
@@ -60,7 +60,7 @@ public abstract class SimpleSlider implements Slider {//implements Slider {
     /**
      *
      */
-    
+
     @Override
     public void showLabel() {
         displayLabel = true;
@@ -69,7 +69,7 @@ public abstract class SimpleSlider implements Slider {//implements Slider {
     /**
      *
      */
-    
+
     @Override
     public void hideLabel() {
         displayLabel = false;
@@ -78,7 +78,7 @@ public abstract class SimpleSlider implements Slider {//implements Slider {
     /**
      *
      */
-    
+
     @Override
     public void showNumbers() {
         displayValue = true;
@@ -99,7 +99,7 @@ public abstract class SimpleSlider implements Slider {//implements Slider {
     /**
      *
      */
-    
+
     @Override
     public void hideBackground() {
         backgroundVisible = false;
@@ -107,9 +107,9 @@ public abstract class SimpleSlider implements Slider {//implements Slider {
 
     /**
      *
-     * @return
+     * @return value as a Float
      */
-    
+
     @Override
     public float readValue() {
         return pValue;
@@ -140,7 +140,7 @@ public abstract class SimpleSlider implements Slider {//implements Slider {
      *
      * @param s
      */
-    
+
     @Override
     public void labelSize(int s) {
         labelSize = (s < 4) ? 4 : s;

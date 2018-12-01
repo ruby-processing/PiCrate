@@ -81,6 +81,11 @@ public class ColorUtil {
         return sb.toString();
     }
 
+    /**
+     *
+     * @param p5colors
+     * @return array of web color as String
+     */
     static public String[] p5ToWeb(int[] p5colors) {
         List<String> list = new ArrayList<>();
         for (int p5color : p5colors) {
@@ -89,6 +94,11 @@ public class ColorUtil {
         return list.toArray(new String[0]);
     }
 
+    /**
+     *
+     * @param cols
+     * @return array of color int
+     */
     static public int[] shuffle(int[] cols) {
         Random rgen = new Random();  // Random number generator
         for (int i = 0; i < cols.length; i++) {
@@ -132,7 +142,7 @@ public class ColorUtil {
      * @param hue
      * @param sat
      * @param brightness
-     * @return
+     * @return color int
      */
     static public int hsbToRgB(double hue, double sat, double brightness) {
         return java.awt.Color.HSBtoRGB((float) hue, (float) sat, (float) brightness);

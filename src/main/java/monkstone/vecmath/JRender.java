@@ -3,6 +3,7 @@ package monkstone.vecmath;
 /**
  *
  *
+ * @author Martin Prout
  */
 public interface JRender {
 

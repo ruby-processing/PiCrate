@@ -41,129 +41,430 @@ import java.util.HashMap;
  * @webref rendering:shaders
  */
 public class PShader implements PConstants {
-  static protected final int POINT    = 0;
-  static protected final int LINE     = 1;
-  static protected final int POLY     = 2;
-  static protected final int COLOR    = 3;
-  static protected final int LIGHT    = 4;
-  static protected final int TEXTURE  = 5;
-  static protected final int TEXLIGHT = 6;
 
-  static protected String pointShaderAttrRegexp =
+    /**
+     *
+     */
+    static protected final int POINT    = 0;
+
+    /**
+     *
+     */
+    static protected final int LINE     = 1;
+
+    /**
+     *
+     */
+    static protected final int POLY     = 2;
+
+    /**
+     *
+     */
+    static protected final int COLOR    = 3;
+
+    /**
+     *
+     */
+    static protected final int LIGHT    = 4;
+
+    /**
+     *
+     */
+    static protected final int TEXTURE  = 5;
+
+    /**
+     *
+     */
+    static protected final int TEXLIGHT = 6;
+
+    /**
+     *
+     */
+    static protected String pointShaderAttrRegexp =
     "attribute *vec2 *offset";
-  static protected String pointShaderInRegexp =
+
+    /**
+     *
+     */
+    static protected String pointShaderInRegexp =
     "in *vec2 *offset;";
-  static protected String lineShaderAttrRegexp =
+
+    /**
+     *
+     */
+    static protected String lineShaderAttrRegexp =
     "attribute *vec4 *direction";
-  static protected String lineShaderInRegexp =
+
+    /**
+     *
+     */
+    static protected String lineShaderInRegexp =
     "in *vec4 *direction";
-  static protected String pointShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String pointShaderDefRegexp =
     "#define *PROCESSING_POINT_SHADER";
-  static protected String lineShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String lineShaderDefRegexp =
     "#define *PROCESSING_LINE_SHADER";
-  static protected String colorShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String colorShaderDefRegexp =
     "#define *PROCESSING_COLOR_SHADER";
-  static protected String lightShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String lightShaderDefRegexp =
     "#define *PROCESSING_LIGHT_SHADER";
-  static protected String texShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String texShaderDefRegexp =
     "#define *PROCESSING_TEXTURE_SHADER";
-  static protected String texlightShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String texlightShaderDefRegexp =
     "#define *PROCESSING_TEXLIGHT_SHADER";
-  static protected String polyShaderDefRegexp =
+
+    /**
+     *
+     */
+    static protected String polyShaderDefRegexp =
     "#define *PROCESSING_POLYGON_SHADER";
-  static protected String triShaderAttrRegexp =
+
+    /**
+     *
+     */
+    static protected String triShaderAttrRegexp =
     "#define *PROCESSING_TRIANGLES_SHADER";
-  static protected String quadShaderAttrRegexp =
+
+    /**
+     *
+     */
+    static protected String quadShaderAttrRegexp =
     "#define *PROCESSING_QUADS_SHADER";
 
-  protected PApplet parent;
+    /**
+     *
+     */
+    protected PApplet parent;
   // The main renderer associated to the parent PApplet.
   //protected PGraphicsOpenGL pgMain;
   // We need a reference to the renderer since a shader might
   // be called by different renderers within a single application
   // (the one corresponding to the main surface, or other offscreen
   // renderers).
+
+    /**
+     *
+     */
   protected PGraphicsOpenGL primaryPG;
-  protected PGraphicsOpenGL currentPG;
-  protected PGL pgl;
-  protected int context;      // The context that created this shader.
+
+    /**
+     *
+     */
+    protected PGraphicsOpenGL currentPG;
+
+    /**
+     *
+     */
+    protected PGL pgl;
+
+    /**
+     *
+     */
+    protected int context;      // The context that created this shader.
 
   // The shader type: POINT, LINE, POLY, etc.
+
+    /**
+     *
+     */
   protected int type;
 
-  public int glProgram;
-  public int glVertex;
-  public int glFragment;
+    /**
+     *
+     */
+    public int glProgram;
+
+    /**
+     *
+     */
+    public int glVertex;
+
+    /**
+     *
+     */
+    public int glFragment;
   private GLResourceShader glres;
 
-  protected URL vertexURL;
-  protected URL fragmentURL;
+    /**
+     *
+     */
+    protected URL vertexURL;
 
-  protected String vertexFilename;
-  protected String fragmentFilename;
+    /**
+     *
+     */
+    protected URL fragmentURL;
 
-  protected String[] vertexShaderSource;
-  protected String[] fragmentShaderSource;
+    /**
+     *
+     */
+    protected String vertexFilename;
 
-  protected boolean bound;
+    /**
+     *
+     */
+    protected String fragmentFilename;
 
-  protected HashMap<String, UniformValue> uniformValues = null;
+    /**
+     *
+     */
+    protected String[] vertexShaderSource;
 
-  protected HashMap<Integer, Texture> textures;
-  protected HashMap<Integer, Integer> texUnits;
+    /**
+     *
+     */
+    protected String[] fragmentShaderSource;
+
+    /**
+     *
+     */
+    protected boolean bound;
+
+    /**
+     *
+     */
+    protected HashMap<String, UniformValue> uniformValues = null;
+
+    /**
+     *
+     */
+    protected HashMap<Integer, Texture> textures;
+
+    /**
+     *
+     */
+    protected HashMap<Integer, Integer> texUnits;
 
   // Direct buffers to pass shader data to GL
-  protected IntBuffer intBuffer;
-  protected FloatBuffer floatBuffer;
 
-  protected boolean loadedAttributes = false;
-  protected boolean loadedUniforms = false;
+    /**
+     *
+     */
+  protected IntBuffer intBuffer;
+
+    /**
+     *
+     */
+    protected FloatBuffer floatBuffer;
+
+    /**
+     *
+     */
+    protected boolean loadedAttributes = false;
+
+    /**
+     *
+     */
+    protected boolean loadedUniforms = false;
 
   // Uniforms common to all shader types
+
+    /**
+     *
+     */
   protected int transformMatLoc;
-  protected int modelviewMatLoc;
-  protected int projectionMatLoc;
-  protected int ppixelsLoc;
-  protected int ppixelsUnit;
-  protected int viewportLoc;
-  protected int resolutionLoc;
+
+    /**
+     *
+     */
+    protected int modelviewMatLoc;
+
+    /**
+     *
+     */
+    protected int projectionMatLoc;
+
+    /**
+     *
+     */
+    protected int ppixelsLoc;
+
+    /**
+     *
+     */
+    protected int ppixelsUnit;
+
+    /**
+     *
+     */
+    protected int viewportLoc;
+
+    /**
+     *
+     */
+    protected int resolutionLoc;
 
   // Uniforms only for lines and points
+
+    /**
+     *
+     */
   protected int perspectiveLoc;
-  protected int scaleLoc;
+
+    /**
+     *
+     */
+    protected int scaleLoc;
 
   // Lighting uniforms
+
+    /**
+     *
+     */
   protected int lightCountLoc;
-  protected int lightPositionLoc;
-  protected int lightNormalLoc;
-  protected int lightAmbientLoc;
-  protected int lightDiffuseLoc;
-  protected int lightSpecularLoc;
-  protected int lightFalloffLoc;
-  protected int lightSpotLoc;
+
+    /**
+     *
+     */
+    protected int lightPositionLoc;
+
+    /**
+     *
+     */
+    protected int lightNormalLoc;
+
+    /**
+     *
+     */
+    protected int lightAmbientLoc;
+
+    /**
+     *
+     */
+    protected int lightDiffuseLoc;
+
+    /**
+     *
+     */
+    protected int lightSpecularLoc;
+
+    /**
+     *
+     */
+    protected int lightFalloffLoc;
+
+    /**
+     *
+     */
+    protected int lightSpotLoc;
 
   // Texturing uniforms
+
+    /**
+     *
+     */
   protected Texture texture;
-  protected int texUnit;
-  protected int textureLoc;
-  protected int texMatrixLoc;
-  protected int texOffsetLoc;
-  protected float[] tcmat;
+
+    /**
+     *
+     */
+    protected int texUnit;
+
+    /**
+     *
+     */
+    protected int textureLoc;
+
+    /**
+     *
+     */
+    protected int texMatrixLoc;
+
+    /**
+     *
+     */
+    protected int texOffsetLoc;
+
+    /**
+     *
+     */
+    protected float[] tcmat;
 
   // Vertex attributes
-  protected int vertexLoc;
-  protected int colorLoc;
-  protected int normalLoc;
-  protected int texCoordLoc;
-  protected int normalMatLoc;
-  protected int directionLoc;
-  protected int offsetLoc;
-  protected int ambientLoc;
-  protected int specularLoc;
-  protected int emissiveLoc;
-  protected int shininessLoc;
 
-  public PShader() {
+    /**
+     *
+     */
+  protected int vertexLoc;
+
+    /**
+     *
+     */
+    protected int colorLoc;
+
+    /**
+     *
+     */
+    protected int normalLoc;
+
+    /**
+     *
+     */
+    protected int texCoordLoc;
+
+    /**
+     *
+     */
+    protected int normalMatLoc;
+
+    /**
+     *
+     */
+    protected int directionLoc;
+
+    /**
+     *
+     */
+    protected int offsetLoc;
+
+    /**
+     *
+     */
+    protected int ambientLoc;
+
+    /**
+     *
+     */
+    protected int specularLoc;
+
+    /**
+     *
+     */
+    protected int emissiveLoc;
+
+    /**
+     *
+     */
+    protected int shininessLoc;
+
+    /**
+     *
+     */
+    public PShader() {
     parent = null;
     pgl = null;
     context = -1;
@@ -185,8 +486,11 @@ public class PShader implements PConstants {
     type = -1;
   }
 
-
-  public PShader(PApplet parent) {
+    /**
+     *
+     * @param parent
+     */
+    public PShader(PApplet parent) {
     this();
     this.parent = parent;
     primaryPG = (PGraphicsOpenGL)parent.g;
@@ -239,6 +543,7 @@ public class PShader implements PConstants {
 
 
   /**
+     * @param parent
    * @param vertURL network location of the vertex shader
    * @param fragURL network location of the fragment shader
    */
@@ -276,7 +581,13 @@ public class PShader implements PConstants {
     }
   }
 
-  public PShader(PApplet parent, String[] vertSource, String[] fragSource) {
+    /**
+     *
+     * @param parent
+     * @param vertSource
+     * @param fragSource
+     */
+    public PShader(PApplet parent, String[] vertSource, String[] fragSource) {
     this.parent = parent;
     primaryPG = (PGraphicsOpenGL)parent.g;
     pgl = primaryPG.pgl;
@@ -310,36 +621,55 @@ public class PShader implements PConstants {
     }
   }
 
-
-  public void setVertexShader(String vertFilename) {
+    /**
+     *
+     * @param vertFilename
+     */
+    public void setVertexShader(String vertFilename) {
     this.vertexFilename = vertFilename;
     vertexShaderSource = pgl.loadVertexShader(vertFilename);
   }
 
-
-  public void setVertexShader(URL vertURL) {
+    /**
+     *
+     * @param vertURL
+     */
+    public void setVertexShader(URL vertURL) {
     this.vertexURL = vertURL;
     vertexShaderSource = pgl.loadVertexShader(vertURL);
   }
 
-
-  public void setVertexShader(String[] vertSource) {
+    /**
+     *
+     * @param vertSource
+     */
+    public void setVertexShader(String[] vertSource) {
     vertexShaderSource = vertSource;
   }
 
-
-  public void setFragmentShader(String fragFilename) {
+    /**
+     *
+     * @param fragFilename
+     */
+    public void setFragmentShader(String fragFilename) {
     this.fragmentFilename = fragFilename;
     fragmentShaderSource = pgl.loadFragmentShader(fragFilename);
   }
 
-
-  public void setFragmentShader(URL fragURL) {
+    /**
+     *
+     * @param fragURL
+     */
+    public void setFragmentShader(URL fragURL) {
     this.fragmentURL = fragURL;
     fragmentShaderSource = pgl.loadFragmentShader(fragURL);
   }
 
-  public void setFragmentShader(String[] fragSource) {
+    /**
+     *
+     * @param fragSource
+     */
+    public void setFragmentShader(String[] fragSource) {
     fragmentShaderSource = fragSource;
   }
 
@@ -376,6 +706,7 @@ public class PShader implements PConstants {
 
   /**
    * Returns true if the shader is bound, false otherwise.
+     * @return 
    */
   public boolean bound() {
     return bound;
@@ -392,47 +723,79 @@ public class PShader implements PConstants {
   }
 
   /**
+     * @param name
    * @param y second component of the variable to modify. The variable has to be declared with an array/vector type in the shader (i.e.: int[2], vec2)
+     * @param x
    */
   public void set(String name, int x, int y) {
     setUniformImpl(name, UniformValue.INT2, new int[] { x, y });
   }
 
   /**
+     * @param name
    * @param z third component of the variable to modify. The variable has to be declared with an array/vector type in the shader (i.e.: int[3], vec3)
+     * @param x
+     * @param y
    */
   public void set(String name, int x, int y, int z) {
     setUniformImpl(name, UniformValue.INT3, new int[] { x, y, z });
   }
 
   /**
+     * @param name
+     * @param x
    * @param w fourth component of the variable to modify. The variable has to be declared with an array/vector type in the shader (i.e.: int[4], vec4)
+     * @param z
+     * @param y
    */
   public void set(String name, int x, int y, int z, int w) {
     setUniformImpl(name, UniformValue.INT4, new int[] { x, y, z, w });
   }
 
-
-  public void set(String name, float x) {
+    /**
+     *
+     * @param name
+     * @param x
+     */
+    public void set(String name, float x) {
     setUniformImpl(name, UniformValue.FLOAT1, new float[] { x });
   }
 
-
-  public void set(String name, float x, float y) {
+    /**
+     *
+     * @param name
+     * @param x
+     * @param y
+     */
+    public void set(String name, float x, float y) {
     setUniformImpl(name, UniformValue.FLOAT2, new float[] { x, y });
   }
 
-
-  public void set(String name, float x, float y, float z) {
+    /**
+     *
+     * @param name
+     * @param x
+     * @param y
+     * @param z
+     */
+    public void set(String name, float x, float y, float z) {
     setUniformImpl(name, UniformValue.FLOAT3, new float[] { x, y, z });
   }
 
-
-  public void set(String name, float x, float y, float z, float w) {
+    /**
+     *
+     * @param name
+     * @param x
+     * @param y
+     * @param z
+     * @param w
+     */
+    public void set(String name, float x, float y, float z, float w) {
     setUniformImpl(name, UniformValue.FLOAT4, new float[] { x, y, z, w });
   }
 
   /**
+     * @param name
    * @param vec modifies all the components of an array/vector uniform variable. PVector can only be used if the type of the variable is vec3.
    */
   public void set(String name, PVector vec) {
@@ -440,37 +803,65 @@ public class PShader implements PConstants {
                    new float[] { vec.x, vec.y, vec.z });
   }
 
-
-  public void set(String name, boolean x) {
+    /**
+     *
+     * @param name
+     * @param x
+     */
+    public void set(String name, boolean x) {
     setUniformImpl(name, UniformValue.INT1, new int[] { (x)?1:0 });
   }
 
-
-  public void set(String name, boolean x, boolean y) {
+    /**
+     *
+     * @param name
+     * @param x
+     * @param y
+     */
+    public void set(String name, boolean x, boolean y) {
     setUniformImpl(name, UniformValue.INT2,
                    new int[] { (x)?1:0, (y)?1:0 });
   }
 
-
-  public void set(String name, boolean x, boolean y, boolean z) {
+    /**
+     *
+     * @param name
+     * @param x
+     * @param y
+     * @param z
+     */
+    public void set(String name, boolean x, boolean y, boolean z) {
     setUniformImpl(name, UniformValue.INT3,
                    new int[] { (x)?1:0, (y)?1:0, (z)?1:0 });
   }
 
-
-  public void set(String name, boolean x, boolean y, boolean z, boolean w) {
+    /**
+     *
+     * @param name
+     * @param x
+     * @param y
+     * @param z
+     * @param w
+     */
+    public void set(String name, boolean x, boolean y, boolean z, boolean w) {
     setUniformImpl(name, UniformValue.INT4,
                    new int[] { (x)?1:0, (y)?1:0, (z)?1:0, (w)?1:0 });
   }
 
-
-  public void set(String name, int[] vec) {
+    /**
+     *
+     * @param name
+     * @param vec
+     */
+    public void set(String name, int[] vec) {
     set(name, vec, 1);
   }
 
 
   /**
+     * @param name
    * @param ncoords number of coordinates per element, max 4
+     * @param vec
    */
   public void set(String name, int[] vec, int ncoords) {
     if (ncoords == 1) {
@@ -489,13 +880,22 @@ public class PShader implements PConstants {
     }
   }
 
-
-  public void set(String name, float[] vec) {
+    /**
+     *
+     * @param name
+     * @param vec
+     */
+    public void set(String name, float[] vec) {
     set(name, vec, 1);
   }
 
-
-  public void set(String name, float[] vec, int ncoords) {
+    /**
+     *
+     * @param name
+     * @param vec
+     * @param ncoords
+     */
+    public void set(String name, float[] vec, int ncoords) {
     if (ncoords == 1) {
       setUniformImpl(name, UniformValue.FLOAT1VEC, vec);
     } else if (ncoords == 2) {
@@ -512,13 +912,22 @@ public class PShader implements PConstants {
     }
   }
 
-
-  public void set(String name, boolean[] vec) {
+    /**
+     *
+     * @param name
+     * @param vec
+     */
+    public void set(String name, boolean[] vec) {
     set(name, vec, 1);
   }
 
-
-  public void set(String name, boolean[] boolvec, int ncoords) {
+    /**
+     *
+     * @param name
+     * @param boolvec
+     * @param ncoords
+     */
+    public void set(String name, boolean[] boolvec, int ncoords) {
     int[] vec = new int[boolvec.length];
     for (int i = 0; i < boolvec.length; i++) {
       vec[i] = (boolvec[i])?1:0;
@@ -528,6 +937,7 @@ public class PShader implements PConstants {
 
 
   /**
+     * @param name
    * @param mat matrix of values
    */
   public void set(String name, PMatrix2D mat) {
@@ -536,13 +946,19 @@ public class PShader implements PConstants {
     setUniformImpl(name, UniformValue.MAT2, matv);
   }
 
-
-  public void set(String name, PMatrix3D mat) {
+    /**
+     *
+     * @param name
+     * @param mat
+     */
+    public void set(String name, PMatrix3D mat) {
     set(name, mat, false);
   }
 
   /**
+     * @param name
    * @param use3x3 enforces the matrix is 3 x 3
+     * @param mat
    */
   public void set(String name, PMatrix3D mat, boolean use3x3) {
     if (use3x3) {
@@ -560,6 +976,7 @@ public class PShader implements PConstants {
   }
 
   /**
+     * @param name
    * @param tex sets the sampler uniform variable to read from this image texture
    */
   public void set(String name, PImage tex) {
@@ -576,8 +993,13 @@ public class PShader implements PConstants {
   protected void setup() {
   }
 
-
-  protected void draw(int idxId, int count, int offset) {
+    /**
+     *
+     * @param idxId
+     * @param count
+     * @param offset
+     */
+    protected void draw(int idxId, int count, int offset) {
     pgl.bindBuffer(PGL.ELEMENT_ARRAY_BUFFER, idxId);
     pgl.drawElements(PGL.TRIANGLES, count, PGL.INDEX_TYPE,
                      offset * PGL.SIZEOF_INDEX);
@@ -608,8 +1030,17 @@ public class PShader implements PConstants {
     return pgl.getUniformLocation(glProgram, name);
   }
 
-
-  protected void setAttributeVBO(int loc, int vboId, int size, int type,
+    /**
+     *
+     * @param loc
+     * @param vboId
+     * @param size
+     * @param type
+     * @param normalized
+     * @param stride
+     * @param offset
+     */
+    protected void setAttributeVBO(int loc, int vboId, int size, int type,
                                  boolean normalized, int stride, int offset) {
     if (-1 < loc) {
       pgl.bindBuffer(PGL.ARRAY_BUFFER, vboId);
@@ -617,63 +1048,114 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void setUniformValue(int loc, int x) {
+    /**
+     *
+     * @param loc
+     * @param x
+     */
+    protected void setUniformValue(int loc, int x) {
     if (-1 < loc) {
       pgl.uniform1i(loc, x);
     }
   }
 
-
-  protected void setUniformValue(int loc, int x, int y) {
+    /**
+     *
+     * @param loc
+     * @param x
+     * @param y
+     */
+    protected void setUniformValue(int loc, int x, int y) {
     if (-1 < loc) {
       pgl.uniform2i(loc, x, y);
     }
   }
 
-
-  protected void setUniformValue(int loc, int x, int y, int z) {
+    /**
+     *
+     * @param loc
+     * @param x
+     * @param y
+     * @param z
+     */
+    protected void setUniformValue(int loc, int x, int y, int z) {
     if (-1 < loc) {
       pgl.uniform3i(loc, x, y, z);
     }
   }
 
-
-  protected void setUniformValue(int loc, int x, int y, int z, int w) {
+    /**
+     *
+     * @param loc
+     * @param x
+     * @param y
+     * @param z
+     * @param w
+     */
+    protected void setUniformValue(int loc, int x, int y, int z, int w) {
     if (-1 < loc) {
       pgl.uniform4i(loc, x, y, z, w);
     }
   }
 
-
-  protected void setUniformValue(int loc, float x) {
+    /**
+     *
+     * @param loc
+     * @param x
+     */
+    protected void setUniformValue(int loc, float x) {
     if (-1 < loc) {
       pgl.uniform1f(loc, x);
     }
   }
 
-  protected void setUniformValue(int loc, float x, float y) {
+    /**
+     *
+     * @param loc
+     * @param x
+     * @param y
+     */
+    protected void setUniformValue(int loc, float x, float y) {
     if (-1 < loc) {
       pgl.uniform2f(loc, x, y);
     }
   }
 
-
-  protected void setUniformValue(int loc, float x, float y, float z) {
+    /**
+     *
+     * @param loc
+     * @param x
+     * @param y
+     * @param z
+     */
+    protected void setUniformValue(int loc, float x, float y, float z) {
     if (-1 < loc) {
       pgl.uniform3f(loc, x, y, z);
     }
   }
 
-
-  protected void setUniformValue(int loc, float x, float y, float z, float w) {
+    /**
+     *
+     * @param loc
+     * @param x
+     * @param y
+     * @param z
+     * @param w
+     */
+    protected void setUniformValue(int loc, float x, float y, float z, float w) {
     if (-1 < loc) {
       pgl.uniform4f(loc, x, y, z, w);
     }
   }
 
-
-  protected void setUniformVector(int loc, int[] vec, int ncoords,
+    /**
+     *
+     * @param loc
+     * @param vec
+     * @param ncoords
+     * @param length
+     */
+    protected void setUniformVector(int loc, int[] vec, int ncoords,
                                   int length) {
     if (-1 < loc) {
       updateIntBuffer(vec);
@@ -689,8 +1171,14 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void setUniformVector(int loc, float[] vec, int ncoords,
+    /**
+     *
+     * @param loc
+     * @param vec
+     * @param ncoords
+     * @param length
+     */
+    protected void setUniformVector(int loc, float[] vec, int ncoords,
                                   int length) {
     if (-1 < loc) {
       updateFloatBuffer(vec);
@@ -706,8 +1194,12 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void setUniformMatrix(int loc, float[] mat) {
+    /**
+     *
+     * @param loc
+     * @param mat
+     */
+    protected void setUniformMatrix(int loc, float[] mat) {
     if (-1 < loc) {
       updateFloatBuffer(mat);
       if (mat.length == 4) {
@@ -720,8 +1212,12 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void setUniformTex(int loc, Texture tex) {
+    /**
+     *
+     * @param loc
+     * @param tex
+     */
+    protected void setUniformTex(int loc, Texture tex) {
     if (texUnits != null) {
       Integer unit = texUnits.get(loc);
       if (unit != null) {
@@ -733,16 +1229,23 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void setUniformImpl(String name, int type, Object value) {
+    /**
+     *
+     * @param name
+     * @param type
+     * @param value
+     */
+    protected void setUniformImpl(String name, int type, Object value) {
     if (uniformValues == null) {
       uniformValues = new HashMap<String, UniformValue>();
     }
     uniformValues.put(name, new UniformValue(type, value));
   }
 
-
-  protected void consumeUniforms() {
+    /**
+     *
+     */
+    protected void consumeUniforms() {
     if (uniformValues != null && 0 < uniformValues.size()) {
       int unit = 0;
       for (String name: uniformValues.keySet()) {
@@ -844,18 +1347,26 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void updateIntBuffer(int[] vec) {
+    /**
+     *
+     * @param vec
+     */
+    protected void updateIntBuffer(int[] vec) {
     intBuffer = PGL.updateIntBuffer(intBuffer, vec, false);
   }
 
-
-  protected void updateFloatBuffer(float[] vec) {
+    /**
+     *
+     * @param vec
+     */
+    protected void updateFloatBuffer(float[] vec) {
     floatBuffer = PGL.updateFloatBuffer(floatBuffer, vec, false);
   }
 
-
-  protected void bindTextures() {
+    /**
+     *
+     */
+    protected void bindTextures() {
     if (textures != null && texUnits != null) {
       for (int loc: textures.keySet()) {
         Texture tex = textures.get(loc);
@@ -870,8 +1381,10 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void unbindTextures() {
+    /**
+     *
+     */
+    protected void unbindTextures() {
     if (textures != null && texUnits != null) {
       for (int loc: textures.keySet()) {
         Texture tex = textures.get(loc);
@@ -887,8 +1400,10 @@ public class PShader implements PConstants {
     }
   }
 
-
-  public void init() {
+    /**
+     *
+     */
+    public void init() {
     if (glProgram == 0 || contextIsOutdated()) {
       create();
       if (compile()) {
@@ -904,14 +1419,19 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void create() {
+    /**
+     *
+     */
+    protected void create() {
     context = pgl.getCurrentContext();
     glres = new GLResourceShader(this);
   }
 
-
-  protected boolean compile() {
+    /**
+     *
+     * @return
+     */
+    protected boolean compile() {
     boolean vertRes = true;
     if (hasVertexShader()) {
       vertRes = compileVertexShader();
@@ -929,8 +1449,10 @@ public class PShader implements PConstants {
     return vertRes && fragRes;
   }
 
-
-  protected void validate() {
+    /**
+     *
+     */
+    protected void validate() {
     pgl.getProgramiv(glProgram, PGL.LINK_STATUS, intBuffer);
     boolean linked = intBuffer.get(0) == 0 ? false : true;
     if (!linked) {
@@ -947,8 +1469,11 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected boolean contextIsOutdated() {
+    /**
+     *
+     * @return
+     */
+    protected boolean contextIsOutdated() {
     boolean outdated = !pgl.contextIsCurrent(context);
     if (outdated) {
       dispose();
@@ -956,20 +1481,26 @@ public class PShader implements PConstants {
     return outdated;
   }
 
-
-
-  protected boolean hasVertexShader() {
+    /**
+     *
+     * @return
+     */
+    protected boolean hasVertexShader() {
     return vertexShaderSource != null && 0 < vertexShaderSource.length;
   }
 
-
-  protected boolean hasFragmentShader() {
+    /**
+     *
+     * @return
+     */
+    protected boolean hasFragmentShader() {
     return fragmentShaderSource != null && 0 < fragmentShaderSource.length;
   }
 
 
   /**
    * @param shaderSource a string containing the shader's code
+     * @return 
    */
   protected boolean compileVertexShader() {
     pgl.shaderSource(glVertex, PApplet.join(vertexShaderSource, "\n"));
@@ -989,6 +1520,7 @@ public class PShader implements PConstants {
 
   /**
    * @param shaderSource a string containing the shader's code
+     * @return 
    */
   protected boolean compileFragmentShader() {
     pgl.shaderSource(glFragment, PApplet.join(fragmentShaderSource, "\n"));
@@ -1005,8 +1537,10 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void dispose() {
+    /**
+     *
+     */
+    protected void dispose() {
     if (glres != null) {
       glres.dispose();
       glVertex = 0;
@@ -1016,8 +1550,13 @@ public class PShader implements PConstants {
     }
   }
 
-
-  static protected int getShaderType(String[] source, int defaultType) {
+    /**
+     *
+     * @param source
+     * @param defaultType
+     * @return
+     */
+    static protected int getShaderType(String[] source, int defaultType) {
     for (int i = 0; i < source.length; i++) {
       String line = source[i].trim();
 
@@ -1056,38 +1595,62 @@ public class PShader implements PConstants {
   //
   // Processing specific
 
+    /**
+     *
+     * @return
+     */
+
 
   protected int getType() {
     return type;
   }
 
-
-  protected void setType(int type) {
+    /**
+     *
+     * @param type
+     */
+    protected void setType(int type) {
     this.type = type;
   }
 
-
-  protected boolean hasType() {
+    /**
+     *
+     * @return
+     */
+    protected boolean hasType() {
     return POINT <= type && type <= TEXLIGHT;
   }
 
-
-  protected boolean isPointShader() {
+    /**
+     *
+     * @return
+     */
+    protected boolean isPointShader() {
     return type == POINT;
   }
 
-
-  protected boolean isLineShader() {
+    /**
+     *
+     * @return
+     */
+    protected boolean isLineShader() {
     return type == LINE;
   }
 
-
-  protected boolean isPolyShader() {
+    /**
+     *
+     * @return
+     */
+    protected boolean isPolyShader() {
     return POLY <= type && type <= TEXLIGHT;
   }
 
-
-  protected boolean checkPolyType(int type) {
+    /**
+     *
+     * @param type
+     * @return
+     */
+    protected boolean checkPolyType(int type) {
     if (getType() == PShader.POLY) return true;
 
     if (getType() != type) {
@@ -1106,18 +1669,26 @@ public class PShader implements PConstants {
     return true;
   }
 
-
-  protected int getLastTexUnit() {
+    /**
+     *
+     * @return
+     */
+    protected int getLastTexUnit() {
     return texUnits == null ? -1 : texUnits.size() - 1;
   }
 
-
-  protected void setRenderer(PGraphicsOpenGL pg) {
+    /**
+     *
+     * @param pg
+     */
+    protected void setRenderer(PGraphicsOpenGL pg) {
     this.currentPG = pg;
   }
 
-
-  protected void loadAttributes() {
+    /**
+     *
+     */
+    protected void loadAttributes() {
     if (loadedAttributes) return;
 
     vertexLoc = getAttributeLoc("vertex");
@@ -1142,8 +1713,10 @@ public class PShader implements PConstants {
     loadedAttributes = true;
   }
 
-
-  protected void loadUniforms() {
+    /**
+     *
+     */
+    protected void loadUniforms() {
     if (loadedUniforms) return;
     transformMatLoc = getUniformLoc("transform");
     if (transformMatLoc == -1)
@@ -1185,8 +1758,10 @@ public class PShader implements PConstants {
     loadedUniforms = true;
   }
 
-
-  protected void setCommonUniforms() {
+    /**
+     *
+     */
+    protected void setCommonUniforms() {
     if (-1 < transformMatLoc) {
       currentPG.updateGLProjmodelview();
       setUniformMatrix(transformMatLoc, currentPG.glProjmodelview);
@@ -1226,8 +1801,10 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected void bindTyped() {
+    /**
+     *
+     */
+    protected void bindTyped() {
     if (currentPG == null) {
       setRenderer(primaryPG.getCurrentPG());
       loadAttributes();
@@ -1290,7 +1867,10 @@ public class PShader implements PConstants {
     }
   }
 
-  protected void unbindTyped() {
+    /**
+     *
+     */
+    protected void unbindTyped() {
     if (-1 < offsetLoc) pgl.disableVertexAttribArray(offsetLoc);
 
     if (-1 < directionLoc) pgl.disableVertexAttribArray(directionLoc);
@@ -1322,7 +1902,11 @@ public class PShader implements PConstants {
     pgl.bindBuffer(PGL.ARRAY_BUFFER, 0);
   }
 
-  protected void setTexture(Texture tex) {
+    /**
+     *
+     * @param tex
+     */
+    protected void setTexture(Texture tex) {
     texture = tex;
 
     float scaleu = 1;
@@ -1368,74 +1952,173 @@ public class PShader implements PConstants {
     }
   }
 
-
-  protected boolean supportsTexturing() {
+    /**
+     *
+     * @return
+     */
+    protected boolean supportsTexturing() {
     return -1 < textureLoc;
   }
 
-  protected boolean supportLighting() {
+    /**
+     *
+     * @return
+     */
+    protected boolean supportLighting() {
     return -1 < lightCountLoc || -1 < lightPositionLoc || -1 < lightNormalLoc;
   }
 
-  protected boolean accessTexCoords() {
+    /**
+     *
+     * @return
+     */
+    protected boolean accessTexCoords() {
     return -1 < texCoordLoc;
   }
 
-  protected boolean accessNormals() {
+    /**
+     *
+     * @return
+     */
+    protected boolean accessNormals() {
     return -1 < normalLoc;
   }
 
-  protected boolean accessLightAttribs() {
+    /**
+     *
+     * @return
+     */
+    protected boolean accessLightAttribs() {
     return -1 < ambientLoc || -1 < specularLoc || -1 < emissiveLoc ||
            -1 < shininessLoc;
   }
 
-  protected void setVertexAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setVertexAttribute(int vboId, int size, int type,
                                     int stride, int offset) {
     setAttributeVBO(vertexLoc, vboId, size, type, false, stride, offset);
   }
 
-  protected void setColorAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setColorAttribute(int vboId, int size, int type,
                                    int stride, int offset) {
     setAttributeVBO(colorLoc, vboId, size, type, true, stride, offset);
   }
 
-  protected void setNormalAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setNormalAttribute(int vboId, int size, int type,
                                     int stride, int offset) {
     setAttributeVBO(normalLoc, vboId, size, type, false, stride, offset);
   }
 
-  protected void setTexcoordAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setTexcoordAttribute(int vboId, int size, int type,
                                       int stride, int offset) {
     setAttributeVBO(texCoordLoc, vboId, size, type, false, stride, offset);
   }
 
-  protected void setAmbientAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setAmbientAttribute(int vboId, int size, int type,
                                      int stride, int offset) {
     setAttributeVBO(ambientLoc, vboId, size, type, true, stride, offset);
   }
 
-  protected void setSpecularAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setSpecularAttribute(int vboId, int size, int type,
                                       int stride, int offset) {
     setAttributeVBO(specularLoc, vboId, size, type, true, stride, offset);
   }
 
-  protected void setEmissiveAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setEmissiveAttribute(int vboId, int size, int type,
                                       int stride, int offset) {
     setAttributeVBO(emissiveLoc, vboId, size, type, true, stride, offset);
   }
 
-  protected void setShininessAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setShininessAttribute(int vboId, int size, int type,
                                        int stride, int offset) {
     setAttributeVBO(shininessLoc, vboId, size, type, false, stride, offset);
   }
 
-  protected void setLineAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setLineAttribute(int vboId, int size, int type,
                                   int stride, int offset) {
     setAttributeVBO(directionLoc, vboId, size, type, false, stride, offset);
   }
 
-  protected void setPointAttribute(int vboId, int size, int type,
+    /**
+     *
+     * @param vboId
+     * @param size
+     * @param type
+     * @param stride
+     * @param offset
+     */
+    protected void setPointAttribute(int vboId, int size, int type,
                                    int stride, int offset) {
     setAttributeVBO(offsetLoc, vboId, size, type, false, stride, offset);
   }
@@ -1445,6 +2128,10 @@ public class PShader implements PConstants {
   //
   // Class to store a user-specified value for a uniform parameter
   // in the shader
+
+    /**
+     *
+     */
   protected static class UniformValue {
     static final int INT1      = 0;
     static final int INT2      = 1;

@@ -74,42 +74,112 @@ import processing.core.PSurface;
 import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
-
+/**
+ *
+ * @author Martin Prout
+ */
 public class PSurfaceJOGL implements PSurface {
   /** Selected GL profile */
   public static GLProfile profile;
 
-  public PJOGL pgl;
+    /**
+     *
+     */
+    public PJOGL pgl;
 
-  protected GLWindow window;
-  protected FPSAnimator animator;
-  protected Rectangle screenRect;
+    /**
+     *
+     */
+    protected GLWindow window;
+
+    /**
+     *
+     */
+    protected FPSAnimator animator;
+
+    /**
+     *
+     */
+    protected Rectangle screenRect;
 
   private Thread drawExceptionHandler;
 
-  protected PApplet sketch;
-  protected PGraphics graphics;
+    /**
+     *
+     */
+    protected PApplet sketch;
 
-  protected int sketchWidth0;
-  protected int sketchHeight0;
-  protected int sketchWidth;
-  protected int sketchHeight;
+    /**
+     *
+     */
+    protected PGraphics graphics;
 
-  protected Display display;
-  protected Screen screen;
-  protected Rectangle displayRect;
-  protected Throwable drawException;
+    /**
+     *
+     */
+    protected int sketchWidth0;
+
+    /**
+     *
+     */
+    protected int sketchHeight0;
+
+    /**
+     *
+     */
+    protected int sketchWidth;
+
+    /**
+     *
+     */
+    protected int sketchHeight;
+
+    /**
+     *
+     */
+    protected Display display;
+
+    /**
+     *
+     */
+    protected Screen screen;
+
+    /**
+     *
+     */
+    protected Rectangle displayRect;
+
+    /**
+     *
+     */
+    protected Throwable drawException;
   private final Object drawExceptionMutex = new Object();
 
-  protected NewtCanvasAWT canvas;
+    /**
+     *
+     */
+    protected NewtCanvasAWT canvas;
 
-  protected int windowScaleFactor;
+    /**
+     *
+     */
+    protected int windowScaleFactor;
 
-  protected float[] currentPixelScale = {0, 0};
+    /**
+     *
+     */
+    protected float[] currentPixelScale = {0, 0};
 
-  protected boolean external = false;
+    /**
+     *
+     */
+    protected boolean external = false;
 
-  public PSurfaceJOGL(PGraphics graphics) {
+    /**
+     *
+     * @param graphics
+     */
+    public PSurfaceJOGL(PGraphics graphics) {
     this.graphics = graphics;
     this.pgl = (PJOGL) ((PGraphicsOpenGL)graphics).pgl;
   }
@@ -144,8 +214,10 @@ public class PSurfaceJOGL implements PSurface {
     return window;
   }
 
-
-  protected void initDisplay() {
+    /**
+     *
+     */
+    protected void initDisplay() {
     display = NewtFactory.createDisplay(null);
     display.addReference();
     screen = NewtFactory.createScreen(display, 0);
@@ -177,8 +249,10 @@ public class PSurfaceJOGL implements PSurface {
     displayRect = awtDisplayDevice.getDefaultConfiguration().getBounds();
   }
 
-
-  protected void initGL() {
+    /**
+     *
+     */
+    protected void initGL() {
 //  System.out.println("*******************************");
     if (profile == null) {
       if (PJOGL.profile == 1) {
@@ -240,8 +314,10 @@ public class PSurfaceJOGL implements PSurface {
     pgl.setCaps(caps);
   }
 
-
-  protected void initWindow() {
+    /**
+     *
+     */
+    protected void initWindow() {
     window = GLWindow.create(screen, pgl.getCaps());
 
     // Make sure that we pass the window close through to exit(), otherwise
@@ -346,8 +422,10 @@ public class PSurfaceJOGL implements PSurface {
     }
   }
 
-
-  protected void initListeners() {
+    /**
+     *
+     */
+    protected void initListeners() {
     NEWTMouseListener mouseListener = new NEWTMouseListener();
     window.addMouseListener(mouseListener);
     NEWTKeyListener keyListener = new NEWTKeyListener();
@@ -359,8 +437,10 @@ public class PSurfaceJOGL implements PSurface {
     window.addGLEventListener(drawlistener);
   }
 
-
-  protected void initAnimator() {
+    /**
+     *
+     */
+    protected void initAnimator() {
     if (PApplet.platform == PConstants.WINDOWS) {
       // Force Windows to keep timer resolution high by
       // sleeping for time which is not a multiple of 10 ms.
@@ -471,8 +551,10 @@ public class PSurfaceJOGL implements PSurface {
     });
   }
 
-
-  protected void initIcons() {
+    /**
+     *
+     */
+    protected void initIcons() {
     IOUtil.ClassResources res = null;
     if (PJOGL.icons == null || PJOGL.icons.length == 0) {
       // Default Processing icons
@@ -771,8 +853,11 @@ public class PSurfaceJOGL implements PSurface {
     }
   }
 
-
-  public float getPixelScale() {
+    /**
+     *
+     * @return
+     */
+    public float getPixelScale() {
     if (graphics.pixelDensity == 1) {
       return 1;
     }
@@ -791,13 +876,19 @@ public class PSurfaceJOGL implements PSurface {
     return currentPixelScale[0];
   }
 
-
-  public Component getComponent() {
+    /**
+     *
+     * @return
+     */
+    public Component getComponent() {
     return canvas;
   }
 
-
-  public void setSmooth(int level) {
+    /**
+     *
+     * @param level
+     */
+    public void setSmooth(int level) {
     pgl.reqNumSamples = level;
     GLCapabilities caps = new GLCapabilities(profile);
     caps.setAlphaBits(PGL.REQUESTED_ALPHA_BITS);
@@ -833,8 +924,10 @@ public class PSurfaceJOGL implements PSurface {
     }
   }
 
-
-  public void requestFocus() {
+    /**
+     *
+     */
+    public void requestFocus() {
     display.getEDTUtil().invoke(false, new Runnable() {
       @Override
       public void run() {
@@ -906,85 +999,168 @@ public class PSurfaceJOGL implements PSurface {
     }
   }
 
+    /**
+     *
+     */
+    protected class NEWTWindowListener implements com.jogamp.newt.event.WindowListener {
 
-  protected class NEWTWindowListener implements com.jogamp.newt.event.WindowListener {
-    public NEWTWindowListener() {
+      /**
+       *
+       */
+      public NEWTWindowListener() {
       super();
     }
-    @Override
+
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowGainedFocus(com.jogamp.newt.event.WindowEvent arg0) {
       sketch.focused = true;
       sketch.focusGained();
     }
 
-    @Override
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowLostFocus(com.jogamp.newt.event.WindowEvent arg0) {
       sketch.focused = false;
       sketch.focusLost();
     }
 
-    @Override
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowDestroyNotify(com.jogamp.newt.event.WindowEvent arg0) {
       sketch.exit();
     }
 
-    @Override
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowDestroyed(com.jogamp.newt.event.WindowEvent arg0) {
       sketch.exit();
     }
 
-    @Override
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowMoved(com.jogamp.newt.event.WindowEvent arg0) {
       if (external) {
         sketch.frameMoved(window.getX(), window.getY());
       }
     }
 
-    @Override
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowRepaint(com.jogamp.newt.event.WindowUpdateEvent arg0) {
     }
 
-    @Override
+      /**
+       *
+       * @param arg0
+       */
+      @Override
     public void windowResized(com.jogamp.newt.event.WindowEvent arg0) {
     }
   }
 
 
   // NEWT mouse listener
+
+    /**
+     *
+     */
   protected class NEWTMouseListener extends com.jogamp.newt.event.MouseAdapter {
-    public NEWTMouseListener() {
+
+      /**
+       *
+       */
+      public NEWTMouseListener() {
       super();
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mousePressed(com.jogamp.newt.event.MouseEvent e) {
       nativeMouseEvent(e, MouseEvent.PRESS);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseReleased(com.jogamp.newt.event.MouseEvent e) {
       nativeMouseEvent(e, MouseEvent.RELEASE);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseClicked(com.jogamp.newt.event.MouseEvent e) {
       nativeMouseEvent(e, MouseEvent.CLICK);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseDragged(com.jogamp.newt.event.MouseEvent e) {
       nativeMouseEvent(e, MouseEvent.DRAG);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseMoved(com.jogamp.newt.event.MouseEvent e) {
       nativeMouseEvent(e, MouseEvent.MOVE);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseWheelMoved(com.jogamp.newt.event.MouseEvent e) {
       nativeMouseEvent(e, MouseEvent.WHEEL);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseEntered(com.jogamp.newt.event.MouseEvent e) {
 //      System.out.println("enter");
       nativeMouseEvent(e, MouseEvent.ENTER);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void mouseExited(com.jogamp.newt.event.MouseEvent e) {
 //      System.out.println("exit");
       nativeMouseEvent(e, MouseEvent.EXIT);
@@ -993,25 +1169,52 @@ public class PSurfaceJOGL implements PSurface {
 
 
   // NEWT key listener
+
+    /**
+     *
+     */
   protected class NEWTKeyListener extends com.jogamp.newt.event.KeyAdapter {
-    public NEWTKeyListener() {
+
+      /**
+       *
+       */
+      public NEWTKeyListener() {
       super();
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void keyPressed(com.jogamp.newt.event.KeyEvent e) {
       nativeKeyEvent(e, KeyEvent.PRESS);
     }
-    @Override
+
+      /**
+       *
+       * @param e
+       */
+      @Override
     public void keyReleased(com.jogamp.newt.event.KeyEvent e) {
       nativeKeyEvent(e, KeyEvent.RELEASE);
     }
-    public void keyTyped(com.jogamp.newt.event.KeyEvent e)  {
+
+      /**
+       *
+       * @param e
+       */
+      public void keyTyped(com.jogamp.newt.event.KeyEvent e)  {
       nativeKeyEvent(e, KeyEvent.TYPE);
     }
   }
 
-
-  protected void nativeMouseEvent(com.jogamp.newt.event.MouseEvent nativeEvent,
+    /**
+     *
+     * @param nativeEvent
+     * @param peAction
+     */
+    protected void nativeMouseEvent(com.jogamp.newt.event.MouseEvent nativeEvent,
                                   int peAction) {
     int modifiers = nativeEvent.getModifiers();
     int peModifiers = modifiers &
@@ -1082,8 +1285,12 @@ public class PSurfaceJOGL implements PSurface {
     sketch.postEvent(me);
   }
 
-
-  protected void nativeKeyEvent(com.jogamp.newt.event.KeyEvent nativeEvent,
+    /**
+     *
+     * @param nativeEvent
+     * @param peAction
+     */
+    protected void nativeKeyEvent(com.jogamp.newt.event.KeyEvent nativeEvent,
                                 int peAction) {
     int peModifiers = nativeEvent.getModifiers() &
                       (InputEvent.SHIFT_MASK |

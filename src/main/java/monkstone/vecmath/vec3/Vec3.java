@@ -37,6 +37,7 @@ import monkstone.vecmath.vec2.Vec2;
 /**
  *
  *
+ * @author Martin Prout
  */
 @JRubyClass(name = "Vec3D")
 public final class Vec3 extends RubyObject {

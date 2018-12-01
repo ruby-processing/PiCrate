@@ -24,7 +24,7 @@ import processing.event.MouseEvent;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public abstract class SliderBar implements Slider {
 

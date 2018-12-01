@@ -57,10 +57,18 @@ public class Vec2 extends RubyObject {
         vec2Cls.defineAnnotatedMethods(Vec2.class);
     }
 
+    /**
+     *
+     * @return x value :double
+     */
     public double javax() {
         return jx;
     }
 
+    /**
+     *
+     * @return y value :double
+     */
     public double javay() {
         return jy;
     }

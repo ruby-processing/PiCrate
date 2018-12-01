@@ -19,7 +19,7 @@ package monkstone.noise;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class SimplexNoise {  // Simplex noise in 2D, 3D and 4D
 
@@ -92,7 +92,7 @@ public class SimplexNoise {  // Simplex noise in 2D, 3D and 4D
      *
      * @param xin
      * @param yin
-     * @return
+     * @return noise double
      */
     public static double noise(double xin, double yin) {
         double n0, n1, n2; // Noise contributions from the three corners
@@ -297,7 +297,7 @@ public class SimplexNoise {  // Simplex noise in 2D, 3D and 4D
      * @param y
      * @param z
      * @param w
-     * @return
+     * @return noise double
      */
     public static double noise(double x, double y, double z, double w) {
 

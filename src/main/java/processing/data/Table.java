@@ -61,8 +61,16 @@ import processing.core.PConstants;
  * @see TableRow
  */
 public class Table {
-  protected int rowCount;
-  protected int allocCount;
+
+    /**
+     *
+     */
+    protected int rowCount;
+
+    /**
+     *
+     */
+    protected int allocCount;
 
 //  protected boolean skipEmptyRows = true;
 //  protected boolean skipCommentLines = true;
@@ -70,32 +78,90 @@ public class Table {
 //  protected boolean commaSeparatedValues = false;
 //  protected boolean awfulCSV = false;
 
+    /**
+     *
+     */
+
   protected String missingString = null;
-  protected int missingInt = 0;
-  protected long missingLong = 0;
-  protected float missingFloat = Float.NaN;
-  protected double missingDouble = Double.NaN;
-  protected int missingCategory = -1;
+
+    /**
+     *
+     */
+    protected int missingInt = 0;
+
+    /**
+     *
+     */
+    protected long missingLong = 0;
+
+    /**
+     *
+     */
+    protected float missingFloat = Float.NaN;
+
+    /**
+     *
+     */
+    protected double missingDouble = Double.NaN;
+
+    /**
+     *
+     */
+    protected int missingCategory = -1;
 
   String[] columnTitles;
   HashMapBlows[] columnCategories;
   HashMap<String, Integer> columnIndices;
 
-  protected Object[] columns;  // [column]
+    /**
+     *
+     */
+    protected Object[] columns;  // [column]
 
   // accessible for advanced users
+
+    /**
+     *
+     */
   static public final int STRING = 0;
-  static public final int INT = 1;
-  static public final int LONG = 2;
-  static public final int FLOAT = 3;
-  static public final int DOUBLE = 4;
-  static public final int CATEGORY = 5;
+
+    /**
+     *
+     */
+    static public final int INT = 1;
+
+    /**
+     *
+     */
+    static public final int LONG = 2;
+
+    /**
+     *
+     */
+    static public final int FLOAT = 3;
+
+    /**
+     *
+     */
+    static public final int DOUBLE = 4;
+
+    /**
+     *
+     */
+    static public final int CATEGORY = 5;
   int[] columnTypes;
 
-  protected RowIterator rowIterator;
+    /**
+     *
+     */
+    protected RowIterator rowIterator;
 
   // 0 for doubling each time, otherwise the number of rows to increment on
   // each expansion.
+
+    /**
+     *
+     */
   protected int expandIncrement;
 
 
@@ -107,6 +173,8 @@ public class Table {
   }
 
   /**
+     * @param file
+     * @throws java.io.IOException
    * @nowebref
    */
   public Table(File file) throws IOException {
@@ -118,6 +186,9 @@ public class Table {
    * version that uses a File object; future releases (or data types)
    * may include additional optimizations here
    *
+     * @param file
+     * @param options
+     * @throws java.io.IOException
    * @nowebref
    */
   public Table(File file, String options) throws IOException {
@@ -128,6 +199,8 @@ public class Table {
   }
 
   /**
+     * @param input
+     * @throws java.io.IOException
    * @nowebref
    */
   public Table(InputStream input) throws IOException {
@@ -154,8 +227,11 @@ public class Table {
     parse(input, options);
   }
 
-
-  public Table(Iterable<TableRow> rows) {
+    /**
+     *
+     * @param rows
+     */
+    public Table(Iterable<TableRow> rows) {
     init();
 
     int row = 0;
@@ -195,6 +271,7 @@ public class Table {
 
 
   /**
+     * @param rs
    * @nowebref
    */
   public Table(ResultSet rs) {
@@ -254,16 +331,24 @@ public class Table {
     }
   }
 
-
-  public Table typedParse(InputStream input, String options) throws IOException {
+    /**
+     *
+     * @param input
+     * @param options
+     * @return
+     * @throws IOException
+     */
+    public Table typedParse(InputStream input, String options) throws IOException {
     Table table = new Table();
     table.setColumnTypes(this);
     table.parse(input, options);
     return table;
   }
 
-
-  protected void init() {
+    /**
+     *
+     */
+    protected void init() {
     columns = new Object[0];
     columnTypes = new int[0];
     columnCategories = new HashMapBlows[0];
@@ -305,7 +390,14 @@ public class Table {
   static final String[] loadExtensions = { "csv", "tsv", "ods", "bin" };
   static final String[] saveExtensions = { "csv", "tsv", "ods", "bin", "html" };
 
-  static public String extensionOptions(boolean loading, String filename, String options) {
+    /**
+     *
+     * @param loading
+     * @param filename
+     * @param options
+     * @return
+     */
+    static public String extensionOptions(boolean loading, String filename, String options) {
     String extension = PApplet.checkExtension(filename);
     if (extension != null) {
       for (String possible : loading ? loadExtensions : saveExtensions) {
@@ -323,8 +415,13 @@ public class Table {
     return options;
   }
 
-
-  protected void parse(InputStream input, String options) throws IOException {
+    /**
+     *
+     * @param input
+     * @param options
+     * @throws IOException
+     */
+    protected void parse(InputStream input, String options) throws IOException {
 //    boolean awfulCSV = false;
     boolean header = false;
     String extension = null;
@@ -400,8 +497,14 @@ public class Table {
     }
   }
 
-
-  protected void parseBasic(BufferedReader reader,
+    /**
+     *
+     * @param reader
+     * @param header
+     * @param tsv
+     * @throws IOException
+     */
+    protected void parseBasic(BufferedReader reader,
                             boolean header, boolean tsv) throws IOException {
     String line = null;
     int row = 0;
@@ -743,10 +846,12 @@ public class Table {
 
   /**
    * Parse a line of text as comma-separated values, returning each value as
-   * one entry in an array of String objects. Remove quotes from entries that
-   * begin and end with them, and convert 'escaped' quotes to actual quotes.
+   * one entry in an array of String objects.Remove quotes from entries that
+ begin and end with them, and convert 'escaped' quotes to actual quotes.
    * @param line line of text to be parsed
+     * @param reader
    * @return an array of the individual values formerly separated by commas
+     * @throws java.io.IOException
    */
   protected String[] splitLineCSV(String line, BufferedReader reader) throws IOException {
     if (csl == null) {
@@ -840,8 +945,13 @@ public class Table {
     return null;
   }
 
-
-  protected void odsParse(InputStream input, String worksheet, boolean header) {
+    /**
+     *
+     * @param input
+     * @param worksheet
+     * @param header
+     */
+    protected void odsParse(InputStream input, String worksheet, boolean header) {
     try {
       InputStream contentStream = odsFindContentXML(input);
       XML xml = new XML(contentStream);
@@ -1027,7 +1137,9 @@ public class Table {
   // because that's passed to the constructor parameter (inserted by the
   // compiler) of an inner class by the runtime.
 
-  /** incomplete, do not use */
+  /** incomplete, do not use
+     * @param enclosingObject
+     * @param fieldName */
   public void parseInto(Object enclosingObject, String fieldName) {
     Class<?> target = null;
     Object outgoing = null;
@@ -1170,14 +1282,25 @@ public class Table {
     }
   }
 
-
-  public boolean save(File file, String options) throws IOException {
+    /**
+     *
+     * @param file
+     * @param options
+     * @return
+     * @throws IOException
+     */
+    public boolean save(File file, String options) throws IOException {
     return save(PApplet.createOutput(file),
                 Table.extensionOptions(false, file.getName(), options));
   }
 
-
-  public boolean save(OutputStream output, String options) {
+    /**
+     *
+     * @param output
+     * @param options
+     * @return
+     */
+    public boolean save(OutputStream output, String options) {
     PrintWriter writer = PApplet.createWriter(output);
     String extension = null;
     if (options == null) {
@@ -1225,8 +1348,11 @@ public class Table {
     return true;
   }
 
-
-  protected void writeTSV(PrintWriter writer) {
+    /**
+     *
+     * @param writer
+     */
+    protected void writeTSV(PrintWriter writer) {
     if (columnTitles != null) {
       for (int col = 0; col < columns.length; col++) {
         if (col != 0) {
@@ -1255,8 +1381,11 @@ public class Table {
     writer.flush();
   }
 
-
-  protected void writeCSV(PrintWriter writer) {
+    /**
+     *
+     * @param writer
+     */
+    protected void writeCSV(PrintWriter writer) {
     if (columnTitles != null) {
       for (int col = 0; col < getColumnCount(); col++) {
         if (col != 0) {
@@ -1292,8 +1421,12 @@ public class Table {
     writer.flush();
   }
 
-
-  protected void writeEntryCSV(PrintWriter writer, String entry) {
+    /**
+     *
+     * @param writer
+     * @param entry
+     */
+    protected void writeEntryCSV(PrintWriter writer, String entry) {
     if (entry != null) {
       if (entry.indexOf('\"') != -1) {  // convert quotes to double quotes
         char[] c = entry.toCharArray();
@@ -1330,8 +1463,11 @@ public class Table {
     }
   }
 
-
-  protected void writeHTML(PrintWriter writer) {
+    /**
+     *
+     * @param writer
+     */
+    protected void writeHTML(PrintWriter writer) {
     writer.println("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 3.2//EN\">");
 //    writer.println("<!DOCTYPE html>");
 //    writer.println("<meta charset=\"utf-8\">");
@@ -1380,8 +1516,12 @@ public class Table {
     writer.flush();
   }
 
-
-  protected void writeEntryHTML(PrintWriter writer, String entry) {
+    /**
+     *
+     * @param writer
+     * @param entry
+     */
+    protected void writeEntryHTML(PrintWriter writer, String entry) {
     //char[] chars = entry.toCharArray();
     for (char c : entry.toCharArray()) {  //chars) {
       if (c == '<') {
@@ -1406,8 +1546,12 @@ public class Table {
     }
   }
 
-
-  protected void saveODS(OutputStream os) throws IOException {
+    /**
+     *
+     * @param os
+     * @throws IOException
+     */
+    protected void saveODS(OutputStream os) throws IOException {
     ZipOutputStream zos = new ZipOutputStream(os);
 
     final String xmlHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
@@ -1607,8 +1751,12 @@ public class Table {
     }
   }
 
-
-  protected void saveBinary(OutputStream os) throws IOException {
+    /**
+     *
+     * @param os
+     * @throws IOException
+     */
+    protected void saveBinary(OutputStream os) throws IOException {
     DataOutputStream output = new DataOutputStream(new BufferedOutputStream(os));
     output.writeInt(0x9007AB1E);  // version
     output.writeInt(getRowCount());
@@ -1683,8 +1831,12 @@ public class Table {
     output.close();
   }
 
-
-  protected void loadBinary(InputStream is) throws IOException {
+    /**
+     *
+     * @param is
+     * @throws IOException
+     */
+    protected void loadBinary(InputStream is) throws IOException {
     DataInputStream input = new DataInputStream(new BufferedInputStream(is));
 
     int magic = input.readInt();
@@ -1805,24 +1957,37 @@ public class Table {
 
 
   /**
+     * @param title
    * @param type the type to be used for the new column: INT, LONG, FLOAT, DOUBLE, or STRING
    */
   public void addColumn(String title, int type) {
     insertColumn(columns.length, title, type);
   }
 
-
-  public void insertColumn(int index) {
+    /**
+     *
+     * @param index
+     */
+    public void insertColumn(int index) {
     insertColumn(index, null, STRING);
   }
 
-
-  public void insertColumn(int index, String title) {
+    /**
+     *
+     * @param index
+     * @param title
+     */
+    public void insertColumn(int index, String title) {
     insertColumn(index, title, STRING);
   }
 
-
-  public void insertColumn(int index, String title, int type) {
+    /**
+     *
+     * @param index
+     * @param title
+     * @param type
+     */
+    public void insertColumn(int index, String title, int type) {
     if (title != null && columnTitles == null) {
       columnTitles = new String[columns.length];
     }
@@ -1906,6 +2071,7 @@ public class Table {
 
 
   /**
+     * @return 
    * @webref table:method
    * @brief Gets the number of columns in a table
    * @see Table#getRowCount()
@@ -1939,8 +2105,12 @@ public class Table {
     }
   }
 
-
-  public void setColumnType(String columnName, String columnType) {
+    /**
+     *
+     * @param columnName
+     * @param columnType
+     */
+    public void setColumnType(String columnName, String columnType) {
     setColumnType(checkColumnIndex(columnName), columnType);
   }
 
@@ -1976,8 +2146,12 @@ public class Table {
     setColumnType(column, parseColumnType(columnType));
   }
 
-
-  public void setColumnType(String columnName, int newType) {
+    /**
+     *
+     * @param columnName
+     * @param newType
+     */
+    public void setColumnType(String columnName, int newType) {
     setColumnType(checkColumnIndex(columnName), newType);
   }
 
@@ -2066,6 +2240,7 @@ public class Table {
 
   /**
    * Set the entire table to a specific data type.
+     * @param type
    */
   public void setTableType(String type) {
     for (int col = 0; col < getColumnCount(); col++) {
@@ -2073,8 +2248,11 @@ public class Table {
     }
   }
 
-
-  public void setColumnTypes(int[] types) {
+    /**
+     *
+     * @param types
+     */
+    public void setColumnTypes(int[] types) {
     ensureColumn(types.length - 1);
     for (int col = 0; col < types.length; col++) {
       setColumnType(col, types[col]);
@@ -2127,19 +2305,28 @@ public class Table {
     }
   }
 
-
-  public int getColumnType(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public int getColumnType(String columnName) {
     return getColumnType(getColumnIndex(columnName));
   }
 
 
-  /** Returns one of Table.STRING, Table.INT, etc... */
+  /** Returns one of Table.STRING, Table.INT, etc...
+     * @param column
+     * @return  */
   public int getColumnType(int column) {
     return columnTypes[column];
   }
 
-
-  public int[] getColumnTypes() {
+    /**
+     *
+     * @return
+     */
+    public int[] getColumnTypes() {
     return columnTypes;
   }
 
@@ -2148,8 +2335,8 @@ public class Table {
 
 
   /**
-   * Remove the first row from the data set, and use it as the column titles.
-   * Use loadTable("table.csv", "header") instead.
+   * Remove the first row from the data set, and use it as the column titles.Use loadTable("table.csv", "header") instead.
+     * @return
    */
   @Deprecated
   public String[] removeTitleRow() {
@@ -2159,8 +2346,11 @@ public class Table {
     return titles;
   }
 
-
-  public void setColumnTitles(String[] titles) {
+    /**
+     *
+     * @param titles
+     */
+    public void setColumnTitles(String[] titles) {
     if (titles != null) {
       ensureColumn(titles.length - 1);
     }
@@ -2168,8 +2358,12 @@ public class Table {
     columnIndices = null;  // remove the cache
   }
 
-
-  public void setColumnTitle(int column, String title) {
+    /**
+     *
+     * @param column
+     * @param title
+     */
+    public void setColumnTitle(int column, String title) {
     ensureColumn(column);
     if (columnTitles == null) {
       columnTitles = new String[getColumnCount()];
@@ -2178,23 +2372,37 @@ public class Table {
     columnIndices = null;  // reset these fellas
   }
 
-
-  public boolean hasColumnTitles() {
+    /**
+     *
+     * @return
+     */
+    public boolean hasColumnTitles() {
     return columnTitles != null;
   }
 
-
-  public String[] getColumnTitles() {
+    /**
+     *
+     * @return
+     */
+    public String[] getColumnTitles() {
     return columnTitles;
   }
 
-
-  public String getColumnTitle(int col) {
+    /**
+     *
+     * @param col
+     * @return
+     */
+    public String getColumnTitle(int col) {
     return (columnTitles == null) ? null : columnTitles[col];
   }
 
-
-  public int getColumnIndex(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public int getColumnIndex(String columnName) {
     return getColumnIndex(columnName, true);
   }
 
@@ -2254,6 +2462,7 @@ public class Table {
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
   /**
+     * @return 
    * @webref table:method
    * @brief Gets the number of rows in a table
    * @see Table#getColumnCount()
@@ -2262,8 +2471,11 @@ public class Table {
     return rowCount;
   }
 
-
-  public int lastRowIndex() {
+    /**
+     *
+     * @return
+     */
+    public int lastRowIndex() {
     return getRowCount() - 1;
   }
 
@@ -2278,8 +2490,11 @@ public class Table {
     setRowCount(0);
   }
 
-
-  public void setRowCount(int newCount) {
+    /**
+     *
+     * @param newCount
+     */
+    public void setRowCount(int newCount) {
     if (newCount != rowCount) {
       if (newCount > 1000000) {
         System.out.print("Note: setting maximum row count to " + PApplet.nfc(newCount));
@@ -2312,6 +2527,7 @@ public class Table {
 
 
  /**
+     * @return 
    * @webref table:method
    * @brief Adds a row to a table
    * @see Table#removeRow(int)
@@ -2326,13 +2542,19 @@ public class Table {
 
  /**
    * @param source a reference to the original row to be duplicated
+     * @return 
    */
   public TableRow addRow(TableRow source) {
     return setRow(rowCount, source);
   }
 
-
-  public TableRow setRow(int row, TableRow source) {
+    /**
+     *
+     * @param row
+     * @param source
+     * @return
+     */
+    public TableRow setRow(int row, TableRow source) {
     // Make sure there are enough columns to add this data
     ensureBounds(row, source.getColumnCount() - 1);
 
@@ -2370,6 +2592,8 @@ public class Table {
 
 
  /**
+     * @param columnData
+     * @return 
    * @nowebref
    */
   public TableRow addRow(Object[] columnData) {
@@ -2377,8 +2601,11 @@ public class Table {
     return new RowPointer(this, rowCount - 1);
   }
 
-
-  public void addRows(Table source) {
+    /**
+     *
+     * @param source
+     */
+    public void addRows(Table source) {
     int index = getRowCount();
     setRowCount(index + source.getRowCount());
     for (TableRow row : source.rows()) {
@@ -2386,8 +2613,12 @@ public class Table {
     }
   }
 
-
-  public void insertRow(int insert, Object[] columnData) {
+    /**
+     *
+     * @param insert
+     * @param columnData
+     */
+    public void insertRow(int insert, Object[] columnData) {
     for (int col = 0; col < columns.length; col++) {
       switch (columnTypes[col]) {
         case CATEGORY:
@@ -2548,6 +2779,13 @@ public class Table {
   }
   */
 
+    /**
+     *
+     * @param row
+     * @param pieces
+     */
+
+
 
   public void setRow(int row, Object[] pieces) {
     ensureBounds(row, pieces.length - 1);
@@ -2557,8 +2795,13 @@ public class Table {
     }
   }
 
-
-  protected void setRowCol(int row, int col, Object piece) {
+    /**
+     *
+     * @param row
+     * @param col
+     * @param piece
+     */
+    protected void setRowCol(int row, int col, Object piece) {
     switch (columnTypes[col]) {
       case STRING:
         String[] stringData = (String[]) columns[col];
@@ -2642,6 +2885,7 @@ public class Table {
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
   /**
+     * @return 
    * @webref table:method
    * @brief Gets a row from a table
    * @param row ID number of the row to get
@@ -2658,9 +2902,9 @@ public class Table {
 
   /**
    * Note that this one iterator instance is shared by any calls to iterate
-   * the rows of this table. This is very efficient, but not thread-safe.
-   * If you want to iterate in a multi-threaded manner, don't use the iterator.
+   * the rows of this table.This is very efficient, but not thread-safe. If you want to iterate in a multi-threaded manner, don't use the iterator.
    *
+     * @return 
    * @webref table:method
    * @brief Gets multiple rows from a table
    * @see Table#getRow(int)
@@ -2683,6 +2927,8 @@ public class Table {
   }
 
   /**
+     * @param indices
+     * @return 
    * @nowebref
    */
   public Iterable<TableRow> rows(final int[] indices) {
@@ -3049,6 +3295,7 @@ public class Table {
 
 
   /**
+     * @return 
    * @webref table:method
    * @brief Get an integer value from the specified row and column
    * @param row ID number of the row to reference
@@ -3073,14 +3320,19 @@ public class Table {
   }
 
   /**
+     * @param row
    * @param columnName title of the column to reference
+     * @return 
    */
   public int getInt(int row, String columnName) {
     return getInt(row, getColumnIndex(columnName));
   }
 
-
-  public void setMissingInt(int value) {
+    /**
+     *
+     * @param value
+     */
+    public void setMissingInt(int value) {
     missingInt = value;
   }
 
@@ -3114,21 +3366,30 @@ public class Table {
   }
 
   /**
+     * @param row
    * @param columnName title of the target column
+     * @param value
    */
   public void setInt(int row, String columnName, int value) {
     setInt(row, getColumnIndex(columnName), value);
   }
 
-
-
-  public int[] getIntColumn(String name) {
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public int[] getIntColumn(String name) {
     int col = getColumnIndex(name);
     return (col == -1) ? null : getIntColumn(col);
   }
 
-
-  public int[] getIntColumn(int col) {
+    /**
+     *
+     * @param col
+     * @return
+     */
+    public int[] getIntColumn(int col) {
     int[] outgoing = new int[rowCount];
     for (int row = 0; row < rowCount; row++) {
       outgoing[row] = getInt(row, col);
@@ -3136,8 +3397,12 @@ public class Table {
     return outgoing;
   }
 
-
-  public int[] getIntRow(int row) {
+    /**
+     *
+     * @param row
+     * @return
+     */
+    public int[] getIntRow(int row) {
     int[] outgoing = new int[columns.length];
     for (int col = 0; col < columns.length; col++) {
       outgoing[col] = getInt(row, col);
@@ -3147,6 +3412,13 @@ public class Table {
 
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+    /**
+     *
+     * @param row
+     * @param column
+     * @return
+     */
 
 
   public long getLong(int row, int column) {
@@ -3166,18 +3438,31 @@ public class Table {
     }
   }
 
-
-  public long getLong(int row, String columnName) {
+    /**
+     *
+     * @param row
+     * @param columnName
+     * @return
+     */
+    public long getLong(int row, String columnName) {
     return getLong(row, getColumnIndex(columnName));
   }
 
-
-  public void setMissingLong(long value) {
+    /**
+     *
+     * @param value
+     */
+    public void setMissingLong(long value) {
     missingLong = value;
   }
 
-
-  public void setLong(int row, int column, long value) {
+    /**
+     *
+     * @param row
+     * @param column
+     * @param value
+     */
+    public void setLong(int row, int column, long value) {
     if (columnTypes[column] == STRING) {
       setString(row, column, String.valueOf(value));
 
@@ -3191,19 +3476,32 @@ public class Table {
     }
   }
 
-
-  public void setLong(int row, String columnName, long value) {
+    /**
+     *
+     * @param row
+     * @param columnName
+     * @param value
+     */
+    public void setLong(int row, String columnName, long value) {
     setLong(row, getColumnIndex(columnName), value);
   }
 
-
-  public long[] getLongColumn(String name) {
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public long[] getLongColumn(String name) {
     int col = getColumnIndex(name);
     return (col == -1) ? null : getLongColumn(col);
   }
 
-
-  public long[] getLongColumn(int col) {
+    /**
+     *
+     * @param col
+     * @return
+     */
+    public long[] getLongColumn(int col) {
     long[] outgoing = new long[rowCount];
     for (int row = 0; row < rowCount; row++) {
       outgoing[row] = getLong(row, col);
@@ -3211,8 +3509,12 @@ public class Table {
     return outgoing;
   }
 
-
-  public long[] getLongRow(int row) {
+    /**
+     *
+     * @param row
+     * @return
+     */
+    public long[] getLongRow(int row) {
     long[] outgoing = new long[columns.length];
     for (int col = 0; col < columns.length; col++) {
       outgoing[col] = getLong(row, col);
@@ -3225,10 +3527,11 @@ public class Table {
 
 
   /**
-   * Get a float value from the specified row and column. If the value is null
-   * or not parseable as a float, the "missing" value is returned. By default,
-   * this is Float.NaN, but can be controlled with setMissingFloat().
+   * Get a float value from the specified row and column.If the value is null
+ or not parseable as a float, the "missing" value is returned. By default,
+ this is Float.NaN, but can be controlled with setMissingFloat().
    *
+     * @return 
    * @webref table:method
    * @brief Get a float value from the specified row and column
    * @param row ID number of the row to reference
@@ -3254,14 +3557,19 @@ public class Table {
   }
 
   /**
+     * @param row
    * @param columnName title of the column to reference
+     * @return 
    */
   public float getFloat(int row, String columnName) {
     return getFloat(row, getColumnIndex(columnName));
   }
 
-
-  public void setMissingFloat(float value) {
+    /**
+     *
+     * @param value
+     */
+    public void setMissingFloat(float value) {
     missingFloat = value;
   }
 
@@ -3294,20 +3602,30 @@ public class Table {
   }
 
   /**
+     * @param row
    * @param columnName title of the target column
+     * @param value
    */
   public void setFloat(int row, String columnName, float value) {
     setFloat(row, getColumnIndex(columnName), value);
   }
 
-
-  public float[] getFloatColumn(String name) {
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public float[] getFloatColumn(String name) {
     int col = getColumnIndex(name);
     return (col == -1) ? null : getFloatColumn(col);
   }
 
-
-  public float[] getFloatColumn(int col) {
+    /**
+     *
+     * @param col
+     * @return
+     */
+    public float[] getFloatColumn(int col) {
     float[] outgoing = new float[rowCount];
     for (int row = 0; row < rowCount; row++) {
       outgoing[row] = getFloat(row, col);
@@ -3315,8 +3633,12 @@ public class Table {
     return outgoing;
   }
 
-
-  public float[] getFloatRow(int row) {
+    /**
+     *
+     * @param row
+     * @return
+     */
+    public float[] getFloatRow(int row) {
     float[] outgoing = new float[columns.length];
     for (int col = 0; col < columns.length; col++) {
       outgoing[col] = getFloat(row, col);
@@ -3326,6 +3648,13 @@ public class Table {
 
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+    /**
+     *
+     * @param row
+     * @param column
+     * @return
+     */
 
 
   public double getDouble(int row, int column) {
@@ -3345,18 +3674,31 @@ public class Table {
     }
   }
 
-
-  public double getDouble(int row, String columnName) {
+    /**
+     *
+     * @param row
+     * @param columnName
+     * @return
+     */
+    public double getDouble(int row, String columnName) {
     return getDouble(row, getColumnIndex(columnName));
   }
 
-
-  public void setMissingDouble(double value) {
+    /**
+     *
+     * @param value
+     */
+    public void setMissingDouble(double value) {
     missingDouble = value;
   }
 
-
-  public void setDouble(int row, int column, double value) {
+    /**
+     *
+     * @param row
+     * @param column
+     * @param value
+     */
+    public void setDouble(int row, int column, double value) {
     if (columnTypes[column] == STRING) {
       setString(row, column, String.valueOf(value));
 
@@ -3370,19 +3712,32 @@ public class Table {
     }
   }
 
-
-  public void setDouble(int row, String columnName, double value) {
+    /**
+     *
+     * @param row
+     * @param columnName
+     * @param value
+     */
+    public void setDouble(int row, String columnName, double value) {
     setDouble(row, getColumnIndex(columnName), value);
   }
 
-
-  public double[] getDoubleColumn(String name) {
+    /**
+     *
+     * @param name
+     * @return
+     */
+    public double[] getDoubleColumn(String name) {
     int col = getColumnIndex(name);
     return (col == -1) ? null : getDoubleColumn(col);
   }
 
-
-  public double[] getDoubleColumn(int col) {
+    /**
+     *
+     * @param col
+     * @return
+     */
+    public double[] getDoubleColumn(int col) {
     double[] outgoing = new double[rowCount];
     for (int row = 0; row < rowCount; row++) {
       outgoing[row] = getDouble(row, col);
@@ -3390,8 +3745,12 @@ public class Table {
     return outgoing;
   }
 
-
-  public double[] getDoubleRow(int row) {
+    /**
+     *
+     * @param row
+     * @return
+     */
+    public double[] getDoubleRow(int row) {
     double[] outgoing = new double[columns.length];
     for (int col = 0; col < columns.length; col++) {
       outgoing[col] = getDouble(row, col);
@@ -3460,8 +3819,9 @@ public class Table {
 
 
   /**
-   * Get a String value from the table. If the row is longer than the table
+   * Get a String value from the table.If the row is longer than the table
    *
+     * @return 
    * @webref table:method
    * @brief Get an String value from the specified row and column
    * @param row ID number of the row to reference
@@ -3498,7 +3858,9 @@ public class Table {
 
 
   /**
+     * @param row
    * @param columnName title of the column to reference
+     * @return 
    */
   public String getString(int row, String columnName) {
     return getString(row, getColumnIndex(columnName));
@@ -3506,7 +3868,8 @@ public class Table {
 
 
   /**
-   * Treat entries with this string as "missing". Also used for categorial.
+   * Treat entries with this string as "missing".Also used for categorial.
+     * @param value
    */
   public void setMissingString(String value) {
     missingString = value;
@@ -3536,7 +3899,9 @@ public class Table {
   }
 
   /**
+     * @param row
    * @param columnName title of the target column
+     * @param value
    */
   public void setString(int row, String columnName, String value) {
     int column = checkColumnIndex(columnName);
@@ -3544,6 +3909,7 @@ public class Table {
   }
 
   /**
+     * @return 
    * @webref table:method
    * @brief Gets all values in the specified column
    * @param columnName title of the column to search
@@ -3562,6 +3928,7 @@ public class Table {
 
   /**
    * @param column ID number of the column to search
+     * @return 
    */
   public String[] getStringColumn(int column) {
     String[] outgoing = new String[rowCount];
@@ -3571,8 +3938,12 @@ public class Table {
     return outgoing;
   }
 
-
-  public String[] getStringRow(int row) {
+    /**
+     *
+     * @param row
+     * @return
+     */
+    public String[] getStringRow(int row) {
     String[] outgoing = new String[columns.length];
     for (int col = 0; col < columns.length; col++) {
       outgoing[col] = getString(row, col);
@@ -3588,6 +3959,7 @@ public class Table {
    * Return the row that contains the first String that matches.
    * @param value the String to match
    * @param column ID number of the column to search
+     * @return 
    */
   public int findRowIndex(String value, int column) {
     checkColumn(column);
@@ -3624,6 +3996,7 @@ public class Table {
    * Return the row that contains the first String that matches.
    * @param value the String to match
    * @param columnName title of the column to search
+     * @return 
    */
   public int findRowIndex(String value, String columnName) {
     return findRowIndex(value, getColumnIndex(columnName));
@@ -3631,10 +4004,11 @@ public class Table {
 
 
   /**
-   * Return a list of rows that contain the String passed in. If there are no
-   * matches, a zero length array will be returned (not a null array).
+   * Return a list of rows that contain the String passed in.If there are no
+ matches, a zero length array will be returned (not a null array).
    * @param value the String to match
    * @param column ID number of the column to search
+     * @return 
    */
   public int[] findRowIndices(String value, int column) {
     int[] outgoing = new int[rowCount];
@@ -3673,10 +4047,11 @@ public class Table {
 
 
   /**
-   * Return a list of rows that contain the String passed in. If there are no
-   * matches, a zero length array will be returned (not a null array).
+   * Return a list of rows that contain the String passed in.If there are no
+ matches, a zero length array will be returned (not a null array).
    * @param value the String to match
    * @param columnName title of the column to search
+     * @return 
    */
   public int[] findRowIndices(String value, String columnName) {
     return findRowIndices(value, getColumnIndex(columnName));
@@ -3686,6 +4061,7 @@ public class Table {
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
   /**
+     * @return 
    * @webref table:method
    * @brief Finds a row that contains the given value
    * @param value the value to match
@@ -3703,7 +4079,9 @@ public class Table {
 
 
   /**
+     * @param value
    * @param columnName title of the column to search
+     * @return 
    */
   public TableRow findRow(String value, String columnName) {
     return findRow(value, getColumnIndex(columnName));
@@ -3711,6 +4089,7 @@ public class Table {
 
 
   /**
+     * @return 
    * @webref table:method
    * @brief Finds multiple rows that contain the given value
    * @param value the value to match
@@ -3731,7 +4110,9 @@ public class Table {
 
 
   /**
+     * @param value
    * @param columnName title of the column to search
+     * @return 
    */
   public Iterable<TableRow> findRows(final String value, final String columnName) {
     return findRows(value, getColumnIndex(columnName));
@@ -3739,6 +4120,7 @@ public class Table {
 
 
   /**
+     * @return 
    * @brief Finds multiple rows that contain the given value
    * @param value the value to match
    * @param column ID number of the column to search
@@ -3749,7 +4131,9 @@ public class Table {
 
 
   /**
+     * @param value
    * @param columnName title of the column to search
+     * @return 
    */
   public Iterator<TableRow> findRowIterator(String value, String columnName) {
     return findRowIterator(value, getColumnIndex(columnName));
@@ -3763,6 +4147,7 @@ public class Table {
    * Return the row that contains the first String that matches.
    * @param regexp the String to match
    * @param column ID number of the column to search
+     * @return 
    */
   public int matchRowIndex(String regexp, int column) {
     checkColumn(column);
@@ -3791,6 +4176,7 @@ public class Table {
    * Return the row that contains the first String that matches.
    * @param what the String to match
    * @param columnName title of the column to search
+     * @return 
    */
   public int matchRowIndex(String what, String columnName) {
     return matchRowIndex(what, getColumnIndex(columnName));
@@ -3798,10 +4184,11 @@ public class Table {
 
 
   /**
-   * Return a list of rows that contain the String passed in. If there are no
-   * matches, a zero length array will be returned (not a null array).
+   * Return a list of rows that contain the String passed in.If there are no
+ matches, a zero length array will be returned (not a null array).
    * @param regexp the String to match
    * @param column ID number of the column to search
+     * @return 
    */
   public int[] matchRowIndices(String regexp, int column) {
     int[] outgoing = new int[rowCount];
@@ -3830,10 +4217,11 @@ public class Table {
 
 
   /**
-   * Return a list of rows that match the regex passed in. If there are no
-   * matches, a zero length array will be returned (not a null array).
+   * Return a list of rows that match the regex passed in.If there are no
+ matches, a zero length array will be returned (not a null array).
    * @param what the String to match
    * @param columnName title of the column to search
+     * @return 
    */
   public int[] matchRowIndices(String what, String columnName) {
     return matchRowIndices(what, getColumnIndex(columnName));
@@ -3843,6 +4231,7 @@ public class Table {
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
   /**
+     * @return 
    * @webref table:method
    * @brief Finds a row that matches the given expression
    * @param regexp the regular expression to match
@@ -3860,7 +4249,9 @@ public class Table {
 
 
   /**
+     * @param regexp
    * @param columnName title of the column to search
+     * @return 
    */
   public TableRow matchRow(String regexp, String columnName) {
     return matchRow(regexp, getColumnIndex(columnName));
@@ -3868,6 +4259,7 @@ public class Table {
 
 
   /**
+     * @return 
    * @webref table:method
    * @brief Finds multiple rows that match the given expression
    * @param regexp the regular expression to match
@@ -3888,7 +4280,9 @@ public class Table {
 
 
   /**
+     * @param regexp
    * @param columnName title of the column to search
+     * @return 
    */
   public Iterable<TableRow> matchRows(String regexp, String columnName) {
     return matchRows(regexp, getColumnIndex(columnName));
@@ -3896,6 +4290,7 @@ public class Table {
 
 
   /**
+     * @return 
    * @webref table:method
    * @brief Finds multiple rows that match the given expression
    * @param value the regular expression to match
@@ -3907,7 +4302,9 @@ public class Table {
 
 
   /**
+     * @param value
    * @param columnName title of the column to search
+     * @return 
    */
   public Iterator<TableRow> matchRowIterator(String value, String columnName) {
     return matchRowIterator(value, getColumnIndex(columnName));
@@ -3930,8 +4327,13 @@ public class Table {
     }
   }
 
-
-  public void replace(String orig, String replacement, int col) {
+    /**
+     *
+     * @param orig
+     * @param replacement
+     * @param col
+     */
+    public void replace(String orig, String replacement, int col) {
     if (columnTypes[col] == STRING) {
       String[] stringData = (String[]) columns[col];
 
@@ -3951,13 +4353,24 @@ public class Table {
     }
   }
 
-
-  public void replace(String orig, String replacement, String colName) {
+    /**
+     *
+     * @param orig
+     * @param replacement
+     * @param colName
+     */
+    public void replace(String orig, String replacement, String colName) {
     replace(orig, replacement, getColumnIndex(colName));
   }
 
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+    /**
+     *
+     * @param regex
+     * @param replacement
+     */
 
 
   public void replaceAll(String regex, String replacement) {
@@ -3966,8 +4379,13 @@ public class Table {
     }
   }
 
-
-  public void replaceAll(String regex, String replacement, int column) {
+    /**
+     *
+     * @param regex
+     * @param replacement
+     * @param column
+     */
+    public void replaceAll(String regex, String replacement, int column) {
     checkColumn(column);
     if (columnTypes[column] == STRING) {
       String[] stringData = (String[]) columns[column];
@@ -3983,9 +4401,9 @@ public class Table {
 
 
   /**
-   * Run String.replaceAll() on all entries in a column.
-   * Only works with columns that are already String values.
+   * Run String.replaceAll() on all entries in a column.Only works with columns that are already String values.
    * @param regex the String to match
+     * @param replacement
    * @param columnName title of the column to search
    */
   public void replaceAll(String regex, String replacement, String columnName) {
@@ -4012,12 +4430,12 @@ public class Table {
 
 
   /**
-   * Removed any of the specified characters from a column. For instance,
-   * the following code removes dollar signs and commas from column 2:
-   * <pre>
+   * Removed any of the specified characters from a column.For instance,
+ the following code removes dollar signs and commas from column 2:<pre>
    * table.removeTokens(",$", 2);
    * </pre>
    *
+     * @param tokens
    * @param column ID number of the column to process
    */
   public void removeTokens(String tokens, int column) {
@@ -4042,6 +4460,7 @@ public class Table {
   }
 
   /**
+     * @param tokens
    * @param columnName title of the column to process
    */
   public void removeTokens(String tokens, String columnName) {
@@ -4088,8 +4507,12 @@ public class Table {
     }
   }
 
-
-  protected boolean isEmptyArray(String[] contents) {
+    /**
+     *
+     * @param contents
+     * @return
+     */
+    protected boolean isEmptyArray(String[] contents) {
     for (String entry : contents) {
       if (entry != null && entry.length() > 0) {
         return false;
@@ -4148,7 +4571,8 @@ public class Table {
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
 
-  /** Make sure this is a legit column, and if not, expand the table. */
+  /** Make sure this is a legit column, and if not, expand the table.
+     * @param col */
   protected void ensureColumn(int col) {
     if (col >= columns.length) {
       setColumnCount(col + 1);
@@ -4156,7 +4580,8 @@ public class Table {
   }
 
 
-  /** Make sure this is a legit row, and if not, expand the table. */
+  /** Make sure this is a legit row, and if not, expand the table.
+     * @param row */
   protected void ensureRow(int row) {
     if (row >= rowCount) {
       setRowCount(row + 1);
@@ -4164,14 +4589,17 @@ public class Table {
   }
 
 
-  /** Make sure this is a legit row and column. If not, expand the table. */
+  /** *  Make sure this is a legit row and column.If not, expand the table.
+     * @param row
+     * @param col */
   protected void ensureBounds(int row, int col) {
     ensureRow(row);
     ensureColumn(col);
   }
 
 
-  /** Throw an error if this row doesn't exist. */
+  /** Throw an error if this row doesn't exist.
+     * @param row */
   protected void checkRow(int row) {
     if (row < 0 || row >= rowCount) {
       throw new ArrayIndexOutOfBoundsException("Row " + row + " does not exist.");
@@ -4179,7 +4607,8 @@ public class Table {
   }
 
 
-  /** Throw an error if this column doesn't exist. */
+  /** Throw an error if this column doesn't exist.
+     * @param column */
   protected void checkColumn(int column) {
     if (column < 0 || column >= columns.length) {
       throw new ArrayIndexOutOfBoundsException("Column " + column + " does not exist.");
@@ -4187,7 +4616,9 @@ public class Table {
   }
 
 
-  /** Throw an error if this entry is out of bounds. */
+  /** Throw an error if this entry is out of bounds.
+     * @param row
+     * @param column */
   protected void checkBounds(int row, int column) {
     checkRow(row);
     checkColumn(column);
@@ -4312,18 +4743,28 @@ public class Table {
     sort(column, false);
   }
 
-
-  public void sortReverse(String columnName) {
+    /**
+     *
+     * @param columnName
+     */
+    public void sortReverse(String columnName) {
     sort(getColumnIndex(columnName), true);
   }
 
-
-  public void sortReverse(int column) {
+    /**
+     *
+     * @param column
+     */
+    public void sortReverse(int column) {
     sort(column, true);
   }
 
-
-  protected void sort(final int column, final boolean reverse) {
+    /**
+     *
+     * @param column
+     * @param reverse
+     */
+    protected void sort(final int column, final boolean reverse) {
     final int[] order = IntList.fromRange(getRowCount()).array();
     Sort s = new Sort() {
 
@@ -4416,35 +4857,61 @@ public class Table {
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+
 
   public String[] getUnique(String columnName) {
     return getUnique(getColumnIndex(columnName));
   }
 
-
-  public String[] getUnique(int column) {
+    /**
+     *
+     * @param column
+     * @return
+     */
+    public String[] getUnique(int column) {
     StringList list = new StringList(getStringColumn(column));
     return list.getUnique();
   }
 
-
-  public IntDict getTally(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public IntDict getTally(String columnName) {
     return getTally(getColumnIndex(columnName));
   }
 
-
-  public IntDict getTally(int column) {
+    /**
+     *
+     * @param column
+     * @return
+     */
+    public IntDict getTally(int column) {
     StringList list = new StringList(getStringColumn(column));
     return list.getTally();
   }
 
-
-  public IntDict getOrder(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public IntDict getOrder(String columnName) {
     return getOrder(getColumnIndex(columnName));
   }
 
-
-  public IntDict getOrder(int column) {
+    /**
+     *
+     * @param column
+     * @return
+     */
+    public IntDict getOrder(int column) {
     StringList list = new StringList(getStringColumn(column));
     return list.getOrder();
   }
@@ -4452,38 +4919,71 @@ public class Table {
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
 
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+
 
   public IntList getIntList(String columnName) {
     return new IntList(getIntColumn(columnName));
   }
 
-
-  public IntList getIntList(int column) {
+    /**
+     *
+     * @param column
+     * @return
+     */
+    public IntList getIntList(int column) {
     return new IntList(getIntColumn(column));
   }
 
-
-  public FloatList getFloatList(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public FloatList getFloatList(String columnName) {
     return new FloatList(getFloatColumn(columnName));
   }
 
-
-  public FloatList getFloatList(int column) {
+    /**
+     *
+     * @param column
+     * @return
+     */
+    public FloatList getFloatList(int column) {
     return new FloatList(getFloatColumn(column));
   }
 
-
-  public StringList getStringList(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public StringList getStringList(String columnName) {
     return new StringList(getStringColumn(columnName));
   }
 
-
-  public StringList getStringList(int column) {
+    /**
+     *
+     * @param column
+     * @return
+     */
+    public StringList getStringList(int column) {
     return new StringList(getStringColumn(column));
   }
 
 
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+    /**
+     *
+     * @param keyColumnName
+     * @param valueColumnName
+     * @return
+     */
 
 
   public IntDict getIntDict(String keyColumnName, String valueColumnName) {
@@ -4491,38 +4991,67 @@ public class Table {
                        getIntColumn(valueColumnName));
   }
 
-
-  public IntDict getIntDict(int keyColumn, int valueColumn) {
+    /**
+     *
+     * @param keyColumn
+     * @param valueColumn
+     * @return
+     */
+    public IntDict getIntDict(int keyColumn, int valueColumn) {
     return new IntDict(getStringColumn(keyColumn),
                        getIntColumn(valueColumn));
   }
 
-
-  public FloatDict getFloatDict(String keyColumnName, String valueColumnName) {
+    /**
+     *
+     * @param keyColumnName
+     * @param valueColumnName
+     * @return
+     */
+    public FloatDict getFloatDict(String keyColumnName, String valueColumnName) {
     return new FloatDict(getStringColumn(keyColumnName),
                          getFloatColumn(valueColumnName));
   }
 
-
-  public FloatDict getFloatDict(int keyColumn, int valueColumn) {
+    /**
+     *
+     * @param keyColumn
+     * @param valueColumn
+     * @return
+     */
+    public FloatDict getFloatDict(int keyColumn, int valueColumn) {
     return new FloatDict(getStringColumn(keyColumn),
                          getFloatColumn(valueColumn));
   }
 
-
-  public StringDict getStringDict(String keyColumnName, String valueColumnName) {
+    /**
+     *
+     * @param keyColumnName
+     * @param valueColumnName
+     * @return
+     */
+    public StringDict getStringDict(String keyColumnName, String valueColumnName) {
     return new StringDict(getStringColumn(keyColumnName),
                           getStringColumn(valueColumnName));
   }
 
-
-  public StringDict getStringDict(int keyColumn, int valueColumn) {
+    /**
+     *
+     * @param keyColumn
+     * @param valueColumn
+     * @return
+     */
+    public StringDict getStringDict(int keyColumn, int valueColumn) {
     return new StringDict(getStringColumn(keyColumn),
                           getStringColumn(valueColumn));
   }
 
-
-  public Map<String, TableRow> getRowMap(String columnName) {
+    /**
+     *
+     * @param columnName
+     * @return
+     */
+    public Map<String, TableRow> getRowMap(String columnName) {
     int col = getColumnIndex(columnName);
     return (col == -1) ? null : getRowMap(col);
   }
@@ -4530,8 +5059,7 @@ public class Table {
 
   /**
    * Return a mapping that connects the entry from a column back to the row
-   * from which it came. For instance:
-   * <pre>
+   * from which it came.For instance:<pre>
    * Table t = loadTable("country-data.tsv", "header");
    * // use the contents of the 'country' column to index the table
    * Map<String, TableRow> lookup = t.getRowMap("country");
@@ -4540,6 +5068,8 @@ public class Table {
    * // get an entry from the 'population' column
    * int population = usRow.getInt("population");
    * </pre>
+     * @param column
+     * @return 
    */
   public Map<String, TableRow> getRowMap(int column) {
     Map<String, TableRow> outgoing = new HashMap<>();
@@ -4674,6 +5204,12 @@ public class Table {
 
 
   // TODO naming/whether to include
+
+    /**
+     *
+     * @param rowSubset
+     * @return
+     */
   protected Table createSubset(int[] rowSubset) {
     Table newbie = new Table();
     newbie.setColumnTitles(columnTitles);  // also sets columns.length
@@ -4700,8 +5236,8 @@ public class Table {
 
 
   /**
-   * Searches the entire table for float values.
-   * Returns missing float (Float.NaN by default) if no valid numbers found.
+   * Searches the entire table for float values.Returns missing float (Float.NaN by default) if no valid numbers found.
+     * @return
    */
   protected float getMaxFloat() {
     boolean found = false;
@@ -4727,6 +5263,14 @@ public class Table {
 
 
   // converts a TSV or CSV file to binary.. do not use
+
+    /**
+     *
+     * @param reader
+     * @param tsv
+     * @param outputFile
+     * @throws IOException
+     */
   protected void convertBasic(BufferedReader reader, boolean tsv,
                               File outputFile) throws IOException {
     FileOutputStream fos = new FileOutputStream(outputFile);
@@ -4800,8 +5344,13 @@ public class Table {
     raf.close();
   }
 
-
-  protected void convertRow(DataOutputStream output, String[] pieces) throws IOException {
+    /**
+     *
+     * @param output
+     * @param pieces
+     * @throws IOException
+     */
+    protected void convertRow(DataOutputStream output, String[] pieces) throws IOException {
     if (pieces.length > getColumnCount()) {
       throw new IllegalArgumentException("Row with too many columns: " +
                                          PApplet.join(pieces, ","));
@@ -4906,18 +5455,24 @@ public class Table {
   */
 
 
-  /** Make a copy of the current table */
+  /** Make a copy of the current table
+     * @return  */
   public Table copy() {
     return new Table(rows());
   }
 
-
-  public void write(PrintWriter writer) {
+    /**
+     *
+     * @param writer
+     */
+    public void write(PrintWriter writer) {
     writeTSV(writer);
   }
 
-
-  public void print() {
+    /**
+     *
+     */
+    public void print() {
     writeTSV(new PrintWriter(System.out));
   }
 }

@@ -22,12 +22,15 @@ public class StringList implements Iterable<String> {
   int count;
   String[] data;
 
-
-  public StringList() {
+    /**
+     *
+     */
+    public StringList() {
     this(10);
   }
 
   /**
+     * @param length
    * @nowebref
    */
   public StringList(int length) {
@@ -35,6 +38,7 @@ public class StringList implements Iterable<String> {
   }
 
   /**
+     * @param list
    * @nowebref
    */
   public StringList(String[] list) {
@@ -45,8 +49,9 @@ public class StringList implements Iterable<String> {
 
 
   /**
-   * Construct a StringList from a random pile of objects. Null values will
-   * stay null, but all the others will be converted to String values.
+   * Construct a StringList from a random pile of objects.Null values will
+ stay null, but all the others will be converted to String values.
+     * @param items
    */
   public StringList(Object... items) {
     count = items.length;
@@ -69,6 +74,7 @@ public class StringList implements Iterable<String> {
    * Create from something iterable, for instance:
    * StringList list = new StringList(hashMap.keySet());
    *
+     * @param iter
    * @nowebref
    */
   public StringList(Iterable<String> iter) {
@@ -95,6 +101,7 @@ public class StringList implements Iterable<String> {
   /**
    * Get the length of the list.
    *
+     * @return 
    * @webref stringlist:method
    * @brief Get the length of the list
    */
@@ -102,8 +109,11 @@ public class StringList implements Iterable<String> {
     return count;
   }
 
-
-  public void resize(int length) {
+    /**
+     *
+     * @param length
+     */
+    public void resize(int length) {
     if (length > data.length) {
       String[] temp = new String[length];
       System.arraycopy(data, 0, temp, 0, count);
@@ -130,6 +140,8 @@ public class StringList implements Iterable<String> {
   /**
    * Get an entry at a particular index.
    *
+     * @param index
+     * @return 
    * @webref stringlist:method
    * @brief Get an entry at a particular index
    */
@@ -142,10 +154,12 @@ public class StringList implements Iterable<String> {
 
 
   /**
-   * Set the entry at a particular index. If the index is past the length of
-   * the list, it'll expand the list to accommodate, and fill the intermediate
-   * entries with 0s.
+   * Set the entry at a particular index.If the index is past the length of
+ the list, it'll expand the list to accommodate, and fill the intermediate
+ entries with 0s.
    *
+     * @param index
+     * @param what
    * @webref stringlist:method
    * @brief Set an entry at a particular index
    */
@@ -161,13 +175,17 @@ public class StringList implements Iterable<String> {
   }
 
 
-  /** Just an alias for append(), but matches pop() */
+  /** Just an alias for append(), but matches pop()
+     * @param value */
   public void push(String value) {
     append(value);
   }
 
-
-  public String pop() {
+    /**
+     *
+     * @return
+     */
+    public String pop() {
     if (count == 0) {
       throw new RuntimeException("Can't call pop() on an empty list");
     }
@@ -180,6 +198,8 @@ public class StringList implements Iterable<String> {
   /**
    * Remove an element from the specified index.
    *
+     * @param index
+     * @return 
    * @webref stringlist:method
    * @brief Remove an element from the specified index
    */
@@ -202,6 +222,12 @@ public class StringList implements Iterable<String> {
 
 
   // Remove the first instance of a particular value and return its index.
+
+    /**
+     *
+     * @param value
+     * @return
+     */
   public int removeValue(String value) {
     if (value == null) {
       for (int i = 0; i < count; i++) {
@@ -222,6 +248,12 @@ public class StringList implements Iterable<String> {
 
 
   // Remove all instances of a particular value and return the count removed.
+
+    /**
+     *
+     * @param value
+     * @return
+     */
   public int removeValues(String value) {
     int ii = 0;
     if (value == null) {
@@ -244,6 +276,13 @@ public class StringList implements Iterable<String> {
 
 
   // replace the first value that matches, return the index that was replaced
+
+    /**
+     *
+     * @param value
+     * @param newValue
+     * @return
+     */
   public int replaceValue(String value, String newValue) {
     if (value == null) {
       for (int i = 0; i < count; i++) {
@@ -265,6 +304,13 @@ public class StringList implements Iterable<String> {
 
 
   // replace all values that match, return the count of those replaced
+
+    /**
+     *
+     * @param value
+     * @param newValue
+     * @return
+     */
   public int replaceValues(String value, String newValue) {
     int changed = 0;
     if (value == null) {
@@ -289,6 +335,7 @@ public class StringList implements Iterable<String> {
   /**
    * Add a new entry to the list.
    *
+     * @param value
    * @webref stringlist:method
    * @brief Add a new entry to the list
    */
@@ -299,22 +346,29 @@ public class StringList implements Iterable<String> {
     data[count++] = value;
   }
 
-
-  public void append(String[] values) {
+    /**
+     *
+     * @param values
+     */
+    public void append(String[] values) {
     for (String v : values) {
       append(v);
     }
   }
 
-
-  public void append(StringList list) {
+    /**
+     *
+     * @param list
+     */
+    public void append(StringList list) {
     for (String v : list.values()) {  // will concat the list...
       append(v);
     }
   }
 
 
-  /** Add this value, but only if it's not already in the list. */
+  /** Add this value, but only if it's not already in the list.
+     * @param value */
   public void appendUnique(String value) {
     if (!hasValue(value)) {
       append(value);
@@ -351,6 +405,12 @@ public class StringList implements Iterable<String> {
 //    }
 //  }
 
+    /**
+     *
+     * @param index
+     * @param value
+     */
+
 
   public void insert(int index, String value) {
     insert(index, new String[] { value });
@@ -358,6 +418,12 @@ public class StringList implements Iterable<String> {
 
 
   // same as splice
+
+    /**
+     *
+     * @param index
+     * @param values
+     */
   public void insert(int index, String[] values) {
     if (index < 0) {
       throw new IllegalArgumentException("insert() index cannot be negative: it was " + index);
@@ -385,8 +451,12 @@ public class StringList implements Iterable<String> {
     data = temp;
   }
 
-
-  public void insert(int index, StringList list) {
+    /**
+     *
+     * @param index
+     * @param list
+     */
+    public void insert(int index, StringList list) {
     insert(index, list.values());
   }
 
@@ -434,7 +504,9 @@ public class StringList implements Iterable<String> {
 //    }
 
 
-  /** Return the first index of a particular value. */
+  /** Return the first index of a particular value.
+     * @param what
+     * @return  */
   public int index(String what) {
     if (what == null) {
       for (int i = 0; i < count; i++) {
@@ -463,6 +535,8 @@ public class StringList implements Iterable<String> {
 //  }
 
   /**
+     * @param value
+     * @return 
    * @webref stringlist:method
    * @brief Check if a value is a part of the list
    */
@@ -584,6 +658,7 @@ public class StringList implements Iterable<String> {
   /**
    * Randomize the list order using the random() function from the specified
    * sketch, allowing shuffle() to use its current randomSeed() setting.
+     * @param sketch
    */
   public void shuffle(PApplet sketch) {
     int num = count;
@@ -626,8 +701,11 @@ public class StringList implements Iterable<String> {
     }
   }
 
-
-  public StringList copy() {
+    /**
+     *
+     * @return
+     */
+    public StringList copy() {
     StringList outgoing = new StringList(data);
     outgoing.count = count;
     return outgoing;
@@ -635,17 +713,21 @@ public class StringList implements Iterable<String> {
 
 
   /**
-   * Returns the actual array being used to store the data. Suitable for
-   * iterating with a for() loop, but modifying the list could cause terrible
-   * things to happen.
+   * Returns the actual array being used to store the data.Suitable for
+ iterating with a for() loop, but modifying the list could cause terrible
+ things to happen.
+     * @return 
    */
   public String[] values() {
     crop();
     return data;
   }
 
-
-  @Override
+    /**
+     *
+     * @return
+     */
+    @Override
   public Iterator<String> iterator() {
 //    return valueIterator();
 //  }
@@ -684,9 +766,10 @@ public class StringList implements Iterable<String> {
 
 
   /**
-   * Copy values into the specified array. If the specified array is null or
-   * not the same size, a new array will be allocated.
+   * Copy values into the specified array.If the specified array is null or
+ not the same size, a new array will be allocated.
    * @param array
+     * @return 
    */
   public String[] array(String[] array) {
     if (array == null || array.length != count) {
@@ -696,26 +779,37 @@ public class StringList implements Iterable<String> {
     return array;
   }
 
-
-  public StringList getSubset(int start) {
+    /**
+     *
+     * @param start
+     * @return
+     */
+    public StringList getSubset(int start) {
     return getSubset(start, count - start);
   }
 
-
-  public StringList getSubset(int start, int num) {
+    /**
+     *
+     * @param start
+     * @param num
+     * @return
+     */
+    public StringList getSubset(int start, int num) {
     String[] subset = new String[num];
     System.arraycopy(data, start, subset, 0, num);
     return new StringList(subset);
   }
 
 
-  /** Get a list of all unique entries. */
+  /** Get a list of all unique entries.
+     * @return  */
   public String[] getUnique() {
     return getTally().keyArray();
   }
 
 
-  /** Count the number of times each String entry is found in this list. */
+  /** Count the number of times each String entry is found in this list.
+     * @return  */
   public IntDict getTally() {
     IntDict outgoing = new IntDict();
     for (int i = 0; i < count; i++) {
@@ -725,7 +819,8 @@ public class StringList implements Iterable<String> {
   }
 
 
-  /** Create a dictionary associating each entry in this list to its index. */
+  /** Create a dictionary associating each entry in this list to its index.
+     * @return  */
   public IntDict getOrder() {
     IntDict outgoing = new IntDict();
     for (int i = 0; i < count; i++) {
@@ -734,8 +829,12 @@ public class StringList implements Iterable<String> {
     return outgoing;
   }
 
-
-  public String join(String separator) {
+    /**
+     *
+     * @param separator
+     * @return
+     */
+    public String join(String separator) {
     if (count == 0) {
       return "";
     }
@@ -748,8 +847,10 @@ public class StringList implements Iterable<String> {
     return sb.toString();
   }
 
-
-  public void print() {
+    /**
+     *
+     */
+    public void print() {
     for (int i = 0; i < count; i++) {
       System.out.format("[%d] %s%n", i, data[i]);
     }
@@ -758,6 +859,7 @@ public class StringList implements Iterable<String> {
 
   /**
    * Return this dictionary as a String in JSON format.
+     * @return 
    */
   public String toJSON() {
     StringList temp = new StringList();
@@ -767,8 +869,11 @@ public class StringList implements Iterable<String> {
     return "[ " + temp.join(", ") + " ]";
   }
 
-
-  @Override
+    /**
+     *
+     * @return
+     */
+    @Override
   public String toString() {
     return getClass().getSimpleName() + " size=" + size() + " " + toJSON();
   }

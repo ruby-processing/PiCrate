@@ -72,13 +72,21 @@ public class JAppleMenuBar {
 //	  instance.setVisible(true);
 //	}
 
+    /**
+     *
+     */
+
 	
 	static public void hide() {
 	  instance.setVisible(false, false);
 	}
 
-	
-	public native void setVisible(boolean visibility, boolean kioskMode); 
+    /**
+     *
+     * @param visibility
+     * @param kioskMode
+     */
+    public native void setVisible(boolean visibility, boolean kioskMode); 
 
 	
 //  public void setVisible(boolean visibility) {

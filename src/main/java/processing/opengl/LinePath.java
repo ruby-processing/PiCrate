@@ -115,17 +115,35 @@ public class LinePath {
 
   static final int EXPAND_MAX = 500;
 
-  protected byte[] pointTypes;
+    /**
+     *
+     */
+    protected byte[] pointTypes;
 
-  protected float[] floatCoords;
+    /**
+     *
+     */
+    protected float[] floatCoords;
 
-  protected int[] pointColors;
+    /**
+     *
+     */
+    protected int[] pointColors;
 
-  protected int numTypes;
+    /**
+     *
+     */
+    protected int numTypes;
 
-  protected int numCoords;
+    /**
+     *
+     */
+    protected int numCoords;
 
-  protected int windingRule;
+    /**
+     *
+     */
+    protected int windingRule;
 
 
   /**
@@ -219,6 +237,7 @@ public class LinePath {
    *          the specified X coordinate
    * @param y
    *          the specified Y coordinate
+     * @param c
    * @see LinePath#moveTo
    */
   public final void moveTo(float x, float y, int c) {
@@ -247,6 +266,7 @@ public class LinePath {
    *          the specified X coordinate
    * @param y
    *          the specified Y coordinate
+     * @param c
    * @see LinePath#lineTo
    */
   public final void lineTo(float x, float y, int c) {
@@ -263,6 +283,7 @@ public class LinePath {
    * the {@code LinePath} class does not guarantee that modifications to the
    * geometry of this {@code LinePath} object do not affect any iterations of that
    * geometry that are already in process.
+     * @return 
    */
   public PathIterator getPathIterator() {
     return new PathIterator(this);
@@ -322,8 +343,10 @@ public class LinePath {
     numTypes = numCoords = 0;
   }
 
-
-  static public class PathIterator {
+    /**
+     *
+     */
+    static public class PathIterator {
     float floatCoords[];
 
     int typeIdx;
@@ -343,7 +366,12 @@ public class LinePath {
       colorIdx = 0;
     }
 
-    public int currentSegment(float[] coords) {
+      /**
+       *
+       * @param coords
+       * @return
+       */
+      public int currentSegment(float[] coords) {
       int type = path.pointTypes[typeIdx];
       int numCoords = curvecoords[type];
       if (numCoords > 0) {
@@ -357,7 +385,12 @@ public class LinePath {
       return type;
     }
 
-    public int currentSegment(double[] coords) {
+      /**
+       *
+       * @param coords
+       * @return
+       */
+      public int currentSegment(double[] coords) {
       int type = path.pointTypes[typeIdx];
       int numCoords = curvecoords[type];
       if (numCoords > 0) {
@@ -373,15 +406,26 @@ public class LinePath {
       return type;
     }
 
-    public int getWindingRule() {
+      /**
+       *
+       * @return
+       */
+      public int getWindingRule() {
       return path.getWindingRule();
     }
 
-    public boolean isDone() {
+      /**
+       *
+       * @return
+       */
+      public boolean isDone() {
       return (typeIdx >= path.numTypes);
     }
 
-    public void next() {
+      /**
+       *
+       */
+      public void next() {
       int type = path.pointTypes[typeIdx++];
       if (0 < curvecoords[type]) {
         pointIdx += curvecoords[type];
@@ -395,14 +439,31 @@ public class LinePath {
   //
   // Stroked path methods
 
+    /**
+     *
+     * @param src
+     * @param weight
+     * @param caps
+     * @param join
+     * @return
+     */
+
 
   static public LinePath createStrokedPath(LinePath src, float weight,
                                            int caps, int join) {
     return createStrokedPath(src, weight, caps, join, defaultMiterlimit, null);
   }
 
-
-  static public LinePath createStrokedPath(LinePath src, float weight,
+    /**
+     *
+     * @param src
+     * @param weight
+     * @param caps
+     * @param join
+     * @param miterlimit
+     * @return
+     */
+    static public LinePath createStrokedPath(LinePath src, float weight,
                                            int caps, int join, float miterlimit) {
     return createStrokedPath(src, weight, caps, join, miterlimit, null);
   }
@@ -421,6 +482,7 @@ public class LinePath {
    *          the decoration applied where path segments meet
    * @param miterlimit
    * @param transform
+     * @return 
    *
    */
   static public LinePath createStrokedPath(LinePath src, float weight,
@@ -506,6 +568,13 @@ public class LinePath {
   //
   // Utility methods
 
+    /**
+     *
+     * @param source
+     * @param length
+     * @return
+     */
+
 
   public static float[] copyOf(float[] source, int length) {
     float[] target = new float[length];
@@ -518,8 +587,13 @@ public class LinePath {
     return target;
   }
 
-
-  public static byte[] copyOf(byte[] source, int length) {
+    /**
+     *
+     * @param source
+     * @param length
+     * @return
+     */
+    public static byte[] copyOf(byte[] source, int length) {
     byte[] target = new byte[length];
     for (int i = 0; i < target.length; i++) {
       if (i > source.length - 1)
@@ -530,8 +604,13 @@ public class LinePath {
     return target;
   }
 
-
-  public static int[] copyOf(int[] source, int length) {
+    /**
+     *
+     * @param source
+     * @param length
+     * @return
+     */
+    public static int[] copyOf(int[] source, int length) {
     int[] target = new int[length];
     for (int i = 0; i < target.length; i++) {
       if (i > source.length - 1)
@@ -544,6 +623,12 @@ public class LinePath {
 
 
   // From Ken Turkowski, _Fixed-Point Square Root_, In Graphics Gems V
+
+    /**
+     *
+     * @param x
+     * @return
+     */
   public static int isqrt(int x) {
     int fracbits = 16;
 
@@ -566,8 +651,12 @@ public class LinePath {
     return root;
   }
 
-
-  public static long lsqrt(long x) {
+    /**
+     *
+     * @param x
+     * @return
+     */
+    public static long lsqrt(long x) {
     int fracbits = 16;
 
     long root = 0;
@@ -589,18 +678,33 @@ public class LinePath {
     return root;
   }
 
-
-  public static double hypot(double x, double y) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static double hypot(double x, double y) {
     return Math.sqrt(x * x + y * y);
   }
 
-
-  public static int hypot(int x, int y) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static int hypot(int x, int y) {
     return (int) ((lsqrt((long) x * x + (long) y * y) + 128) >> 8);
   }
 
-
-  public static long hypot(long x, long y) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @return
+     */
+    public static long hypot(long x, long y) {
     return (lsqrt(x * x + y * y) + 128) >> 8;
   }
 

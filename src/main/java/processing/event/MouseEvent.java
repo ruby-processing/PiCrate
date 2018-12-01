@@ -22,21 +22,73 @@
 package processing.event;
 
 //import processing.core.PConstants;
+
+/**
+ *
+ * @author Martin Prout
+ */
 public class MouseEvent extends Event {
 
+    /**
+     *
+     */
     static public final int PRESS = 1;
+
+    /**
+     *
+     */
     static public final int RELEASE = 2;
+
+    /**
+     *
+     */
     static public final int CLICK = 3;
+
+    /**
+     *
+     */
     static public final int DRAG = 4;
+
+    /**
+     *
+     */
     static public final int MOVE = 5;
+
+    /**
+     *
+     */
     static public final int ENTER = 6;
+
+    /**
+     *
+     */
     static public final int EXIT = 7;
+
+    /**
+     *
+     */
     static public final int WHEEL = 8;
 
-    protected int x, y;
+    /**
+     *
+     */
+    protected int x,
+
+    /**
+     *
+     */
+    y;
+
+    /**
+     *
+     */
     protected int button;
 //  protected int clickCount;
 //  protected float amount;
+
+    /**
+     *
+     */
     protected int count;
 
 //  public MouseEvent(int x, int y) {
@@ -44,6 +96,18 @@ public class MouseEvent extends Event {
 //         System.currentTimeMillis(), PRESSED, 0,
 //         x, y, PConstants.LEFT, 1);
 //  }
+
+    /**
+     *
+     * @param nativeObject
+     * @param millis
+     * @param action
+     * @param modifiers
+     * @param x
+     * @param y
+     * @param button
+     * @param count
+     */
     public MouseEvent(Object nativeObject,
             long millis, int action, int modifiers,
             int x, int y, int button, int count) {  //float amount) {  //int clickCount) {
@@ -57,10 +121,18 @@ public class MouseEvent extends Event {
         this.count = count;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getY() {
         return y;
     }
@@ -141,6 +213,10 @@ public class MouseEvent extends Event {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return String.format("<MouseEvent %s@%d,%d count:%d button:%d>",

@@ -29,6 +29,10 @@ package processing.opengl;
 
 import processing.core.PMatrix2D;
 
+/**
+ *
+ * @author Martin Prout
+ */
 public class LineStroker  {
   private LineStroker output;
   private int capStyle;
@@ -415,7 +419,13 @@ public class LineStroker  {
     }
   }
 
-  public void moveTo(int x0, int y0, int c0) {
+    /**
+     *
+     * @param x0
+     * @param y0
+     * @param c0
+     */
+    public void moveTo(int x0, int y0, int c0) {
     // System.out.println("LineStroker.moveTo(" + x0/65536.0 + ", " + y0/65536.0 + ")");
 
     if (lineToOrigin) {
@@ -439,12 +449,21 @@ public class LineStroker  {
 
   boolean joinSegment = false;
 
-  public void lineJoin() {
+    /**
+     *
+     */
+    public void lineJoin() {
     // System.out.println("LineStroker.lineJoin()");
     this.joinSegment = true;
   }
 
-  public void lineTo(int x1, int y1, int c1) {
+    /**
+     *
+     * @param x1
+     * @param y1
+     * @param c1
+     */
+    public void lineTo(int x1, int y1, int c1) {
     // System.out.println("LineStroker.lineTo(" + x1/65536.0 + ", " + y1/65536.0 + ")");
 
     if (lineToOrigin) {
@@ -516,7 +535,10 @@ public class LineStroker  {
     this.prev = LinePath.SEG_LINETO;
   }
 
-  public void close() {
+    /**
+     *
+     */
+    public void close() {
     if (lineToOrigin) {
       // ignore the previous lineTo
       lineToOrigin = false;
@@ -590,7 +612,10 @@ public class LineStroker  {
     emitClose();
   }
 
-  public void end() {
+    /**
+     *
+     */
+    public void end() {
     if (lineToOrigin) {
       // not closing the path, do the previous lineTo
       lineToImpl(sx0, sy0, scolor0, joinToOrigin);

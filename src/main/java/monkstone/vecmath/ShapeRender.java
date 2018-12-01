@@ -5,6 +5,7 @@ import processing.core.PShape;
 /**
  *
  *
+ * @author Martin Prout
  */
 public class ShapeRender implements JRender {
 

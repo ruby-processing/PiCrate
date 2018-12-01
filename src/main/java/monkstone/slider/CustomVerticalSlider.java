@@ -25,7 +25,7 @@ import static processing.core.PConstants.*;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class CustomVerticalSlider extends SliderBar {
 

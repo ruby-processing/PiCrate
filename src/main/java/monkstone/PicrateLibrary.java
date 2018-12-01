@@ -20,6 +20,7 @@ import org.jruby.runtime.load.Library;
 /**
  *
  *
+ * @author Martin Prout
  */
 public class PicrateLibrary implements Library{
   

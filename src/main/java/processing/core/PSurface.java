@@ -24,7 +24,7 @@ package processing.core;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public interface PSurface {
   /**

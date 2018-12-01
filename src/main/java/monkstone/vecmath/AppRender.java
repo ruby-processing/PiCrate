@@ -6,6 +6,7 @@ import processing.core.PGraphics;
 /**
  *
  *
+ * @author Martin Prout
  */
 public class AppRender implements JRender {
 

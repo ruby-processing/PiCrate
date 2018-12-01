@@ -25,7 +25,7 @@ import static processing.core.PConstants.HALF_PI;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class SimpleVerticalSlider extends SimpleSlider {
     

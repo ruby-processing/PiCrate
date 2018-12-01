@@ -60,6 +60,10 @@ public class PGraphicsJava2D extends PGraphics {
 ////  boolean useOffscreen = true;  // ~40fps
 //  boolean useOffscreen = false;
 
+    /**
+     *
+     */
+
   public Graphics2D g2;
 //  protected BufferedImage offscreen;
 
@@ -91,16 +95,45 @@ public class PGraphicsJava2D extends PGraphics {
   Rectangle2D.Float rect = new Rectangle2D.Float();
   Arc2D.Float arc = new Arc2D.Float();
 
-  protected Color tintColorObject;
+    /**
+     *
+     */
+    protected Color tintColorObject;
 
-  protected Color fillColorObject;
-  public boolean fillGradient;
-  public Paint fillGradientObject;
+    /**
+     *
+     */
+    protected Color fillColorObject;
 
-  protected Stroke strokeObject;
-  protected Color strokeColorObject;
-  public boolean strokeGradient;
-  public Paint strokeGradientObject;
+    /**
+     *
+     */
+    public boolean fillGradient;
+
+    /**
+     *
+     */
+    public Paint fillGradientObject;
+
+    /**
+     *
+     */
+    protected Stroke strokeObject;
+
+    /**
+     *
+     */
+    protected Color strokeColorObject;
+
+    /**
+     *
+     */
+    public boolean strokeGradient;
+
+    /**
+     *
+     */
+    public Paint strokeGradientObject;
 
   Font fontObject;
 
@@ -109,6 +142,10 @@ public class PGraphicsJava2D extends PGraphics {
   //////////////////////////////////////////////////////////////
 
   // INTERNAL
+
+    /**
+     *
+     */
 
 
   public PGraphicsJava2D() { }
@@ -256,6 +293,7 @@ public class PGraphicsJava2D extends PGraphics {
   /**
    * Still need a means to get the java.awt.Image object, since getNative()
    * is going to return the {@link Graphics2D} object.
+     * @return 
    */
   @Override
   public Image getImage() {
@@ -263,7 +301,8 @@ public class PGraphicsJava2D extends PGraphics {
   }
 
 
-  /** Returns the java.awt.Graphics2D object used by this renderer. */
+  /** Returns the java.awt.Graphics2D object used by this renderer.
+     * @return  */
   @Override
   public Object getNative() {
     return g2;
@@ -292,6 +331,11 @@ public class PGraphicsJava2D extends PGraphics {
 
 
 //  Graphics2D g2old;
+
+    /**
+     *
+     * @return
+     */
 
   public Graphics2D checkImage() {
     if (image == null ||
@@ -1323,6 +1367,11 @@ public class PGraphicsJava2D extends PGraphics {
 
   // JAVA2D SHAPE/PATH HANDLING
 
+    /**
+     *
+     * @param s
+     */
+
 
   protected void fillShape(Shape s) {
     if (fillGradient) {
@@ -1334,8 +1383,11 @@ public class PGraphicsJava2D extends PGraphics {
     }
   }
 
-
-  protected void strokeShape(Shape s) {
+    /**
+     *
+     * @param s
+     */
+    protected void strokeShape(Shape s) {
     if (strokeGradient) {
       g2.setPaint(strokeGradientObject);
       g2.draw(s);
@@ -1345,8 +1397,11 @@ public class PGraphicsJava2D extends PGraphics {
     }
   }
 
-
-  protected void drawShape(Shape s) {
+    /**
+     *
+     * @param s
+     */
+    protected void drawShape(Shape s) {
     if (fillGradient) {
       g2.setPaint(fillGradientObject);
       g2.fill(s);
@@ -1559,6 +1614,7 @@ public class PGraphicsJava2D extends PGraphics {
 
   /**
    * Handle renderer-specific image drawing.
+     * @param who
    */
   @Override
   protected void imageImpl(PImage who,
@@ -2430,8 +2486,10 @@ public class PGraphicsJava2D extends PGraphics {
     strokeImpl();
   }
 
-
-  protected void strokeImpl() {
+    /**
+     *
+     */
+    protected void strokeImpl() {
     int cap = BasicStroke.CAP_BUTT;
     if (strokeCap == ROUND) {
       cap = BasicStroke.CAP_ROUND;
@@ -2553,7 +2611,11 @@ public class PGraphicsJava2D extends PGraphics {
 
   int[] clearPixels;
 
-  protected void clearPixels(int color) {
+    /**
+     *
+     * @param color
+     */
+    protected void clearPixels(int color) {
     // On a hi-res display, image may be larger than width/height
     int imageWidth = image.getWidth(null);
     int imageHeight = image.getHeight(null);
@@ -2710,6 +2772,11 @@ public class PGraphicsJava2D extends PGraphics {
 
   // getImage, setCache, getCache, removeCache, isModified, setModified
 
+    /**
+     *
+     * @return
+     */
+
 
   protected WritableRaster getRaster() {
     WritableRaster raster = null;
@@ -2783,6 +2850,8 @@ public class PGraphicsJava2D extends PGraphics {
    * <P>
    * Unlike in PImage, where updatePixels() only requests that the
    * update happens, in PGraphicsJava2D, this will happen immediately.
+     * @param d
+     * @param c
    */
   @Override
   public void updatePixels(int x, int y, int c, int d) {

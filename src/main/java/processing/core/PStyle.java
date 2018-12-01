@@ -25,7 +25,7 @@ package processing.core;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class PStyle implements PConstants {
 

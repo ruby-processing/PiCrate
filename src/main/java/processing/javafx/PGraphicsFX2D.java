@@ -8,8 +8,16 @@ import processing.core.PMatrix3D;
 import processing.core.PShape;
 import processing.core.PSurface;
 
+/**
+ *
+ * @author Martin Prout
+ */
 public class PGraphicsFX2D extends PGraphics{
     final String message = "FX2D renderer not supported in this version of picrate";
+
+    /**
+     *
+     */
     public PGraphicsFX2D(){
     }
 

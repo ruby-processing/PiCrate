@@ -59,7 +59,7 @@ import processing.event.MouseEvent;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class PSurfaceAWT extends PSurfaceNone {
   GraphicsDevice displayDevice;

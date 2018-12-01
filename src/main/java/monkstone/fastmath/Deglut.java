@@ -31,6 +31,7 @@ import org.jruby.runtime.builtin.IRubyObject;
 /**
 *
 *
+ * @author Martin Prout
 */
 @JRubyModule(name = "DegLut")
 public class Deglut {

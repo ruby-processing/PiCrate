@@ -24,7 +24,7 @@ import processing.core.PConstants;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class CustomHorizontalSlider extends SliderBar {
 

@@ -71,66 +71,224 @@ public class Texture implements PConstants {
   // This constant controls how many times pixelBuffer and rgbaPixels can be
   // accessed before they are not released anymore. The idea is that if they
   // have been used only a few times, it doesn't make sense to keep them around.
+
+    /**
+     *
+     */
   protected static final int MAX_UPDATES = 10;
 
   // The minimum amount of free JVM's memory (in MB) before pixelBuffer and
   // rgbaPixels are released every time after they are used.
+
+    /**
+     *
+     */
   protected static final int MIN_MEMORY = 5;
 
-  public int width, height;
+    /**
+     *
+     */
+    public int width,
 
-  public int glName;
-  public int glTarget;
-  public int glFormat;
-  public int glMinFilter;
-  public int glMagFilter;
-  public int glWrapS;
-  public int glWrapT;
-  public int glWidth;
-  public int glHeight;
+    /**
+     *
+     */
+    height;
+
+    /**
+     *
+     */
+    public int glName;
+
+    /**
+     *
+     */
+    public int glTarget;
+
+    /**
+     *
+     */
+    public int glFormat;
+
+    /**
+     *
+     */
+    public int glMinFilter;
+
+    /**
+     *
+     */
+    public int glMagFilter;
+
+    /**
+     *
+     */
+    public int glWrapS;
+
+    /**
+     *
+     */
+    public int glWrapT;
+
+    /**
+     *
+     */
+    public int glWidth;
+
+    /**
+     *
+     */
+    public int glHeight;
   private GLResourceTexture glres;
 
-  protected PGraphicsOpenGL pg;
-  protected PGL pgl;                // The interface between Processing and OpenGL.
-  protected int context;            // The context that created this texture.
-  protected boolean colorBuffer;    // true if it is the color attachment of
+    /**
+     *
+     */
+    protected PGraphicsOpenGL pg;
+
+    /**
+     *
+     */
+    protected PGL pgl;                // The interface between Processing and OpenGL.
+
+    /**
+     *
+     */
+    protected int context;            // The context that created this texture.
+
+    /**
+     *
+     */
+    protected boolean colorBuffer;    // true if it is the color attachment of
                                     // FrameBuffer object.
 
-  protected boolean usingMipmaps;
-  protected boolean usingRepeat;
-  protected float maxTexcoordU;
-  protected float maxTexcoordV;
-  protected boolean bound;
+    /**
+     *
+     */
+    protected boolean usingMipmaps;
 
-  protected boolean invertedX;
-  protected boolean invertedY;
+    /**
+     *
+     */
+    protected boolean usingRepeat;
 
-  protected int[] rgbaPixels = null;
-  protected IntBuffer pixelBuffer = null;
+    /**
+     *
+     */
+    protected float maxTexcoordU;
 
-  protected int[] edgePixels = null;
-  protected IntBuffer edgeBuffer = null;
+    /**
+     *
+     */
+    protected float maxTexcoordV;
 
-  protected FrameBuffer tempFbo = null;
-  protected int pixBufUpdateCount = 0;
-  protected int rgbaPixUpdateCount = 0;
+    /**
+     *
+     */
+    protected boolean bound;
+
+    /**
+     *
+     */
+    protected boolean invertedX;
+
+    /**
+     *
+     */
+    protected boolean invertedY;
+
+    /**
+     *
+     */
+    protected int[] rgbaPixels = null;
+
+    /**
+     *
+     */
+    protected IntBuffer pixelBuffer = null;
+
+    /**
+     *
+     */
+    protected int[] edgePixels = null;
+
+    /**
+     *
+     */
+    protected IntBuffer edgeBuffer = null;
+
+    /**
+     *
+     */
+    protected FrameBuffer tempFbo = null;
+
+    /**
+     *
+     */
+    protected int pixBufUpdateCount = 0;
+
+    /**
+     *
+     */
+    protected int rgbaPixUpdateCount = 0;
 
   /** Modified portion of the texture */
   protected boolean modified;
-  protected int mx1, my1, mx2, my2;
 
-  protected Object bufferSource;
-  protected LinkedList<BufferData> bufferCache = null;
-  protected LinkedList<BufferData> usedBuffers = null;
-  protected Method disposeBufferMethod;
-  public static final int MAX_BUFFER_CACHE_SIZE = 3;
+    /**
+     *
+     */
+    protected int mx1,
+
+    /**
+     *
+     */
+    my1,
+
+    /**
+     *
+     */
+    mx2,
+
+    /**
+     *
+     */
+    my2;
+
+    /**
+     *
+     */
+    protected Object bufferSource;
+
+    /**
+     *
+     */
+    protected LinkedList<BufferData> bufferCache = null;
+
+    /**
+     *
+     */
+    protected LinkedList<BufferData> usedBuffers = null;
+
+    /**
+     *
+     */
+    protected Method disposeBufferMethod;
+
+    /**
+     *
+     */
+    public static final int MAX_BUFFER_CACHE_SIZE = 3;
 
   ////////////////////////////////////////////////////////////
 
   // Constructors.
 
-
-  public Texture(PGraphicsOpenGL pg) {
+    /**
+     *
+     * @param pg
+     */
+    public Texture(PGraphicsOpenGL pg) {
     this.pg = pg;
     pgl = pg.pgl;
     context = pgl.createEmptyContext();
@@ -142,8 +300,9 @@ public class Texture implements PConstants {
 
 
   /**
-   * Creates an instance of PTexture with size width x height. The texture is
-   * initialized (empty) to that size.
+   * Creates an instance of PTexture with size width x height.The texture is
+ initialized (empty) to that size.
+     * @param pg
    * @param width  int
    * @param height  int
    */
@@ -154,7 +313,8 @@ public class Texture implements PConstants {
 
   /**
    * Creates an instance of PTexture with size width x height and with the
-   * specified parameters. The texture is initialized (empty) to that size.
+   * specified parameters.The texture is initialized (empty) to that size.
+     * @param pg
    * @param width int
    * @param height int
    * @param params Parameters
@@ -216,6 +376,17 @@ public class Texture implements PConstants {
 
   /**
    * Initializes the texture using GL parameters
+     * @param width
+     * @param glWidth
+     * @param height
+     * @param glTarget
+     * @param glFormat
+     * @param glName
+     * @param glHeight
+     * @param glWrapS
+     * @param glMinFilter
+     * @param glMagFilter
+     * @param glWrapT
    */
   public void init(int width, int height,
                    int glName, int glTarget, int glFormat,
@@ -244,8 +415,12 @@ public class Texture implements PConstants {
     usingRepeat = glWrapS == PGL.REPEAT || glWrapT == PGL.REPEAT;
   }
 
-
-  public void resize(int wide, int high) {
+    /**
+     *
+     * @param wide
+     * @param high
+     */
+    public void resize(int wide, int high) {
     // Disposing current resources.
     dispose();
 
@@ -277,45 +452,99 @@ public class Texture implements PConstants {
 
   // Set methods
 
+    /**
+     *
+     * @param tex
+     */
+
 
   public void set(Texture tex) {
     copyTexture(tex, 0, 0, tex.width, tex.height, true);
   }
 
-
-  public void set(Texture tex, int x, int y, int w, int h) {
+    /**
+     *
+     * @param tex
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void set(Texture tex, int x, int y, int w, int h) {
     copyTexture(tex, x, y, w, h, true);
   }
 
-
-  public void set(int texTarget, int texName, int texWidth, int texHeight,
+    /**
+     *
+     * @param texTarget
+     * @param texName
+     * @param texWidth
+     * @param texHeight
+     * @param w
+     * @param h
+     */
+    public void set(int texTarget, int texName, int texWidth, int texHeight,
                   int w, int h) {
     copyTexture(texTarget, texName, texWidth, texHeight, 0, 0, w, h, true);
   }
 
-
-  public void set(int texTarget, int texName, int texWidth, int texHeight,
+    /**
+     *
+     * @param texTarget
+     * @param texName
+     * @param texWidth
+     * @param texHeight
+     * @param target
+     * @param tex
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void set(int texTarget, int texName, int texWidth, int texHeight,
                   int target, int tex, int x, int y, int w, int h) {
     copyTexture(texTarget, texName, texWidth, texHeight, x, y, w, h, true);
   }
 
-
-  public void set(int[] pixels) {
+    /**
+     *
+     * @param pixels
+     */
+    public void set(int[] pixels) {
     set(pixels, 0, 0, width, height, ARGB);
   }
 
-
-  public void set(int[] pixels, int format) {
+    /**
+     *
+     * @param pixels
+     * @param format
+     */
+    public void set(int[] pixels, int format) {
     set(pixels, 0, 0, width, height, format);
   }
 
-
-  public void set(int[] pixels, int x, int y, int w, int h) {
+    /**
+     *
+     * @param pixels
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void set(int[] pixels, int x, int y, int w, int h) {
     set(pixels, x, y, w, h, ARGB);
   }
 
-
-  public void set(int[] pixels, int x, int y, int w, int h, int format) {
+    /**
+     *
+     * @param pixels
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param format
+     */
+    public void set(int[] pixels, int x, int y, int w, int h, int format) {
     if (pixels == null) {
       PGraphics.showWarning("The pixels array is null.");
       return;
@@ -371,20 +600,39 @@ public class Texture implements PConstants {
 
   // Native set methods
 
+    /**
+     *
+     * @param pixels
+     */
+
 
   public void setNative(int[] pixels) {
     setNative(pixels, 0, 0, width, height);
   }
 
-
-  public void setNative(int[] pixels, int x, int y, int w, int h) {
+    /**
+     *
+     * @param pixels
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void setNative(int[] pixels, int x, int y, int w, int h) {
     updatePixelBuffer(pixels);
     setNative(pixelBuffer, x, y, w, h);
     releasePixelBuffer();
   }
 
-
-  public void setNative(IntBuffer pixBuf, int x, int y, int w, int h) {
+    /**
+     *
+     * @param pixBuf
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void setNative(IntBuffer pixBuf, int x, int y, int w, int h) {
     if (pixBuf == null) {
       pixBuf = null;
       PGraphics.showWarning("The pixel buffer is null.");
@@ -435,7 +683,8 @@ public class Texture implements PConstants {
 
 
   /**
-   * Copy texture to pixels. Involves video memory to main memory transfer (slow).
+   * Copy texture to pixels.Involves video memory to main memory transfer (slow).
+     * @param pixels
    */
   public void get(int[] pixels) {
     if (pixels == null) {
@@ -472,24 +721,56 @@ public class Texture implements PConstants {
   // Put methods (the source texture is not resized to cover the entire
   // destination).
 
+    /**
+     *
+     * @param tex
+     */
+
 
   public void put(Texture tex) {
     copyTexture(tex, 0, 0, tex.width, tex.height, false);
   }
 
-
-  public void put(Texture tex, int x, int y, int w, int h) {
+    /**
+     *
+     * @param tex
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void put(Texture tex, int x, int y, int w, int h) {
     copyTexture(tex, x, y, w, h, false);
   }
 
-
-  public void put(int texTarget, int texName, int texWidth, int texHeight,
+    /**
+     *
+     * @param texTarget
+     * @param texName
+     * @param texWidth
+     * @param texHeight
+     * @param w
+     * @param h
+     */
+    public void put(int texTarget, int texName, int texWidth, int texHeight,
                   int w, int h) {
     copyTexture(texTarget, texName, texWidth, texHeight, 0, 0, w, h, false);
   }
 
-
-  public void put(int texTarget, int texName, int texWidth, int texHeight,
+    /**
+     *
+     * @param texTarget
+     * @param texName
+     * @param texWidth
+     * @param texHeight
+     * @param target
+     * @param tex
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void put(int texTarget, int texName, int texWidth, int texHeight,
                   int target, int tex, int x, int y, int w, int h) {
     copyTexture(texTarget, texName, texWidth, texHeight, x, y, w, h, false);
   }
@@ -508,8 +789,12 @@ public class Texture implements PConstants {
     return usingMipmaps;
   }
 
-
-  public void usingMipmaps(boolean mipmaps, int sampling)  {
+    /**
+     *
+     * @param mipmaps
+     * @param sampling
+     */
+    public void usingMipmaps(boolean mipmaps, int sampling)  {
     int glMagFilter0 = glMagFilter;
     int glMinFilter0 = glMinFilter;
     if (mipmaps) {
@@ -576,8 +861,11 @@ public class Texture implements PConstants {
     return usingRepeat;
   }
 
-
-  public void usingRepeat(boolean repeat)  {
+    /**
+     *
+     * @param repeat
+     */
+    public void usingRepeat(boolean repeat)  {
     if (repeat) {
       glWrapS = PGL.REPEAT;
       glWrapT = PGL.REPEAT;
@@ -649,8 +937,11 @@ public class Texture implements PConstants {
     invertedY = v;
   }
 
-
-  public int currentSampling() {
+    /**
+     *
+     * @return
+     */
+    public int currentSampling() {
     if (glMagFilter == PGL.NEAREST && glMinFilter == PGL.NEAREST) {
       return POINT;
     } else if (glMagFilter == PGL.NEAREST &&
@@ -671,8 +962,10 @@ public class Texture implements PConstants {
 
   // Bind/unbind
 
-
-  public void bind() {
+    /**
+     *
+     */
+    public void bind() {
     // Binding a texture automatically enables texturing for the
     // texture target from that moment onwards. Unbinding the texture
     // won't disable texturing.
@@ -683,8 +976,10 @@ public class Texture implements PConstants {
     bound = true;
   }
 
-
-  public void unbind() {
+    /**
+     *
+     */
+    public void unbind() {
     if (pgl.textureIsBound(glTarget, glName)) {
       // We don't want to unbind another texture
       // that might be bound instead of this one.
@@ -699,8 +994,11 @@ public class Texture implements PConstants {
     bound = false;
   }
 
-
-  public boolean bound() {
+    /**
+     *
+     * @return
+     */
+    public boolean bound() {
     // A true result might not necessarily mean that texturing is enabled
     // (a texture can be bound to the target, but texturing is disabled).
     return bound;
@@ -711,53 +1009,89 @@ public class Texture implements PConstants {
 
   // Modified flag
 
+    /**
+     *
+     * @return
+     */
+
 
   public boolean isModified() {
     return modified;
   }
 
-
-  public void setModified() {
+    /**
+     *
+     */
+    public void setModified() {
     modified = true;
   }
 
-
-  public void setModified(boolean m) {
+    /**
+     *
+     * @param m
+     */
+    public void setModified(boolean m) {
     modified = m;
   }
 
-
-  public int getModifiedX1() {
+    /**
+     *
+     * @return
+     */
+    public int getModifiedX1() {
     return mx1;
   }
 
-
-  public int getModifiedX2() {
+    /**
+     *
+     * @return
+     */
+    public int getModifiedX2() {
     return mx2;
   }
 
-
-  public int getModifiedY1() {
+    /**
+     *
+     * @return
+     */
+    public int getModifiedY1() {
     return my1;
   }
 
-
-  public int getModifiedY2() {
+    /**
+     *
+     * @return
+     */
+    public int getModifiedY2() {
     return my2;
   }
 
-
-  public void updateTexels() {
+    /**
+     *
+     */
+    public void updateTexels() {
     updateTexelsImpl(0, 0, width, height);
   }
 
-
-  public void updateTexels(int x, int y, int w, int h) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    public void updateTexels(int x, int y, int w, int h) {
     updateTexelsImpl(x, y, w, h);
   }
 
-
-  protected void updateTexelsImpl(int x, int y, int w, int h) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    protected void updateTexelsImpl(int x, int y, int w, int h) {
     int x2 = x + w;
     int y2 = y + h;
 
@@ -781,21 +1115,29 @@ public class Texture implements PConstants {
     }
   }
 
-
-  protected void loadPixels(int len) {
+    /**
+     *
+     * @param len
+     */
+    protected void loadPixels(int len) {
     if (rgbaPixels == null || rgbaPixels.length < len) {
       rgbaPixels = new int[len];
     }
   }
 
-
-  protected void updatePixelBuffer(int[] pixels) {
+    /**
+     *
+     * @param pixels
+     */
+    protected void updatePixelBuffer(int[] pixels) {
     pixelBuffer = PGL.updateIntBuffer(pixelBuffer, pixels, true);
     pixBufUpdateCount++;
   }
 
-
-  protected void manualMipmap() {
+    /**
+     *
+     */
+    protected void manualMipmap() {
     // TODO: finish manual mipmap generation,
     // https://github.com/processing/processing/issues/3335
   }
@@ -805,14 +1147,25 @@ public class Texture implements PConstants {
 
   // Buffer sink interface.
 
+    /**
+     *
+     * @param source
+     */
+
 
   public void setBufferSource(Object source) {
     bufferSource = source;
     getSourceMethods();
   }
 
-
-  public void copyBufferFromSource(Object natRef, ByteBuffer byteBuf,
+    /**
+     *
+     * @param natRef
+     * @param byteBuf
+     * @param w
+     * @param h
+     */
+    public void copyBufferFromSource(Object natRef, ByteBuffer byteBuf,
                                    int w, int h) {
     if (bufferCache == null) {
       bufferCache = new LinkedList<BufferData>();
@@ -831,8 +1184,10 @@ public class Texture implements PConstants {
     }
   }
 
-
-  public void disposeSourceBuffer() {
+    /**
+     *
+     */
+    public void disposeSourceBuffer() {
     if (usedBuffers == null) return;
 
     while (0 < usedBuffers.size()) {
@@ -848,7 +1203,11 @@ public class Texture implements PConstants {
     }
   }
 
-  public void getBufferPixels(int[] pixels) {
+    /**
+     *
+     * @param pixels
+     */
+    public void getBufferPixels(int[] pixels) {
     // We get the buffer either from the used buffers or the cache, giving
     // priority to the used buffers. Why? Because the used buffer was already
     // transferred to the texture, so the pixels should be in sync with the
@@ -881,19 +1240,28 @@ public class Texture implements PConstants {
     }
   }
 
-
-  public boolean hasBufferSource() {
+    /**
+     *
+     * @return
+     */
+    public boolean hasBufferSource() {
     return bufferSource != null;
   }
 
-
-  public boolean hasBuffers() {
+    /**
+     *
+     * @return
+     */
+    public boolean hasBuffers() {
     return bufferSource != null && bufferCache != null &&
            0 < bufferCache.size();
   }
 
-
-  protected boolean bufferUpdate() {
+    /**
+     *
+     * @return
+     */
+    protected boolean bufferUpdate() {
     BufferData data = null;
     try {
       data = bufferCache.remove(0);
@@ -921,8 +1289,10 @@ public class Texture implements PConstants {
     }
   }
 
-
-  protected void getSourceMethods() {
+    /**
+     *
+     */
+    protected void getSourceMethods() {
     try {
       disposeBufferMethod = bufferSource.getClass().
         getMethod("disposeBuffer", new Class[] { Object.class });
@@ -1097,6 +1467,12 @@ public class Texture implements PConstants {
 
   // Allocate/release texture.
 
+    /**
+     *
+     * @param w
+     * @param h
+     */
+
 
   protected void setSize(int w, int h) {
     width = w;
@@ -1183,8 +1559,11 @@ public class Texture implements PConstants {
     }
   }
 
-
-  protected boolean contextIsOutdated() {
+    /**
+     *
+     * @return
+     */
+    protected boolean contextIsOutdated() {
     boolean outdated = !pgl.contextIsCurrent(context);
     if (outdated) {
       dispose();
@@ -1192,13 +1571,19 @@ public class Texture implements PConstants {
     return outdated;
   }
 
-
-  public void colorBuffer(boolean value) {
+    /**
+     *
+     * @param value
+     */
+    public void colorBuffer(boolean value) {
     colorBuffer = value;
   }
 
-
-  public boolean colorBuffer() {
+    /**
+     *
+     * @return
+     */
+    public boolean colorBuffer() {
     return colorBuffer;
   }
 
@@ -1209,6 +1594,16 @@ public class Texture implements PConstants {
 
 
   // Copies source texture tex into this.
+
+    /**
+     *
+     * @param tex
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param scale
+     */
   protected void copyTexture(Texture tex, int x, int y, int w, int h,
                              boolean scale) {
     if (tex == null) {
@@ -1254,6 +1649,19 @@ public class Texture implements PConstants {
 
 
   // Copies source texture tex into this.
+
+    /**
+     *
+     * @param texTarget
+     * @param texName
+     * @param texWidth
+     * @param texHeight
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     * @param scale
+     */
   protected void copyTexture(int texTarget, int texName,
                              int texWidth, int texHeight,
                              int x, int y, int w, int h, boolean scale) {
@@ -1294,8 +1702,11 @@ public class Texture implements PConstants {
     updateTexels(x, y, w, h);
   }
 
-
-  protected void copyObject(Texture src) {
+    /**
+     *
+     * @param src
+     */
+    protected void copyObject(Texture src) {
     // The OpenGL texture of this object is replaced with the one from the
     // source object, so we delete the former to avoid resource wasting.
     dispose();
@@ -1324,6 +1735,10 @@ public class Texture implements PConstants {
 
   // Releases the memory used by pixelBuffer either if the buffer hasn't been
   // used many times yet, or if the JVM is running low in free memory.
+
+    /**
+     *
+     */
   protected void releasePixelBuffer() {
     double freeMB = Runtime.getRuntime().freeMemory() / 1E6;
     if (pixBufUpdateCount < MAX_UPDATES || freeMB < MIN_MEMORY) {
@@ -1334,6 +1749,10 @@ public class Texture implements PConstants {
 
   // Releases the memory used by rgbaPixels either if the array hasn't been
   // used many times yet, or if the JVM is running low in free memory.
+
+    /**
+     *
+     */
   protected void releaseRGBAPixels() {
     double freeMB = Runtime.getRuntime().freeMemory() / 1E6;
     if (rgbaPixUpdateCount < MAX_UPDATES || freeMB < MIN_MEMORY) {
@@ -1345,6 +1764,11 @@ public class Texture implements PConstants {
   ///////////////////////////////////////////////////////////
 
   // Parameter handling
+
+    /**
+     *
+     * @return
+     */
 
 
   public Parameters getParameters() {
@@ -1474,8 +1898,14 @@ public class Texture implements PConstants {
     invertedY = false;
   }
 
-
-  protected void fillEdges(int x, int y, int w, int h) {
+    /**
+     *
+     * @param x
+     * @param y
+     * @param w
+     * @param h
+     */
+    protected void fillEdges(int x, int y, int w, int h) {
     if ((width < glWidth || height < glHeight) && (x + w == width || y + h == height)) {
       if (x + w == width) {
         int ew = glWidth - width;
@@ -1565,7 +1995,11 @@ public class Texture implements PConstants {
       this.wrapV = CLAMP;
     }
 
-    public Parameters(int format) {
+      /**
+       *
+       * @param format
+       */
+      public Parameters(int format) {
       this.target = TEX2D;
       this.format = format;
       this.sampling = BILINEAR;
@@ -1574,7 +2008,12 @@ public class Texture implements PConstants {
       this.wrapV = CLAMP;
     }
 
-    public Parameters(int format, int sampling) {
+      /**
+       *
+       * @param format
+       * @param sampling
+       */
+      public Parameters(int format, int sampling) {
       this.target = TEX2D;
       this.format = format;
       this.sampling = sampling;
@@ -1583,7 +2022,13 @@ public class Texture implements PConstants {
       this.wrapV = CLAMP;
     }
 
-    public Parameters(int format, int sampling, boolean mipmaps) {
+      /**
+       *
+       * @param format
+       * @param sampling
+       * @param mipmaps
+       */
+      public Parameters(int format, int sampling, boolean mipmaps) {
       this.target = TEX2D;
       this.format = format;
       this.mipmaps = mipmaps;
@@ -1596,7 +2041,14 @@ public class Texture implements PConstants {
       this.wrapV = CLAMP;
     }
 
-    public Parameters(int format, int sampling, boolean mipmaps, int wrap) {
+      /**
+       *
+       * @param format
+       * @param sampling
+       * @param mipmaps
+       * @param wrap
+       */
+      public Parameters(int format, int sampling, boolean mipmaps, int wrap) {
       this.target = TEX2D;
       this.format = format;
       this.mipmaps = mipmaps;
@@ -1609,26 +2061,49 @@ public class Texture implements PConstants {
       this.wrapV = wrap;
     }
 
-    public Parameters(Parameters src) {
+      /**
+       *
+       * @param src
+       */
+      public Parameters(Parameters src) {
       set(src);
     }
 
-    public void set(int format) {
+      /**
+       *
+       * @param format
+       */
+      public void set(int format) {
       this.format = format;
     }
 
-    public void set(int format, int sampling) {
+      /**
+       *
+       * @param format
+       * @param sampling
+       */
+      public void set(int format, int sampling) {
       this.format = format;
       this.sampling = sampling;
     }
 
-    public void set(int format, int sampling, boolean mipmaps) {
+      /**
+       *
+       * @param format
+       * @param sampling
+       * @param mipmaps
+       */
+      public void set(int format, int sampling, boolean mipmaps) {
       this.format = format;
       this.sampling = sampling;
       this.mipmaps = mipmaps;
     }
 
-    public void set(Parameters src) {
+      /**
+       *
+       * @param src
+       */
+      public void set(Parameters src) {
       this.target = src.target;
       this.format = src.format;
       this.sampling = src.sampling;

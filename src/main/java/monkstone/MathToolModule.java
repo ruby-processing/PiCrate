@@ -24,6 +24,7 @@ import org.jruby.runtime.builtin.IRubyObject;
 /**
  *
  *
+ * @author Martin Prout
  */
 @JRubyModule(name = "MathTool")
 public class MathToolModule {

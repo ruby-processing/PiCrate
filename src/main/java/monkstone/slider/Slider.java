@@ -7,7 +7,7 @@ package monkstone.slider;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public interface Slider {
 
@@ -44,7 +44,7 @@ public interface Slider {
 
     /**
      *
-     * @return
+     * @return value
      */
     float readValue();
 
@@ -63,5 +63,5 @@ public interface Slider {
      *
      */
     void showNumbers();
-    
+
 }

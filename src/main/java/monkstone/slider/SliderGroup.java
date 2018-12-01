@@ -25,7 +25,7 @@ import processing.core.PApplet;
 
 /**
  *
- * @author tux
+ * @author Martin Prout
  */
 public class SliderGroup {
 

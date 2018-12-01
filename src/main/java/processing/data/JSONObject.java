@@ -220,6 +220,7 @@ public class JSONObject {
 
 
   /**
+     * @param reader
    * @nowebref
    */
   public JSONObject(Reader reader) {
@@ -306,6 +307,7 @@ public class JSONObject {
 
 
   /**
+     * @param dict
    * @nowebref
    */
   public JSONObject(IntDict dict) {
@@ -317,6 +319,7 @@ public class JSONObject {
 
 
   /**
+     * @param dict
    * @nowebref
    */
   public JSONObject(FloatDict dict) {
@@ -328,6 +331,7 @@ public class JSONObject {
 
 
   /**
+     * @param dict
    * @nowebref
    */
   public JSONObject(StringDict dict) {
@@ -389,11 +393,11 @@ public class JSONObject {
 
 
   /**
-   * Construct a JSONObject from a source JSON text string.
-   * This is the most commonly used JSONObject constructor.
+   * Construct a JSONObject from a source JSON text string.This is the most commonly used JSONObject constructor.
    * @param source    A string beginning
    *  with <code>{</code>&nbsp;<small>(left brace)</small> and ending
    *  with <code>}</code>&nbsp;<small>(right brace)</small>.
+     * @return 
    * @exception RuntimeException If there is a syntax error in the source
    *  string or a duplicated key.
    */
@@ -678,6 +682,7 @@ public class JSONObject {
 
 
   /**
+     * @return 
    * @webref jsonobject:method
    * @brief Gets the float value associated with a key
    * @param key a key string
@@ -689,8 +694,13 @@ public class JSONObject {
     return (float) getDouble(key);
   }
 
-
-  public float getFloat(String key, float defaultValue) {
+    /**
+     *
+     * @param key
+     * @param defaultValue
+     * @return
+     */
+    public float getFloat(String key, float defaultValue) {
     try {
       return getFloat(key);
     } catch (Exception e) {
@@ -1156,6 +1166,7 @@ public class JSONObject {
 
 
   /**
+     * @return 
    * @webref jsonobject:method
    * @brief Put a key/String pair in the JSONObject
    * @param key a key string
@@ -1202,6 +1213,7 @@ public class JSONObject {
   }
 
   /**
+     * @return 
    * @webref jsonobject:method
    * @brief Put a key/float pair in the JSONObject
    * @param key a key string
@@ -1250,6 +1262,7 @@ public class JSONObject {
   }
 
   /**
+     * @return 
    * @webref jsonobject:method
    * @brief Sets the JSONObject value associated with a key
    * @param key a key string
@@ -1263,6 +1276,7 @@ public class JSONObject {
   }
 
   /**
+     * @return 
    * @webref jsonobject:method
    * @brief Sets the JSONArray value associated with a key
    * @param key a key string
@@ -1399,7 +1413,14 @@ public class JSONObject {
     }
   }
 
-  static public Writer quote(String string, Writer w) throws IOException {
+    /**
+     *
+     * @param string
+     * @param w
+     * @return
+     * @throws IOException
+     */
+    static public Writer quote(String string, Writer w) throws IOException {
     if (string == null || string.length() == 0) {
       w.write("\"\"");
       return w;
@@ -1570,6 +1591,13 @@ public class JSONObject {
 //    return save(PApplet.createWriter(output));
 //  }
 
+    /**
+     *
+     * @param file
+     * @param options
+     * @return
+     */
+
 
   public boolean save(File file, String options) {
     PrintWriter writer = PApplet.createWriter(file);
@@ -1578,13 +1606,22 @@ public class JSONObject {
     return success;
   }
 
-
-  public boolean write(PrintWriter output) {
+    /**
+     *
+     * @param output
+     * @return
+     */
+    public boolean write(PrintWriter output) {
     return write(output, null);
   }
 
-
-  public boolean write(PrintWriter output, String options) {
+    /**
+     *
+     * @param output
+     * @param options
+     * @return
+     */
+    public boolean write(PrintWriter output, String options) {
     int indentFactor = 2;
     if (options != null) {
       String[] opts = PApplet.split(options, ',');
@@ -1608,9 +1645,10 @@ public class JSONObject {
 
 
   /**
-   * Return the JSON data formatted with two spaces for indents.
-   * Chosen to do this since it's the most common case (e.g. with println()).
-   * Same as format(2). Use the format() function for more options.
+   * Return the JSON data formatted with two spaces for indents.Chosen to do this since it's the most common case (e.g.
+   * with println()).
+ Same as format(2). Use the format() function for more options.
+     * @return 
    */
   @Override
   public String toString() {
@@ -1812,6 +1850,9 @@ public class JSONObject {
    * <p>
    * Warning: This method assumes that the data structure is acyclical.
    *
+     * @param writer
+     * @param indentFactor
+     * @param indent
    * @return The writer.
    * @throws RuntimeException
    */

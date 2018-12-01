@@ -21,27 +21,84 @@
  */
 package processing.event;
 
+/**
+ *
+ * @author Martin Prout
+ */
 public class Event {
 
+    /**
+     *
+     */
     protected Object nativeObject;
 
+    /**
+     *
+     */
     protected long millis;
+
+    /**
+     *
+     */
     protected int action;
 
     // These correspond to the java.awt.Event modifiers (not to be confused with
     // the newer getModifiersEx), though they're not guaranteed to in the future.
+
+    /**
+     *
+     */
     static public final int SHIFT = 1;
+
+    /**
+     *
+     */
     static public final int CTRL = 1 << 1;
+
+    /**
+     *
+     */
     static public final int META = 1 << 2;
+
+    /**
+     *
+     */
     static public final int ALT = 1 << 3;
+
+    /**
+     *
+     */
     protected int modifiers;
 
     // Types of events. As with all constants in Processing, brevity's preferred.
+
+    /**
+     *
+     */
     static public final int KEY = 1;
+
+    /**
+     *
+     */
     static public final int MOUSE = 2;
+
+    /**
+     *
+     */
     static public final int TOUCH = 3;
+
+    /**
+     *
+     */
     protected int flavor;
 
+    /**
+     *
+     * @param nativeObject
+     * @param millis
+     * @param action
+     * @param modifiers
+     */
     public Event(Object nativeObject, long millis, int action, int modifiers) {
         this.nativeObject = nativeObject;
         this.millis = millis;
@@ -49,6 +106,10 @@ public class Event {
         this.modifiers = modifiers;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getFlavor() {
         return flavor;
     }
@@ -69,6 +130,11 @@ public class Event {
 //  public void setNative(Object nativeObject) {
 //    this.nativeObject = nativeObject;
 //  }
+
+    /**
+     *
+     * @return
+     */
     public long getMillis() {
         return millis;
     }
@@ -76,6 +142,11 @@ public class Event {
 //  public void setMillis(long millis) {
 //    this.millis = millis;
 //  }
+
+    /**
+     *
+     * @return
+     */
     public int getAction() {
         return action;
     }
@@ -83,6 +154,11 @@ public class Event {
 //  public void setAction(int action) {
 //    this.action = action;
 //  }
+
+    /**
+     *
+     * @return
+     */
     public int getModifiers() {
         return modifiers;
     }
@@ -90,18 +166,35 @@ public class Event {
 //  public void setModifiers(int modifiers) {
 //    this.modifiers = modifiers;
 //  }
+
+    /**
+     *
+     * @return
+     */
     public boolean isShiftDown() {
         return (modifiers & SHIFT) != 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isControlDown() {
         return (modifiers & CTRL) != 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isMetaDown() {
         return (modifiers & META) != 0;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isAltDown() {
         return (modifiers & ALT) != 0;
     }

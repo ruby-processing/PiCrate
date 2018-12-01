@@ -3637,15 +3637,15 @@ public class PApplet implements PConstants {
 
     /**
      * Alternative version of exec() that retrieves stdout and stderr into the
-     * StringList objects provided. This is a convenience function that handles
-     * simple exec() calls. If the results will be more than a couple lines, you
-     * shouldn't use this function, you should use a more elaborate method that
-     * makes use of proper threading (to drain the shell output) and error
-     * handling to address the many things that can go wrong within this method.
+     * StringList objects provided.This is a convenience function that handles
+ simple exec() calls.If the results will be more than a couple lines, you
+ shouldn't use this function, you should use a more elaborate method that
+ makes use of proper threading (to drain the shell output) and error
+ handling to address the many things that can go wrong within this method.
      *
-     * @param stdout a non-null StringList object to be filled with any output
-     * @param stderr a non-null StringList object to be filled with error lines
-     * @param args each argument to be passed as a series of String objects
+     * @param arg0
+     * @param arg1
+     * @param arg2
      * @return the result returned from the application, or -1 if an Exception
      * occurs before the application is able to return a result.
      */
@@ -3674,6 +3674,9 @@ public class PApplet implements PConstants {
 
     /**
      * Same as exec() above, but prefixes the call with a shell.
+     * @param arg0
+     * @param arg1
+     * @param arg2
      * @param stdout
      * @param stderr
      * @param args
@@ -7079,8 +7082,8 @@ public class PApplet implements PConstants {
 
     /**
      *
-     * @param path
-     * @param options
+     * @param arg0
+     * @param arg1
      * @return
      */
     public String[] listPaths(String path, String... options) {
@@ -7106,7 +7109,9 @@ public class PApplet implements PConstants {
 
     /**
      *
+     * @param arg0
      * @param path
+     * @param arg1
      * @param options
      * @return
      */
@@ -7128,8 +7133,9 @@ public class PApplet implements PConstants {
 
     /**
      *
+     * @param arg0
      * @param base
-     * @param options
+     * @param arg1
      * @return
      */
     static public File[] listFiles(File base, String... options) {
