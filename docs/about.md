@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-![Alt picrate.svg](img src="assets/picrate.svg")
+![Alt picrate.svg](img src="{{ site.github.url }}/assets/picrate.svg")
 
 PiCrate is both a `library` and an `app` that allows you to create [processing][processing] sketches in ruby on the [RaspberryPI][PI] (or 64 bit linux). PiCrate is available as a gem (from [rubygems][rubygems]), it requires [JRuby][jruby] to both install and run.
 
