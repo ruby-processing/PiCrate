@@ -4,14 +4,28 @@ title: About
 permalink: /about/
 ---
 
-PiCrate is an experimental ruby wrapper for processing for the raspberrypi (raspbian image), like the vanilla processing version this uses the 32 bit video drivers. It could be that 64 bit drivers work, but is possible they don't play too well together (to use the 64 bit drivers uncomment them in Rakefile and gemspec and comment out the 32 bit drivers). Also `native_folder.rb` will need amending for sound etc libraries see also [pi.processing.org libraries][libraries].
-See [github repo][repo]
+![Alt text](picrate.svg) <img src="assets/picrate.svg">
 
-See also [gottfreid haider][gottfreid] at vanilla processing and vanilla [processing wiki][wiki]
+PiCrate is both a `library` and an `app` that allows you to create [processing][processing] sketches in ruby on the [RaspberryPI][PI] (or 64 bit linux). PiCrate is available as a gem (from [rubygems][rubygems]), it requires [JRuby][jruby] to both install and run.
 
-[jruby_art]: https://ruby-processing.github.io/index.html
-[propane]:https://ruby-processing.github.io/propane/
-[repo]:https://github.com/ruby-processing/PiCrate
-[gottfreid]:https://github.com/processing/processing/wiki/Raspberry-Pi#download
-[wiki]:https://github.com/processing/processing/wiki/Raspberry-Pi
-[libraries]:https://pi.processing.org/libraries.html
+
+#### Executable ####
+
+The executable is `picrate`, which can be used to install samples (and configure [GeanyIDE][geany]) and some processing libraries
+
+#### Library ###
+
+Your PiCrate sketches need to `require` the `picrate` library, and can be run with `jruby`.
+
+* Command line interface (typically using vim as editor)
+
+* Gui interface, sketches can be run from [GeanyIDE][geany]
+
+
+
+
+[rubygems]:https://rubygems.org/
+[jruby]:https://www.jruby.org/
+[PI]:https://www.raspberrypi.org/
+[processing]:https://www.processing.org/
+[geany]:https://www.geany.org/
