@@ -3,7 +3,8 @@ layout: default
 title: About
 permalink: /about/
 ---
-![picrate.png]({{ site.github.url }}/assets/android-chrome-192x192.png) PiCrate is both a `library` and an `app` that allows you to create [processing][processing] sketches in ruby on the [RaspberryPI][PI] (or 64 bit linux). PiCrate is available as a gem (from [rubygems][rubygems]), it requires [JRuby][jruby] to both install and run. It does not depend on a vanilla processing install ( _cf_ JRubyArt).
+![picrate.png]({{ site.github.url }}/assets/android-chrome-192x192.png)
+PiCrate is both a `library` and an `app` that allows you to create [processing][processing] sketches in ruby on the [RaspberryPI][PI] (or 64 bit linux). PiCrate is available as a gem (from [rubygems][rubygems]), it requires [JRuby][jruby] to both install and run. It does not depend on a vanilla processing install ( _cf_ JRubyArt).
 
 #### Executable ####
 
