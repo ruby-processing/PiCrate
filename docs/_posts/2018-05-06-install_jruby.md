@@ -49,5 +49,5 @@ export PATH="${PATH}:${GEM_PATH}/bin"
 
 If you know better please post on wiki
 
-[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/#{JRUBY_VERSION}/jruby-dist-#{JRUBY_VERSION}-bin.tar.gz"
+[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.4.1/jruby-dist-9.2.4.1-bin.tar.gz"
 [rake_gist]:https://gist.github.com/monkstone/159c5a9813c9cd181040b4715e74f6b2
