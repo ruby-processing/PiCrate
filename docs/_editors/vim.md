@@ -4,6 +4,12 @@ title:  "Vim"
 permalink: /editors/vim/
 keywords: editor, ide, ruby, picrate, vim, emacs, jedit
 ---
+### Install vim
+You will probably need to install vim
+
+```bash
+sudo apt-get install vim
+```
 
 Is an excellent choice for linux and mac users, it is lighweight (runs from the console) commands available from vim:-
 ```bash
