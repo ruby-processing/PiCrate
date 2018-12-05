@@ -6,10 +6,17 @@ categories: PiCrate update
 permalink: /install_picrate/
 ---
 
-For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/159c5a9813c9cd181040b4715e74f6b2)
+For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/c7d7741f800eb2327253635ee283c7eb). To keep your system clean put the file in a folder say
+`~/install_picrate`
 
 ```bash
-bash gem_path.sh # sets up a local gem environment
+cd ~/.install_picrate
 rake # default is to install jruby to opt, then link using update-alternatives
 ```
 Adjust script to suit needs if required, now installs `gems` with `jgem` from `rubygems`.
+
+Note the script modifies `~/.profile` to define `GEM_HOME` and puts gem binaries on your path, it does this on logon. To use immediately:-
+
+```bash
+source ~/.profile
+```
