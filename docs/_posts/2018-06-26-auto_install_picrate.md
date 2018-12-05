@@ -10,7 +10,7 @@ For a semi-automated setup and install, download and extract [this gist](https:/
 `~/install_picrate`
 
 ```bash
-cd ~/.install_picrate
+cd ~/install_picrate
 rake # default is to install jruby to opt, then link using update-alternatives
 ```
 Adjust script to suit needs if required, now installs `gems` with `jgem` from `rubygems`.
