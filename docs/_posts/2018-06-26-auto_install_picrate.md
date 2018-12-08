@@ -17,7 +17,7 @@ rake # to run default task
 1. Downloads JRuby (checks against sha256)
 2. Installs JRuby to `/opt`
 3. Uses `update-alternatives` to configure `jruby`, `jgem` and `jirb`
-4. The script modifies `~/.profile` to define `GEM_HOME` and puts gem binaries on your path, at logon.
+4. The script checks for `GEM_HOME`, if undefined it modifies `~/.profile` to define `GEM_HOME` and puts gem binaries on your path, at logon.
 5. Installs `picrate` gem
 6. Downloads and installs `picrate_samples` also configures `geanyIDE` for use with `picrate`
 
