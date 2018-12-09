@@ -2,15 +2,15 @@
 # Boids -- after Tom de Smedt.
 # See his Python version: http://nodebox.net/code/index.php/Boids
 # This is an example of how a pure-Ruby library can work. Original for
-# ruby-processing Jeremy Ashkenas. Reworked, re-factored for JRubyArt 0.9+
-# by Martin Prout, features forwardable, keyword args, Vec3D and Vec2D.
+# ruby-processing Jeremy Ashkenas. Reworked, re-factored for PiCrate
+# by Martin Prout, features forwardable, keyword args, Vec2D.
 class Boid
   attr_reader :boids
   attr_accessor :vel, :pos, :is_perching, :perch_time
   def initialize(boids, pos)
     @boids, @flock = boids, boids
     @pos = pos
-    @vel = Vec3D.new
+    @vel = Vec2D.new
     @is_perching = false
     @perch_time = 0.0
   end
@@ -18,7 +18,7 @@ class Boid
   def cohesion(d:)
     # Boids gravitate towards the center of the flock,
     # Which is the averaged position of the rest of the boids.
-    vect = Vec3D.new
+    vect = Vec2D.new
     @boids.each do |boid|
       vect += boid.pos unless boid == self
     end
@@ -29,7 +29,7 @@ class Boid
 
   def separation(radius:)
     # Boids don't like to cuddle.
-    vect = Vec3D.new
+    vect = Vec2D.new
     @boids.each do |boid|
       if boid != self
         dv = pos - boid.pos
@@ -41,7 +41,7 @@ class Boid
 
   def alignment(d:)
     # Boids like to fly at the speed of traffic.
-    vect = Vec3D.new
+    vect = Vec2D.new
     @boids.each do |boid|
       vect += boid.vel if boid != self
     end
@@ -52,7 +52,7 @@ class Boid
 
   def limit(max:)
     # Tweet, Tweet! The boid police will bust you for breaking the speed limit.
-    most = [vel.x.abs, vel.y.abs, vel.z.abs].max
+    most = [vel.x.abs, vel.y.abs].max
     return if most < max
     scale = max / most.to_f
     @vel *= scale
@@ -84,14 +84,13 @@ class Boids
 
   def self.flock(n:, x:, y:, w:, h:)
     flock = Boids.new.setup(n, x, y, w, h)
-    flock.reset_goal(Vec3D.new(w / 2, h / 2, 0))
+    flock.reset_goal(Vec2D.new(w / 2, h / 2, 0))
   end
 
   def setup(n, x, y, w, h)
     n.times do
       dx, dy = rand(w), rand(h)
-      z = rand(200.0)
-      self << Boid.new(self, Vec3D.new(x + dx, y + dy, z))
+      self << Boid.new(self, Vec2D.new(x + dx, y + dy))
     end
     @x, @y, @w, @h = x, y, w, h
     @scattered = false
@@ -103,7 +102,7 @@ class Boids
     @perch_tm = -> { 25.0 + rand(50.0) }
     @has_goal = false
     @flee = false
-    @goal = Vec3D.new
+    @goal = Vec2D.new
     self
   end
 
@@ -152,8 +151,6 @@ class Boids
       b.vel.y += rand(dy) if b.pos.y < @y - dy
       b.vel.x -= rand(dx) if b.pos.x > @x + @w + dx
       b.vel.y -= rand(dy) if b.pos.y > @y + @h + dy
-      b.vel.z += 10.0 if b.pos.z < 0.0
-      b.vel.z -= 10.0 if b.pos.z > 100.0
       next unless b.pos.y > perch_y && rand < perch
       b.pos.y = perch_y
       b.vel.y = b.vel.y.abs * -0.2
