@@ -10,6 +10,12 @@ Geany is highly configurable, and we have created a `geany` project file `picrat
 picrate --install samples
 ```
 
+#### Using picrate.rb template ####
+
+![select picrate.rb]({{ site.github.url }}/assets/picrate_template.png)
+
+![new with template]({{ site.github.url }}/assets/new_with_template.png)
+
 Use `make` to check syntax and `run` to run sketch
 
 See running sketch below:-
