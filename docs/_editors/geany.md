@@ -4,7 +4,7 @@ title:  "Geany"
 permalink: /editors/geany/
 keywords: editor, ide, ruby, picrate, vim, emacs, geany
 ---
-Geany is highly configurable, and we have created a `geany` project file `picrate.geany` and sketch template `picrate.rb` for you, thai get installed when you:-
+Geany is highly configurable, and we have created a `geany` project file `picrate.geany` and sketch template `picrate.rb` for you, that get installed when you:-
 
 ```bash
 picrate --install samples
@@ -14,7 +14,7 @@ picrate --install samples
 
 ![select picrate.rb]({{ site.github.url }}/assets/picrate_template.png)
 
-Remember to give you sketch file a new name (PS: it's easy to create your own templates):-
+Remember to give untitled sketch a new name (PS: it's easy to create your own templates):-
 
 ![new with template]({{ site.github.url }}/assets/new_with_template.png)
 
