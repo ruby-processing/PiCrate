@@ -14,6 +14,8 @@ picrate --install samples
 
 ![select picrate.rb]({{ site.github.url }}/assets/picrate_template.png)
 
+Remember to give you sketch file a new name (PS: it's easy to create your own templates):-
+
 ![new with template]({{ site.github.url }}/assets/new_with_template.png)
 
 Use `make` to check syntax and `run` to run sketch
