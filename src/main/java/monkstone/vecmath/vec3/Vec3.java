@@ -1,7 +1,7 @@
 package monkstone.vecmath.vec3;
 
 /*
-* Copyright (c) 2018 Martin Prout
+* Copyright (c) 2018-19 Martin Prout
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU General Public
