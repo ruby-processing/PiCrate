@@ -4,7 +4,7 @@ class SketchFactory
   NAMES = %w[One Two Three]
   def initialize(argc)
     NAMES.each do |name|
-      SketchWriter.new(File.basename(name, '.rb'), width: 300, height: 300).write
+      SketchWriter.new(File.basename(name, '.rb')).write
     end
   end
 end

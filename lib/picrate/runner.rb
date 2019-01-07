@@ -63,7 +63,8 @@ module Processing
 
     def create
       require_relative 'creators/sketch_writer'
-      SketchWriter.new(File.basename(filename, '.rb'), argc).write
+      # in case user supplied extension, we remove it
+      SketchWriter.new(File.basename(filename, '.rb')).write
     end
 
     def show_version
