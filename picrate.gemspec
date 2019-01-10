@@ -4,19 +4,19 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'picrate/version'
 
 Gem::Specification.new do |gem|
-  gem.name          = 'picrate'
-  gem.version       = PiCrate::VERSION
-  gem.authors       = ['monkstone']
-  gem.email         = ['mamba2928@yahoo.co.uk']
-  gem.licenses     = %w(GPL-3.0 LGPL-2.0)
-  gem.description  = <<-EOS
-  A batteries included version of processing in ruby, for raspberrypi and linux.
-  Install samples to configures geany ide.
+  gem.name        = 'picrate'
+  gem.version     = PiCrate::VERSION
+  gem.authors     = ['monkstone']
+  gem.email       = ['mamba2928@yahoo.co.uk']
+  gem.licenses    = %w(GPL-3.0 LGPL-2.0)
+  gem.description = <<~EOS
+    A batteries included version of processing in ruby, for raspberrypi and
+    linux. Install samples to configures geany ide.
   EOS
-  gem.summary       = %q{ruby wrapper for processing-3.4 on raspberrypi and linux64}
-  gem.homepage      = 'https://ruby-processing.github.io/PiCrate/'
+  gem.summary     = %q{ruby wrapper for processing-3.4 on raspberrypi and linux64}
+  gem.homepage    = 'https://ruby-processing.github.io/PiCrate/'
   gem.post_install_message = %q{Use 'picrate --install Samples' to install samples}
-  gem.files         = `git ls-files`.split($/)
+  gem.files       = `git ls-files`.split($/)
   gem.files << "lib/picrate-#{PiCrate::VERSION}.jar"
   gem.files << 'lib/gluegen-rt.jar'
   gem.files << 'lib/jogl-all.jar'

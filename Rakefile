@@ -1,4 +1,6 @@
 # frozen_string_literal: false
+
+require 'fileutils'
 require_relative 'lib/picrate/version'
 
 HOME_DIR = ENV['HOME']
@@ -31,7 +33,7 @@ end
 
 desc 'Install'
 task :install do
-  sh "mv target/picrate-#{PiCrate::VERSION}.jar lib"
+  FileUtils.mv "target/picrate-#{PiCrate::VERSION}.jar", 'lib'
 end
 
 desc 'Gem'
