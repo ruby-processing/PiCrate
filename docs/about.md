@@ -8,7 +8,14 @@ PiCrate is both a `library` and an `app` that allows you to create [processing][
 
 #### Executable ####
 
-The executable is `picrate`, which can be used to install samples (and configure [GeanyIDE][geany]) and some processing libraries
+PiCrate sketches are executable scripts that (but without the executable permission), that will run directly from jruby.
+
+
+```bash
+jruby my_sketch.rb
+```
+
+The gem executable is `picrate`, which can be used to install samples (and to configure [GeanyIDE][geany]) and some processing libraries
 
 #### Library ###
 
