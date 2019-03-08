@@ -1,4 +1,4 @@
-v0.7.0 Refactor sketch_writer to load params from ~/.picrate/sketch.yml
+v0.7.0 Refactor sketch_writer to load params from ~/.picrate/sketch.yml. `AppRender => GfxRender` because we only need `PGraphics` in renderer.
 
 v0.6.0 Re-branding with new 'pick'/'eight' svg for PiCrate
 
