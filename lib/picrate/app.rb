@@ -11,7 +11,7 @@ module Processing
   # JRuby::Util.load_ext('monkstone.PicrateLibrary')
   # A utility to facilitate rendering of Vec2D and Vec3D as vertex
   module Render
-    java_import 'monkstone.vecmath.AppRender'
+    java_import 'monkstone.vecmath.GfxRender'
     java_import 'monkstone.vecmath.ShapeRender'
   end
 
