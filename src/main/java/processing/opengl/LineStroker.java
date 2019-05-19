@@ -61,9 +61,9 @@ public class LineStroker  {
 
   private boolean[] penIncluded;
   private int[] join;
-  private int[] offset = new int[2];
+  private final int[] offset = new int[2];
   private int[] reverse = new int[100];
-  private int[] miter = new int[2];
+  private final int[] miter = new int[2];
   private long miterLimitSq;
   private int prev;
   private int rindex;
@@ -118,7 +118,7 @@ public class LineStroker  {
    * @param output
    *          an output <code>LineStroker</code>.
    */
-  public void setOutput(LineStroker output) {
+  private void setOutput(LineStroker output) {
     this.output = output;
   }
 
@@ -141,7 +141,7 @@ public class LineStroker  {
    *          required in order to produce consistently shaped end caps and
    *          joins.
    */
-  public void setParameters(int lineWidth, int capStyle, int joinStyle,
+  public final void setParameters(int lineWidth, int capStyle, int joinStyle,
                             int miterLimit, PMatrix2D transform) {
     this.m00 = LinePath.FloatToS15_16(transform.m00);
     this.m01 = LinePath.FloatToS15_16(transform.m01);
@@ -262,18 +262,14 @@ public class LineStroker  {
     if (side == 0) {
       centerSide = side(cx, cy, xa, ya, xb, yb);
     } else {
-      centerSide = (side == 1) ? true : false;
+      centerSide = (side == 1);
     }
     for (int i = 0; i < numPenSegments; i++) {
       px = cx + pen_dx[i];
       py = cy + pen_dy[i];
 
       boolean penSide = side(px, py, xa, ya, xb, yb);
-      if (penSide != centerSide) {
-        penIncluded[i] = true;
-      } else {
-        penIncluded[i] = false;
-      }
+      penIncluded[i] = penSide != centerSide;
     }
 
     int start = -1, end = -1;

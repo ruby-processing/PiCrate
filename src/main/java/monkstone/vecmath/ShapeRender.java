@@ -37,7 +37,7 @@ public class ShapeRender implements JRender {
      */
     @Override
     public void curveVertex(double x, double y) {
-        throw new UnsupportedOperationException("Not implemented for this renderer");
+        shape.curveVertex((float) x, (float) y);
     }
 
     /**

@@ -1085,12 +1085,12 @@ public class PGraphics extends PImage implements PConstants{
     /**
      *
      */
-    static final protected float sinLUT[];
+    static final protected float[] SIN_LUT;
 
     /**
      *
      */
-    static final protected float cosLUT[];
+    static final protected float[] COS_LUT;
 
     /**
      *
@@ -1103,11 +1103,11 @@ public class PGraphics extends PImage implements PConstants{
     static final protected int SINCOS_LENGTH = (int) (360f / SINCOS_PRECISION);
 
     static {
-        sinLUT = new float[SINCOS_LENGTH];
-        cosLUT = new float[SINCOS_LENGTH];
+        SIN_LUT = new float[SINCOS_LENGTH];
+        COS_LUT = new float[SINCOS_LENGTH];
         for (int i = 0; i < SINCOS_LENGTH; i++) {
-            sinLUT[i] = (float) Math.sin(i * DEG_TO_RAD * SINCOS_PRECISION);
-            cosLUT[i] = (float) Math.cos(i * DEG_TO_RAD * SINCOS_PRECISION);
+            SIN_LUT[i] = (float) Math.sin(i * DEG_TO_RAD * SINCOS_PRECISION);
+            COS_LUT[i] = (float) Math.cos(i * DEG_TO_RAD * SINCOS_PRECISION);
         }
     }
 
@@ -3781,8 +3781,8 @@ public class PGraphics extends PImage implements PConstants{
         float[] cz = new float[ures];
         // calc unit circle in XZ plane
         for (int i = 0; i < ures; i++) {
-            cx[i] = cosLUT[(int) (i * delta) % SINCOS_LENGTH];
-            cz[i] = sinLUT[(int) (i * delta) % SINCOS_LENGTH];
+            cx[i] = COS_LUT[(int) (i * delta) % SINCOS_LENGTH];
+            cz[i] = SIN_LUT[(int) (i * delta) % SINCOS_LENGTH];
         }
         // computing vertexlist
         // vertexlist starts at south pole
@@ -3799,8 +3799,8 @@ public class PGraphics extends PImage implements PConstants{
 
         // step along Y axis
         for (int i = 1; i < vres; i++) {
-            float curradius = sinLUT[(int) angle % SINCOS_LENGTH];
-            float currY = cosLUT[(int) angle % SINCOS_LENGTH];
+            float curradius = SIN_LUT[(int) angle % SINCOS_LENGTH];
+            float currY = COS_LUT[(int) angle % SINCOS_LENGTH];
             for (int j = 0; j < ures; j++) {
                 sphereX[currVert] = cx[j] * curradius;
                 sphereY[currVert] = currY;
@@ -9388,6 +9388,7 @@ public class PGraphics extends PImage implements PConstants{
      * @return
      */
 
+    @Override
     public boolean save(String filename) { // ignore
 
         if (hints[DISABLE_ASYNC_SAVEFRAME]) {

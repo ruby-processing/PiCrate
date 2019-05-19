@@ -134,7 +134,7 @@ public interface PConstants {
     /**
      *
      */
-    static final String[] platformNames = {
+    static final String[] PLATFORM_NAMES = {
         "other", "windows", "macosx", "linux"
     };
 
@@ -711,7 +711,7 @@ public interface PConstants {
     /**
      * textMode(MODEL) is the default, meaning that characters will be affected
      * by transformations like any other shapes.
-     * <p/>
+     * 
      * Changed value in 0093 to not interfere with LEFT, CENTER, and RIGHT.
      */
     static final int MODEL = 4;
@@ -722,7 +722,7 @@ public interface PConstants {
      * then textMode(SHAPE) will be ignored and textMode(MODEL) will be used
      * instead. For this reason, be sure to call textMode()
      * <EM>after</EM> calling textFont().
-     * <p/>
+     * 
      * Currently, textMode(SHAPE) is only supported by OPENGL mode. It also
      * requires Java 1.2 or higher (OPENGL requires 1.4 anyway)
      */
@@ -734,7 +734,7 @@ public interface PConstants {
     /**
      *
      */
-    static final int SQUARE = 1 << 0;  // called 'butt' in the svg spec
+    static final int SQUARE = 1;  // called 'butt' in the svg spec
 
     /**
      *

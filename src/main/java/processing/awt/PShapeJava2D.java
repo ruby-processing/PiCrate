@@ -131,6 +131,7 @@ public class PShapeJava2D extends PShapeSVG {
       this.opacity = opacity;
     }
 
+    @Override
     public PaintContext createContext(ColorModel cm,
                                       Rectangle deviceBounds, Rectangle2D userBounds,
                                       AffineTransform xform, RenderingHints hints) {
@@ -140,6 +141,7 @@ public class PShapeJava2D extends PShapeSVG {
                                        (float) t2.getX(), (float) t2.getY());
     }
 
+    @Override
     public int getTransparency() {
       return TRANSLUCENT;  // why not.. rather than checking each color
     }
@@ -155,10 +157,13 @@ public class PShapeJava2D extends PShapeSVG {
         this.ty2 = ty2;
       }
 
+      @Override
       public void dispose() { }
 
+      @Override
       public ColorModel getColorModel() { return ColorModel.getRGBdefault(); }
 
+      @Override
       public Raster getRaster(int x, int y, int w, int h) {
         WritableRaster raster =
           getColorModel().createCompatibleWritableRaster(w, h);
@@ -255,12 +260,14 @@ public class PShapeJava2D extends PShapeSVG {
       this.opacity = opacity;
     }
 
+    @Override
     public PaintContext createContext(ColorModel cm,
                                       Rectangle deviceBounds, Rectangle2D userBounds,
                                       AffineTransform xform, RenderingHints hints) {
       return new RadialGradientContext();
     }
 
+    @Override
     public int getTransparency() {
       return TRANSLUCENT;
     }
@@ -268,10 +275,13 @@ public class PShapeJava2D extends PShapeSVG {
     public class RadialGradientContext implements PaintContext {
       int ACCURACY = 5;
 
+      @Override
       public void dispose() {}
 
+      @Override
       public ColorModel getColorModel() { return ColorModel.getRGBdefault(); }
 
+      @Override
       public Raster getRaster(int x, int y, int w, int h) {
         WritableRaster raster =
           getColorModel().createCompatibleWritableRaster(w, h);

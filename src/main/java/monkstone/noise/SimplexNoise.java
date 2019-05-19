@@ -50,7 +50,7 @@ public class SimplexNoise {  // Simplex noise in 2D, 3D and 4D
         49, 192, 214, 31, 181, 199, 106, 157, 184, 84, 204, 176, 115, 121, 50, 45, 127, 4, 150, 254,
         138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180};
     // To remove the need for index wrapping, double the permutation table length
-    static short[] PERM = new short[512];
+    static final short[] PERM = new short[512];
     static short[] PERM_MOD_12 = new short[512];
 
     static {

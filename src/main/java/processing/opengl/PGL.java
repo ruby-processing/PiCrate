@@ -131,12 +131,12 @@ public abstract class PGL {
    * shorts as primitive type we have 2^15 = 32768 as the maximum number of
    * vertices that can be referred to within a single VBO.
    */
-  protected static int MAX_VERTEX_INDEX  = 32767;
+  protected static final int MAX_VERTEX_INDEX  = 32767;
 
     /**
      *
      */
-    protected static int MAX_VERTEX_INDEX1 = MAX_VERTEX_INDEX + 1;
+    protected static final int MAX_VERTEX_INDEX1 = MAX_VERTEX_INDEX + 1;
 
   /** Count of tessellated fill, line or point vertices that will
    * trigger a flush in the immediate mode. It doesn't necessarily
@@ -643,7 +643,7 @@ public abstract class PGL {
   // Constants
 
   /** Size of different types in bytes */
-  protected static int SIZEOF_SHORT = Short.SIZE / 8;
+  protected static final int SIZEOF_SHORT = Short.SIZE / 8;
 
     /**
      *
@@ -827,15 +827,16 @@ public abstract class PGL {
      * @return
      */
     static public int smoothToSamples(int smooth) {
-    if (smooth == 0) {
-      // smooth(0) is noSmooth(), which is 1x sampling
-      return 1;
-    } else if (smooth == 1) {
-      // smooth(1) means "default smoothing", which is 2x for OpenGL
-      return 2;
-    } else {
-      // smooth(N) can be used for 4x, 8x, etc
-      return smooth;
+    switch (smooth) {
+      case 0:
+        // smooth(0) is noSmooth(), which is 1x sampling
+        return 1;
+      case 1:
+        // smooth(1) means "default smoothing", which is 2x for OpenGL
+        return 2;
+      default:
+        // smooth(N) can be used for 4x, 8x, etc
+        return smooth;
     }
   }
 
@@ -905,7 +906,7 @@ public abstract class PGL {
      *
      * @return
      */
-    protected boolean isFBOBacked() {;
+    protected boolean isFBOBacked() {
     return fboLayerEnabled;
   }
 
@@ -966,7 +967,7 @@ public abstract class PGL {
     protected boolean getDepthTest() {
     intBuffer.rewind();
     getBooleanv(DEPTH_TEST, intBuffer);
-    return intBuffer.get(0) == 0 ? false : true;
+    return intBuffer.get(0) != 0;
   }
 
     /**
@@ -976,7 +977,7 @@ public abstract class PGL {
     protected boolean getDepthWriteMask() {
     intBuffer.rewind();
     getBooleanv(DEPTH_WRITEMASK, intBuffer);
-    return intBuffer.get(0) == 0 ? false : true;
+    return intBuffer.get(0) != 0;
   }
 
     /**
@@ -1306,13 +1307,13 @@ public abstract class PGL {
             float ba = ((stopButtonColor >> 24) & 0xFF) / 255f;
             float br = ((stopButtonColor >> 16) & 0xFF) / 255f;
             float bg = ((stopButtonColor >>  8) & 0xFF) / 255f;
-            float bb = ((stopButtonColor >>  0) & 0xFF) / 255f;
+            float bb = ((stopButtonColor) & 0xFF) / 255f;
             for (int i = 0; i < color.length; i++) {
               int c = closeButtonPix[i];
               int a = (int)(ba * ((c >> 24) & 0xFF));
               int r = (int)(br * ((c >> 16) & 0xFF));
               int g = (int)(bg * ((c >>  8) & 0xFF));
-              int b = (int)(bb * ((c >>  0) & 0xFF));
+              int b = (int)(bb * ((c) & 0xFF));
               color[i] = javaToNativeARGB((a << 24) | (r << 16) | (g << 8) | b);
             }
             IntBuffer buf = allocateIntBuffer(color);
@@ -1614,12 +1615,18 @@ public abstract class PGL {
       // separate depth and stencil buffers
       if (0 < depthBits) {
         int depthComponent = DEPTH_COMPONENT16;
-        if (depthBits == 32) {
-          depthComponent = DEPTH_COMPONENT32;
-        } else if (depthBits == 24) {
-          depthComponent = DEPTH_COMPONENT24;
-        } else if (depthBits == 16) {
-          depthComponent = DEPTH_COMPONENT16;
+        switch (depthBits) {
+          case 32:
+            depthComponent = DEPTH_COMPONENT32;
+            break;
+          case 24:
+            depthComponent = DEPTH_COMPONENT24;
+            break;
+          case 16:
+            depthComponent = DEPTH_COMPONENT16;
+            break;
+          default:
+            break;
         }
 
         IntBuffer depthBuf = multisample ? glMultiDepth : glDepth;
@@ -1638,12 +1645,18 @@ public abstract class PGL {
 
       if (0 < stencilBits) {
         int stencilIndex = STENCIL_INDEX1;
-        if (stencilBits == 8) {
-          stencilIndex = STENCIL_INDEX8;
-        } else if (stencilBits == 4) {
-          stencilIndex = STENCIL_INDEX4;
-        } else if (stencilBits == 1) {
-          stencilIndex = STENCIL_INDEX1;
+        switch (stencilBits) {
+          case 8:
+            stencilIndex = STENCIL_INDEX8;
+            break;
+          case 4:
+            stencilIndex = STENCIL_INDEX4;
+            break;
+          case 1:
+            stencilIndex = STENCIL_INDEX1;
+            break;
+          default:
+            break;
         }
 
         IntBuffer stencilBuf = multisample ? glMultiStencil : glStencil;
@@ -2824,8 +2837,7 @@ public abstract class PGL {
      * @return
      */
     protected static boolean containsVersionDirective(String[] shSrc) {
-    for (int i = 0; i < shSrc.length; i++) {
-      String line = shSrc[i];
+    for (String line : shSrc) {
       int versionIndex = line.indexOf("#version");
       if (versionIndex >= 0) {
         int commentIndex = line.indexOf("//");
@@ -2888,7 +2900,7 @@ public abstract class PGL {
     protected boolean compiled(int shader) {
     intBuffer.rewind();
     getShaderiv(shader, COMPILE_STATUS, intBuffer);
-    return intBuffer.get(0) == 0 ? false : true;
+    return intBuffer.get(0) != 0;
   }
 
     /**
@@ -2899,7 +2911,7 @@ public abstract class PGL {
     protected boolean linked(int program) {
     intBuffer.rewind();
     getProgramiv(program, LINK_STATUS, intBuffer);
-    return intBuffer.get(0) == 0 ? false : true;
+    return intBuffer.get(0) != 0;
   }
 
     /**
@@ -2970,9 +2982,9 @@ public abstract class PGL {
 
     int[] res = {0, 0, 0};
     String[] parts = version.split(" ");
-    for (int i = 0; i < parts.length; i++) {
-      if (0 < parts[i].indexOf(".")) {
-        String nums[] = parts[i].split("\\.");
+    for (String part : parts) {
+      if (0 < part.indexOf(".")) {
+        String[] nums = part.split("\\.");
         try {
           res[0] = Integer.parseInt(nums[0]);
         } catch (NumberFormatException e) { }
@@ -3001,10 +3013,10 @@ public abstract class PGL {
     int major = getGLVersion()[0];
     if (major < 2) {
       String ext = getString(EXTENSIONS);
-      return ext.indexOf("_framebuffer_object") != -1 &&
-             ext.indexOf("_vertex_shader")      != -1 &&
-             ext.indexOf("_shader_objects")     != -1 &&
-             ext.indexOf("_shading_language")   != -1;
+      return ext.contains("_framebuffer_object") &&
+        ext.contains("_vertex_shader") &&
+        ext.contains("_shader_objects") &&
+        ext.contains("_shading_language");
     } else {
       return true;
     }
@@ -3021,10 +3033,10 @@ public abstract class PGL {
     int major = getGLVersion()[0];
     if (major < 2) {
       String ext = getString(EXTENSIONS);
-      return ext.indexOf("_fragment_shader")  != -1 &&
-             ext.indexOf("_vertex_shader")    != -1 &&
-             ext.indexOf("_shader_objects")   != -1 &&
-             ext.indexOf("_shading_language") != -1;
+      return ext.contains("_fragment_shader") &&
+        ext.contains("_vertex_shader") &&
+        ext.contains("_shader_objects") &&
+        ext.contains("_shading_language");
     } else {
       return true;
     }

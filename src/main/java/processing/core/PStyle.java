@@ -1,6 +1,6 @@
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
-/*
+ /*
   Part of the Processing project - http://processing.org
 
   Copyright (c) 2008 Ben Fry and Casey Reas
@@ -19,8 +19,7 @@
   Public License along with this library; if not, write to the
   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
   Boston, MA  02111-1307  USA
-*/
-
+ */
 package processing.core;
 
 /**
@@ -29,180 +28,173 @@ package processing.core;
  */
 public class PStyle implements PConstants {
 
-    /**
-     *
-     */
-    public int imageMode;
+  /**
+   *
+   */
+  public int imageMode;
 
-    /**
-     *
-     */
-    public int rectMode;
+  /**
+   *
+   */
+  public int rectMode;
 
-    /**
-     *
-     */
-    public int ellipseMode;
+  /**
+   *
+   */
+  public int ellipseMode;
 
-    /**
-     *
-     */
-    public int shapeMode;
+  /**
+   *
+   */
+  public int shapeMode;
 
-    /**
-     *
-     */
-    public int blendMode;
+  /**
+   *
+   */
+  public int blendMode;
 
-    /**
-     *
-     */
-    public int colorMode;
+  /**
+   *
+   */
+  public int colorMode;
 
-    /**
-     *
-     */
-    public float colorModeX;
+  /**
+   *
+   */
+  public float colorModeX;
 
-    /**
-     *
-     */
-    public float colorModeY;
+  /**
+   *
+   */
+  public float colorModeY;
 
-    /**
-     *
-     */
-    public float colorModeZ;
+  /**
+   *
+   */
+  public float colorModeZ;
 
-    /**
-     *
-     */
-    public float colorModeA;
+  /**
+   *
+   */
+  public float colorModeA;
 
-    /**
-     *
-     */
-    public boolean tint;
+  /**
+   *
+   */
+  public boolean tint;
 
-    /**
-     *
-     */
-    public int tintColor;
+  /**
+   *
+   */
+  public int tintColor;
 
-    /**
-     *
-     */
-    public boolean fill;
+  /**
+   *
+   */
+  public boolean fill;
 
-    /**
-     *
-     */
-    public int fillColor;
+  /**
+   *
+   */
+  public int fillColor;
 
-    /**
-     *
-     */
-    public boolean stroke;
+  /**
+   *
+   */
+  public boolean stroke;
 
-    /**
-     *
-     */
-    public int strokeColor;
+  /**
+   *
+   */
+  public int strokeColor;
 
-    /**
-     *
-     */
-    public float strokeWeight;
+  /**
+   *
+   */
+  public float strokeWeight;
 
-    /**
-     *
-     */
-    public int strokeCap;
+  /**
+   *
+   */
+  public int strokeCap;
 
-    /**
-     *
-     */
-    public int strokeJoin;
+  /**
+   *
+   */
+  public int strokeJoin;
 
   // TODO these fellas are inconsistent, and may need to go elsewhere
-
-    /**
-     *
-     */
+  /**
+   *
+   */
   public float ambientR,
-
     /**
      *
      */
     ambientG,
-
     /**
      *
      */
     ambientB;
 
-    /**
-     *
-     */
-    public float specularR,
-
+  /**
+   *
+   */
+  public float specularR,
     /**
      *
      */
     specularG,
-
     /**
      *
      */
     specularB;
 
-    /**
-     *
-     */
-    public float emissiveR,
-
+  /**
+   *
+   */
+  public float emissiveR,
     /**
      *
      */
     emissiveG,
-
     /**
      *
      */
     emissiveB;
 
-    /**
-     *
-     */
-    public float shininess;
+  /**
+   *
+   */
+  public float shininess;
 
-    /**
-     *
-     */
-    public PFont textFont;
+  /**
+   *
+   */
+  public PFont textFont;
 
-    /**
-     *
-     */
-    public int textAlign;
+  /**
+   *
+   */
+  public int textAlign;
 
-    /**
-     *
-     */
-    public int textAlignY;
+  /**
+   *
+   */
+  public int textAlignY;
 
-    /**
-     *
-     */
-    public int textMode;
+  /**
+   *
+   */
+  public int textMode;
 
-    /**
-     *
-     */
-    public float textSize;
+  /**
+   *
+   */
+  public float textSize;
 
-    /**
-     *
-     */
-    public float textLeading;
+  /**
+   *
+   */
+  public float textLeading;
 }

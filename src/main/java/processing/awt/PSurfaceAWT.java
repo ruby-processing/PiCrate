@@ -1,6 +1,6 @@
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
-/*
+ /*
   Part of the Processing project - http://processing.org
 
   Copyright (c) 2014-15 The Processing Foundation
@@ -18,8 +18,7 @@
   Public License along with this library; if not, write to the
   Free Software Foundation, Inc., 59 Temple Place, Suite 330,
   Boston, MA  02111-1307  USA
-*/
-
+ */
 package processing.awt;
 
 import java.awt.Canvas;
@@ -42,7 +41,6 @@ import java.awt.event.*;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.*;
 import java.lang.management.ManagementFactory;
-import java.lang.reflect.Method;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,11 +60,11 @@ import processing.event.MouseEvent;
  * @author Martin Prout
  */
 public class PSurfaceAWT extends PSurfaceNone {
+
   GraphicsDevice displayDevice;
 
   // used for canvas to determine whether resizable or not
 //  boolean resizable;  // default is false
-
   // Internally, we know it's always a JFrame (not just a Frame)
 //  JFrame frame;
   // Trying Frame again with a11 to see if this avoids some Swing nastiness.
@@ -84,22 +82,20 @@ public class PSurfaceAWT extends PSurfaceNone {
 
   // 3.0a5 didn't use strategy, and active was shut off during init() w/ retina
 //  boolean useStrategy = true;
-
   Canvas canvas;
 //  Component canvas;
 
 //  PGraphics graphics;  // moved to PSurfaceNone
-
   int sketchWidth;
   int sketchHeight;
 
   int windowScaleFactor;
 
-    /**
-     *
-     * @param graphics
-     */
-    public PSurfaceAWT(PGraphics graphics) {
+  /**
+   *
+   * @param graphics
+   */
+  public PSurfaceAWT(PGraphics graphics) {
     //this.graphics = graphics;
     super(graphics);
 
@@ -124,7 +120,7 @@ public class PSurfaceAWT extends PSurfaceNone {
       // flicker--pushing pixels out before the screen has finished rendering.
 //      useStrategy = false;
     }
-    */
+     */
     canvas = new SmoothCanvas();
 //    if (useStrategy) {
     //canvas.setIgnoreRepaint(true);
@@ -140,8 +136,8 @@ public class PSurfaceAWT extends PSurfaceNone {
           // make sure this is a real resize event, not just initial setup
           // https://github.com/processing/processing/issues/3310
           Dimension canvasSize = canvas.getSize();
-          if (canvasSize.width != sketch.sketchWidth() ||
-              canvasSize.height != sketch.sketchHeight()) {
+          if (canvasSize.width != sketch.sketchWidth()
+            || canvasSize.height != sketch.sketchHeight()) {
             sketch.redraw();
           }
         }
@@ -149,7 +145,6 @@ public class PSurfaceAWT extends PSurfaceNone {
     });
     addListeners();
   }
-
 
 //  /**
 //   * Handle grabbing the focus on startup. Other renderers can override this
@@ -185,62 +180,56 @@ public class PSurfaceAWT extends PSurfaceNone {
 //      }
 //    });
 //  }
-
-
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-    /**
-     *
-     */
-
-
+  /**
+   *
+   */
   public class SmoothCanvas extends Canvas {
+
     private Dimension oldSize = new Dimension(0, 0);
     private Dimension newSize = new Dimension(0, 0);
 
-
     // Turns out getParent() returns a JPanel on a JFrame. Yech.
-
-      /**
-       *
-       * @return
-       */
+    /**
+     *
+     * @return
+     */
     public Frame getFrame() {
       return frame;
     }
 
-      /**
-       *
-       * @return
-       */
-      @Override
+    /**
+     *
+     * @return
+     */
+    @Override
     public Dimension getPreferredSize() {
       return new Dimension(sketchWidth, sketchHeight);
     }
 
-      /**
-       *
-       * @return
-       */
-      @Override
+    /**
+     *
+     * @return
+     */
+    @Override
     public Dimension getMinimumSize() {
       return getPreferredSize();
     }
 
-      /**
-       *
-       * @return
-       */
-      @Override
+    /**
+     *
+     * @return
+     */
+    @Override
     public Dimension getMaximumSize() {
       //return resizable ? super.getMaximumSize() : getPreferredSize();
       return frame.isResizable() ? super.getMaximumSize() : getPreferredSize();
     }
 
-      /**
-       *
-       */
-      @Override
+    /**
+     *
+     */
+    @Override
     public void validate() {
       super.validate();
       newSize.width = getWidth();
@@ -261,21 +250,21 @@ public class PSurfaceAWT extends PSurfaceNone {
       }
     }
 
-      /**
-       *
-       * @param g
-       */
-      @Override
+    /**
+     *
+     * @param g
+     */
+    @Override
     public void update(Graphics g) {
 //      System.out.println("updating");
       paint(g);
     }
 
-      /**
-       *
-       * @param screen
-       */
-      @Override
+    /**
+     *
+     * @param screen
+     */
+    @Override
     public void paint(Graphics screen) {
 //      System.out.println("painting");
 //      if (useStrategy) {
@@ -285,7 +274,7 @@ public class PSurfaceAWT extends PSurfaceNone {
         System.out.println("drawing to screen " + canvas);
         screen.drawImage(graphics.image, 0, 0, sketchWidth, sketchHeight, null);
       }
-      */
+       */
 
 //      } else {
 ////        new Exception("painting").printStackTrace(System.out);
@@ -302,7 +291,7 @@ public class PSurfaceAWT extends PSurfaceNone {
     }
   }
 
-    /*
+  /*
     @Override
     public void addNotify() {
 //      System.out.println("adding notify");
@@ -310,14 +299,13 @@ public class PSurfaceAWT extends PSurfaceNone {
       // prior to Java 7 on OS X, this no longer works [121222]
 //    createBufferStrategy(2);
     }
-    */
-
-    /**
-     *
-     */
-    synchronized protected void render() {
-    if (canvas.isDisplayable() &&
-        graphics.image != null) {
+   */
+  /**
+   *
+   */
+  synchronized protected void render() {
+    if (canvas.isDisplayable()
+      && graphics.image != null) {
       if (canvas.getBufferStrategy() == null) {
         canvas.createBufferStrategy(2);
       }
@@ -387,15 +375,12 @@ public class PSurfaceAWT extends PSurfaceNone {
       }
     }
   }
-  */
-
-
+   */
   // what needs to happen here?
-
-    /**
-     *
-     * @param sketch
-     */
+  /**
+   *
+   * @param sketch
+   */
   @Override
   public void initOffscreen(PApplet sketch) {
     this.sketch = sketch;
@@ -408,9 +393,9 @@ public class PSurfaceAWT extends PSurfaceNone {
     // but don't show it
     return dummy;
   }
-  */
+   */
 
-  /*
+ /*
   @Override
   public Component initComponent(PApplet sketch) {
     this.sketch = sketch;
@@ -421,19 +406,18 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     return canvas;
   }
-  */
-
-    /**
-     *
-     * @param sketch
-     */
-    @Override
+   */
+  /**
+   *
+   * @param sketch
+   */
+  @Override
   public void initFrame(final PApplet sketch) {/*, int backgroundColor,
                         int deviceIndex, boolean fullScreen, boolean spanDisplays) {*/
     this.sketch = sketch;
 
-    GraphicsEnvironment environment =
-      GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsEnvironment environment
+      = GraphicsEnvironment.getLocalGraphicsEnvironment();
 
     int displayNum = sketch.sketchDisplay();
 //    System.out.println("display from sketch is " + displayNum);
@@ -442,10 +426,10 @@ public class PSurfaceAWT extends PSurfaceNone {
       if (displayNum <= devices.length) {
         displayDevice = devices[displayNum - 1];
       } else {
-        System.err.format("Display %d does not exist, " +
-          "using the default display instead.%n", displayNum);
+        System.err.format("Display %d does not exist, "
+          + "using the default display instead.%n", displayNum);
         for (int i = 0; i < devices.length; i++) {
-          System.err.format("Display %d is %s%n", (i+1), devices[i]);
+          System.err.format("Display %d is %s%n", (i + 1), devices[i]);
         }
       }
     }
@@ -457,8 +441,8 @@ public class PSurfaceAWT extends PSurfaceNone {
     // because pack() will cause the bounds to go to zero.
     // http://dev.processing.org/bugs/show_bug.cgi?id=923
     boolean spanDisplays = sketch.sketchDisplay() == PConstants.SPAN;
-    screenRect = spanDisplays ? getDisplaySpan() :
-      displayDevice.getDefaultConfiguration().getBounds();
+    screenRect = spanDisplays ? getDisplaySpan()
+      : displayDevice.getDefaultConfiguration().getBounds();
     // DisplayMode doesn't work here, because we can't get the upper-left
     // corner of the display, which is important for multi-display setups.
 
@@ -467,8 +451,8 @@ public class PSurfaceAWT extends PSurfaceNone {
     sketch.displayWidth = screenRect.width;
     sketch.displayHeight = screenRect.height;
 
-    windowScaleFactor = PApplet.platform == PConstants.MACOSX ?
-        1 : sketch.pixelDensity;
+    windowScaleFactor = PApplet.platform == PConstants.MACOSX
+      ? 1 : sketch.pixelDensity;
 
     sketchWidth = sketch.sketchWidth() * windowScaleFactor;
     sketchHeight = sketch.sketchHeight() * windowScaleFactor;
@@ -486,7 +470,7 @@ public class PSurfaceAWT extends PSurfaceNone {
       fullScreen = true;
       sketch.fullScreen();  // won't change the renderer
     }
-    */
+     */
 
     if (fullScreen || spanDisplays) {
       sketchWidth = screenRect.width;
@@ -526,7 +510,6 @@ public class PSurfaceAWT extends PSurfaceNone {
     // and launches the Thread that will kick off setup().
     // http://dev.processing.org/bugs/show_bug.cgi?id=891
     // http://dev.processing.org/bugs/show_bug.cgi?id=908
-
     frame.add(canvas);
     setSize(sketchWidth / windowScaleFactor, sketchHeight / windowScaleFactor);
 
@@ -553,7 +536,7 @@ public class PSurfaceAWT extends PSurfaceNone {
       // will be set visible in placeWindow() [3.0a10]
       //frame.setVisible(true);  // re-add native resources
     }
-    */
+     */
     frame.setLayout(null);
     //frame.add(applet);
 
@@ -562,9 +545,7 @@ public class PSurfaceAWT extends PSurfaceNone {
     // spanScreens was in use.
 //    pg = sketch.makePrimaryGraphics(sketchWidth, sketchHeight);
 //    pg = sketch.makePrimaryGraphics();
-
     // resize sketch to sketchWidth/sketchHeight here
-
     if (fullScreen) {
       frame.invalidate();
     } else {
@@ -573,7 +554,6 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     // insufficient, places the 100x100 sketches offset strangely
     //frame.validate();
-
     // disabling resize has to happen after pack() to avoid apparent Apple bug
     // http://code.google.com/p/processing/issues/detail?id=467
     frame.setResizable(false);
@@ -588,36 +568,37 @@ public class PSurfaceAWT extends PSurfaceNone {
 //    sketch.setFrame(frame);
   }
 
-
   @Override
   public Object getNative() {
     return canvas;
   }
 
-
 //  public Toolkit getToolkit() {
 //    return canvas.getToolkit();
 //  }
-
-
-  /** Set the window (and dock, or whatever necessary) title.
-     * @param title */
+  /**
+   * Set the window (and dock, or whatever necessary) title.
+   *
+   * @param title
+   */
   @Override
   public void setTitle(String title) {
     frame.setTitle(title);
     // Workaround for apparent Java bug on OS X?
     // https://github.com/processing/processing/issues/3472
-    if (cursorVisible &&
-        (PApplet.platform == PConstants.MACOSX) &&
-        (cursorType != PConstants.ARROW)) {
+    if (cursorVisible
+      && (PApplet.platform == PConstants.MACOSX)
+      && (cursorType != PConstants.ARROW)) {
       hideCursor();
       showCursor();
     }
   }
 
-
-  /** Set true if we want to resize things (default is not resizable)
-     * @param resizable */
+  /**
+   * Set true if we want to resize things (default is not resizable)
+   *
+   * @param resizable
+   */
   @Override
   public void setResizable(boolean resizable) {
     //this.resizable = resizable;  // really only used for canvas
@@ -627,11 +608,11 @@ public class PSurfaceAWT extends PSurfaceNone {
     }
   }
 
-    /**
-     *
-     * @param image
-     */
-    @Override
+  /**
+   *
+   * @param image
+   */
+  @Override
   public void setIcon(PImage image) {
     Image awtImage = (Image) image.getNative();
     frame.setIconImage(awtImage);
@@ -652,51 +633,50 @@ public class PSurfaceAWT extends PSurfaceNone {
     // }
   }
 
-
   @Override
   public void setAlwaysOnTop(boolean always) {
     frame.setAlwaysOnTop(always);
   }
 
-    /**
-     *
-     * @param x
-     * @param y
-     */
-    @Override
+  /**
+   *
+   * @param x
+   * @param y
+   */
+  @Override
   public void setLocation(int x, int y) {
     frame.setLocation(x, y);
   }
 
-
   List<Image> iconImages;
 
-    /**
-     *
-     * @param frame
-     */
-    protected void setProcessingIcon(Frame frame) {
+  /**
+   *
+   * @param frame
+   */
+  protected void setProcessingIcon(Frame frame) {
     // On OS X, this only affects what shows up in the dock when minimized.
     // So replacing it is actually a step backwards. Brilliant.
     // if (PApplet.platform != PConstants.MACOSX) {
-      //Image image = Toolkit.getDefaultToolkit().createImage(ICON_IMAGE);
-      //frame.setIconImage(image);
-      try {
-        if (iconImages == null) {
-          iconImages = new ArrayList<Image>();
-          final int[] sizes = { 16, 32, 48, 64, 128, 256, 512 };
+    //Image image = Toolkit.getDefaultToolkit().createImage(ICON_IMAGE);
+    //frame.setIconImage(image);
+    try {
+      if (iconImages == null) {
+        iconImages = new ArrayList<>();
+        final int[] sizes = {16, 32, 48, 64, 128, 256, 512};
 
-          for (int sz : sizes) {
-            //URL url = getClass().getResource("/icon/icon-" + sz + ".png");
-            URL url = PApplet.class.getResource("/icon/icon-" + sz + ".png");
-            Image image = Toolkit.getDefaultToolkit().getImage(url);
-            iconImages.add(image);
-            //iconImages.add(Toolkit.getLibImage("icons/pde-" + sz + ".png", frame));
-          }
+        for (int sz : sizes) {
+          //URL url = getClass().getResource("/icon/icon-" + sz + ".png");
+          URL url = PApplet.class.getResource("/icon/icon-" + sz + ".png");
+          Image image = Toolkit.getDefaultToolkit().getImage(url);
+          iconImages.add(image);
+          //iconImages.add(Toolkit.getLibImage("icons/pde-" + sz + ".png", frame));
         }
-        frame.setIconImages(iconImages);
+      }
+      frame.setIconImages(iconImages);
 
-      } catch (Exception e) { }  // harmless; keep this to ourselves
+    } catch (Exception e) {
+    }  // harmless; keep this to ourselves
 
     // } else {  // handle OS X differently
     //   if (!dockIconSpecified()) {  // don't override existing -Xdock param
@@ -719,15 +699,14 @@ public class PSurfaceAWT extends PSurfaceNone {
     // }
   }
 
-
   /**
    * @return true if -Xdock:icon was specified on the command line
    */
   private boolean dockIconSpecified() {
     // TODO This is incomplete... Haven't yet found a way to figure out if
     //      the app has an icns file specified already. Help?
-    List<String> jvmArgs =
-      ManagementFactory.getRuntimeMXBean().getInputArguments();
+    List<String> jvmArgs
+      = ManagementFactory.getRuntimeMXBean().getInputArguments();
     for (String arg : jvmArgs) {
       if (arg.startsWith("-Xdock:icon")) {
         return true;  // dock image already set
@@ -735,7 +714,6 @@ public class PSurfaceAWT extends PSurfaceNone {
     }
     return false;
   }
-
 
   @Override
   public void setVisible(boolean visible) {
@@ -762,16 +740,14 @@ public class PSurfaceAWT extends PSurfaceNone {
                       insets.top + insets.bottom);
       }
     }
-*/
+     */
   }
 
-
   //public void placeFullScreen(boolean hideStop) {
-
-    /**
-     *
-     * @param stopColor
-     */
+  /**
+   *
+   * @param stopColor
+   */
   @Override
   public void placePresent(int stopColor) {
     setFullFrame();
@@ -779,14 +755,13 @@ public class PSurfaceAWT extends PSurfaceNone {
     // After the pack(), the screen bounds are gonna be 0s
 //    frame.setBounds(screenRect);  // already called in setFullFrame()
     canvas.setBounds((screenRect.width - sketchWidth) / 2,
-                     (screenRect.height - sketchHeight) / 2,
-                     sketchWidth, sketchHeight);
+      (screenRect.height - sketchHeight) / 2,
+      sketchWidth, sketchHeight);
 
 //    if (PApplet.platform == PConstants.MACOSX) {
 //      macosxFullScreenEnable(frame);
 //      macosxFullScreenToggle(frame);
 //    }
-
     if (stopColor != 0) {
       Label label = new Label("stop");
       label.setForeground(new Color(stopColor, false));
@@ -856,22 +831,21 @@ public class PSurfaceAWT extends PSurfaceNone {
       frame.setVisible(true);
     }
   }
-  */
-
-
+   */
   private void setCanvasSize() {
 //    System.out.format("setting canvas size %d %d%n", sketchWidth, sketchHeight);
 //    new Exception().printStackTrace(System.out);
     int contentW = Math.max(sketchWidth, MIN_WINDOW_WIDTH);
     int contentH = Math.max(sketchHeight, MIN_WINDOW_HEIGHT);
 
-    canvas.setBounds((contentW - sketchWidth)/2,
-                     (contentH - sketchHeight)/2,
-                     sketchWidth, sketchHeight);
+    canvas.setBounds((contentW - sketchWidth) / 2,
+      (contentH - sketchHeight) / 2,
+      sketchWidth, sketchHeight);
   }
 
-
-  /** Resize frame for these sketch (canvas) dimensions. */
+  /**
+   * Resize frame for these sketch (canvas) dimensions.
+   */
   private Dimension setFrameSize() {  //int sketchWidth, int sketchHeight) {
     // https://github.com/processing/processing/pull/3162
     frame.addNotify();  // using instead of show() to add the peer [fry]
@@ -879,24 +853,24 @@ public class PSurfaceAWT extends PSurfaceNone {
 //    System.out.format("setting frame size %d %d %n", sketchWidth, sketchHeight);
 //    new Exception().printStackTrace(System.out);
     currentInsets = frame.getInsets();
-    int windowW = Math.max(sketchWidth, MIN_WINDOW_WIDTH) +
-      currentInsets.left + currentInsets.right;
-    int windowH = Math.max(sketchHeight, MIN_WINDOW_HEIGHT) +
-      currentInsets.top + currentInsets.bottom;
+    int windowW = Math.max(sketchWidth, MIN_WINDOW_WIDTH)
+      + currentInsets.left + currentInsets.right;
+    int windowH = Math.max(sketchHeight, MIN_WINDOW_HEIGHT)
+      + currentInsets.top + currentInsets.bottom;
     frame.setSize(windowW, windowH);
     return new Dimension(windowW, windowH);
   }
-
 
   private void setFrameCentered() {
     // Can't use frame.setLocationRelativeTo(null) because it sends the
     // frame to the main display, which undermines the --display setting.
     frame.setLocation(screenRect.x + (screenRect.width - sketchWidth) / 2,
-                      screenRect.y + (screenRect.height - sketchHeight) / 2);
+      screenRect.y + (screenRect.height - sketchHeight) / 2);
   }
 
-
-  /** Hide the menu bar, make the Frame undecorated, set it to screenRect. */
+  /**
+   * Hide the menu bar, make the Frame undecorated, set it to screenRect.
+   */
   private void setFullFrame() {
     // Called here because the graphics device is needed before we can
     // determine whether the sketch wants size(displayWidth, displayHeight),
@@ -906,7 +880,6 @@ public class PSurfaceAWT extends PSurfaceNone {
     // Tried to use this to fix the 'present' mode issue.
     // Did not help, and the screenRect setup seems to work fine.
     //frame.setExtendedState(Frame.MAXIMIZED_BOTH);
-
     // https://github.com/processing/processing/pull/3162
     //frame.dispose();  // release native resources, allows setUndecorated()
     frame.removeNotify();
@@ -919,12 +892,12 @@ public class PSurfaceAWT extends PSurfaceNone {
     //frame.setVisible(true);  // re-add native resources
   }
 
-    /**
-     *
-     * @param location
-     * @param editorLocation
-     */
-    @Override
+  /**
+   *
+   * @param location
+   * @param editorLocation
+   */
+  @Override
   public void placeWindow(int[] location, int[] editorLocation) {
     //Dimension window = setFrameSize(sketchWidth, sketchHeight);
     Dimension window = setFrameSize(); //sketchWidth, sketchHeight);
@@ -967,7 +940,7 @@ public class PSurfaceAWT extends PSurfaceNone {
             locationX = (sketch.displayWidth - window.width) / 2;
             locationY = (sketch.displayHeight - window.height) / 2;
           }
-          */
+           */
           frame.setLocation(locationX, locationY);
         }
       } else {  // just center on screen
@@ -981,9 +954,9 @@ public class PSurfaceAWT extends PSurfaceNone {
       }
     }
 
-    canvas.setBounds((contentW - sketchWidth)/2,
-                     (contentH - sketchHeight)/2,
-                     sketchWidth, sketchHeight);
+    canvas.setBounds((contentW - sketchWidth) / 2,
+      (contentH - sketchHeight) / 2,
+      sketchWidth, sketchHeight);
 
     // handle frame resizing events
     setupFrameResizeListener();
@@ -999,20 +972,18 @@ public class PSurfaceAWT extends PSurfaceNone {
 //        canvas.requestFocus();
 //      }
     }
-    */
+     */
 //    if (sketch.getGraphics().displayable()) {
 //      setVisible(true);
 //    }
   }
 
-
   // needs to resize the frame, which will resize the canvas, and so on...
-
-    /**
-     *
-     * @param wide
-     * @param high
-     */
+  /**
+   *
+   * @param wide
+   * @param high
+   */
   @Override
   public void setSize(int wide, int high) {
     // When the surface is set to resizable via surface.setResizable(true),
@@ -1029,10 +1000,9 @@ public class PSurfaceAWT extends PSurfaceNone {
 //      //System.out.format("frame visible %b, setSize(%d, %d) %n", frame.isVisible(), wide, high);
 //      new Exception(String.format("setSize(%d, %d)", wide, high)).printStackTrace(System.out);
 //    }
-
     //if (wide == sketchWidth && high == sketchHeight) {  // doesn't work on launch
-    if (wide == sketch.width && high == sketch.height &&
-        (frame == null || currentInsets.equals(frame.getInsets()))) {
+    if (wide == sketch.width && high == sketch.height
+      && (frame == null || currentInsets.equals(frame.getInsets()))) {
 //      if (PApplet.DEBUG) {
 //        new Exception("w/h unchanged " + wide + " " + high).printStackTrace(System.out);
 //      }
@@ -1053,7 +1023,6 @@ public class PSurfaceAWT extends PSurfaceNone {
 //    }
 
     //initImage(graphics, wide, high);
-
     //throw new RuntimeException("implement me, see readme.md");
     sketch.setSize(wide, high);
 //    sketch.width = wide;
@@ -1063,7 +1032,6 @@ public class PSurfaceAWT extends PSurfaceNone {
     graphics.setSize(wide, high);
 //    System.out.println("out of setSize()");
   }
-
 
   //public void initImage(PGraphics gr, int wide, int high) {
   /*
@@ -1083,20 +1051,14 @@ public class PSurfaceAWT extends PSurfaceNone {
     int high = graphics.height * graphics.pixelFactor;
     graphics.image = gc.createCompatibleImage(wide, high);
   }
-  */
-
-
+   */
 //  @Override
 //  public Component getComponent() {
 //    return canvas;
 //  }
-
-
 //  @Override
 //  public void setSmooth(int level) {
 //  }
-
-
   /*
   private boolean checkRetina() {
     if (PApplet.platform == PConstants.MACOSX) {
@@ -1123,14 +1085,14 @@ public class PSurfaceAWT extends PSurfaceNone {
     }
     return false;
   }
-  */
-
-
-  /** Get the bounds rectangle for all displays. */
+   */
+  /**
+   * Get the bounds rectangle for all displays.
+   */
   static Rectangle getDisplaySpan() {
     Rectangle bounds = new Rectangle();
-    GraphicsEnvironment environment =
-      GraphicsEnvironment.getLocalGraphicsEnvironment();
+    GraphicsEnvironment environment
+      = GraphicsEnvironment.getLocalGraphicsEnvironment();
     for (GraphicsDevice device : environment.getScreenDevices()) {
       for (GraphicsConfiguration config : device.getConfigurations()) {
         Rectangle2D.union(bounds, config.getBounds(), bounds);
@@ -1154,15 +1116,13 @@ public class PSurfaceAWT extends PSurfaceNone {
       }
     }
   }
-  */
-
-
+   */
   /**
    * Set this sketch to communicate its state back to the PDE.
-   * <p/>
-   * This uses the stderr stream to write positions of the window
-   * (so that it will be saved by the PDE for the next run) and
-   * notify on quit. See more notes in the Worker class.
+   *
+   * This uses the stderr stream to write positions of the window (so that it
+   * will be saved by the PDE for the next run) and notify on quit. See more
+   * notes in the Worker class.
    */
   @Override
   public void setupExternalMessages() {
@@ -1175,33 +1135,26 @@ public class PSurfaceAWT extends PSurfaceNone {
     });
   }
 
-
   /**
-   * Set up a listener that will fire proper component resize events
-   * in cases where frame.setResizable(true) is called.
+   * Set up a listener that will fire proper component resize events in cases
+   * where frame.setResizable(true) is called.
    */
   private void setupFrameResizeListener() {
-    frame.addWindowStateListener(new WindowStateListener() {
-      @Override
-      // Detecting when the frame is resized in order to handle the frame
-      // maximization bug in OSX:
-      // http://bugs.java.com/bugdatabase/view_bug.do?bug_id=8036935
-      public void windowStateChanged(WindowEvent e) {
-        // This seems to be firing when dragging the window on OS X
+    frame.addWindowStateListener((WindowEvent e) -> {
+      // This seems to be firing when dragging the window on OS X
+      // https://github.com/processing/processing/issues/3092
+      if (Frame.MAXIMIZED_BOTH == e.getNewState()) {
+        // Supposedly, sending the frame to back and then front is a
+        // workaround for this bug:
+        // http://stackoverflow.com/a/23897602
+        // but is not working for me...
+        //frame.toBack();
+        //frame.toFront();
+        // Packing the frame works, but that causes the window to collapse
+        // on OS X when the window is dragged. Changing to addNotify() for
         // https://github.com/processing/processing/issues/3092
-        if (Frame.MAXIMIZED_BOTH == e.getNewState()) {
-          // Supposedly, sending the frame to back and then front is a
-          // workaround for this bug:
-          // http://stackoverflow.com/a/23897602
-          // but is not working for me...
-          //frame.toBack();
-          //frame.toFront();
-          // Packing the frame works, but that causes the window to collapse
-          // on OS X when the window is dragged. Changing to addNotify() for
-          // https://github.com/processing/processing/issues/3092
-          //frame.pack();
-          frame.addNotify();
-        }
+        //frame.pack();
+        frame.addNotify();
       }
     });
 
@@ -1238,7 +1191,6 @@ public class PSurfaceAWT extends PSurfaceNone {
       }
     });
   }
-
 
 //  /**
 //   * (No longer in use) Use reflection to call
@@ -1280,11 +1232,7 @@ public class PSurfaceAWT extends PSurfaceNone {
 //      e.printStackTrace();
 //    }
 //  }
-
-
   //////////////////////////////////////////////////////////////
-
-
   /*
   // disabling for now; requires Java 1.7 and "precise" semantics are odd...
   // returns 0.1 for tick-by-tick scrolling on OS X, but it's not a matter of
@@ -1298,14 +1246,13 @@ public class PSurfaceAWT extends PSurfaceNone {
       // ignored, the method will just be set to null
     }
   }
-  */
-
-
+   */
   /**
-   * Figure out how to process a mouse event. When loop() has been
-   * called, the events will be queued up until drawing is complete.
-   * If noLoop() has been called, then events will happen immediately.
-     * @param nativeEvent
+   * Figure out how to process a mouse event. When loop() has been called, the
+   * events will be queued up until drawing is complete. If noLoop() has been
+   * called, then events will happen immediately.
+   *
+   * @param nativeEvent
    */
   protected void nativeMouseEvent(java.awt.event.MouseEvent nativeEvent) {
     // the 'amount' is the number of button clicks for a click event,
@@ -1314,31 +1261,31 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     int peAction = 0;
     switch (nativeEvent.getID()) {
-    case java.awt.event.MouseEvent.MOUSE_PRESSED:
-      peAction = MouseEvent.PRESS;
-      break;
-    case java.awt.event.MouseEvent.MOUSE_RELEASED:
-      peAction = MouseEvent.RELEASE;
-      break;
-    case java.awt.event.MouseEvent.MOUSE_CLICKED:
-      peAction = MouseEvent.CLICK;
-      break;
-    case java.awt.event.MouseEvent.MOUSE_DRAGGED:
-      peAction = MouseEvent.DRAG;
-      break;
-    case java.awt.event.MouseEvent.MOUSE_MOVED:
-      peAction = MouseEvent.MOVE;
-      break;
-    case java.awt.event.MouseEvent.MOUSE_ENTERED:
-      peAction = MouseEvent.ENTER;
-      break;
-    case java.awt.event.MouseEvent.MOUSE_EXITED:
-      peAction = MouseEvent.EXIT;
-      break;
-    //case java.awt.event.MouseWheelEvent.WHEEL_UNIT_SCROLL:
-    case java.awt.event.MouseEvent.MOUSE_WHEEL:
-      peAction = MouseEvent.WHEEL;
-      /*
+      case java.awt.event.MouseEvent.MOUSE_PRESSED:
+        peAction = MouseEvent.PRESS;
+        break;
+      case java.awt.event.MouseEvent.MOUSE_RELEASED:
+        peAction = MouseEvent.RELEASE;
+        break;
+      case java.awt.event.MouseEvent.MOUSE_CLICKED:
+        peAction = MouseEvent.CLICK;
+        break;
+      case java.awt.event.MouseEvent.MOUSE_DRAGGED:
+        peAction = MouseEvent.DRAG;
+        break;
+      case java.awt.event.MouseEvent.MOUSE_MOVED:
+        peAction = MouseEvent.MOVE;
+        break;
+      case java.awt.event.MouseEvent.MOUSE_ENTERED:
+        peAction = MouseEvent.ENTER;
+        break;
+      case java.awt.event.MouseEvent.MOUSE_EXITED:
+        peAction = MouseEvent.EXIT;
+        break;
+      //case java.awt.event.MouseWheelEvent.WHEEL_UNIT_SCROLL:
+      case java.awt.event.MouseEvent.MOUSE_WHEEL:
+        peAction = MouseEvent.WHEEL;
+        /*
       if (preciseWheelMethod != null) {
         try {
           peAmount = ((Double) preciseWheelMethod.invoke(nativeEvent, (Object[]) null)).floatValue();
@@ -1346,9 +1293,9 @@ public class PSurfaceAWT extends PSurfaceNone {
           preciseWheelMethod = null;
         }
       }
-      */
-      peCount = ((MouseWheelEvent) nativeEvent).getWheelRotation();
-      break;
+         */
+        peCount = ((MouseWheelEvent) nativeEvent).getWheelRotation();
+        break;
     }
 
     //System.out.println(nativeEvent);
@@ -1356,11 +1303,11 @@ public class PSurfaceAWT extends PSurfaceNone {
     // If using getModifiersEx(), the regular modifiers don't set properly.
     int modifiers = nativeEvent.getModifiers();
 
-    int peModifiers = modifiers &
-      (InputEvent.SHIFT_MASK |
-       InputEvent.CTRL_MASK |
-       InputEvent.META_MASK |
-       InputEvent.ALT_MASK);
+    int peModifiers = modifiers
+      & (InputEvent.SHIFT_MASK
+      | InputEvent.CTRL_MASK
+      | InputEvent.META_MASK
+      | InputEvent.ALT_MASK);
 
     // Windows and OS X seem to disagree on how to handle this. Windows only
     // sets BUTTON1_DOWN_MASK, while OS X seems to set BUTTON1_MASK.
@@ -1398,29 +1345,29 @@ public class PSurfaceAWT extends PSurfaceNone {
     }
 
     sketch.postEvent(new MouseEvent(nativeEvent, nativeEvent.getWhen(),
-                                    peAction, peModifiers,
-                                    nativeEvent.getX() / windowScaleFactor,
-                                    nativeEvent.getY() / windowScaleFactor,
-                                    peButton,
-                                    peCount));
+      peAction, peModifiers,
+      nativeEvent.getX() / windowScaleFactor,
+      nativeEvent.getY() / windowScaleFactor,
+      peButton,
+      peCount));
   }
 
-    /**
-     *
-     * @param event
-     */
-    protected void nativeKeyEvent(java.awt.event.KeyEvent event) {
+  /**
+   *
+   * @param event
+   */
+  protected void nativeKeyEvent(java.awt.event.KeyEvent event) {
     int peAction = 0;
     switch (event.getID()) {
-    case java.awt.event.KeyEvent.KEY_PRESSED:
-      peAction = KeyEvent.PRESS;
-      break;
-    case java.awt.event.KeyEvent.KEY_RELEASED:
-      peAction = KeyEvent.RELEASE;
-      break;
-    case java.awt.event.KeyEvent.KEY_TYPED:
-      peAction = KeyEvent.TYPE;
-      break;
+      case java.awt.event.KeyEvent.KEY_PRESSED:
+        peAction = KeyEvent.PRESS;
+        break;
+      case java.awt.event.KeyEvent.KEY_RELEASED:
+        peAction = KeyEvent.RELEASE;
+        break;
+      case java.awt.event.KeyEvent.KEY_TYPED:
+        peAction = KeyEvent.TYPE;
+        break;
     }
 
 //    int peModifiers = event.getModifiersEx() &
@@ -1428,43 +1375,46 @@ public class PSurfaceAWT extends PSurfaceNone {
 //       InputEvent.CTRL_DOWN_MASK |
 //       InputEvent.META_DOWN_MASK |
 //       InputEvent.ALT_DOWN_MASK);
-    int peModifiers = event.getModifiers() &
-      (InputEvent.SHIFT_MASK |
-       InputEvent.CTRL_MASK |
-       InputEvent.META_MASK |
-       InputEvent.ALT_MASK);
+    int peModifiers = event.getModifiers()
+      & (InputEvent.SHIFT_MASK
+      | InputEvent.CTRL_MASK
+      | InputEvent.META_MASK
+      | InputEvent.ALT_MASK);
 
     sketch.postEvent(new KeyEvent(event, event.getWhen(),
-                                  peAction, peModifiers,
-                                  event.getKeyChar(), event.getKeyCode()));
+      peAction, peModifiers,
+      event.getKeyChar(), event.getKeyCode()));
   }
 
-
   // listeners, for all my men!
-
-    /**
-     *
-     */
-  protected void addListeners() {
+  /**
+   *
+   */
+  protected final void addListeners() {
 
     canvas.addMouseListener(new MouseListener() {
 
+      @Override
       public void mousePressed(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
 
+      @Override
       public void mouseReleased(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
 
+      @Override
       public void mouseClicked(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
 
+      @Override
       public void mouseEntered(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
 
+      @Override
       public void mouseExited(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
@@ -1472,34 +1422,34 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     canvas.addMouseMotionListener(new MouseMotionListener() {
 
+      @Override
       public void mouseDragged(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
 
+      @Override
       public void mouseMoved(java.awt.event.MouseEvent e) {
         nativeMouseEvent(e);
       }
     });
 
-    canvas.addMouseWheelListener(new MouseWheelListener() {
-
-      public void mouseWheelMoved(MouseWheelEvent e) {
-        nativeMouseEvent(e);
-      }
+    canvas.addMouseWheelListener((MouseWheelEvent e) -> {
+      nativeMouseEvent(e);
     });
 
     canvas.addKeyListener(new KeyListener() {
 
+      @Override
       public void keyPressed(java.awt.event.KeyEvent e) {
         nativeKeyEvent(e);
       }
 
-
+      @Override
       public void keyReleased(java.awt.event.KeyEvent e) {
         nativeKeyEvent(e);
       }
 
-
+      @Override
       public void keyTyped(java.awt.event.KeyEvent e) {
         nativeKeyEvent(e);
       }
@@ -1507,11 +1457,13 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     canvas.addFocusListener(new FocusListener() {
 
+      @Override
       public void focusGained(FocusEvent e) {
         sketch.focused = true;
         sketch.focusGained();
       }
 
+      @Override
       public void focusLost(FocusEvent e) {
         sketch.focused = false;
         sketch.focusLost();
@@ -1537,9 +1489,7 @@ public class PSurfaceAWT extends PSurfaceNone {
     comp.removeKeyListener(this);
     comp.removeFocusListener(this);
   }
-  */
-
-
+   */
 //  /**
 //   * Call to remove, then add, listeners to a component.
 //   * Avoids issues with double-adding.
@@ -1548,21 +1498,16 @@ public class PSurfaceAWT extends PSurfaceNone {
 //    removeListeners(comp);
 //    addListeners(comp);
 //  }
-
-
-
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-
   int cursorType = PConstants.ARROW;
   boolean cursorVisible = true;
   Cursor invisibleCursor;
 
-    /**
-     *
-     * @param kind
-     */
-    @Override
+  /**
+   *
+   * @param kind
+   */
+  @Override
   public void setCursor(int kind) {
     // Swap the HAND cursor because MOVE doesn't seem to be available on OS X
     // https://github.com/processing/processing/issues/2358
@@ -1574,13 +1519,13 @@ public class PSurfaceAWT extends PSurfaceNone {
     this.cursorType = kind;
   }
 
-    /**
-     *
-     * @param img
-     * @param x
-     * @param y
-     */
-    @Override
+  /**
+   *
+   * @param img
+   * @param x
+   * @param y
+   */
+  @Override
   public void setCursor(PImage img, int x, int y) {
     // Don't set cursorType, instead use cursorType to save the last
     // regular cursor type used for when cursor() is called.
@@ -1592,18 +1537,18 @@ public class PSurfaceAWT extends PSurfaceNone {
       return;
     }
 
-    Cursor cursor =
-      canvas.getToolkit().createCustomCursor((Image) img.getNative(),
-                                             new Point(x, y),
-                                             "custom");
+    Cursor cursor
+      = canvas.getToolkit().createCustomCursor((Image) img.getNative(),
+        new Point(x, y),
+        "custom");
     canvas.setCursor(cursor);
     cursorVisible = true;
   }
 
-    /**
-     *
-     */
-    @Override
+  /**
+   *
+   */
+  @Override
   public void showCursor() {
     // Maybe should always set here? Seems dangerous, since it's likely that
     // Java will set the cursor to something else on its own, and the sketch
@@ -1614,35 +1559,35 @@ public class PSurfaceAWT extends PSurfaceNone {
     }
   }
 
-    /**
-     *
-     */
-    @Override
+  /**
+   *
+   */
+  @Override
   public void hideCursor() {
     // Because the OS may have shown the cursor on its own,
     // don't return if 'cursorVisible' is set to true. [rev 0216]
 
     if (invisibleCursor == null) {
-      BufferedImage cursorImg =
-        new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+      BufferedImage cursorImg
+        = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
       // this is a temporary workaround for the CHIP, will be removed
       Dimension cursorSize = Toolkit.getDefaultToolkit().getBestCursorSize(16, 16);
       if (cursorSize.width == 0 || cursorSize.height == 0) {
         invisibleCursor = Cursor.getDefaultCursor();
       } else {
-        invisibleCursor =
-          canvas.getToolkit().createCustomCursor(cursorImg, new Point(8, 8), "blank");
+        invisibleCursor
+          = canvas.getToolkit().createCustomCursor(cursorImg, new Point(8, 8), "blank");
       }
     }
     canvas.setCursor(invisibleCursor);
     cursorVisible = false;
   }
 
-    /**
-     *
-     * @return
-     */
-    @Override
+  /**
+   *
+   * @return
+   */
+  @Override
   public Thread createThread() {
     return new AnimationThread() {
       @Override
@@ -1653,8 +1598,7 @@ public class PSurfaceAWT extends PSurfaceNone {
     };
   }
 
-
-  void debug(String format, Object ... args) {
+  void debug(String format, Object... args) {
     System.out.format(format + "%n", args);
   }
 }

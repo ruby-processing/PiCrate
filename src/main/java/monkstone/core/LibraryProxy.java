@@ -1,7 +1,6 @@
 package monkstone.core;
 
 import processing.core.PApplet;
-import static processing.core.PConstants.*;
 import processing.event.MouseEvent;
 import processing.event.KeyEvent;
 

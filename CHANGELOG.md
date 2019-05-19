@@ -1,7 +1,9 @@
+v0.8.0 Refactor processing code to jdk8 syntax, include lambda, switch on string etc. Make some methods used in constructors (eg allocate) final, might cause breakages?
 
 v0.7.1 Oops fix `GfxRender` had not been merged
 
 v0.7.0 Refactor sketch_writer to load params from ~/.picrate/sketch.yml. `AppRender => GfxRender` because we only need `PGraphics` in renderer.
+
 v0.6.0 Re-branding with new 'pick'/'eight' svg for PiCrate
 
 v0.5.0 Do geany configuration when installing samples
