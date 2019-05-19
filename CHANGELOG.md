@@ -1,4 +1,4 @@
-v0.8.0 Refactor processing code to jdk8 syntax, include lambda, switch on string etc. Make some methods used in constructors (eg allocate) final, might cause breakages?
+v0.8.0 Refactor processing code to jdk8 syntax, include lambda, switch on string etc. Make some methods used in constructors (eg allocate) final, might cause breakages? Using maven `release` flag which assumes build with jdk9+ (though targeting 8, which only supports `source` & `release` flags).
 
 v0.7.1 Oops fix `GfxRender` had not been merged
 

@@ -25,12 +25,10 @@ project 'picrate', 'http://maven.apache.org' do
   properties( 'jogl.version' => '2.3.2',
     'jruby.api' => 'http://jruby.org/apidocs/',
     'source.directory' => 'src/main',
-    'maven.compiler.target' => '1.8',
     'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
     'picrate.basedir' => '${project.basedir}',
     'project.build.sourceEncoding' => 'utf-8',
-    'polyglot.dump.pom' => 'pom.xml',
-    'maven.compiler.source' => '1.8' )
+    'polyglot.dump.pom' => 'pom.xml')
     pom 'org.jruby:jruby:9.2.7.0'
     jar 'org.processing:video:3.2.3'
     jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
@@ -40,8 +38,7 @@ project 'picrate', 'http://maven.apache.org' do
   plugin( :resources, '2.7',
     'encoding' =>  'UTF-8' )
     plugin( :compiler, '3.8.0',
-      'source' =>  '1.8',
-      'target' =>  '1.8' )
+          'release' =>  '8' )
       plugin( :pmd, '3.3',
         'sourceEncoding' =>  'utf-8',
         'minimumTokens' =>  '100',
