@@ -19,7 +19,7 @@ class NativeFolder
       return format(LINUX_FORMAT, '64') if /amd64/.match?(bit)
       return format(LINUX_FORMAT, ARM32) if /arm/.match?(bit)
     end
-    raise RuntimeError, "Unsupported Archicture"
+    raise RuntimeError, "Unsupported Architecture"
   end
 
   def extension
