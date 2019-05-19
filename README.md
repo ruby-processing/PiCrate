@@ -13,12 +13,12 @@ jgem install picrate
 
 Clone this repo:-
 
-Requires maven, [jdk8][oracle] (but could be openjdk), and a jruby install.
+Requires maven, openjdk11 (to build, uses `release` flag), and a jdk8 and jruby to install.
 
 ```bash
 cd PiCrate
 rake # assumes an installed version of vanilla processing
-jgem install picrate-0.6.0-java.gem
+jgem install picrate-0.8.0-java.gem
 ```
 To create a template sketch:-
 ```bash
