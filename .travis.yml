@@ -1,9 +1,6 @@
-language: ruby
-sudo: false
+language: java
 dist: trusty
 
-rvm:
-  - jruby-9.2.7.0
 jdk:
   - openjdk11
 os:

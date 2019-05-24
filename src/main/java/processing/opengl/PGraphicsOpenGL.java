@@ -5352,9 +5352,9 @@ public class PGraphicsOpenGL extends PGraphics {
   // showWarning() and showException() available from PGraphics.
 
   /**
-   * Report on anything from glError().
-   * Don't use this inside glBegin/glEnd otherwise it'll
-   * throw an GL_INVALID_OPERATION error.
+   * Report on anything from glError().Don't use this inside glBegin/glEnd 
+   * otherwise it'll throw an GL_INVALID_OPERATION error.
+   * @param where
    */
   protected void report(String where) {
     if (!hints[DISABLE_OPENGL_ERRORS]) {

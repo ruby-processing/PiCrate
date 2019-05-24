@@ -35,22 +35,38 @@ project 'picrate', 'http://maven.apache.org' do
     jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   end
 
-  plugin( :resources, '2.7',
-    'encoding' =>  'UTF-8' )
-    plugin( :compiler, '3.8.0',
-          'release' =>  '8' )
-      plugin( :pmd, '3.3',
-        'sourceEncoding' =>  'utf-8',
-        'minimumTokens' =>  '100',
-        'targetJdk' =>  '${compileSource}' )
-        build do
-          resource do
-            directory '${source.directory}/java'
-            includes ['**/**/*.glsl', '**/*.jnilib']
-            excludes '**/**/*.java'
-          end
-          resource do
-            directory '${source.directory}/resources'
-            includes ['**/*.png', '*.txt']
-          end
-        end
+  pom 'org.jruby:jruby:9.2.7.0'
+  jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
+  jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
+  jar 'org.processing:video:3.0.2'
+
+  overrides do
+    plugin :resources, '2.7'
+    plugin :dependency, '2.8'
+    plugin( :compiler, '3.8.0', 'release' => '8' )
+    plugin(
+      :javadoc,
+      '2.10.4',
+      'detectOfflineLinks' =>  'false',
+      'links' => [ '${processing.api}', '${jruby.api}' ]
+    )
+    plugin(
+      :jar, '3.1.0',
+      'archive' => {
+        'manifestEntries' => { 'Class-Path' => 'gluegen-rt.jar jog-all.jar' }
+      }
+    )
+  end
+
+  build do
+    resource do
+      directory '${source.directory}/main/java'
+      includes '**/**/*.glsl', '**/*.jnilib'
+      excludes '**/**/*.java'
+    end
+    resource do
+      directory '${source.directory}/main/resources'
+      includes '**/*.png', '*.txt'
+      excludes
+    end
+  end

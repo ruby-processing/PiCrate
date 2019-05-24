@@ -4,20 +4,9 @@ HOME_DIR = ENV['HOME']
 
 task default: %i[init compile install test gem]
 
-def create_manifest
-  title = 'Implementation-Title: PiCrate'
-  version = "Implementation-Version: #{PiCrate::VERSION}"
-  File.open('MANIFEST.MF', 'w') do |f|
-    f.puts(title)
-    f.puts(version)
-    f.puts('Class-Path: gluegen-rt.jar jog-all.jar')
-  end
-end
-
 # depends on installed processing, with processing on path
-desc 'Create Manifest and Copy Jars'
+desc 'Copy Jars'
 task :init do
-  create_manifest
   # for Archlinux etc
   processing_root = File.dirname(`readlink -f $(which processing)`)
   # alternative for debian linux etc
