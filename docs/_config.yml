@@ -3,7 +3,7 @@ port: 4000
 title: PiCrate gem
 email: mamba2928@yahoo.co.uk
 description: > # this means to ignore newlines until "baseurl:"
-  The picrate gem is ruby wrapper around processing, targetting raspberrypi and
+  The picrate gem is ruby implementation of processing, targetting raspberrypi and
   linux
 baseurl: "" # the subpath of your site, e.g. /blog
 regenerate: true

@@ -1,5 +1,5 @@
 /**
- * This utility allows JRubyArt users to use the processing.org color method
+ * This utility allows PiCrate users to use the processing.org color method
  * in their sketches. Includes a method to efficiently convert an cols of web
  * strings to an cols of color int, and another to convert an cols of p5 color
  * (int) to a string that can be used in ruby code (to generate web color cols).

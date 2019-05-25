@@ -8,7 +8,7 @@ It is quite likely that people wishing to experiment with PiCrate on arm have mo
 
 ```bash
 sudo pacman -Syu # get up to data
-sudo pacman jdk-arm # but I'm not 100% sure what version is installed jdk8 is reqd / and preferred over later
+sudo pacman jdk-arm # but I'm not 100% sure what version is installed jdk8+ is reqd
 sudo archlinux-java set java-8-openjdk/jre # case you have more than one java installed
 sudo pacman jruby # should install latest version
 ```
