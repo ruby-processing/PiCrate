@@ -1,25 +1,27 @@
 /* -*- mode: java; c-basic-offset: 2; indent-tabs-mode: nil -*- */
 
  /*
-  Part of the Processing project - http://processing.org
+Part of the Processing project - http://processing.org
 
-  Copyright (c) 2012-15 The Processing Foundation
-  Copyright (c) 2004-12 Ben Fry & Casey Reas
-  Copyright (c) 2001-04 Massachusetts Institute of Technology
+Copyright (c) 2012-19 The Processing Foundation
+Copyright (c) 2004-12 Ben Fry & Casey Reas
+Copyright (c) 2001-04 Massachusetts Institute of Technology
 
-  This library is free software; you can redistribute it and/or
-  modify it under the terms of version 2.01 of the GNU Lesser General
-  Public License as published by the Free Software Foundation.
+This library is free software; you can redistribute it and/or
+modify it under the terms of version 2.01 of the GNU Lesser General
+Public License as published by the Free Software Foundation.
 
-  This library is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  Lesser General Public License for more details.
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
 
-  You should have received a copy of the GNU Lesser General
-  Public License along with this library; if not, write to the
-  Free Software Foundation, Inc., 59 Temple Place, Suite 330,
-  Boston, MA  02111-1307  USA
+You should have received a copy of the GNU Lesser General
+Public License along with this library; if not, write to the
+Free Software Foundation, Inc., 59 Temple Place, Suite 330,
+Boston, MA  02111-1307  USA
+
+Hacked by Martin Prout to remove Apple shit, not needed on linux
  */
 package processing.core;
 
@@ -30,7 +32,7 @@ import java.awt.geom.PathIterator;
 import java.awt.image.*;
 import java.io.*;
 import java.util.Arrays;
-import java.util.HashMap;
+//import java.util.HashMap;
 
 /**
  * Grayscale bitmap font class used by Processing.
@@ -153,47 +155,16 @@ public class PFont implements PConstants {
   protected boolean fontSearched;
 
   /**
-   * Array of the native system fonts. Used to lookup native fonts by their
-   * PostScript name. This is a workaround for a several year old Apple Java bug
-   * that they can't be bothered to fix.
+   * The name of the font that Java uses when a font isn't found. See
+   * {@link #findFont(String)} and {@link #loadFonts()} for more info.
    */
-  static protected Font[] fonts;
-
-  /**
-   *
-   */
-  static protected HashMap<String, Font> fontDifferent;
-
-//  /**
-//   * If not null, this font is set to load dynamically. This is the default
-//   * when createFont() method is called without a character set. Bitmap
-//   * versions of characters are only created when prompted by an index() call.
-//   */
-//  protected Font lazyFont;
-  /**
-   *
-   */
+  static protected String systemFontName;
+  static protected String[] fonts;
   protected BufferedImage lazyImage;
-
-  /**
-   *
-   */
   protected Graphics2D lazyGraphics;
-
-  /**
-   *
-   */
   protected FontMetrics lazyMetrics;
-
-  /**
-   *
-   */
   protected int[] lazySamples;
 
-  /**
-   * for subclasses that need to store metadata about the font
-   */
-//  protected HashMap<PGraphics, Object> cacheMap;
   /**
    * @nowebref
    */
@@ -226,9 +197,8 @@ public class PFont implements PConstants {
   }
 
   /**
-   * Create a new image-based font on the fly. If charset is set to null, the
-   * characters will only be created as bitmaps when they're drawn.
-   *
+   * Create a new image-based font on the fly.If charset is set to null, the
+   * characters will only be created as bitmaps when they're drawn.   *
    * @param font
    * @param smooth
    * @nowebref
@@ -278,7 +248,7 @@ public class PFont implements PConstants {
     //descent = lazyMetrics.getDescent();
     if (charset == null) {
       lazy = true;
-//      lazyFont = font;
+      //      lazyFont = font;
 
     } else {
       // charset needs to be sorted to make index lookup run more quickly
@@ -307,24 +277,24 @@ public class PFont implements PConstants {
       // foreign font, so just make ascent the max topExtent
       // for > 1.0.9, not doing this anymore.
       // instead using getAscent() and getDescent() values for these cases.
-//      if ((ascent == 0) && (descent == 0)) {
-//        //for (int i = 0; i < charCount; i++) {
-//        for (Glyph glyph : glyphs) {
-//          char cc = (char) glyph.value;
-//          //char cc = (char) glyphs[i].value;
-//          if (Character.isWhitespace(cc) ||
-//              (cc == '\u00A0') || (cc == '\u2007') || (cc == '\u202F')) {
-//            continue;
-//          }
-//          if (glyph.topExtent > ascent) {
-//            ascent = glyph.topExtent;
-//          }
-//          int d = -glyph.topExtent + glyph.height;
-//          if (d > descent) {
-//            descent = d;
-//          }
-//        }
-//      }
+      //      if ((ascent == 0) && (descent == 0)) {
+      //        //for (int i = 0; i < charCount; i++) {
+      //        for (Glyph glyph : glyphs) {
+      //          char cc = (char) glyph.value;
+      //          //char cc = (char) glyphs[i].value;
+      //          if (Character.isWhitespace(cc) ||
+      //              (cc == '\u00A0') || (cc == '\u2007') || (cc == '\u202F')) {
+      //            continue;
+      //          }
+      //          if (glyph.topExtent > ascent) {
+      //            ascent = glyph.topExtent;
+      //          }
+      //          int d = -glyph.topExtent + glyph.height;
+      //          if (d > descent) {
+      //            descent = d;
+      //          }
+      //        }
+      //      }
     }
 
     // If not already created, just create these two characters to calculate
@@ -370,8 +340,7 @@ public class PFont implements PConstants {
 
   /**
    * @throws java.io.IOException
-   * @nowebref
-   * @param input InputStream
+   * @nowebref @param input InputStream
    */
   public PFont(InputStream input) throws IOException {
     DataInputStream is = new DataInputStream(input);
@@ -432,7 +401,7 @@ public class PFont implements PConstants {
     }
     // See if there's a native version of this font that can be used,
     // in case that's of interest later.
-//    findNative();
+    //    findNative();
   }
 
   /**
@@ -443,7 +412,6 @@ public class PFont implements PConstants {
    * <p>
    * It is assumed that the calling class will handle closing the stream when
    * finished.
-   *
    * @param output
    * @throws java.io.IOException
    */
@@ -525,27 +493,18 @@ public class PFont implements PConstants {
     glyphCount++;
   }
 
-  /**
-   *
-   * @return
-   */
   public String getName() {
     return name;
   }
 
-  /**
-   *
-   * @return
-   */
   public String getPostScriptName() {
     return psname;
   }
 
   /**
-   * Set the native complement of this font. Might be set internally via the
-   * findFont() function, or externally by a deriveFont() call if the font is
-   * resized by PGraphicsJava2D.
-   *
+   * Set the native complement of this font.Might be set internally via the
+ findFont() function, or externally by a deriveFont() call if the font is
+ resized by PGraphicsJava2D.
    * @param font
    */
   public void setNative(Object font) {
@@ -555,8 +514,7 @@ public class PFont implements PConstants {
   /**
    * Use the getNative() method instead, which allows library interfaces to be
    * written in a cross-platform fashion for desktop, Android, and others.
-   *
-   * @return
+   * @return 
    */
   @Deprecated
   public Font getFont() {
@@ -565,8 +523,7 @@ public class PFont implements PConstants {
 
   /**
    * Return the native java.awt.Font associated with this PFont (if any).
-   *
-   * @return
+   * @return 
    */
   public Object getNative() {
     if (subsetting) {
@@ -577,58 +534,43 @@ public class PFont implements PConstants {
 
   /**
    * Return size of this font.
-   *
-   * @return
+   * @return 
    */
   public int getSize() {
     return size;
   }
 
-//  public void setDefaultSize(int size) {
-//    defaultSize = size;
-//  }
+  //  public void setDefaultSize(int size) {
+  //    defaultSize = size;
+  //  }
   /**
-   * Returns the size that will be used when textFont(font) is called. When
+   * Returns the size that will be used when textFont(font) is called.When
    * drawing with 2x pixel density, bitmap fonts in OpenGL need to be created
    * (behind the scenes) at double the requested size. This ensures that they're
-   * shown at half on displays (so folks don't have to change their sketch
-   * code).
-   *
-   * @return
+   * shown at half on displays (so folks don't have to change their sketch code).
+   * @return 
    */
   public int getDefaultSize() {
     //return defaultSize;
     return size / density;
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean isSmooth() {
     return smooth;
   }
 
-  /**
-   *
-   * @return
-   */
   public boolean isStream() {
     return stream;
   }
 
-  /**
-   *
-   */
   public void setSubsetting() {
     subsetting = true;
   }
 
   /**
-   * Attempt to find the native version of this font. (Public so that it can be
+   * Attempt to find the native version of this font.(Public so that it can be
    * used by OpenGL or other renderers.)
-   *
-   * @return
+   * @return 
    */
   public Object findNative() {
     if (font == null) {
@@ -653,11 +595,6 @@ public class PFont implements PConstants {
     return font;
   }
 
-  /**
-   *
-   * @param c
-   * @return
-   */
   public Glyph getGlyph(char c) {
     int index = index(c);
     return (index == -1) ? null : glyphs[index];
@@ -690,11 +627,6 @@ public class PFont implements PConstants {
     }
   }
 
-  /**
-   *
-   * @param c
-   * @return
-   */
   protected int indexActual(char c) {
     // degenerate case, but the find function will have trouble
     // if there are somehow zero chars in the lookup
@@ -713,13 +645,6 @@ public class PFont implements PConstants {
     return indexHunt(c, 0, glyphCount - 1);
   }
 
-  /**
-   *
-   * @param c
-   * @param start
-   * @param stop
-   * @return
-   */
   protected int indexHunt(int c, int start, int stop) {
     int pivot = (start + stop) / 2;
 
@@ -746,30 +671,27 @@ public class PFont implements PConstants {
   /**
    * Currently un-implemented for .vlw fonts, but honored for layout in case
    * subclasses use it.
-   *
    * @param a
    * @param b
-   * @return
+   * @return 
    */
   public float kern(char a, char b) {
     return 0;
   }
 
   /**
-   * Returns the ascent of this font from the baseline. The value is based on a
+   * Returns the ascent of this font from the baseline.The value is based on a
    * font of size 1.
-   *
-   * @return
+   * @return 
    */
   public float ascent() {
     return ((float) ascent / (float) size);
   }
 
   /**
-   * Returns how far this font descends from the baseline. The value is based on
-   * a font size of 1.
-   *
-   * @return
+   * Returns how far this font descends from the baseline.The value is based on
+ a font size of 1.
+   * @return 
    */
   public float descent() {
     return ((float) descent / (float) size);
@@ -777,9 +699,8 @@ public class PFont implements PConstants {
 
   /**
    * Width of this character for a font of size 1.
-   *
    * @param c
-   * @return
+   * @return 
    */
   public float width(char c) {
     if (c == 32) {
@@ -795,41 +716,21 @@ public class PFont implements PConstants {
   }
 
   //////////////////////////////////////////////////////////////
-  /**
-   *
-   * @return
-   */
   public int getGlyphCount() {
     return glyphCount;
   }
 
-  /**
-   *
-   * @param i
-   * @return
-   */
   public Glyph getGlyph(int i) {
     return glyphs[i];
   }
 
-  /**
-   *
-   * @param ch
-   * @return
-   */
   public PShape getShape(char ch) {
     return getShape(ch, 0);
   }
 
-  /**
-   *
-   * @param ch
-   * @param detail
-   * @return
-   */
   public PShape getShape(char ch, float detail) {
-    Font font = (Font) getNative();
-    if (font == null) {
+    Font lfont = (Font) getNative();
+    if (lfont == null) {
       throw new IllegalArgumentException("getShape() only works on fonts loaded with createFont()");
     }
 
@@ -844,8 +745,8 @@ public class PFont implements PConstants {
     //FontRenderContext frc = graphics.getFontRenderContext();
     @SuppressWarnings("deprecation")
     FontRenderContext frc
-      = Toolkit.getDefaultToolkit().getFontMetrics(font).getFontRenderContext();
-    GlyphVector gv = font.createGlyphVector(frc, textArray);
+      = Toolkit.getDefaultToolkit().getFontMetrics(lfont).getFontRenderContext();
+    GlyphVector gv = lfont.createGlyphVector(frc, textArray);
     Shape shp = gv.getOutline();
     // make everything into moveto and lineto
     PathIterator iter = (detail == 0)
@@ -855,56 +756,56 @@ public class PFont implements PConstants {
 
     int contours = 0;
     //boolean outer = true;
-//    boolean contour = false;
+    //    boolean contour = false;
     while (!iter.isDone()) {
       int type = iter.currentSegment(iterPoints);
       switch (type) {
         case PathIterator.SEG_MOVETO:   // 1 point (2 vars) in textPoints
-//        System.out.println("moveto");
-//        if (!contour) {
+          //        System.out.println("moveto");
+          //        if (!contour) {
           if (contours == 0) {
             s.beginShape();
           } else {
             s.beginContour();
-//          contour = true;
+            //          contour = true;
           }
           contours++;
           s.vertex(iterPoints[0], iterPoints[1]);
           break;
 
         case PathIterator.SEG_LINETO:   // 1 point
-//        System.out.println("lineto");
-//        PApplet.println(PApplet.subset(iterPoints, 0, 2));
+          //        System.out.println("lineto");
+          //        PApplet.println(PApplet.subset(iterPoints, 0, 2));
           s.vertex(iterPoints[0], iterPoints[1]);
           break;
 
         case PathIterator.SEG_QUADTO:   // 2 points
-//        System.out.println("quadto");
-//        PApplet.println(PApplet.subset(iterPoints, 0, 4));
+          //        System.out.println("quadto");
+          //        PApplet.println(PApplet.subset(iterPoints, 0, 4));
           s.quadraticVertex(iterPoints[0], iterPoints[1],
             iterPoints[2], iterPoints[3]);
           break;
 
         case PathIterator.SEG_CUBICTO:  // 3 points
-//        System.out.println("cubicto");
-//        PApplet.println(iterPoints);
+          //        System.out.println("cubicto");
+          //        PApplet.println(iterPoints);
           s.quadraticVertex(iterPoints[0], iterPoints[1],
             iterPoints[2], iterPoints[3],
             iterPoints[4], iterPoints[5]);
           break;
 
         case PathIterator.SEG_CLOSE:
-//        System.out.println("close");
+          //        System.out.println("close");
           if (contours > 1) {
-//        contours--;
-//        if (contours == 0) {
-////          s.endShape();
-//        } else {
+            //        contours--;
+            //        if (contours == 0) {
+            ////          s.endShape();
+            //        } else {
             s.endContour();
           }
           break;
       }
-//      PApplet.println(iterPoints);
+      //      PApplet.println(iterPoints);
       iter.next();
     }
     s.endShape(CLOSE);
@@ -968,77 +869,53 @@ public class PFont implements PConstants {
     for (int i = 0; i < EXTRA_CHARS.length; i++) {
       CHARSET[index++] = EXTRA_CHARS[i];
     }
-  }
-
-  ;
-
+  };
 
   /**
-   * ( begin auto-generated from PFont_list.xml )
-   *
-   * Gets a list of the fonts installed on the system. The data is returned
-   * as a String array. This list provides the names of each font for input
-   * into <b>createFont()</b>, which allows Processing to dynamically format
-   * fonts. This function is meant as a tool for programming local
-   * applications and is not recommended for use in applets.
-   *
-   * ( end auto-generated )
-   *
-     * @return 
-   * @webref pfont
-   * @usage application
-   * @brief     Gets a list of the fonts installed on the system
-   */
+   * @return 
+  * @webref pfont
+  * @usage application
+  * @brief     Gets a list of the fonts installed on the system
+  */
   static public String[] list() {
     loadFonts();
-    String list[] = new String[fonts.length];
-    for (int i = 0; i < list.length; i++) {
-      list[i] = fonts[i].getName();
-    }
-    return list;
+    return fonts;
   }
 
   /**
-   *
+   * Make an internal list of available fonts.
    */
   static public void loadFonts() {
     if (fonts == null) {
       GraphicsEnvironment ge
         = GraphicsEnvironment.getLocalGraphicsEnvironment();
-      fonts = ge.getAllFonts();
-      if (PApplet.platform == PConstants.MACOSX) {
-        fontDifferent = new HashMap<>();
-        for (Font font : fonts) {
-          // getName() returns the PostScript name on OS X 10.6 w/ Java 6.
-          fontDifferent.put(font.getName(), font);
-          //fontDifferent.put(font.getPSName(), font);
-        }
-      }
+      fonts = ge.getAvailableFontFamilyNames();
     }
   }
 
   /**
-   * Starting with Java 1.5, Apple broke the ability to specify most fonts. This
-   * bug was filed years ago as #4769141 at bugreporter.apple.com. More:
-   * <a href="http://dev.processing.org/bugs/show_bug.cgi?id=407">Bug 407</a>.
-   *
+   * This function displays a warning when the font is not found and Java's
+   * system font is used. See:
+   * <a href="https://github.com/processing/processing/issues/5481">issue
+   * #5481</a>
    * @param name
-   * @return
+   * @return 
    */
   static public Font findFont(String name) {
-    loadFonts();
-    if (PApplet.platform == PConstants.MACOSX) {
-      Font maybe = fontDifferent.get(name);
-      if (maybe != null) {
-        return maybe;
-      }
-//      for (int i = 0; i < fonts.length; i++) {
-//        if (name.equals(fonts[i].getName())) {
-//          return fonts[i];
-//        }
-//      }
+    Font font = new Font(name, Font.PLAIN, 1);
+    // make sure we have the name of the system fallback font
+    if (systemFontName == null) {
+      // Figure out what the font is named when things fail
+      systemFontName = new Font("", Font.PLAIN, 1).getFontName();
     }
-    return new Font(name, Font.PLAIN, 1);
+    // warn the user if they didn't get the font they want
+    if (!name.equals(systemFontName)
+      && font.getFontName().equals(systemFontName)) {
+      PGraphics.showWarning("\"" + name + "\" is not available, "
+        + "so another font will be used. "
+        + "Use PFont.list() to show available fonts.");
+    }
+    return font;
   }
 
   //////////////////////////////////////////////////////////////
@@ -1047,70 +924,26 @@ public class PFont implements PConstants {
    */
   public class Glyph {
 
-    /**
-     *
-     */
     public PImage image;
-
-    /**
-     *
-     */
     public int value;
-
-    /**
-     *
-     */
     public int height;
-
-    /**
-     *
-     */
     public int width;
-
-    /**
-     *
-     */
     public int index;
-
-    /**
-     *
-     */
     public int setWidth;
-
-    /**
-     *
-     */
     public int topExtent;
-
-    /**
-     *
-     */
     public int leftExtent;
 
-    /**
-     *
-     */
     public Glyph() {
       index = -1;
       // used when reading from a stream or for subclasses
     }
 
-    /**
-     *
-     * @param is
-     * @throws IOException
-     */
     public Glyph(DataInputStream is) throws IOException {
       index = -1;
       readHeader(is);
     }
 
-    /**
-     *
-     * @param is
-     * @throws IOException
-     */
-    protected final void readHeader(DataInputStream is) throws IOException {
+    protected void readHeader(DataInputStream is) throws IOException {
       value = is.readInt();
       height = is.readInt();
       width = is.readInt();
@@ -1136,11 +969,6 @@ public class PFont implements PConstants {
       }
     }
 
-    /**
-     *
-     * @param os
-     * @throws IOException
-     */
     protected void writeHeader(DataOutputStream os) throws IOException {
       os.writeInt(value);
       os.writeInt(height);
@@ -1151,11 +979,6 @@ public class PFont implements PConstants {
       os.writeInt(0); // padding
     }
 
-    /**
-     *
-     * @param is
-     * @throws IOException
-     */
     protected void readBitmap(DataInputStream is) throws IOException {
       image = new PImage(width, height, ALPHA);
       int bitmapSize = width * height;
@@ -1170,18 +993,13 @@ public class PFont implements PConstants {
       for (int y = 0; y < h; y++) {
         for (int x = 0; x < w; x++) {
           pixels[y * width + x] = temp[y * w + x] & 0xff;
-//          System.out.print((image.pixels[y*64+x] > 128) ? "*" : ".");
+          //          System.out.print((image.pixels[y*64+x] > 128) ? "*" : ".");
         }
-//        System.out.println();
+        //        System.out.println();
       }
-//      System.out.println();
+      //      System.out.println();
     }
 
-    /**
-     *
-     * @param os
-     * @throws IOException
-     */
     protected void writeBitmap(DataOutputStream os) throws IOException {
       int[] pixels = image.pixels;
       for (int y = 0; y < height; y++) {
@@ -1191,10 +1009,6 @@ public class PFont implements PConstants {
       }
     }
 
-    /**
-     *
-     * @param c
-     */
     protected Glyph(char c) {
       int mbox3 = size * 3;
       lazyGraphics.setColor(Color.white);
