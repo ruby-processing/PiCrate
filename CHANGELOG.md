@@ -1,3 +1,5 @@
+v0.8.1 Refactor processing.core.PFont to remove need to load Fonts, that was a kack to support MacOS. List available fonts instead.
+
 v0.8.0 Refactor processing code to jdk8 syntax, include lambda, switch on string etc. Make some methods used in constructors (eg allocate) final, might cause breakages? Using maven `release` flag which assumes build with jdk9+ (though targeting 8, which only supports `source` & `release` flags). The Jar manifest is now dynamically created by maven, which allows `travisci` to pass on java build.
 
 v0.7.1 Oops fix `GfxRender` had not been merged
