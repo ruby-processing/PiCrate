@@ -7,7 +7,7 @@ module Processing
   include_package 'processing.core' # imports the processing jar.
   # Load vecmath, fastmath and mathtool modules
   Java::Monkstone::PicrateLibrary.load(JRuby.runtime)
-  SKETCH_ROOT ||= Dir.pwd
+  SKETCH_ROOT = File.absolute_path('.')
   # JRuby::Util.load_ext('monkstone.PicrateLibrary')
   # A utility to facilitate rendering of Vec2D and Vec3D as vertex
   module Render
