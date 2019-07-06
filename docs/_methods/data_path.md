@@ -7,8 +7,6 @@ permalink: methods/data_path.html
 ---
 The purpose of the `data_path` wrapper is to provide the absolute data path to a sketches `data` folder. In vanilla processing the direct use of this method is discouraged, owing to the way it has been implemented (it is used internally and may be the cause file access issues in PiCrate). The `data_path` method is implemented in PiCrate, and does not rely on the vanilla-processing version.
 
-It should be used to get around the need to provide an absolute data path on macosx to run sketches that contain `load_image`, `load_shader` etc that otherwise could not find the data.
-
 ### Simple usage ###
 
 ```ruby

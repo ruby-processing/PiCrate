@@ -213,9 +213,6 @@ Here is an example sketch:-
 #
 # Note: requires Carnivore Library for Processing (https://r-s-g.org/carnivore)
 #
-# + Windows:  first install winpcap (https://winpcap.org)
-# + Mac:      first open a Terminal and execute this commmand: sudo chmod 777 /dev/bpf*
-#             you need to do this each time you reboot Mac
 # + Linux:    run with difficulty (run with sudo rights arghh!!!) also install libpcap
 require 'picrate'
 

@@ -3,7 +3,7 @@ layout: post
 title:  "settings"
 permalink: methods/settings.html
 ---
-All sketches require a user defined [settings][settings] method. This is where you define the sketch size (can be fullscreen) and render mode. Regular processing sketches hide this in a pre-process step that converts `pde` code to valid java code (on linux you can find the java code in the `/tmp` folder, and in some other temporary location on MacOS and Windows).
+All sketches require a user defined [settings][settings] method. This is where you define the sketch size (can be fullscreen) and render mode. Regular processing sketches hide this in a pre-process step that converts `pde` code to valid java code (on linux you can find the java code in the `/tmp` folder).
 
 Minimal code default renderer:-
 ```ruby

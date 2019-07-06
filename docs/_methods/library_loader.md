@@ -4,7 +4,7 @@ title:  "load_library"
 keywords: ruby, java, jruby, library, load_library, native
 permalink: methods/load_library.html
 ---
-The purpose of the `load_library` (synonym `load_libraries`) method is to provide a convenient way to load the different kinds of ruby [libraries][libraries], and in the case of java libraries that use a native library, load the relevant classpath.  It does this by a mixture of pattern matching and honest magic so that you don't need to worry about adding the native libraries to classpath to the java runtime, and lots of other incomprehensible stuff. When it works it is fabulous (which is most of the time on Linux64 bit and MacOS). See examples under [libraries][libraries].
+The purpose of the `load_library` (synonym `load_libraries`) method is to provide a convenient way to load the different kinds of ruby [libraries][libraries], and in the case of java libraries that use a native library, load the relevant classpath.  It does this by a mixture of pattern matching and honest magic so that you don't need to worry about adding the native libraries to classpath to the java runtime, and lots of other incomprehensible stuff. See examples under [libraries][libraries].
 
 ### Cautionary Notes ###
 

@@ -451,8 +451,7 @@ public class PSurfaceAWT extends PSurfaceNone {
     sketch.displayWidth = screenRect.width;
     sketch.displayHeight = screenRect.height;
 
-    windowScaleFactor = PApplet.platform == PConstants.MACOSX
-      ? 1 : sketch.pixelDensity;
+    windowScaleFactor = sketch.pixelDensity;
 
     sketchWidth = sketch.sketchWidth() * windowScaleFactor;
     sketchHeight = sketch.sketchHeight() * windowScaleFactor;
@@ -584,14 +583,6 @@ public class PSurfaceAWT extends PSurfaceNone {
   @Override
   public void setTitle(String title) {
     frame.setTitle(title);
-    // Workaround for apparent Java bug on OS X?
-    // https://github.com/processing/processing/issues/3472
-    if (cursorVisible
-      && (PApplet.platform == PConstants.MACOSX)
-      && (cursorType != PConstants.ARROW)) {
-      hideCursor();
-      showCursor();
-    }
   }
 
   /**
@@ -707,11 +698,9 @@ public class PSurfaceAWT extends PSurfaceNone {
     //      the app has an icns file specified already. Help?
     List<String> jvmArgs
       = ManagementFactory.getRuntimeMXBean().getInputArguments();
-    for (String arg : jvmArgs) {
-      if (arg.startsWith("-Xdock:icon")) {
-        return true;  // dock image already set
-      }
-    }
+      if (jvmArgs.stream().anyMatch((arg) -> (arg.startsWith("-Xdock:icon")))) {
+          return true;
+      } // dock image already set
     return false;
   }
 
@@ -875,8 +864,6 @@ public class PSurfaceAWT extends PSurfaceNone {
     // Called here because the graphics device is needed before we can
     // determine whether the sketch wants size(displayWidth, displayHeight),
     // and getting the graphics device will be PSurface-specific.
-    PApplet.hideMenuBar();
-
     // Tried to use this to fix the 'present' mode issue.
     // Did not help, and the screenRect setup seems to work fine.
     //frame.setExtendedState(Frame.MAXIMIZED_BOTH);
@@ -1334,15 +1321,6 @@ public class PSurfaceAWT extends PSurfaceNone {
       peButton = PConstants.RIGHT;
     }
 
-    // If running on Mac OS, allow ctrl-click as right mouse. Prior to 0215,
-    // this used isPopupTrigger() on the native event, but that doesn't work
-    // for mouseClicked and mouseReleased (or others).
-    if (PApplet.platform == PConstants.MACOSX) {
-      //if (nativeEvent.isPopupTrigger()) {
-      if ((modifiers & InputEvent.CTRL_MASK) != 0) {
-        peButton = PConstants.RIGHT;
-      }
-    }
 
     sketch.postEvent(new MouseEvent(nativeEvent, nativeEvent.getWhen(),
       peAction, peModifiers,
@@ -1509,11 +1487,6 @@ public class PSurfaceAWT extends PSurfaceNone {
    */
   @Override
   public void setCursor(int kind) {
-    // Swap the HAND cursor because MOVE doesn't seem to be available on OS X
-    // https://github.com/processing/processing/issues/2358
-    if (PApplet.platform == PConstants.MACOSX && kind == PConstants.MOVE) {
-      kind = PConstants.HAND;
-    }
     canvas.setCursor(Cursor.getPredefinedCursor(kind));
     cursorVisible = true;
     this.cursorType = kind;
