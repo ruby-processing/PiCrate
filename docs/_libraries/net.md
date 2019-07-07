@@ -8,4 +8,4 @@ The processing net library can be used to create instances of server and client.
 
 ![Client / Server]({{site.github.url}}/assets/net.png)
 
-[examples](https://github.com/ruby-processing/picrate-examples/tree/master/library/net)
+[examples]:https://github.com/ruby-processing/picrate-examples/tree/master/library/net
