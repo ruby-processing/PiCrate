@@ -10,8 +10,8 @@ For a semi-automated setup and install, download and extract [this gist](https:/
 `~/install_picrate`
 
 ```bash
-cd ~/install_picrate
-bash install_picrate.sh # to run default task
+cd ~/picrate_install
+bash picrate_install.sh # to run default task
 ```
 #### What the script does ###
 1. Downloads JRuby
