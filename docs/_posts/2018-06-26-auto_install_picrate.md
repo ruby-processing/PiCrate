@@ -6,15 +6,15 @@ categories: PiCrate update
 permalink: /install_picrate/
 ---
 
-For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/c7d7741f800eb2327253635ee283c7eb). To keep your system clean put the file in a folder say
+For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/e9df8ea776aed58ce1c4de8e12982aad). To keep your system clean put the file in a folder say
 `~/install_picrate`
 
 ```bash
 cd ~/install_picrate
-rake # to run default task
+bash install_picrate.sh # to run default task
 ```
 #### What the script does ###
-1. Downloads JRuby (checks against sha256)
+1. Downloads JRuby
 2. Installs JRuby to `/opt`
 3. Uses `update-alternatives` to configure `jruby`, `jgem` and `jirb`
 4. The script checks for `GEM_HOME`, if undefined it modifies `~/.profile` to define `GEM_HOME` and puts gem binaries on your path, at logon.
