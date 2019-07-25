@@ -13,7 +13,7 @@ jgem install picrate
 
 Clone this repo:-
 
-Requires maven, openjdk11 (to build, uses `release` flag), and a jdk8 and jruby to install.
+Requires maven, openjdk11+ (to build, uses `release` flag), and a jdk8 and jruby to install.
 
 ```bash
 cd PiCrate
