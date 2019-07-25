@@ -18,7 +18,7 @@ Requires maven, openjdk11 (to build, uses `release` flag), and a jdk8 and jruby 
 ```bash
 cd PiCrate
 rake # assumes an installed version of vanilla processing
-jgem install picrate-0.8.0-java.gem
+jgem install picrate-0.9.0-java.gem
 ```
 To create a template sketch:-
 ```bash
