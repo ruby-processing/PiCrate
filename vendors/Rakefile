@@ -2,7 +2,6 @@
 
 require 'fileutils'
 require 'rake/clean'
-
 WARNING = 'WARNING: wget download failed you could do a manual download'
 SOUND = 'sound.zip'
 SOUND_VERSION = 'v1.3.2'
@@ -42,7 +41,7 @@ task download_and_copy_glvideo: %i[init_dir download_glvideo copy_glvideo clobbe
 
 desc 'download sound library'
 task :download_sound do
-  wget_base = 'wget https://github.com/processing/processing-sound/'
+  wget_base = 'wget https://github.com/processing/processing-sound'
   wget_string = [wget_base, 'releases/download/latest', SOUND].join('/')
   begin
     sh wget_string
