@@ -40,7 +40,7 @@ end
 overrides do
   plugin :resources, '2.7'
   plugin :dependency, '2.8'
-  plugin( :compiler, '3.8.0', 'release' => '8' )
+  plugin( :compiler, '3.8.1', 'release' => '11' )
   plugin(
     :javadoc,
     '2.10.4',
