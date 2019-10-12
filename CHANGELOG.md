@@ -1,3 +1,5 @@
+v1.0.0 Final release for Raspbian Stretch and Oracle java
+
 v0.9.0 Remove unnecessary MacOS variations, bump examples version
 
 v0.8.1 Refactor processing.core.PFont to remove need to load Fonts, that was a hack to support MacOS. List available fonts instead.

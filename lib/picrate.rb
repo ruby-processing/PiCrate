@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'java'
 unless defined? PICRATE_ROOT
   $LOAD_PATH << File.dirname(__dir__)

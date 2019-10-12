@@ -13,10 +13,10 @@ HOME_DIR = ENV['HOME']
 CLOBBER.include(EXAMPLES, SOUND, GLVIDEO, VIDEO)
 
 desc 'download, and copy picrate examples'
-task default: [:download_and_copy_samples]
+task default: %i[download_and_copy_samples config_geany]
 
 desc 'download and copy examples to user home'
-task download_and_copy_samples: %i[download_examples copy_examples config_geany]
+task download_and_copy_samples: %i[download_examples copy_examples]
 
 task :download_examples
 file_name = "#{EXAMPLES}.tar.gz"
@@ -84,7 +84,7 @@ desc 'configure geany'
 task :config_geany do
   unless File.exist? "#{HOME_DIR}/.config/geany/templates/files/picrate.rb"
     FileUtils.mkdir_p "#{HOME_DIR}/.config/geany/templates/files"
-    FileUtils.cp 'picrate.rb' "#{HOME_DIR}/.config/geany/templates/files"
+    FileUtils.cp 'picrate.rb', "#{HOME_DIR}/.config/geany/templates/files"
   end
   unless File.exist? "#{HOME_DIR}/projects/picrate.geany"
     FileUtils.mkdir_p "#{HOME_DIR}/projects"

@@ -1,6 +1,4 @@
 require_relative 'test_helper'
-require 'java'
-require_relative '../lib/picrate'
 
 Dir.chdir(File.dirname(__FILE__))
 

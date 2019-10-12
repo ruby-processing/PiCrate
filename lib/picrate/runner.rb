@@ -15,12 +15,12 @@ module Processing
     def self.execute
       runner = new
       runner.parse_options(ARGV)
-      runner.execute!
+      runner.execute
     end
 
     # Dispatch central.
-    def execute!
-      show_help if options.empty?
+    def execute
+      parse_options('-h') if options.empty?
       show_version if options[:version]
       create if options[:create]
       install(filename) if options[:install]
@@ -52,7 +52,7 @@ module Processing
 
         # This displays the help screen, all programs are
         # assumed to have this option.
-        opts.on('-h', '--help', 'Display this screen') do
+        opts.on_tail('-h', '--help', 'Display this screen') do
           puts opts
           exit
         end
@@ -76,11 +76,18 @@ module Processing
       puts template.result(binding)
     end
 
-    def install(library)
+    def install(library = nil)
+      library ||= 'new'
       choice = library.downcase
-      valid = Regexp.union('samples', 'sound', 'video', 'glvideo')
-      return warn format('No installer for %s', choice) unless valid =~ choice
-      system "cd #{PICRATE_ROOT}/vendors && rake download_and_copy_#{choice}"
+      case choice
+      when /samples|sound|video/
+        system "cd #{PICRATE_ROOT}/vendors && rake download_and_copy_#{choice}"
+      when /new/
+        # install samples and config geany
+        system "cd #{PICRATE_ROOT}/vendors && rake"
+      else
+        warn format('No installer for %s', library)
+      end
     end
   end # class Runner
 end # module Processing

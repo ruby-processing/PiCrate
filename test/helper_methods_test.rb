@@ -1,7 +1,6 @@
 # frozen_string_literal: true
+
 require_relative 'test_helper'
-require 'java'
-require_relative '../lib/picrate'
 
 Java::Monkstone::PicrateLibrary.new.load(JRuby.runtime, false)
 

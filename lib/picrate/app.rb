@@ -1,7 +1,6 @@
 # frozen_string_literal: false
 require_relative 'helper_methods'
 require_relative 'library_loader'
-require 'jruby'
 # A wrapper module for the processing App
 module Processing
   include_package 'processing.core' # imports the processing jar.
