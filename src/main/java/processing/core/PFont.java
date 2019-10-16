@@ -913,7 +913,7 @@ public class PFont implements PConstants {
       && font.getFontName().equals(systemFontName)) {
       PGraphics.showWarning("\"" + name + "\" is not available, "
         + "so another font will be used. "
-        + "Use PFont.list() to show available fonts.");
+        + "Use PFont.list to show available fonts.");
     }
     return font;
   }

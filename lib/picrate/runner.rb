@@ -70,17 +70,25 @@ module Processing
     def show_version
       require 'erb'
       template = ERB.new <<-EOF
-        PiCrate version <%= PiCrate::VERSION %>
-        JRuby version <%= JRUBY_VERSION %>
+      PiCrate version <%= PiCrate::VERSION %>
+      JRuby version <%= JRUBY_VERSION %>
       EOF
       puts template.result(binding)
     end
 
-    def install(library)
+    def install(library = nil)
+      library ||= 'new'
       choice = library.downcase
-      valid = Regexp.union('samples', 'sound', 'video', 'glvideo')
-      return warn format('No installer for %s', choice) unless valid =~ choice
-      system "cd #{PICRATE_ROOT}/vendors && rake download_and_copy_#{choice}"
+      case choice
+      when /samples|sound|video|glvideo/
+        system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
+      when /new/
+        system "cd #{PICRATE_ROOT}/vendors && rake"
+      else
+        warn format('No installer for %s', choice)
+      end
     end
-  end # class Runner
-end # module Processing
+  end
+  # class Runner
+end
+# module Processing

@@ -3,7 +3,7 @@ require 'picrate'
 # Sketch class
 class MySketch < Processing::App
   def settings
-    size 200, 200
+    size 400, 300
   end
 
   def setup

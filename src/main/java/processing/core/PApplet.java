@@ -142,11 +142,11 @@ public class PApplet implements PConstants {
   }
 
   /**
-   * Do not use; or javaVersionName are better options. For instance, is useful
+   * Do not use; or JAVA_VERSIONName are better options. For instance, is useful
    * when you need a number for comparison, i.e. "if ( >= 9)".
    */
   @Deprecated
-  public static final float javaVersion = 1 + JAVA_PLATFORM / 10f;
+  public static final float JAVA_VERSION = 1 + JAVA_PLATFORM / 10f;
 
   /**
    * Current platform in use, one of the PConstants WINDOWS, MACOSX, MACOS9,
@@ -438,8 +438,8 @@ public class PApplet implements PConstants {
    * <b>draw()</b>). But, inside mouse events, they update each time the event
    * is called. If they weren't separated, then the mouse would be read only
    * once per frame, making response choppy. If the mouse variables were always
-   * updated multiple times per frame, using <NOBR><b>line(pmouseX, pmouseY,
-   * mouseX, mouseY)</b></NOBR> inside <b>draw()</b> would have lots of gaps,
+   * updated multiple times per frame, using <b>line(pmouseX, pmouseY,
+   * mouseX, mouseY)</b> inside <b>draw()</b> would have lots of gaps,
    * because <b>pmouseX</b> may have changed several times in between the calls
    * to <b>line()</b>. Use <b>pmouseX</b> and
    * <b>pmouseY</b> inside <b>draw()</b> if you want values relative to the
@@ -1369,7 +1369,7 @@ public class PApplet implements PConstants {
 //   * Called by the browser or applet viewer to inform this applet
 //   * that it is being reclaimed and that it should destroy
 //   * any resources that it has allocated.
-//   * 
+//   *
 //   * destroy() supposedly gets called as the applet viewer
 //   * is shutting down the applet. stop() is called
 //   * first, and then destroy() to really get rid of things.
@@ -2284,7 +2284,7 @@ public class PApplet implements PConstants {
 
   /**
    * Create default renderer, likely to be resized, but needed for surface init.
-   * @return 
+   * @return
    */
   protected PGraphics createPrimaryGraphics() {
     return makeGraphics(sketchWidth(), sketchHeight(),
@@ -2622,22 +2622,6 @@ public class PApplet implements PConstants {
 
     int button = event.getButton();
 
-    // If running on Mac OS, allow ctrl-click as right mouse.
-    if (PApplet.platform == PConstants.MACOSX && event.getButton() == PConstants.LEFT) {
-      if (action == MouseEvent.PRESS && event.isControlDown()) {
-        macosxLeftButtonWithCtrlPressed = true;
-      }
-      if (macosxLeftButtonWithCtrlPressed) {
-        button = PConstants.RIGHT;
-        event = new MouseEvent(event.getNative(), event.getMillis(),
-          event.getAction(), event.getModifiers(),
-          event.getX(), event.getY(),
-          button, event.getCount());
-      }
-      if (action == MouseEvent.RELEASE) {
-        macosxLeftButtonWithCtrlPressed = false;
-      }
-    }
 
     // Get the (already processed) button code
     mouseButton = button;
@@ -6254,7 +6238,7 @@ public class PApplet implements PConstants {
    * precise control. On most occasions you should create fonts through
    * selecting "Create Font..." from the Tools menu.
    *
-   * Use the <b>PFont.list()</b> method to first determine the names for the
+   * Use the <b>PFont.list</b> method to first determine the names for the
    * fonts recognized by the computer and are compatible with this function.
    * Because of limitations in Java, not all fonts can be used and some might
    * work with one operating system and not others. When sharing a sketch with
@@ -7933,12 +7917,6 @@ public class PApplet implements PConstants {
     } catch (URISyntaxException e) {
       return null;
     }
-    if (jarPath.contains("Contents/Java/")) {
-      File containingFolder = new File(jarPath).getParentFile();
-      File dataFolder = new File(containingFolder, "data");
-      return new File(dataFolder, where);
-    }
-    // Windows, Linux, or when not using a Mac OS X .app file
     File workingDirItem
       = new File(sketchPath + File.separator + "data" + File.separator + where);
 //    if (workingDirItem.exists()) {
@@ -10554,7 +10532,7 @@ public class PApplet implements PConstants {
         if (equals != -1) {
           param = args[argIndex].substring(0, equals);
           value = args[argIndex].substring(equals + 1);
-          
+
           switch (param) {
             case ARGS_EDITOR_LOCATION:
               external = true;
@@ -10602,7 +10580,7 @@ public class PApplet implements PConstants {
           switch (args[argIndex]) {
             case ARGS_PRESENT:
               present = true;
-              
+
 //        } else if (args[argIndex].equals(ARGS_SPAN_DISPLAYS)) {
 //          spanDisplays = true;
               break;
@@ -10824,7 +10802,7 @@ public class PApplet implements PConstants {
       };
 
       surface.initFrame(this); //, backgroundColor, displayNum, fullScreen, spanDisplays);
-      surface.setTitle(getClass().getSimpleName());
+      surface.setTitle("PiCrate 2.0 Sketch");
 
     } else {
       surface.initOffscreen(this);  // for PDF/PSurfaceNone and friends
