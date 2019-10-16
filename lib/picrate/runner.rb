@@ -79,6 +79,7 @@ module Processing
     def install(library = nil)
       library ||= 'new'
       choice = library.downcase
+      case choice
       when /samples|sound|video|glvideo/
         system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
       when /new/

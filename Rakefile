@@ -9,7 +9,7 @@ task default: %i[init compile install test gem]
 # depends on installed processing, with processing on path
 desc 'Copy Jars'
 task :init do
-  processing_root = File.join(HOME_DIR, 'processing-3.4')
+  processing_root = File.join(HOME_DIR, 'processing-3.5.3')
   jar_dir = File.join(processing_root, 'core', 'library')
   opengl = Dir.entries(jar_dir).grep(/amd64|armv6hf/).select { |jar| jar =~ /linux/ }
   opengl.concat %w[jogl-all.jar gluegen-rt.jar]

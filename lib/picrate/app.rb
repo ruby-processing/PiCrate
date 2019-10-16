@@ -1,17 +1,66 @@
+# frozen_string_literal: false
+require_relative 'helper_methods'
+require_relative 'library_loader'
+# A wrapper module for the processing App
+module Processing
+  include_package 'processing.core' # imports the processing jar.
+  # Load vecmath, fastmath and mathtool modules
+  Java::Monkstone::PicrateLibrary.load(JRuby.runtime)
+  SKETCH_ROOT = File.absolute_path('.')
+  # JRuby::Util.load_ext('monkstone.PicrateLibrary')
+  # A utility to facilitate rendering of Vec2D and Vec3D as vertex
+  module Render
+    java_import 'monkstone.vecmath.GfxRender'
+    java_import 'monkstone.vecmath.ShapeRender'
+  end
+
+  # This class is the base class the user should inherit from when making
+  # their own sketch.
+  #
+  # i.e.
+  # require 'picrate'
+  #
+  # class MySketch < Processing::App
+  #
+  #   def draw
+  #     background rand(255)
+  #   end
+  #
+  # end
+  #
+  # MySketch.new
+
+  # Watch the definition of these methods, to make sure
+  # that Processing is able to call them during events.
+  METHODS_TO_ALIAS ||= {
+    mouse_pressed: :mousePressed,
+    mouse_dragged: :mouseDragged,
+    mouse_clicked: :mouseClicked,
+    mouse_moved: :mouseMoved,
+    mouse_released: :mouseReleased,
+    key_pressed: :keyPressed,
+    key_released: :keyReleased,
+    key_typed: :keyTyped
+  }.freeze
+
+  class << self
+    attr_accessor :app
+  end
+
+  # All sketches extend this class
+  class App < PApplet
     include Math, MathTool, HelperMethods, Render
     # Alias some methods for familiarity for Shoes coders.
     alias oval ellipse
     alias stroke_width stroke_weight
     alias rgb color
     alias gray color
-
     def sketch_class
       self.class.sketch_class
     end
 
     def sketch_title(title)
-      warn 'Sketch Title To Be Implemented'
-      # surface.set_title(title)
+      surface.set_title(title)
     end
 
     # Keep track of what inherits from the Processing::App, because we're
