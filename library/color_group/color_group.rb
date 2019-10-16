@@ -17,7 +17,7 @@ class ColorGroup
     @colors = ColorUtil.shuffle(colors)
   end
 
-  def ruby_code
+  def ruby_string
     ColorUtil.rubyString(colors)
   end
 

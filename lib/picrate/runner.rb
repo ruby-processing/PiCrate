@@ -15,12 +15,12 @@ module Processing
     def self.execute
       runner = new
       runner.parse_options(ARGV)
-      runner.execute!
+      runner.execute
     end
 
     # Dispatch central.
-    def execute!
-      show_help if options.empty?
+    def execute
+      parse_options('-h') if options.empty?
       show_version if options[:version]
       create if options[:create]
       install(filename) if options[:install]
@@ -52,7 +52,7 @@ module Processing
 
         # This displays the help screen, all programs are
         # assumed to have this option.
-        opts.on('-h', '--help', 'Display this screen') do
+        opts.on_tail('-h', '--help', 'Display this screen') do
           puts opts
           exit
         end
@@ -79,7 +79,6 @@ module Processing
     def install(library = nil)
       library ||= 'new'
       choice = library.downcase
-      case choice
       when /samples|sound|video|glvideo/
         system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
       when /new/
