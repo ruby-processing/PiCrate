@@ -1,5 +1,3 @@
 source 'https://rubygems.org'
 ruby '2.5.3', :engine => 'jruby', :engine_version => '9.2.8.0'
-gem 'arcball',  '~>1.0.1'
-gem 'geomerative'  '~>1.1.0'
-gem 'ruby_wordcram',  '~>2.0.4'
+gemspec

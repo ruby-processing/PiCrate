@@ -16,9 +16,9 @@ jgem install picrate
 __For a first install:-__
 
 ```bash
-picrate --install # no args
+picrate --install # no args, install samples and geany config
 # or
-picrate -i
+picrate -i Samples # to omit geany config
 ```
 
 This installs example sketches in `~/sample_sketches` and ties them into a `geany` project `picrate.geany`. It should also be possible to run sketches from the `geany` ide.

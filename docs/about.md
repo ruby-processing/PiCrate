@@ -25,7 +25,7 @@ Your PiCrate sketches need to `require` the `picrate` library, and can be run wi
 
 * Gui interface, sketches can be run from [GeanyIDE][geany]
 
-
+* Use --dev flag to speed start-up
 
 
 [rubygems]:https://rubygems.org/
