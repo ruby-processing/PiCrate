@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
     A batteries included version of processing in ruby, for raspberrypi and
     linux. Install samples to configures geany ide.
   EOS
-  gem.summary     = %q{ruby wrapper for processing-3.5.3 on raspberrypi and linux64}
+  gem.summary     = %q{ruby wrapper for processing-4.0 on raspberrypi and linux64}
   gem.homepage    = 'https://ruby-processing.github.io/PiCrate/'
   gem.post_install_message = %q{Use 'picrate --install' to config geany & install samples}
   gem.files       = `git ls-files`.split($/)
@@ -31,9 +31,7 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'rake', '~> 12.3'
   gem.add_development_dependency 'minitest', '~> 5.10'
   gem.add_runtime_dependency 'arcball', '~> 1.0.1'
-  gem.add_runtime_dependency 'geomerative', '~> 1.1'
-  gem.add_runtime_dependency 'ruby_wordcram', '~> 2.0.4'
   gem.require_paths = ['lib']
   gem.platform      = 'java'
-  gem.requirements << 'java runtime == 8'
+  gem.requirements << 'java runtime == 11'
 end

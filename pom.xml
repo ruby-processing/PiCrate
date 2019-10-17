@@ -11,7 +11,7 @@ DO NOT MODIFIY - GENERATED CODE
   <modelVersion>4.0.0</modelVersion>
   <groupId>ruby-processing</groupId>
   <artifactId>picrate</artifactId>
-  <version>1.1.0</version>
+  <version>2.0.0.pre</version>
   <name>picrate</name>
   <description>An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.</description>
   <url>http://maven.apache.org</url>
@@ -129,7 +129,7 @@ DO NOT MODIFIY - GENERATED CODE
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.1</version>
           <configuration>
-            <release>8</release>
+            <release>11</release>
           </configuration>
         </plugin>
         <plugin>
