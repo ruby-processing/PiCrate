@@ -5,21 +5,25 @@ date:   2018-05-24 07:34:13
 categories: PiCrate update
 permalink: /getting/
 ---
-The current version of raspbian installs jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use.
+Raspbian stretch installs jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use.
 
-Then install JRuby see [jruby][jruby].
+__Then install JRuby see__ [jruby][jruby].
 
 ```bash
 jgem install picrate
 ```
 
-Install samples, and configure `geany` ide (for `PiCrate`)
+__For a first install:-__
 
 ```bash
-picrate -i Samples # geany configuration files are installed if required
+picrate --install # no args
+# or
+picrate -i
 ```
 
-Install processing libraries
+This installs example sketches in `~/sample_sketches` and ties them into a `geany` project `picrate.geany`. It should also be possible to run sketches from the `geany` ide.
+
+__Install processing libraries__
 
 ```bash
 picrate -i Sound
