@@ -1,7 +1,6 @@
 # frozen_string_literal: true
-require 'java'
+
 require_relative 'test_helper'
-require_relative '../lib/picrate'
 
 METHODS = %i(
   alpha

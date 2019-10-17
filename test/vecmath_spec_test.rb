@@ -1,6 +1,4 @@
 require_relative 'test_helper'
-require 'java'
-require_relative '../lib/picrate'
 
 Java::Monkstone::PicrateLibrary.load(JRuby.runtime)
 

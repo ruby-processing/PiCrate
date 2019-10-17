@@ -9,6 +9,9 @@ task default: %i[init compile install test gem]
 # depends on installed processing, with processing on path
 desc 'Copy Jars'
 task :init do
+  # for Archlinux etc
+  # processing_root = File.dirname(`readlink -f $(which processing)`)
+  # alternative for debian linux etc
   processing_root = File.join(HOME_DIR, 'processing-3.5.3')
   jar_dir = File.join(processing_root, 'core', 'library')
   opengl = Dir.entries(jar_dir).grep(/amd64|armv6hf/).select { |jar| jar =~ /linux/ }
@@ -40,11 +43,11 @@ end
 
 desc 'Test'
 task :test do
-  system 'jruby test/helper_methods_test.rb'
-  system 'jruby test/respond_to_test.rb' # Skip this test on Travis etc
-  system 'jruby test/math_tool_test.rb'
-  system 'jruby test/deglut_spec_test.rb'
-  system 'jruby test/vecmath_spec_test.rb'
+  system 'jruby --dev test/helper_methods_test.rb'
+  system 'jruby --dev test/respond_to_test.rb' # Skip this test on Travis etc
+  system 'jruby --dev test/math_tool_test.rb'
+  system 'jruby --dev test/deglut_spec_test.rb'
+  system 'jruby --dev test/vecmath_spec_test.rb'
 end
 
 desc 'clean'

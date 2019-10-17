@@ -1,6 +1,6 @@
 v1.1.0 Bring up to date with latest development branch, except still target Stretch and Oracle jdk8, add Gemfile to help version locking.
 
-v1.0.0 Earlier code targetting Stretch
+v1.0.0 Release for Raspbian Stretch and Oracle java
 
 v0.9.0 Remove unnecessary MacOS variations, bump examples version
 

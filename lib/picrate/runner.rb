@@ -80,12 +80,13 @@ module Processing
       library ||= 'new'
       choice = library.downcase
       case choice
-      when /samples|sound|video|glvideo/
-        system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
+      when /samples|sound|video/
+        system "cd #{PICRATE_ROOT}/vendors && rake download_and_copy_#{choice}"
       when /new/
+        # install samples and config geany
         system "cd #{PICRATE_ROOT}/vendors && rake"
       else
-        warn format('No installer for %s', choice)
+        warn format('No installer for %s', library)
       end
     end
   end
