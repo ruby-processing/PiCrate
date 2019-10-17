@@ -10,78 +10,70 @@ VIDEO = 'video-2.zip'
 VIDEO_VERSION = '2'
 EXAMPLES = '0.4.0'
 HOME_DIR = ENV['HOME']
+LIBRARY = File.join(HOME_DIR, '.picrate', 'libraries')
 CLOBBER.include(EXAMPLES, SOUND, GLVIDEO, VIDEO)
 
-desc 'download, and copy picrate examples'
-task default: %i[download_and_copy_samples config_geany]
-
-desc 'download and copy examples to user home'
-task download_and_copy_samples: %i[download_examples copy_examples]
-
-task :download_examples
-file_name = "#{EXAMPLES}.tar.gz"
-wget_base = 'wget https://github.com/ruby-processing/picrate-examples'
-wget_string = [wget_base, 'archive', file_name].join('/')
-file file_name do
-  begin
-    sh wget_string
-  rescue
-    warn(WARNING)
-  end
+def dependency
+  system 'which wget'
 end
 
+desc 'check dependency'
+task :check_dependency do
+  warn(WARNING) unless dependency
+end
+
+desc 'download, and copy picrate examples & configure geany'
+task default: %i[check_dependency install_samples install_config]
+
+file "#{EXAMPLES}.tar.gz" do
+  wget_base = 'wget https://github.com/ruby-processing/picrate-examples'
+  wget_string = [wget_base, 'archive', "#{EXAMPLES}.tar.gz"].join('/')
+  system wget_string
+end
+
+desc 'download and install samples to ~/picrate_samples'
+task install_samples: %i[check_dependency download_samples copy_examples]
+
 desc 'download and copy sound library to ~/.picrate'
-task download_and_copy_sound: %i[init_dir download_sound copy_sound clobber]
+task install_sound: %i[init_dir download_sound copy_sound clobber]
 
 desc 'download and copy video library to ~/.picrate'
-task download_and_copy_video: %i[init_dir download_video copy_video clobber]
+task install_video: %i[init_dir download_video copy_video clobber]
 
 desc 'download and copy glvideo library to ~/.picrate'
-task download_and_copy_glvideo: %i[init_dir download_glvideo copy_glvideo clobber]
+task install_glvideo: %i[init_dir download_glvideo copy_glvideo clobber]
+
+desc 'download, and copy picrate examples'
+task download_samples: ["#{EXAMPLES}.tar.gz"]
 
 desc 'download sound library'
 task :download_sound do
   wget_base = 'wget https://github.com/processing/processing-sound'
   wget_string = [wget_base, 'releases/download/latest', SOUND].join('/')
-  begin
-    sh wget_string
-  rescue
-    puts 'Not Currently Available'
-    # warn(WARNING)
-  end
+  system wget_string
 end
 
 desc 'download glvideo library'
 task :download_glvideo do
   wget_base = 'wget https://github.com/gohai/processing-glvideo'
   wget_string = [wget_base, 'releases/download/latest', GLVIDEO].join('/')
-  begin
-    sh wget_string
-  rescue
-    warn(WARNING)
-  end
+  system wget_string
 end
 
 desc 'download video library'
 task :download_video do
   wget_base = 'wget https://github.com/processing/processing-video'
   wget_string = [wget_base, 'releases/download', VIDEO_VERSION, VIDEO].join('/')
-  begin
-    sh wget_string
-  rescue
-    warn(WARNING)
-  end
+  system wget_string
 end
 
 desc 'initialize ~/.picrate directories'
 task :init_dir do
-  unless File.exist? "#{HOME_DIR}/.picrate/libraries"
-    FileUtils.mkdir_p "#{HOME_DIR}/.picrate/libraries"
-  end
+  FileUtils.mkdir_p LIBRARY unless File.exist? LIBRARY
 end
 
 desc 'configure geany'
-task :config_geany do
+task :install_config do
   unless File.exist? "#{HOME_DIR}/.config/geany/templates/files/picrate.rb"
     FileUtils.mkdir_p "#{HOME_DIR}/.config/geany/templates/files"
     FileUtils.cp 'picrate.rb', "#{HOME_DIR}/.config/geany/templates/files"
@@ -93,8 +85,8 @@ task :config_geany do
 end
 
 desc 'copy examples'
-task copy_examples: file_name do
-  sh "tar xzvf #{EXAMPLES}.tar.gz"
+task copy_examples: %i[download_samples] do
+  system "tar xzvf #{EXAMPLES}.tar.gz"
   FileUtils.rm_r "#{HOME_DIR}/picrate_samples" if File.exist? "#{HOME_DIR}/picrate_samples"
   FileUtils.cp_r "picrate-examples-#{EXAMPLES}", "#{HOME_DIR}/picrate_samples"
   FileUtils.rm_r "picrate-examples-#{EXAMPLES}"
@@ -102,26 +94,25 @@ end
 
 desc 'copy sound library'
 task copy_sound: SOUND do
-  sh "unzip #{SOUND}"
-  FileUtils.rm_r "#{HOME_DIR}/.picrate/libraries/sound" if File.exist? "#{HOME_DIR}/.picrate/libraries/sound"
-  FileUtils.cp_r 'sound', "#{HOME_DIR}/.picrate/libraries"
+  system "unzip #{SOUND}"
+  FileUtils.rm_r "#{LIBRARY}/sound" if File.exist? "#{LIBRARY}/sound"
+  FileUtils.cp_r 'sound', LIBRARY
   FileUtils.rm_r 'sound'
-  FileUtils.rm_r '__MACOSX'
 end
 
 desc 'copy video library'
 task copy_video: VIDEO do
-  sh "unzip #{VIDEO}"
-  FileUtils.rm_r "#{HOME_DIR}/.picrate/libraries/video" if File.exist? "#{HOME_DIR}/.picrate/libraries/video"
-  FileUtils.cp_r 'video', "#{HOME_DIR}/.picrate/libraries/video"
+  system "unzip #{VIDEO}"
+  FileUtils.rm_r "#{LIBRARY}/video" if File.exist? "#{LIBRARY}/video"
+  FileUtils.cp_r 'video', LIBRARY
   FileUtils.rm_r 'video'
 end
 
 desc 'copy glvideo library'
 task copy_glvideo: GLVIDEO do
-  directory "#{HOME_DIR}/.picrate/libraries/glvideo"
-  sh "unzip #{GLVIDEO}"
-  FileUtils.rm_r "#{HOME_DIR}/.picrate/libraries/glvideo" if File.exist? "#{HOME_DIR}/.picrate/libraries/glvideo"
-  FileUtils.cp_r 'glvideo', "#{HOME_DIR}/.picrate/libraries/glvideo"
+  directory "#{LIBRARY}/glvideo"
+  system "unzip #{GLVIDEO}"
+  FileUtils.rm_r "#{LIBRARY}/glvideo" if File.exist? "#{LIBRARY}/glvideo"
+  FileUtils.cp_r 'glvideo', LIBRARY
   FileUtils.rm_r 'glvideo'
 end

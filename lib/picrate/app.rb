@@ -55,8 +55,6 @@ module Processing
     alias stroke_width stroke_weight
     alias rgb color
     alias gray color
-    field_reader :surface
-
     def sketch_class
       self.class.sketch_class
     end
@@ -79,8 +77,8 @@ module Processing
     #
     class << self
       # Handy getters and setters on the class go here:
-      attr_accessor :sketch_class, :library_loader, :title, :arguments, :options
-
+      attr_accessor :sketch_class, :library_loader, :arguments, :options
+      attr_reader :surface
       def load_libraries(*args)
         library_loader ||= LibraryLoader.new
         library_loader.load_library(*args)
@@ -121,6 +119,7 @@ module Processing
       Processing.app = self
       @arguments = arguments
       @options   = options
+      @surface   = get_surface
       run_picrate
     end
 

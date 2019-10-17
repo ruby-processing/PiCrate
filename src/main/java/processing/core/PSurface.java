@@ -28,11 +28,7 @@ package processing.core;
 public interface PSurface {
 
   /**
-   * Minimum dimensions for the window holding an applet. This varies between
-   * platforms, Mac OS X 10.3 (confirmed with 10.7 and Java 6) can do any height
-   * but requires at least 128 pixels width. Windows XP has another set of
-   * limitations. And for all I know, Linux probably allows window sizes to be
-   * negative numbers.
+   * Minimum dimensions for the window holding an applet.
    */
   static public final int MIN_WINDOW_WIDTH = 128;
 

@@ -70,8 +70,8 @@ module Processing
     def show_version
       require 'erb'
       template = ERB.new <<-EOF
-        PiCrate version <%= PiCrate::VERSION %>
-        JRuby version <%= JRUBY_VERSION %>
+      PiCrate version <%= PiCrate::VERSION %>
+      JRuby version <%= JRUBY_VERSION %>
       EOF
       puts template.result(binding)
     end
@@ -89,5 +89,7 @@ module Processing
         warn format('No installer for %s', library)
       end
     end
-  end # class Runner
-end # module Processing
+  end
+  # class Runner
+end
+# module Processing

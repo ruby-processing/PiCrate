@@ -698,10 +698,7 @@ public class PSurfaceAWT extends PSurfaceNone {
     //      the app has an icns file specified already. Help?
     List<String> jvmArgs
       = ManagementFactory.getRuntimeMXBean().getInputArguments();
-      if (jvmArgs.stream().anyMatch((arg) -> (arg.startsWith("-Xdock:icon")))) {
-          return true;
-      } // dock image already set
-    return false;
+      return (jvmArgs.stream().anyMatch((arg) -> (arg.startsWith("-Xdock:icon")))); 
   }
 
   @Override

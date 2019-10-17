@@ -12,7 +12,7 @@ TEMPLATE = ERB.new <<~SKETCH
     end
 
     def setup
-      sketch_title '<%= @title %>'
+
     end
 
     def draw
@@ -34,9 +34,9 @@ class SketchClass
     name.split('_').collect(&:capitalize).join
   end
 
-  def title
-    name.split('_').collect(&:capitalize).join(' ')
-  end
+  # def title
+  #   name.split('_').collect(&:capitalize).join(' ')
+  # end
 
   def filename
     name << '.rb'
@@ -50,7 +50,6 @@ class SketchWriter
     param = Parameters.read
     @sketch = SketchClass.new(path)
     @class = sketch.class_name
-    @title = sketch.title
     sketch_param = param.fetch('sketch')
     @width = sketch_param.fetch('width')
     @height = sketch_param.fetch('height')

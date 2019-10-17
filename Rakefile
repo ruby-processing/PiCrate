@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './lib/picrate/version'
 
 HOME_DIR = ENV['HOME']
@@ -50,7 +52,7 @@ end
 
 desc 'clean'
 task :clean do
-  Dir["./**/*.{jar,gem}"].each do |path|
+  Dir['./**/*.{jar,gem}'].each do |path|
     puts "Deleting #{path} ..."
     File.delete(path)
   end
