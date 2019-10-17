@@ -1,4 +1,6 @@
-v2.0.0 For buster we assume and install of OpenJDK11+ hard float 32bit.
+v1.1.0 Bring up to date with latest development branch, except still target Stretch and Oracle jdk8, add Gemfile to help version locking.
+
+v1.0.0 Earlier code targetting Stretch
 
 v0.9.0 Remove unnecessary MacOS variations, bump examples version
 
