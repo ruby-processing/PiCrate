@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   EOS
   gem.summary     = %q{ruby wrapper for processing-3.5.3 on raspberrypi and linux64}
   gem.homepage    = 'https://ruby-processing.github.io/PiCrate/'
-  gem.post_install_message = %q{Use 'picrate --install Samples' to install samples}
+  gem.post_install_message = %q{Use 'picrate --install' to config geany & install samples}
   gem.files       = `git ls-files`.split($/)
   gem.files << "lib/picrate-#{PiCrate::VERSION}.jar"
   gem.files << 'lib/gluegen-rt.jar'
