@@ -384,7 +384,7 @@ public class PFont implements PConstants {
     // not a roman font, so throw an error and ask to re-build.
     // that way can avoid a bunch of error checking hacks in here.
     if ((ascent == 0) && (descent == 0)) {
-      throw new RuntimeException("Please use \"Create Font\" to "
+      throw new RuntimeException("Please use \"create_font\" to "
         + "re-create this font.");
     }
 
@@ -514,7 +514,7 @@ public class PFont implements PConstants {
   /**
    * Use the getNative() method instead, which allows library interfaces to be
    * written in a cross-platform fashion for desktop, Android, and others.
-   * @return 
+   * @return
    */
   @Deprecated
   public Font getFont() {
@@ -523,7 +523,7 @@ public class PFont implements PConstants {
 
   /**
    * Return the native java.awt.Font associated with this PFont (if any).
-   * @return 
+   * @return
    */
   public Object getNative() {
     if (subsetting) {
@@ -534,7 +534,7 @@ public class PFont implements PConstants {
 
   /**
    * Return size of this font.
-   * @return 
+   * @return
    */
   public int getSize() {
     return size;
@@ -548,7 +548,7 @@ public class PFont implements PConstants {
    * drawing with 2x pixel density, bitmap fonts in OpenGL need to be created
    * (behind the scenes) at double the requested size. This ensures that they're
    * shown at half on displays (so folks don't have to change their sketch code).
-   * @return 
+   * @return
    */
   public int getDefaultSize() {
     //return defaultSize;
@@ -570,7 +570,7 @@ public class PFont implements PConstants {
   /**
    * Attempt to find the native version of this font.(Public so that it can be
    * used by OpenGL or other renderers.)
-   * @return 
+   * @return
    */
   public Object findNative() {
     if (font == null) {
@@ -673,7 +673,7 @@ public class PFont implements PConstants {
    * subclasses use it.
    * @param a
    * @param b
-   * @return 
+   * @return
    */
   public float kern(char a, char b) {
     return 0;
@@ -682,7 +682,7 @@ public class PFont implements PConstants {
   /**
    * Returns the ascent of this font from the baseline.The value is based on a
    * font of size 1.
-   * @return 
+   * @return
    */
   public float ascent() {
     return ((float) ascent / (float) size);
@@ -691,7 +691,7 @@ public class PFont implements PConstants {
   /**
    * Returns how far this font descends from the baseline.The value is based on
  a font size of 1.
-   * @return 
+   * @return
    */
   public float descent() {
     return ((float) descent / (float) size);
@@ -700,7 +700,7 @@ public class PFont implements PConstants {
   /**
    * Width of this character for a font of size 1.
    * @param c
-   * @return 
+   * @return
    */
   public float width(char c) {
     if (c == 32) {
@@ -872,7 +872,7 @@ public class PFont implements PConstants {
   };
 
   /**
-   * @return 
+   * @return
   * @webref pfont
   * @usage application
   * @brief     Gets a list of the fonts installed on the system
@@ -899,7 +899,7 @@ public class PFont implements PConstants {
    * <a href="https://github.com/processing/processing/issues/5481">issue
    * #5481</a>
    * @param name
-   * @return 
+   * @return
    */
   static public Font findFont(String name) {
     Font font = new Font(name, Font.PLAIN, 1);
@@ -912,8 +912,10 @@ public class PFont implements PConstants {
     if (!name.equals(systemFontName)
       && font.getFontName().equals(systemFontName)) {
       PGraphics.showWarning("\"" + name + "\" is not available, "
-        + "so another font will be used. "
-        + "Use PFont.list to show available fonts.");
+        + "so another font will be used.\n"
+        + "Use PFont.list in sketch to show available fonts.\n"
+        + "Or <fc-match \"" + name + "\"> in a terminal to find\n"
+        + "an alternative");
     }
     return font;
   }
@@ -943,7 +945,7 @@ public class PFont implements PConstants {
       readHeader(is);
     }
 
-    protected void readHeader(DataInputStream is) throws IOException {
+    protected final void readHeader(DataInputStream is) throws IOException {
       value = is.readInt();
       height = is.readInt();
       width = is.readInt();

@@ -1,11 +1,11 @@
 package processing.data;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import processing.core.PApplet;
-
 
 /**
  * A simple table class to use a String as a lookup for an float value.
@@ -16,37 +16,41 @@ import processing.core.PApplet;
  */
 public class FloatDict {
 
-  /** Number of elements in the table */
+  /**
+   * Number of elements in the table
+   */
   protected int count;
 
-    /**
-     *
-     */
-    protected String[] keys;
+  /**
+   *
+   */
+  protected String[] keys;
 
-    /**
-     *
-     */
-    protected float[] values;
+  /**
+   *
+   */
+  protected float[] values;
 
-  /** Internal implementation for faster lookups */
+  /**
+   * Internal implementation for faster lookups
+   */
   private HashMap<String, Integer> indices = new HashMap<>();
 
-    /**
-     *
-     */
-    public FloatDict() {
+  /**
+   *
+   */
+  public FloatDict() {
     count = 0;
     keys = new String[10];
     values = new float[10];
   }
 
-
   /**
    * Create a new lookup with a specific size.This is more efficient than not
- specifying a size. Use it when you know the rough size of the thing you're creating.
+   * specifying a size. Use it when you know the rough size of the thing you're
+   * creating.
    *
-     * @param length
+   * @param length
    * @nowebref
    */
   public FloatDict(int length) {
@@ -55,12 +59,11 @@ public class FloatDict {
     values = new float[length];
   }
 
-
   /**
-   * Read a set of entries from a Reader that has each key/value pair on
-   * a single line, separated by a tab.
+   * Read a set of entries from a Reader that has each key/value pair on a
+   * single line, separated by a tab.
    *
-     * @param reader
+   * @param reader
    * @nowebref
    */
   public FloatDict(BufferedReader reader) {
@@ -68,8 +71,8 @@ public class FloatDict {
     keys = new String[lines.length];
     values = new float[lines.length];
 
-    for (int i = 0; i < lines.length; i++) {
-      String[] pieces = PApplet.split(lines[i], '\t');
+    for (String line : lines) {
+      String[] pieces = PApplet.split(line, '\t');
       if (pieces.length == 2) {
         keys[count] = pieces[0];
         values[count] = PApplet.parseFloat(pieces[1]);
@@ -79,10 +82,9 @@ public class FloatDict {
     }
   }
 
-
   /**
-     * @param keys
-     * @param values
+   * @param keys
+   * @param values
    * @nowebref
    */
   public FloatDict(String[] keys, float[] values) {
@@ -97,7 +99,6 @@ public class FloatDict {
     }
   }
 
-
   /**
    * Constructor to allow (more intuitive) inline initialization, e.g.:
    * <pre>
@@ -106,7 +107,8 @@ public class FloatDict {
    *   { "key2", 2 }
    * });
    * </pre>
-     * @param pairs
+   *
+   * @param pairs
    */
   public FloatDict(Object[][] pairs) {
     count = pairs.length;
@@ -119,23 +121,24 @@ public class FloatDict {
     }
   }
 
-
   /**
-     * @return 
-   * @webref floatdict:method
+   * @return @webref floatdict:method
    * @brief Returns the number of key/value pairs
    */
   public int size() {
     return count;
   }
 
-
   /**
-   * Resize the internal data, this can only be used to shrink the list.Helpful for situations like sorting and then grabbing the top 50 entries.
-     * @param arg0
+   * Resize the internal data, this can only be used to shrink the list.Helpful
+   * for situations like sorting and then grabbing the top 50 entries.
+   *
+   * @param length
    */
   public void resize(int length) {
-    if (length == count) return;
+    if (length == count) {
+      return;
+    }
 
     if (length > count) {
       throw new IllegalArgumentException("resize() can only be used to shrink the dictionary");
@@ -154,7 +157,6 @@ public class FloatDict {
     resetIndices();
   }
 
-
   /**
    * Remove all entries.
    *
@@ -166,7 +168,6 @@ public class FloatDict {
     indices = new HashMap<>();
   }
 
-
   private void resetIndices() {
     indices = new HashMap<>(count);
     for (int i = 0; i < count; i++) {
@@ -174,25 +175,21 @@ public class FloatDict {
     }
   }
 
-
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+  /**
+   *
+   */
+  public class Entry {
 
     /**
      *
      */
+    public String key;
 
-
-  public class Entry {
-
-      /**
-       *
-       */
-      public String key;
-
-      /**
-       *
-       */
-      public float value;
+    /**
+     *
+     */
+    public float value;
 
     Entry(String key, float value) {
       this.key = key;
@@ -200,113 +197,101 @@ public class FloatDict {
     }
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterable<Entry> entries() {
-    return new Iterable<Entry>() {
-
-      public Iterator<Entry> iterator() {
-        return entryIterator();
-      }
-    };
+  /**
+   *
+   * @return
+   */
+  public Iterable<Entry> entries() {
+    return () -> entryIterator();
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterator<Entry> entryIterator() {
+  /**
+   *
+   * @return
+   */
+  public Iterator<Entry> entryIterator() {
     return new Iterator<Entry>() {
       int index = -1;
 
+      @Override
       public void remove() {
         removeIndex(index);
         index--;
       }
 
+      @Override
       public Entry next() {
         ++index;
         Entry e = new Entry(keys[index], values[index]);
         return e;
       }
 
+      @Override
       public boolean hasNext() {
-        return index+1 < size();
+        return index + 1 < size();
       }
     };
   }
 
-
   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
-
-    /**
-     *
-     * @param index
-     * @return
-     */
-
-
+  /**
+   *
+   * @param index
+   * @return
+   */
   public String key(int index) {
     return keys[index];
   }
 
-    /**
-     *
-     */
-    protected void crop() {
+  /**
+   *
+   */
+  protected void crop() {
     if (count != keys.length) {
       keys = PApplet.subset(keys, 0, count);
       values = PApplet.subset(values, 0, count);
     }
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterable<String> keys() {
-    return new Iterable<String>() {
-
-      @Override
-      public Iterator<String> iterator() {
-        return keyIterator();
-      }
-    };
+  /**
+   *
+   * @return
+   */
+  public Iterable<String> keys() {
+    return () -> keyIterator();
   }
 
-
   // Use this to iterate when you want to be able to remove elements along the way
-
-    /**
-     *
-     * @return
-     */
+  /**
+   *
+   * @return
+   */
   public Iterator<String> keyIterator() {
     return new Iterator<String>() {
       int index = -1;
 
+      @Override
       public void remove() {
         removeIndex(index);
         index--;
       }
 
+      @Override
       public String next() {
         return key(++index);
       }
 
+      @Override
       public boolean hasNext() {
-        return index+1 < size();
+        return index + 1 < size();
       }
     };
   }
 
-
   /**
    * Return a copy of the internal keys array.This array can be modified.
    *
-     * @return 
+   * @return
    * @webref floatdict:method
    * @brief Return a copy of the internal keys array
    */
@@ -315,12 +300,12 @@ public class FloatDict {
     return keyArray(null);
   }
 
-    /**
-     *
-     * @param outgoing
-     * @return
-     */
-    public String[] keyArray(String[] outgoing) {
+  /**
+   *
+   * @param outgoing
+   * @return
+   */
+  public String[] keyArray(String[] outgoing) {
     if (outgoing == null || outgoing.length != count) {
       outgoing = new String[count];
     }
@@ -328,59 +313,53 @@ public class FloatDict {
     return outgoing;
   }
 
-    /**
-     *
-     * @param index
-     * @return
-     */
-    public float value(int index) {
+  /**
+   *
+   * @param index
+   * @return
+   */
+  public float value(int index) {
     return values[index];
   }
 
-
   /**
-     * @return 
-   * @webref floatdict:method
+   * @return @webref floatdict:method
    * @brief Return the internal array being used to store the values
    */
   public Iterable<Float> values() {
-    return new Iterable<Float>() {
-
-      @Override
-      public Iterator<Float> iterator() {
-        return valueIterator();
-      }
-    };
+    return () -> valueIterator();
   }
 
-    /**
-     *
-     * @return
-     */
-    public Iterator<Float> valueIterator() {
+  /**
+   *
+   * @return
+   */
+  public Iterator<Float> valueIterator() {
     return new Iterator<Float>() {
       int index = -1;
 
+      @Override
       public void remove() {
         removeIndex(index);
         index--;
       }
 
+      @Override
       public Float next() {
         return value(++index);
       }
 
+      @Override
       public boolean hasNext() {
-        return index+1 < size();
+        return index + 1 < size();
       }
     };
   }
 
-
   /**
    * Create a new array and copy each of the values into it.
    *
-     * @return 
+   * @return
    * @webref floatdict:method
    * @brief Create a new array and copy each of the values into it
    */
@@ -389,13 +368,13 @@ public class FloatDict {
     return valueArray(null);
   }
 
-
   /**
    * Fill an already-allocated array with the values (more efficient than
-   * creating a new array each time).If 'array' is null, or not the same
- size as the number of values, a new array will be allocated and returned.
-     * @param array
-     * @return 
+   * creating a new array each time).If 'array' is null, or not the same size as
+   * the number of values, a new array will be allocated and returned.
+   *
+   * @param array
+   * @return
    */
   public float[] valueArray(float[] array) {
     if (array == null || array.length != size()) {
@@ -405,12 +384,11 @@ public class FloatDict {
     return array;
   }
 
-
   /**
    * Return a value for the specified key.
    *
-     * @param key
-     * @return 
+   * @param key
+   * @return
    * @webref floatdict:method
    * @brief Return a value for the specified key
    */
@@ -422,13 +400,13 @@ public class FloatDict {
     return values[index];
   }
 
-    /**
-     *
-     * @param key
-     * @param alternate
-     * @return
-     */
-    public float get(String key, float alternate) {
+  /**
+   *
+   * @param key
+   * @param alternate
+   * @return
+   */
+  public float get(String key, float alternate) {
     int index = index(key);
     if (index == -1) {
       return alternate;
@@ -436,10 +414,9 @@ public class FloatDict {
     return values[index];
   }
 
-
   /**
-     * @param key
-     * @param amount
+   * @param key
+   * @param amount
    * @webref floatdict:method
    * @brief Create a new key/value pair or change the value of one
    */
@@ -452,13 +429,13 @@ public class FloatDict {
     }
   }
 
-    /**
-     *
-     * @param index
-     * @param key
-     * @param value
-     */
-    public void setIndex(int index, String key, float value) {
+  /**
+   *
+   * @param index
+   * @param key
+   * @param value
+   */
+  public void setIndex(int index, String key, float value) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException(index);
     }
@@ -466,10 +443,9 @@ public class FloatDict {
     values[index] = value;
   }
 
-
   /**
-     * @param key
-     * @return 
+   * @param key
+   * @return
    * @webref floatdict:method
    * @brief Check if a key is a part of the data structure
    */
@@ -477,10 +453,9 @@ public class FloatDict {
     return index(key) != -1;
   }
 
-
   /**
-     * @param key
-     * @param amount
+   * @param key
+   * @param amount
    * @webref floatdict:method
    * @brief Add to a value
    */
@@ -493,10 +468,9 @@ public class FloatDict {
     }
   }
 
-
   /**
-     * @param key
-     * @param amount
+   * @param key
+   * @param amount
    * @webref floatdict:method
    * @brief Subtract from a value
    */
@@ -504,10 +478,9 @@ public class FloatDict {
     add(key, -amount);
   }
 
-
   /**
-     * @param key
-     * @param amount
+   * @param key
+   * @param amount
    * @webref floatdict:method
    * @brief Multiply a value
    */
@@ -518,10 +491,9 @@ public class FloatDict {
     }
   }
 
-
   /**
-     * @param key
-     * @param amount
+   * @param key
+   * @param amount
    * @webref floatdict:method
    * @brief Divide a value
    */
@@ -532,25 +504,24 @@ public class FloatDict {
     }
   }
 
-
   private void checkMinMax(String functionName) {
     if (count == 0) {
-      String msg =
-        String.format("Cannot use %s() on an empty %s.",
-                      functionName, getClass().getSimpleName());
+      String msg
+        = String.format("Cannot use %s() on an empty %s.",
+          functionName, getClass().getSimpleName());
       throw new RuntimeException(msg);
     }
   }
 
-
   /**
-     * @return 
-   * @webref floatlist:method
+   * @return @webref floatlist:method
    * @brief Return the smallest value
    */
   public int minIndex() {
     //checkMinMax("minIndex");
-    if (count == 0) return -1;
+    if (count == 0) {
+      return -1;
+    }
 
     // Will still return NaN if there are 1 or more entries, and they're all NaN
     float m = Float.NaN;
@@ -562,7 +533,7 @@ public class FloatDict {
         mi = i;
 
         // calculate the rest
-        for (int j = i+1; j < count; j++) {
+        for (int j = i + 1; j < count; j++) {
           float d = values[j];
           if ((d == d) && (d < m)) {
             m = values[j];
@@ -575,13 +546,11 @@ public class FloatDict {
     return mi;
   }
 
-
   // return the key for the minimum value
-
-    /**
-     *
-     * @return
-     */
+  /**
+   *
+   * @return
+   */
   public String minKey() {
     checkMinMax("minKey");
     int index = minIndex();
@@ -591,13 +560,11 @@ public class FloatDict {
     return keys[index];
   }
 
-
   // return the minimum value, or throw an error if there are no values
-
-    /**
-     *
-     * @return
-     */
+  /**
+   *
+   * @return
+   */
   public float minValue() {
     checkMinMax("minValue");
     int index = minIndex();
@@ -607,10 +574,8 @@ public class FloatDict {
     return values[index];
   }
 
-
   /**
-     * @return 
-   * @webref floatlist:method
+   * @return @webref floatlist:method
    * @brief Return the largest value
    */
   // The index of the entry that has the max value. Reference above is incorrect.
@@ -629,7 +594,7 @@ public class FloatDict {
         mi = i;
 
         // calculate the rest
-        for (int j = i+1; j < count; j++) {
+        for (int j = i + 1; j < count; j++) {
           float d = values[j];
           if (!Float.isNaN(d) && (d > m)) {
             m = values[j];
@@ -642,9 +607,11 @@ public class FloatDict {
     return mi;
   }
 
-
-  /** The key for a max value; null if empty or everything is NaN (no max).
-     * @return  */
+  /**
+   * The key for a max value; null if empty or everything is NaN (no max).
+   *
+   * @return
+   */
   public String maxKey() {
     //checkMinMax("maxKey");
     int index = maxIndex();
@@ -654,9 +621,11 @@ public class FloatDict {
     return keys[index];
   }
 
-
-  /** *  The max value.(Or NaN if no entries or they're all NaN.)
-     * @return  */
+  /**
+   * * The max value.(Or NaN if no entries or they're all NaN.)
+   *
+   * @return
+   */
   public float maxValue() {
     //checkMinMax("maxValue");
     int index = maxIndex();
@@ -666,11 +635,11 @@ public class FloatDict {
     return values[index];
   }
 
-    /**
-     *
-     * @return
-     */
-    public float sum() {
+  /**
+   *
+   * @return
+   */
+  public float sum() {
     double amount = sumDouble();
     if (amount > Float.MAX_VALUE) {
       throw new RuntimeException("sum() exceeds " + Float.MAX_VALUE + ", use sumDouble()");
@@ -681,11 +650,11 @@ public class FloatDict {
     return (float) amount;
   }
 
-    /**
-     *
-     * @return
-     */
-    public double sumDouble() {
+  /**
+   *
+   * @return
+   */
+  public double sumDouble() {
     double sum = 0;
     for (int i = 0; i < count; i++) {
       sum += values[i];
@@ -693,36 +662,35 @@ public class FloatDict {
     return sum;
   }
 
-    /**
-     *
-     * @param what
-     * @return
-     */
-    public int index(String what) {
+  /**
+   *
+   * @param what
+   * @return
+   */
+  public int index(String what) {
     Integer found = indices.get(what);
-    return (found == null) ? -1 : found.intValue();
+    return (found == null) ? -1 : found;
   }
 
-    /**
-     *
-     * @param what
-     * @param much
-     */
-    protected void create(String what, float much) {
+  /**
+   *
+   * @param what
+   * @param much
+   */
+  protected void create(String what, float much) {
     if (count == keys.length) {
       keys = PApplet.expand(keys);
       values = PApplet.expand(values);
     }
-    indices.put(what, Integer.valueOf(count));
+    indices.put(what, count);
     keys[count] = what;
     values[count] = much;
     count++;
   }
 
-
   /**
-     * @param key
-     * @return 
+   * @param key
+   * @return
    * @webref floatdict:method
    * @brief Remove a key/value pair
    */
@@ -734,21 +702,21 @@ public class FloatDict {
     return index;
   }
 
-    /**
-     *
-     * @param index
-     * @return
-     */
-    public String removeIndex(int index) {
+  /**
+   *
+   * @param index
+   * @return
+   */
+  public String removeIndex(int index) {
     if (index < 0 || index >= count) {
       throw new ArrayIndexOutOfBoundsException(index);
     }
     String key = keys[index];
     //System.out.println("index is " + which + " and " + keys[which]);
     indices.remove(keys[index]);
-    for (int i = index; i < count-1; i++) {
-      keys[i] = keys[i+1];
-      values[i] = values[i+1];
+    for (int i = index; i < count - 1; i++) {
+      keys[i] = keys[i + 1];
+      values[i] = values[i + 1];
       indices.put(keys[i], i);
     }
     count--;
@@ -757,12 +725,12 @@ public class FloatDict {
     return key;
   }
 
-    /**
-     *
-     * @param a
-     * @param b
-     */
-    public void swap(int a, int b) {
+  /**
+   *
+   * @param a
+   * @param b
+   */
+  public void swap(int a, int b) {
     String tkey = keys[a];
     float tvalue = values[a];
     keys[a] = keys[b];
@@ -773,7 +741,6 @@ public class FloatDict {
 //    indices.put(keys[a], Integer.valueOf(a));
 //    indices.put(keys[b], Integer.valueOf(b));
   }
-
 
   /**
    * Sort the keys alphabetically (ignoring case). Uses the value as a
@@ -786,7 +753,6 @@ public class FloatDict {
     sortImpl(true, false, true);
   }
 
-
   /**
    * @webref floatdict:method
    * @brief Sort the keys alphabetically in reverse
@@ -794,7 +760,6 @@ public class FloatDict {
   public void sortKeysReverse() {
     sortImpl(true, true, true);
   }
-
 
   /**
    * Sort by values in descending order (largest value will be at [0]).
@@ -806,16 +771,15 @@ public class FloatDict {
     sortValues(true);
   }
 
-
   /**
-   * Set true to ensure that the order returned is identical. Slightly
-   * slower because the tie-breaker for identical values compares the keys.
+   * Set true to ensure that the order returned is identical. Slightly slower
+   * because the tie-breaker for identical values compares the keys.
+   *
    * @param stable
    */
   public void sortValues(boolean stable) {
     sortImpl(false, false, stable);
   }
-
 
   /**
    * @webref floatdict:method
@@ -825,22 +789,22 @@ public class FloatDict {
     sortValuesReverse(true);
   }
 
-    /**
-     *
-     * @param stable
-     */
-    public void sortValuesReverse(boolean stable) {
+  /**
+   *
+   * @param stable
+   */
+  public void sortValuesReverse(boolean stable) {
     sortImpl(false, true, stable);
   }
 
-    /**
-     *
-     * @param useKeys
-     * @param reverse
-     * @param stable
-     */
-    protected void sortImpl(final boolean useKeys, final boolean reverse,
-                          final boolean stable) {
+  /**
+   *
+   * @param useKeys
+   * @param reverse
+   * @param stable
+   */
+  protected void sortImpl(final boolean useKeys, final boolean reverse,
+    final boolean stable) {
     Sort s = new Sort() {
       @Override
       public int size() {
@@ -896,11 +860,12 @@ public class FloatDict {
     resetIndices();
   }
 
-
   /**
    * Sum all of the values in this dictionary, then return a new FloatDict of
    * each key, divided by the total sum. The total for all values will be ~1.0.
-   * @return a FloatDict with the original keys, mapped to their pct of the total
+   *
+   * @return a FloatDict with the original keys, mapped to their pct of the
+   * total
    */
   public FloatDict getPercent() {
     double sum = sum();
@@ -912,9 +877,11 @@ public class FloatDict {
     return outgoing;
   }
 
-
-  /** Returns a duplicate copy of this object.
-     * @return  */
+  /**
+   * Returns a duplicate copy of this object.
+   *
+   * @return
+   */
   public FloatDict copy() {
     FloatDict outgoing = new FloatDict(count);
     System.arraycopy(keys, 0, outgoing.keys, 0, count);
@@ -926,18 +893,18 @@ public class FloatDict {
     return outgoing;
   }
 
-    /**
-     *
-     */
-    public void print() {
+  /**
+   *
+   */
+  public void print() {
     for (int i = 0; i < size(); i++) {
       System.out.println(keys[i] + " = " + values[i]);
     }
   }
 
-
   /**
    * Write tab-delimited entries out to
+   *
    * @param writer
    */
   public void write(PrintWriter writer) {
@@ -947,24 +914,24 @@ public class FloatDict {
     writer.flush();
   }
 
-
   /**
    * Return this dictionary as a String in JSON format.
-     * @return 
+   *
+   * @return
    */
   public String toJSON() {
     StringList items = new StringList();
     for (int i = 0; i < count; i++) {
-      items.append(JSONObject.quote(keys[i])+ ": " + values[i]);
+      items.append(JSONObject.quote(keys[i]) + ": " + values[i]);
     }
     return "{ " + items.join(", ") + " }";
   }
 
-    /**
-     *
-     * @return
-     */
-    @Override
+  /**
+   *
+   * @return
+   */
+  @Override
   public String toString() {
     return getClass().getSimpleName() + " size=" + size() + " " + toJSON();
   }
