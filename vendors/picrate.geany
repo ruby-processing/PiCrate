@@ -39,6 +39,6 @@ EX_00_LB=_Execute
 EX_00_CM=jruby "%f"
 EX_00_WD=
 RubyFT_00_LB=_Compile
-RubyFT_00_CM=jruby -wc "%f"
+RubyFT_00_CM=jruby --dev "%f"
 RubyFT_00_WD=
 filetypes=Ruby;

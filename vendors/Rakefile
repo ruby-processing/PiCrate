@@ -8,7 +8,7 @@ SOUND_VERSION = 'v1.3.2'
 GLVIDEO = 'processing-glvideo.zip'
 VIDEO = 'video-2.zip'
 VIDEO_VERSION = '2'
-EXAMPLES = '0.4.0'
+EXAMPLES = '0.5.0'
 HOME_DIR = ENV['HOME']
 LIBRARY = File.join(HOME_DIR, '.picrate', 'libraries')
 CLOBBER.include(EXAMPLES, SOUND, GLVIDEO, VIDEO)
