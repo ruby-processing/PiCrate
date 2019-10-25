@@ -1,3 +1,5 @@
+v1.2.1 Fix install Samples etc. in runner.rb to match modified vendor Rakefile.
+
 v1.2.0 Update samples to use safer fonts, add linux specific suggestion on missing fonts PFont.java, fix :web_to_color_array(web).
 
 v1.1.0 Bring up to date with latest development branch, except still target Stretch and Oracle jdk8, add Gemfile to help version locking.
