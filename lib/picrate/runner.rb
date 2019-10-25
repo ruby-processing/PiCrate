@@ -81,7 +81,7 @@ module Processing
       choice = library.downcase
       case choice
       when /samples|sound|video/
-        system "cd #{PICRATE_ROOT}/vendors && rake download_and_copy_#{choice}"
+        system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
       when /new/
         # install samples and config geany
         system "cd #{PICRATE_ROOT}/vendors && rake"
