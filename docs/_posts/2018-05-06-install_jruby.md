@@ -44,9 +44,9 @@ mkdir installer
 cd installer
 rake
 ```
-Currently installs jruby-9.2.8.0
+Currently installs jruby-9.2.9.0
 
 If you know better please post on wiki
 
-[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.8.0/jruby-dist-9.2.8.0-bin.tar.gz"
+[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.9.0/jruby-dist-9.2.9.0-bin.tar.gz"
 [rake_gist]:https://gist.github.com/monkstone/159c5a9813c9cd181040b4715e74f6b2
