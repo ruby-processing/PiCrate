@@ -101,9 +101,9 @@ Or even `chmod +x my_sketch.rb` to make an executable script.
 
 See [editors][geany] geany, for how to run sketches from a gui.
 
-### Circle Collision Sketch Running on RaspberryPI
+### JWishy Sketch Running on RaspberryPI
 
-![circle_collisions]({{ site.github.url }}/assets/circle_collisions.png)
+![jwishy_buster]({{ site.github.url }}/assets/jwishy_buster.png)
 
 
 [java]:http://ruby-processing.github.io/java/raspberry/
