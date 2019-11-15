@@ -78,9 +78,9 @@ task :install_config do
     FileUtils.mkdir_p "#{HOME_DIR}/.config/geany/templates/files"
     FileUtils.cp 'picrate.rb', "#{HOME_DIR}/.config/geany/templates/files"
   end
-  unless File.exist? "#{HOME_DIR}/projects/picrate.geany"
-    FileUtils.mkdir_p "#{HOME_DIR}/projects"
-    FileUtils.cp 'picrate.geany', "#{HOME_DIR}/projects"
+  unless File.exist? "#{HOME_DIR}/projects/sketchbook/picrate_sketches.geany"
+    FileUtils.mkdir_p "#{HOME_DIR}/projects/sketchbook"
+    FileUtils.cp 'picrate_sketches.geany', "#{HOME_DIR}/projects/sketchbook"
   end
 end
 
