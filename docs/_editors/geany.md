@@ -26,6 +26,7 @@ See running sketch below:-
 ![geany]({{ site.github.url }}/assets/geany.png)
 
 #### Advanced options
+
 1. rubocop
 
 If you install the `rubocop` gem you can use the Build/Rubocop control to do a static test on the current file. You can configure `rubocop` to ignore selected rules if you wish. Or use it to auto-correct issues.
