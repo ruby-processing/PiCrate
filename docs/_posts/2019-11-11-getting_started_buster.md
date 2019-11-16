@@ -5,7 +5,12 @@ date:   2019-11-11 07:34:13
 categories: PiCrate update
 permalink: /getting_buster/
 ---
-Currently Raspbian Buster does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing openjdk8 (_there a complications you don't need using jdk11_) to benefit from `client` optimisations.
+Currently Raspbian Buster does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing openjdk8 (_there a complications you don't need using jdk11_) to benefit from `client` optimisations. There is a bash script [here][buster], that will install `openjdk8`, `jruby-9.2.9.0` and picrate for you.
+```bash
+bash install_bust
+```
+
+  __Otherwise follow these instructions in order as needed:-__
 
 ```bash
 sudo apt-get update # sync your local database with current release
@@ -105,7 +110,7 @@ See [editors][geany] geany, for how to run sketches from a gui.
 
 ![jwishy_buster]({{ site.github.url }}/assets/jwishy_buster.png)
 
-
+[buster]: https://gist.github.com/monkstone/04a1272ca9274a2c7e3e1bf170877bfb
 [java]:http://ruby-processing.github.io/java/raspberry/
 [jruby]:{{ site.github.url }}/install_jruby/
 [geany]:{{ site.github.url }}/editors/geany
