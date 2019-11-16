@@ -23,3 +23,16 @@ Use `make` to check syntax and `run` to run sketch
 See running sketch below:-
 
 ![geany]({{ site.github.url }}/assets/geany.png)
+
+#### Advanced options
+1. rubocop
+
+If you install the `rubocop` gem you can use the Build/Rubocop control to do a static test on the current file. You can configure `rubocop` to ignore selected rules if you wish. Or use it to auto-correct issues.
+
+2. reek
+
+If you are keen to develop your `OO` skills analysing your sketch code for smells can be instructive see references:-
+
+* Practical Object-Oriented Design in Ruby - Sandi Metz
+* Refactoring (Ruby Edition) - Jay Fields, Shane Harvie, Martin Fowler
+* 99 Bottles of OOP - Sandi Metz and Katrina Owen
