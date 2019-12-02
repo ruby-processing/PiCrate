@@ -1,3 +1,5 @@
+v1.2.3 Favor latest beta Video2 library over GLVideo.
+
 v1.2.2 Removed landscape from example as too taxing for raspberryPI. Improved geany tools.
 
 v1.2.1 Fix install Samples etc. in runner.rb to match modified vendor Rakefile.
