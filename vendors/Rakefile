@@ -10,6 +10,7 @@ VIDEO_VERSION = 'r6-v2.0-beta4'
 EXAMPLES = '0.5.1'
 HOME_DIR = ENV['HOME']
 LIBRARY = File.join(HOME_DIR, '.picrate', 'libraries')
+EXAMPLES_DIR = File.join(HOME_DIR, 'projects', 'examples')
 CLOBBER.include(EXAMPLES, SOUND, VIDEO)
 
 def dependency
@@ -76,8 +77,9 @@ end
 desc 'copy examples'
 task copy_examples: %i[download_samples] do
   system "tar xzvf #{EXAMPLES}.tar.gz"
-  FileUtils.rm_r "#{HOME_DIR}/picrate_samples" if File.exist? "#{HOME_DIR}/picrate_samples"
-  FileUtils.cp_r "picrate-examples-#{EXAMPLES}", "#{HOME_DIR}/picrate_samples"
+  FileUtils.rm_r EXAMPLES_DIR if File.exist? EXAMPLES_DIR
+  FileUtils.mkdir_p EXAMPLES_DIR
+  FileUtils.cp_r "picrate-examples-#{EXAMPLES}", EXAMPLES_DIR
   FileUtils.rm_r "picrate-examples-#{EXAMPLES}"
 end
 
