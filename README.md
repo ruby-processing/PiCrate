@@ -7,7 +7,7 @@ Create processing sketches in ruby on raspberry-pi and linux (this project is a 
 ### To install from rubygems ###
 
 ```bash
-jgem install picrate -v 1.2.3
+jgem install picrate
 ```
 
 ### To Build and Test ###
@@ -19,7 +19,7 @@ Requires java to build, but uses a maven wrapper so you don't need to install ma
 ```bash
 cd PiCrate
 rake # assumes an installed version of vanilla processing
-jgem install picrate-1.2.3-java.gem
+jgem install picrate-1.2.4-java.gem
 
 ```
 To create a template sketch:-
