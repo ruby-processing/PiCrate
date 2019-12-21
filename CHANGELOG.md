@@ -1,3 +1,9 @@
+v1.2.4 Extract picrate examples to ~/projects/examples instead of ~/picrate_samples for tighter integration with geany editor. Remove non-functioning sound library as an install option (direct toward minim as option).
+
+v1.2.3 Favor latest beta Video2 library over GLVideo.
+
+v1.2.2 Removed landscape from example as too taxing for raspberryPI. Improved geany tools.
+
 v1.2.1 Fix install Samples etc. in runner.rb to match modified vendor Rakefile.
 
 v1.2.0 Update samples to use safer fonts, add linux specific suggestion on missing fonts PFont.java, fix :web_to_color_array(web).

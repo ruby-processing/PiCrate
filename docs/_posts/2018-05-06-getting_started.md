@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Getting Started Command Line"
+title:  "Getting Started Stretch"
 date:   2018-05-24 07:34:13
 categories: PiCrate update
 permalink: /getting/
 ---
-Raspbian stretch installs Oracle jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use. Will work with OpenJDK-11 but currently performance is sub-optimal.
+Raspbian Stretch installs Oracle jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use. Will work with OpenJDK-11 but currently performance is sub-optimal.
 
 __Then install JRuby see__ [jruby][jruby].
 

@@ -12,7 +12,7 @@ Requirements:-
 
 Simply clone this distribution, then rake to build and test gem
 ```bash
-git clone -b stretch --single-branch https://github.com/ruby-processing/PiCrate.git
+git clone --depth 1 https://github.com/ruby-processing/PiCrate.git
 cd PiCrate
 rake # to build gem
 ```

@@ -1,7 +1,7 @@
 project 'picrate', 'http://maven.apache.org' do
 
   model_version '4.0.0'
-  id 'ruby-processing:picrate:1.2.1'
+  id 'ruby-processing:picrate:1.2.4'
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -31,24 +31,24 @@ project 'picrate', 'http://maven.apache.org' do
     'polyglot.dump.pom' => 'pom.xml'
   )
 
-  pom 'org.jruby:jruby:9.2.8.0'
+  pom 'org.jruby:jruby:9.2.9.0'
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'
 end
 
 overrides do
-  plugin :resources, '2.7'
-  plugin :dependency, '2.8'
+  plugin :resources, '3.1.0'
+  plugin :dependency, '3.1.1'
   plugin( :compiler, '3.8.1', 'release' => '8' )
   plugin(
     :javadoc,
-    '2.10.4',
+    '3.1.1',
     'detectOfflineLinks' =>  'false',
     'links' => [ '${processing.api}', '${jruby.api}' ]
   )
   plugin(
-    :jar, '3.1.0',
+    :jar, '3.1.2',
     'archive' => {
       'manifestEntries' => { 'Class-Path' => 'gluegen-rt.jar jog-all.jar' }
     }
