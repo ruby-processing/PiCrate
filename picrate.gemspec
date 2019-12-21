@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
     A batteries included version of processing in ruby, for raspberrypi and
     linux. Install samples to configures geany ide.
   EOS
-  gem.summary     = %q{ruby wrapper for processing-4.0 on raspberrypi and linux64}
+  gem.summary     = %q{ruby implementation of processing-3 on raspberrypi and linux64}
   gem.homepage    = 'https://ruby-processing.github.io/PiCrate/'
   gem.post_install_message = %q{Use 'picrate --install' to config geany & install samples}
   gem.files       = `git ls-files`.split($/)

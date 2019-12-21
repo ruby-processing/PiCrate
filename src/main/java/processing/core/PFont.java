@@ -901,24 +901,24 @@ public class PFont implements PConstants {
    * @param name
    * @return
    */
-  static public Font findFont(String name) {
-    Font font = new Font(name, Font.PLAIN, 1);
-    // make sure we have the name of the system fallback font
-    if (systemFontName == null) {
-      // Figure out what the font is named when things fail
-      systemFontName = new Font("", Font.PLAIN, 1).getFontName();
-    }
-    // warn the user if they didn't get the font they want
-    if (!name.equals(systemFontName)
-      && font.getFontName().equals(systemFontName)) {
-      PGraphics.showWarning("\"" + name + "\" is not available, "
-        + "so another font will be used.\n"
-        + "Use PFont.list in sketch to show available fonts.\n"
-        + "Or <fc-match \"" + name + "\"> in a terminal to find\n"
-        + "an alternative");
-    }
-    return font;
-  }
+   static public Font findFont(String name) {
+     Font font = new Font(name, Font.PLAIN, 1);
+     // make sure we have the name of the system fallback font
+     if (systemFontName == null) {
+       // Figure out what the font is named when things fail
+       systemFontName = new Font("", Font.PLAIN, 1).getFontName();
+     }
+     // warn the user if they didn't get the font they want
+     if (!name.equals(systemFontName)
+       && font.getFontName().equals(systemFontName)) {
+       PGraphics.showWarning("\"" + name + "\" is not available, "
+         + "so another font will be used.\n"
+         + "Use PFont.list in sketch to show available fonts.\n"
+         + "Or <fc-match \"" + name + "\"> in a terminal to find\n"
+         + "an alternative");
+     }
+     return font;
+   }
 
   //////////////////////////////////////////////////////////////
   /**

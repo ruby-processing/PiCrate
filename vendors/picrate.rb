@@ -1,4 +1,5 @@
-#!/usr/bin/env jruby
+# frozen_string_literal: true
+
 require 'picrate'
 # Sketch class
 class MySketch < Processing::App

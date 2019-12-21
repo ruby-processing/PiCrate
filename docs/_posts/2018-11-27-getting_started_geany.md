@@ -10,22 +10,29 @@ The current version of raspbian installs jdk-1.8.0_65-bi17 (hard float) and that
 Then install JRuby see [jruby][jruby].
 
 ```bash
-jgem install picrate -v 1.1.0
+jgem install picrate
 ```
 
 Install samples, and configure `geany` ide (for `PiCrate`)
 
 ```bash
-picrate -i # geany configuration files are installed if required
+picrate -i
 # or
-picrate --install # no args or samples without geany config
+picrate --install
 ```
+or for no geany configuration
+```bash
+picrate -i Samples
+# or
+picrate --install Samples
+```
+
 
 Install processing libraries
 
 ```bash
-picrate -i Sound
-picrate -i glvideo # preferred over vanilla video for now
+# picrate -i Sound not currently working
+picrate -i video # preferred over vanilla video for now
 ```
 
 ### Creating Sketches from the GeanyIDE

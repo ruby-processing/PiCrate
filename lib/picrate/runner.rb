@@ -40,7 +40,7 @@ module Processing
         end
 
         options[:install] = false
-        message = '<Samples><GLVideo><Video><Sound> Install samples or library'
+        message = '<Samples><Video> Install samples or library'
         opts.on('-i', '--install', message) do
           options[:install] = true
         end
@@ -80,8 +80,10 @@ module Processing
       library ||= 'new'
       choice = library.downcase
       case choice
-      when /samples|sound|video/
-        system "cd #{PICRATE_ROOT}/vendors && rake download_and_copy_#{choice}"
+      when /sound/
+        warn 'The sound library is broken, try minim instead'
+      when /samples|video/
+        system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
       when /new/
         # install samples and config geany
         system "cd #{PICRATE_ROOT}/vendors && rake"
