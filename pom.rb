@@ -1,11 +1,7 @@
 project 'picrate', 'http://maven.apache.org' do
 
   model_version '4.0.0'
-<<<<<<< HEAD
   id 'ruby-processing:picrate:2.0.0.pre'
-=======
-  id 'ruby-processing:picrate:1.2.4'
->>>>>>> 58b677e29000d5a98f8ea81a2e009698a274883f
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -42,15 +38,9 @@ project 'picrate', 'http://maven.apache.org' do
 end
 
 overrides do
-<<<<<<< HEAD
   plugin :resources, '2.7'
   plugin :dependency, '2.8'
   plugin( :compiler, '3.8.1', 'release' => '11' )
-=======
-  plugin :resources, '3.1.0'
-  plugin :dependency, '3.1.1'
-  plugin( :compiler, '3.8.1', 'release' => '8' )
->>>>>>> 58b677e29000d5a98f8ea81a2e009698a274883f
   plugin(
     :javadoc,
     '3.1.1',

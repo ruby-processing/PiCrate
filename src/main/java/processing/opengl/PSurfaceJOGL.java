@@ -438,21 +438,6 @@ public class PSurfaceJOGL implements PSurface {
      *
      */
     protected void initAnimator() {
-        if (PApplet.platform == PConstants.WINDOWS) {
-            // Force Windows to keep timer resolution high by
-            // sleeping for time which is not a multiple of 10 ms.
-            // See section "Clocks and Timers on Windows":
-            //   https://blogs.oracle.com/dholmes/entry/inside_the_hotspot_vm_clocks
-            Thread highResTimerThread = new Thread(() -> {
-                try {
-                    Thread.sleep(Long.MAX_VALUE);
-                } catch (InterruptedException ignore) {
-                }
-            }, "HighResTimerThread");
-            highResTimerThread.setDaemon(true);
-            highResTimerThread.start();
-        }
-
         animator = new FPSAnimator(window, 60);
         drawException = null;
         animator.setUncaughtExceptionHandler((final GLAnimatorControl animator1, final GLAutoDrawable drawable, final Throwable cause) -> {
@@ -462,34 +447,31 @@ public class PSurfaceJOGL implements PSurface {
             }
         });
 
-        drawExceptionHandler = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                synchronized (drawExceptionMutex) {
-                    try {
-                        while (drawException == null) {
-                            drawExceptionMutex.wait();
-                        }
-                        // System.err.println("Caught exception: " + drawException.getMessage());
-                        if (drawException != null) {
-                            Throwable cause = drawException.getCause();
-                            if (cause instanceof ThreadDeath) {
-                                // System.out.println("caught ThreadDeath");
-                                // throw (ThreadDeath)cause;
-                            } else if (cause instanceof RuntimeException) {
-                                throw (RuntimeException) cause;
-                            } else if (cause instanceof UnsatisfiedLinkError) {
-                                throw new UnsatisfiedLinkError(cause.getMessage());
-                            } else if (cause == null) {
-                                throw new RuntimeException(drawException.getMessage());
-                            } else {
-                                throw new RuntimeException(cause);
-                            }
-                        }
-                    } catch (InterruptedException e) {
-                    }
+        drawExceptionHandler = new Thread(() -> {
+          synchronized (drawExceptionMutex) {
+            try {
+              while (drawException == null) {
+                drawExceptionMutex.wait();
+              }
+              // System.err.println("Caught exception: " + drawException.getMessage());
+              if (drawException != null) {
+                Throwable cause = drawException.getCause();
+                if (cause instanceof ThreadDeath) {
+                  // System.out.println("caught ThreadDeath");
+                  // throw (ThreadDeath)cause;
+                } else if (cause instanceof RuntimeException) {
+                  throw (RuntimeException) cause;
+                } else if (cause instanceof UnsatisfiedLinkError) {
+                  throw new UnsatisfiedLinkError(cause.getMessage());
+                } else if (cause == null) {
+                  throw new RuntimeException(drawException.getMessage());
+                } else {
+                  throw new RuntimeException(cause);
                 }
+              }
+            } catch (InterruptedException e) {
             }
+          }
         });
         drawExceptionHandler.start();
     }
@@ -592,10 +574,10 @@ public class PSurfaceJOGL implements PSurface {
             }
 
             stream = new FileInputStream(file);
-            if (stream != null) {
+           // if (stream != null) {
                 stream.close();
                 return file.getCanonicalPath();
-            }
+          //  }
 
             // have to break these out because a general Exception might
             // catch the RuntimeException being thrown above
@@ -641,29 +623,29 @@ public class PSurfaceJOGL implements PSurface {
                 try {
                     String path = sketch.dataPath(filename);
                     stream = new FileInputStream(path);
-                    if (stream != null) {
+                   // if (stream != null) {
                         stream.close();
                         return path;
-                    }
+                   // }
                 } catch (IOException e2) {
                 }
 
                 try {
                     String path = sketch.sketchPath(filename);
                     stream = new FileInputStream(path);
-                    if (stream != null) {
+                    //if (stream != null) {
                         stream.close();
                         return path;
-                    }
+                  //  }
                 } catch (IOException e) {
                 }  // ignored
 
                 try {
                     stream = new FileInputStream(filename);
-                    if (stream != null) {
+                   // if (stream != null) {
                         stream.close();
                         return filename;
-                    }
+                   // }
                 } catch (IOException e1) {
                 }
 
