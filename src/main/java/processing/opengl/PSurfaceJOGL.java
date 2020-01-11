@@ -514,7 +514,7 @@ public class PSurfaceJOGL implements PSurface {
      *
      */
     protected void initIcons() {
-        IOUtil.ClassResources res = null;
+        IOUtil.ClassResources res;
         if (PJOGL.icons == null || PJOGL.icons.length == 0) {
             // Default Processing icons
             final int[] sizes = {16, 32, 48, 64, 128, 256, 512};
@@ -542,7 +542,7 @@ public class PSurfaceJOGL implements PSurface {
     @SuppressWarnings("resource")
     private String resourceFilename(String filename) {
         // The code below comes from PApplet.createInputRaw() with a few adaptations
-        InputStream stream = null;
+        InputStream stream;
         try {
             // First see if it's in a data folder. This may fail by throwing
             // a SecurityException. If so, this whole block will be skipped.
@@ -1371,16 +1371,15 @@ public class PSurfaceJOGL implements PSurface {
     }
 
     static Map<Integer, CursorInfo> cursors = new HashMap<>();
-    static Map<Integer, String> cursorNames = new HashMap<>();
+    static Map<Integer, String> cursorNames = Map.of(
+          PConstants.ARROW, "arrow",
+          PConstants.CROSS, "cross",
+          PConstants.WAIT, "wait",
+          PConstants.MOVE, "move",
+          PConstants.HAND, "hand",
+          PConstants.TEXT, "text"
+  );
 
-    static {
-        cursorNames.put(PConstants.ARROW, "arrow");
-        cursorNames.put(PConstants.CROSS, "cross");
-        cursorNames.put(PConstants.WAIT, "wait");
-        cursorNames.put(PConstants.MOVE, "move");
-        cursorNames.put(PConstants.HAND, "hand");
-        cursorNames.put(PConstants.TEXT, "text");
-    }
 
     @Override
     public void setCursor(int kind) {
