@@ -668,26 +668,6 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     } catch (Exception e) {
     }  // harmless; keep this to ourselves
-
-    // } else {  // handle OS X differently
-    //   if (!dockIconSpecified()) {  // don't override existing -Xdock param
-    //     // On OS X, set this for AWT surfaces, which handles the dock image
-    //     // as well as the cmd-tab image that's shown. Just one size, I guess.
-    //     URL url = PApplet.class.getResource("/icon/icon-512.png");
-    //     // Seems dangerous to have this in code instead of using reflection, no?
-    //     //ThinkDifferent.setIconImage(Toolkit.getDefaultToolkit().getImage(url));
-    //     try {
-    //       final String td = "processing.core.ThinkDifferent";
-    //       Class<?> thinkDifferent =
-    //         Thread.currentThread().getContextClassLoader().loadClass(td);
-    //       Method method =
-    //         thinkDifferent.getMethod("setIconImage", new Class[] { java.awt.Image.class });
-    //       method.invoke(null, new Object[] { Toolkit.getDefaultToolkit().getImage(url) });
-    //     } catch (Exception e) {
-    //       e.printStackTrace();  // That's unfortunate
-    //     }
-    //   }
-    // }
   }
 
   /**

@@ -52,13 +52,11 @@ import java.awt.FileDialog;
 import javax.swing.JFileChooser;
 
 // set the look and feel, if specified
-import javax.swing.UIManager;
 
 // used by link()
 import java.awt.Desktop;
 
 // used by desktopFile() method
-import javax.swing.filechooser.FileSystemView;
 
 // loadXML() error handling
 import javax.xml.parsers.ParserConfigurationException;
@@ -78,7 +76,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
 import java.util.regex.*;
 import java.util.zip.*;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import processing.data.*;
 import processing.event.*;
@@ -328,7 +325,7 @@ public class PApplet implements PConstants {
    * is doubled. As a result, all operations that use pixels (like
    * <b>loadPixels()</b>, <b>get()</b>, <b>set()</b>, etc.) happen in this
    * doubled space. As a convenience, the variables <b>pixelWidth</b>
-   * and <b>pixelHeight<b> hold the actual width and height of the sketch in
+   * and <b>pixelHeight</b> hold the actual width and height of the sketch in
    * pixels. This is useful for any sketch that uses the <b>pixels[]</b>
    * array, for instance, because the number of elements in the array will be
    * <b>pixelWidth*pixelHeight</b>, not <b>width*height</b>.
@@ -1451,17 +1448,19 @@ public class PApplet implements PConstants {
    * @param target the target object that should receive the event
    */
   public void registerMethod(String methodName, Object target) {
-    if (methodName.equals("mouseEvent")) {
-      registerWithArgs("mouseEvent", target, new Class[]{processing.event.MouseEvent.class});
-
-    } else if (methodName.equals("keyEvent")) {
-      registerWithArgs("keyEvent", target, new Class[]{processing.event.KeyEvent.class});
-
-    } else if (methodName.equals("touchEvent")) {
-      registerWithArgs("touchEvent", target, new Class[]{processing.event.TouchEvent.class});
-
-    } else {
-      registerNoArgs(methodName, target);
+    switch (methodName) {
+      case "mouseEvent":
+        registerWithArgs("mouseEvent", target, new Class[]{processing.event.MouseEvent.class});
+        break;
+      case "keyEvent":
+        registerWithArgs("keyEvent", target, new Class[]{processing.event.KeyEvent.class});
+        break;
+      case "touchEvent":
+        registerWithArgs("touchEvent", target, new Class[]{processing.event.TouchEvent.class});
+        break;
+      default:
+        registerNoArgs(methodName, target);
+        break;
     }
   }
 

@@ -30,31 +30,31 @@ public interface PSurface {
   /**
    * Minimum dimensions for the window holding an applet.
    */
-  static public final int MIN_WINDOW_WIDTH = 128;
+  int MIN_WINDOW_WIDTH = 128;
 
   /**
    *
    */
-  static public final int MIN_WINDOW_HEIGHT = 128;
+  int MIN_WINDOW_HEIGHT = 128;
 
   // renderer that doesn't draw to the screen
   /**
    *
    * @param sketch
    */
-  public void initOffscreen(PApplet sketch);
+  void initOffscreen(PApplet sketch);
 
   // considering removal in favor of separate Component classes for appropriate renderers
   // (i.e. for Java2D or a generic Image surface, but not PDF, debatable for GL or FX)
-  //public Component initComponent(PApplet sketch);
-  //public Frame initFrame(PApplet sketch, Color backgroundColor,
-//  public void initFrame(PApplet sketch, int backgroundColor,
+  //Component initComponent(PApplet sketch);
+  //Frame initFrame(PApplet sketch, Color backgroundColor,
+//  void initFrame(PApplet sketch, int backgroundColor,
 //                        int deviceIndex, boolean fullScreen, boolean spanDisplays);
   /**
    *
    * @param sketch
    */
-  public void initFrame(PApplet sketch);
+  void initFrame(PApplet sketch);
 
   /**
    * Get the native window object associated with this drawing surface. For
@@ -66,7 +66,7 @@ public interface PSurface {
    *
    * @return
    */
-  public Object getNative();
+  Object getNative();
 
   //
   // Just call these on an AWT Frame object stored in PApplet.
@@ -77,73 +77,73 @@ public interface PSurface {
    *
    * @param title
    */
-  public void setTitle(String title);
+  void setTitle(String title);
 
   /**
    * Show or hide the window.
    *
    * @param visible
    */
-  public void setVisible(boolean visible);
+  void setVisible(boolean visible);
 
   /**
    * Set true if we want to resize things (default is not resizable)
    *
    * @param resizable
    */
-  public void setResizable(boolean resizable);
+  void setResizable(boolean resizable);
 
   /**
    * Dumb name, but inherited from Frame and no better ideas.
    *
    * @param always
    */
-  public void setAlwaysOnTop(boolean always);
+  void setAlwaysOnTop(boolean always);
 
   /**
    *
    * @param icon
    */
-  public void setIcon(PImage icon);
+  void setIcon(PImage icon);
 
   //
-//  public void placeWindow(int[] location);
+//  void placeWindow(int[] location);
   /**
    *
    * @param location
    * @param editorLocation
    */
-  public void placeWindow(int[] location, int[] editorLocation);
+  void placeWindow(int[] location, int[] editorLocation);
 
-  //public void placeFullScreen(boolean hideStop);
+  //void placeFullScreen(boolean hideStop);
   /**
    *
    * @param stopColor
    */
-  public void placePresent(int stopColor);
+  void placePresent(int stopColor);
 
   // Sketch is running from the PDE, set up messaging back to the PDE
   /**
    *
    */
-  public void setupExternalMessages();
+  void setupExternalMessages();
 
   //
   // sets displayWidth/Height inside PApplet
-  //public void checkDisplaySize();
+  //void checkDisplaySize();
   /**
    *
    * @param x
    * @param y
    */
-  public void setLocation(int x, int y);
+  void setLocation(int x, int y);
 
   /**
    *
    * @param width
    * @param height
    */
-  public void setSize(int width, int height);
+  void setSize(int width, int height);
 
 //  /**
 //   * Called by {@link PApplet#createGraphics} to initialize the
@@ -154,32 +154,32 @@ public interface PSurface {
 //   * @param high
 //   */
   // create pixel buffer (pulled out for offscreen graphics)
-  //public void initImage(PGraphics gr, int wide, int high);
+  //void initImage(PGraphics gr, int wide, int high);
   // create pixel buffer, called from allocate() to produce a compatible image for rendering efficiently
-//  public void initImage(PGraphics gr);
-  //public Component getComponent();
+//  void initImage(PGraphics gr);
+  //Component getComponent();
 //  /**
 //   * Sometimes smoothing must be set at the drawing surface level
 //   * not just inside the renderer itself.
 //   */
-//  public void setSmooth(int level);
+//  void setSmooth(int level);
   /**
    *
    * @param fps
    */
-  public void setFrameRate(float fps);
+  void setFrameRate(float fps);
 
 //  // called on the first frame so that the now-visible drawing surface can
 //  // receive key and mouse events
-//  public void requestFocus();
+//  void requestFocus();
 //  // finish rendering to the screen (called by PApplet)
-//  public void blit();
+//  void blit();
   //
   /**
    *
    * @param kind
    */
-  public void setCursor(int kind);
+  void setCursor(int kind);
 
   /**
    *
@@ -187,46 +187,46 @@ public interface PSurface {
    * @param hotspotX
    * @param hotspotY
    */
-  public void setCursor(PImage image, int hotspotX, int hotspotY);
+  void setCursor(PImage image, int hotspotX, int hotspotY);
 
   /**
    *
    */
-  public void showCursor();
+  void showCursor();
 
   /**
    *
    */
-  public void hideCursor();
+  void hideCursor();
 
   //
   /**
    * Start the animation thread
    */
-  public void startThread();
+  void startThread();
 
   /**
    * On the next trip through the animation thread, things should go sleepy-bye.
    * Does not pause the thread immediately because that needs to happen on the
    * animation thread itself, so fires on the next trip through draw().
    */
-  public void pauseThread();
+  void pauseThread();
 
   /**
    *
    */
-  public void resumeThread();
+  void resumeThread();
 
   /**
    * Stop the animation thread (set it null)
    *
    * @return false if already stopped
    */
-  public boolean stopThread();
+  boolean stopThread();
 
   /**
    *
    * @return
    */
-  public boolean isStopped();
+  boolean isStopped();
 }
