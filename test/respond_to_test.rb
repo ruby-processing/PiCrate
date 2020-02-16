@@ -2,7 +2,7 @@
 
 require_relative 'test_helper'
 
-METHODS = %i(
+METHODS = %i[
   alpha
   ambient
   ambient_light
@@ -181,7 +181,7 @@ METHODS = %i(
   update_pixels
   vertex
   width
-)
+].freeze
 
 class TestSketch < Processing::App
   def settings
@@ -193,7 +193,9 @@ class TestSketch < Processing::App
   end
 
   def draw
-    exit if frame_count > 30
+    exit if frame_count > 20
+
+    background 0, 200, 0
   end
 end
 

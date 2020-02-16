@@ -96,5 +96,5 @@ task copy_video: "/tmp/#{VIDEO}" do
   system "unzip -d /tmp /tmp/#{VIDEO}"
   FileUtils.rm_r "#{LIBRARY}/video" if File.exist? "#{LIBRARY}/video"
   FileUtils.mkdir_p "#{LIBRARY}/video/library"
-  FileUtils.mv Dir.glob("/tmp/video/library/*.jar"), "#{LIBRARY}/video/library"
+  FileUtils.mv Dir.glob('/tmp/video/library/*.jar'), "#{LIBRARY}/video/library"
 end

@@ -1,9 +1,9 @@
 #!/usr/bin/env jruby
+# frozen_string_literal: true
+
 require 'picrate'
 
-
 class CustomProxySketch < Processing::App
-
   # A simple demonstration of vanilla processing 'reflection' methods using
   # picrate :library_proxy. See my_library.rb code for the guts.
   load_libraries :library_proxy, :my_library

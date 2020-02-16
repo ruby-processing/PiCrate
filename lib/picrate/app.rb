@@ -1,4 +1,5 @@
 # frozen_string_literal: false
+
 require_relative 'helper_methods'
 require_relative 'library_loader'
 # A wrapper module for the processing App
@@ -49,7 +50,10 @@ module Processing
 
   # All sketches extend this class
   class App < PApplet
-    include Math, MathTool, HelperMethods, Render
+    include Render
+    include HelperMethods
+    include MathTool
+    include Math
     # Alias some methods for familiarity for Shoes coders.
     alias oval ellipse
     alias stroke_width stroke_weight
@@ -101,6 +105,7 @@ module Processing
       # Processing call them by their expected Java names.
       def method_added(method_name) #:nodoc:
         return unless METHODS_TO_ALIAS.key?(method_name)
+
         alias_method METHODS_TO_ALIAS[method_name], method_name
       end
     end
@@ -113,6 +118,7 @@ module Processing
       # Guard against invalid input.
       proxy_java_fields
       raise TypeError unless options.is_a?(Hash) && arguments.is_a?(Array)
+
       # Set up the sketch.
       super()
       post_initialize(options)
@@ -132,8 +138,7 @@ module Processing
       super(*args)
     end
 
-    def post_initialize(_args)
-    end
+    def post_initialize(_args); end
 
     def data_path(dat)
       dat_root = File.join(SKETCH_ROOT, 'data')
@@ -162,6 +167,7 @@ module Processing
     # Processing call them by their expected Java names.
     def method_added(method_name) #:nodoc:
       return unless METHODS_TO_ALIAS.key?(method_name)
+
       alias_method METHODS_TO_ALIAS[method_name], method_name
     end
   end
@@ -179,6 +185,7 @@ module Processing
 
     def method_missing(name, *args, &block)
       return Processing.app.send(name, *args) if Processing.app.respond_to? name
+
       super
     end
   end # Processing::Proxy
