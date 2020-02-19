@@ -5,7 +5,7 @@ date:   2019-11-11 07:34:13
 categories: PiCrate update
 permalink: /getting_buster/
 ---
-Currently Raspbian Buster does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing openjdk8 (_there a complications you don't need using jdk11_) to benefit from `client` optimisations. There is a bash script [here][buster], that will install `openjdk8`, `jruby-9.2.9.0` and picrate for you.
+Currently Raspbian Buster does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing openjdk8 (_there a complications you don't need using jdk11_) to benefit from `client` optimisations. There is a bash script [here][buster], that will install `openjdk8`, `jruby-9.2.10.0` and picrate for you.
 ```bash
 bash buster_install.sh
 ```
