@@ -55,5 +55,4 @@ jruby --dev my_sketch.rb # --dev flag speeds start-up
 ```
 
 [buster]:https://gist.github.com/monkstone/6ae9840d7b7008c177b4a9f589d14ec6
-[propane]:https://ruby-processing.github.io/propane/
-[oracle]:http://www.rpiblog.com/2014/03/installing-oracle-jdk-8-on-raspberry-pi.html
+
