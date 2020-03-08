@@ -59,7 +59,7 @@ picrate --install # no args, install samples and geany config
 picrate -i Samples # to omit geany config
 ```
 
-This installs example sketches in `~/sample_sketches` and ties them into a `geany` project `picrate.geany`. It should also be possible to run sketches from the `geany` ide.
+This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide.
 
 To create a template sketch from the command line:-
 
