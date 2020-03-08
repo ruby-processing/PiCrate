@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'test_helper'
 
 Dir.chdir(File.dirname(__FILE__))

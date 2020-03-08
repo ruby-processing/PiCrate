@@ -11,13 +11,13 @@ module Parameters
   PARAM = { 'sketch' =>
     { 'width' => 640, 'height' => 480, 'mode' => 'P2D' } }.freeze
 
-    def self.write
-      FileUtils.mkdir_p PATH
-      File.write(FILE, PARAM.to_yaml)
-    end
-
-    def self.read
-      write unless File.exist?(FILE)
-      YAML.load_file(FILE)
-    end
+  def self.write
+    FileUtils.mkdir_p PATH
+    File.write(FILE, PARAM.to_yaml)
   end
+
+  def self.read
+    write unless File.exist?(FILE)
+    YAML.load_file(FILE)
+  end
+end

@@ -1,4 +1,5 @@
 # frozen_string_literal: false
+
 # processing module wrapper
 require_relative 'helpers/numeric'
 module Processing
@@ -52,6 +53,7 @@ module Processing
 
     def color(*args)
       return super(*args) unless args.length == 1
+
       super(hex_color(args[0]))
     end
 
@@ -66,11 +68,8 @@ module Processing
     # Overrides Processing convenience function thread, which takes a String
     # arg (for a function) to more rubylike version, takes a block...
     def thread(&block)
-      if block_given?
-        Thread.new(&block)
-      else
-        raise ArgumentError, 'thread must be called with a block', caller
-      end
+      warn 'you must provide a block' unless block_given?
+      Java::JavaLang::Thread.new(&block).start
     end
 
     # explicitly provide 'processing.org' min instance method
@@ -94,9 +93,9 @@ module Processing
     def dist(*args)
       case args.length
       when 4
-        return dist2d(*args)
+        dist2d(*args)
       when 6
-        return dist3d(*args)
+        dist3d(*args)
       else
         raise ArgumentError, 'takes 4 or 6 parameters'
       end
@@ -111,13 +110,13 @@ module Processing
     # Here's a convenient way to look for them.
     def find_method(method_name)
       reg = Regexp.new(method_name.to_s, true)
-      methods.sort.select { |meth| reg.match(meth) }
+      methods.sort.select { |meth| reg.match?(meth) }
     end
 
     # Proxy over a list of Java declared fields that have the same name as
     # some methods. Add to this list as needed.
     def proxy_java_fields
-      fields = %w(key frameRate mousePressed keyPressed)
+      fields = %w[key frameRate mousePressed keyPressed]
       methods = fields.map { |field| java_class.declared_field(field) }
       @declared_fields = Hash[fields.zip(methods)]
     end
@@ -163,6 +162,7 @@ module Processing
     # frame_rate needs to support reading and writing
     def frame_rate(fps = nil)
       return @declared_fields['frameRate'].value(java_self) unless fps
+
       super(fps)
     end
 
@@ -178,19 +178,17 @@ module Processing
 
     private
 
-    INTEGER_COL = -> (x) { x.is_a?(Integer) }
-    STRING_COL = -> (x) { x.is_a?(String) }
-    FLOAT_COL = -> (x) { x.is_a?(Float) }
     # parse single argument color int/double/String
-    def hex_color(a)
-      case a
-      when INTEGER_COL
-        Java::Monkstone::ColorUtil.colorLong(a)
-      when STRING_COL
-        return Java::Monkstone::ColorUtil.colorString(a) if a =~ /#\h+/
-        raise StandardError, 'Dodgy Hexstring'
-      when FLOAT_COL
-        Java::Monkstone::ColorUtil.colorDouble(a)
+    def hex_color(arg)
+      case arg
+      when Integer
+        Java::Monkstone::ColorUtil.colorLong(arg)
+      when String
+        raise StandardError, 'Dodgy Hexstring' unless arg.match(/#\h{6}$/)
+
+        Java::Monkstone::ColorUtil.colorString(arg)
+      when Float
+        Java::Monkstone::ColorUtil.colorDouble(arg)
       else
         raise StandardError, 'Dodgy Color Conversion'
       end
@@ -200,6 +198,7 @@ module Processing
       dx = args[0] - args[2]
       dy = args[1] - args[3]
       return 0 if dx.abs < EPSILON && dy.abs < EPSILON
+
       Math.hypot(dx, dy)
     end
 
@@ -208,6 +207,7 @@ module Processing
       dy = args[1] - args[4]
       dz = args[2] - args[5]
       return 0 if dx.abs < EPSILON && dy.abs < EPSILON && dz.abs < EPSILON
+
       Math.sqrt(dx * dx + dy * dy + dz * dz)
     end
   end

@@ -1,3 +1,5 @@
+v2.0.0 Use JDK11+ update to processing-3.5.4 suggest jruby-9.2.11.0
+
 v1.2.4 Extract picrate examples to ~/projects/examples instead of ~/picrate_samples for tighter integration with geany editor. Remove non-functioning sound library as an install option (direct toward minim as option).
 
 v1.2.3 Favor latest beta Video2 library over GLVideo.

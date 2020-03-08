@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 java_import Java::Monkstone::ColorUtil
 
 # class wraps a java color array (of signed int), supports shuffle!, last and

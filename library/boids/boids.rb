@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 # Boids -- after Tom de Smedt.
 # See his Python version: http://nodebox.net/code/index.php/Boids
 # This is an example of how a pure-Ruby library can work. Original for
@@ -8,7 +9,8 @@ class Boid
   attr_reader :boids
   attr_accessor :vel, :pos, :is_perching, :perch_time
   def initialize(boids, pos)
-    @boids, @flock = boids, boids
+    @boids = boids
+    @flock = boids
     @pos = pos
     @vel = Vec2D.new
     @is_perching = false
@@ -54,6 +56,7 @@ class Boid
     # Tweet, Tweet! The boid police will bust you for breaking the speed limit.
     most = [vel.x.abs, vel.y.abs].max
     return if most < max
+
     scale = max / most.to_f
     @vel *= scale
   end
@@ -76,7 +79,7 @@ class Boids
   extend Forwardable
   def_delegators(:@boids, :reject, :<<, :each, :shuffle!, :length, :next)
 
-  attr_reader :has_goal, :perch, :perch_tm, :perch_y
+  attr_reader :has_goal, :perchance, :perch_tm, :perch_y
 
   def initialize
     @boids = []
@@ -89,15 +92,19 @@ class Boids
 
   def setup(n, x, y, w, h)
     n.times do
-      dx, dy = rand(w), rand(h)
+      dx = rand(w)
+      dy = rand(h)
       self << Boid.new(self, Vec2D.new(x + dx, y + dy))
     end
-    @x, @y, @w, @h = x, y, w, h
+    @x = x
+    @y = y
+    @w = w
+    @h = h
     @scattered = false
     @scatter = 0.005
     @scatter_time = 50.0
     @scatter_i = 0.0
-    @perch = 1.0 # Lower this number to divebomb.
+    @perchance = 1.0 # Lower this number to divebomb.
     @perch_y = h
     @perch_tm = -> { 25.0 + rand(50.0) }
     @has_goal = false
@@ -118,11 +125,11 @@ class Boids
   def perch(ground = nil, chance = 1.0, frames = nil)
     @perch_tm = frames.nil? ? -> { 25.0 + rand(50.0) } : frames
     @perch_y = ground.nil? ? @h : ground
-    @perch = chance
+    @perchance = chance
   end
 
   def no_perch
-    @perch = 0.0
+    @perchance= 0.0
   end
 
   def reset_goal(target)
@@ -145,13 +152,15 @@ class Boids
 
   def constrain
     # Put them boids in a cage.
-    dx, dy = @w * 0.1, @h * 0.1
+    dx = @w * 0.1
+    dy = @h * 0.1
     each do |b|
       b.vel.x += rand(dx) if b.pos.x < @x - dx
       b.vel.y += rand(dy) if b.pos.y < @y - dy
       b.vel.x -= rand(dx) if b.pos.x > @x + @w + dx
       b.vel.y -= rand(dy) if b.pos.y > @y + @h + dy
       next unless b.pos.y > perch_y && rand < perch
+
       b.pos.y = perch_y
       b.vel.y = b.vel.y.abs * -0.2
       b.is_perching = true

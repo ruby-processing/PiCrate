@@ -1,7 +1,8 @@
-project 'picrate', 'http://maven.apache.org' do
+# frozen_string_literal: true
 
+project 'picrate', 'http://maven.apache.org' do
   model_version '4.0.0'
-  id 'ruby-processing:picrate:1.2.4'
+  id 'ruby-processing:picrate:2.0.0.pre'
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -22,30 +23,29 @@ project 'picrate', 'http://maven.apache.org' do
 
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
 
-  properties( 'jogl.version' => '2.3.2',
-    'jruby.api' => 'http://jruby.org/apidocs/',
-    'source.directory' => 'src',
-    'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
-    'picrate.basedir' => '${project.basedir}',
-    'project.build.sourceEncoding' => 'utf-8',
-    'polyglot.dump.pom' => 'pom.xml'
-  )
+  properties('jogl.version' => '2.3.2',
+             'jruby.api' => 'http://jruby.org/apidocs/',
+             'source.directory' => 'src',
+             'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
+             'picrate.basedir' => '${project.basedir}',
+             'project.build.sourceEncoding' => 'utf-8',
+             'polyglot.dump.pom' => 'pom.xml')
 
-  pom 'org.jruby:jruby:9.2.9.0'
+  pom 'org.jruby:jruby:9.2.11.0'
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'
 end
 
 overrides do
-  plugin :resources, '3.1.0'
-  plugin :dependency, '3.1.1'
-  plugin( :compiler, '3.8.1', 'release' => '8' )
+  plugin :resources, '2.7'
+  plugin :dependency, '2.8'
+  plugin(:compiler, '3.8.1', 'release' => '11')
   plugin(
     :javadoc,
     '3.1.1',
-    'detectOfflineLinks' =>  'false',
-    'links' => [ '${processing.api}', '${jruby.api}' ]
+    'detectOfflineLinks' => 'false',
+    'links' => ['${processing.api}', '${jruby.api}']
   )
   plugin(
     :jar, '3.1.2',

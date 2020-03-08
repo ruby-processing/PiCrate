@@ -1,12 +1,14 @@
+# frozen_string_literal: true
+
 require 'rbconfig'
 
 # Utility to load native binaries on Java CLASSPATH
-#HACK until jruby returns a more specific 'host_os' than 'linux'
+# HACK until jruby returns a more specific 'host_os' than 'linux'
 class NativeFolder
   attr_reader :os, :bit
 
-  LINUX_FORMAT = 'linux%s'.freeze
-  ARM32 = '-armv6hf'.freeze
+  LINUX_FORMAT = 'linux%s'
+  ARM32 = '-armv6hf'
   # ARM64 = '-aarch64'.freeze
 
   def initialize
@@ -19,7 +21,7 @@ class NativeFolder
       return format(LINUX_FORMAT, '64') if /amd64/.match?(bit)
       return format(LINUX_FORMAT, ARM32) if /arm/.match?(bit)
     end
-    raise RuntimeError, "Unsupported Architecture"
+    raise 'Unsupported Architecture'
   end
 
   def extension

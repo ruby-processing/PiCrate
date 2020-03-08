@@ -6,7 +6,7 @@ unless defined? PICRATE_ROOT
   PICRATE_ROOT = File.dirname(__dir__)
 end
 
-Dir["#{PICRATE_ROOT}/lib/*.jar"].each do |jar|
+Dir["#{PICRATE_ROOT}/lib/*.jar"].sort.each do |jar|
   require jar
 end
 require_relative 'picrate/app'

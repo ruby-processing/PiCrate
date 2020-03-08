@@ -14,7 +14,7 @@ Get the latest version from [http://jruby.org/download][download]
 
 ```bash
 cd /opt
-sudo tar xzvf /pathToDownload/jruby-bin-9.2.9.0.tar.gz
+sudo tar xzvf /pathToDownload/jruby-bin-9.2.11.0.tar.gz
 ```
 
 Then use the excellent `update-alternatives` tool to provide symbolic links to `jruby`, `jgem`, `jirb` and `rake` especially if you haven't installed `mri` ruby.
@@ -44,9 +44,9 @@ mkdir installer
 cd installer
 rake
 ```
-Currently installs jruby-9.2.9.0
+Currently installs jruby-9.2.11.0
 
 If you know better please post on wiki
 
-[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.9.0/jruby-dist-9.2.9.0-bin.tar.gz"
+[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.11.0/jruby-dist-9.2.11.0-bin.tar.gz"
 [rake_gist]:https://gist.github.com/monkstone/159c5a9813c9cd181040b4715e74f6b2

@@ -41,11 +41,11 @@ import javax.imageio.metadata.*;
  * <b>width</b> and <b>height</b> of the image, as well as an array called
  * <b>pixels[]</b> that contains the values for every pixel in the image. The
  * methods described below allow easy access to the image's pixels and alpha
- * channel and simplify the process of compositing.<br/>
- * <br/> using the <b>pixels[]</b> array, be sure to use the
+ * channel and simplify the process of compositing.
+ *  using the <b>pixels[]</b> array, be sure to use the
  * <b>loadPixels()</b> method on the image to make sure that the pixel data is
- * properly loaded.<br/>
- * <br/> create a new image, use the <b>createImage()</b> function. Do not use
+ * properly loaded.
+ *  create a new image, use the <b>createImage()</b> function. Do not use
  * the syntax <b>new PImage()</b>.
  *
  * ( end auto-generated )
@@ -75,8 +75,8 @@ public class PImage implements PConstants, Cloneable {
    * values and if the window is 200x300 pixels, there will be 60000 values. The
    * <b>index</b> value defines the position of a value within the array. For
    * example, the statement <b>color b = pixels[230]</b> will set the variable
-   * <b>b</b> to be equal to the value at that location in the array.<br />
-   * <br />
+   * <b>b</b> to be equal to the value at that location in the array.
+   * 
    * Before accessing this array, the data must loaded with the
    * <b>loadPixels()</b> function. After the array data has been modified, the
    * <b>updatePixels()</b> function must be run to update the changes. Without
@@ -478,7 +478,7 @@ public class PImage implements PConstants, Cloneable {
    * Loads the pixel data for the image into its <b>pixels[]</b> array. This
    * function must always be called before reading from or writing to
    * <b>pixels[]</b>.
-   * <br/><br/> renderers may or may not seem to require <b>loadPixels()</b>
+   *  renderers may or may not seem to require <b>loadPixels()</b>
    * or <b>updatePixels()</b>. However, the rule is that any time you want to
    * manipulate the <b>pixels[]</b> array, you must first call
    * <b>loadPixels()</b>, and after changes have been made, call
@@ -518,7 +518,7 @@ public class PImage implements PConstants, Cloneable {
    * Updates the image with the data in its <b>pixels[]</b> array. Use in
    * conjunction with <b>loadPixels()</b>. If you're only reading pixels from
    * the array, there's no need to call <b>updatePixels()</b>.
-   * <br/><br/> renderers may or may not seem to require <b>loadPixels()</b>
+   *  renderers may or may not seem to require <b>loadPixels()</b>
    * or <b>updatePixels()</b>. However, the rule is that any time you want to
    * manipulate the <b>pixels[]</b> array, you must first call
    * <b>loadPixels()</b>, and after changes have been made, call
@@ -606,8 +606,8 @@ public class PImage implements PConstants, Cloneable {
    * Resize the image to a new width and height. To make the image scale
    * proportionally, use 0 as the value for the <b>wide</b> or <b>high</b>
    * parameter. For instance, to make the width of an image 150 pixels, and
-   * change the height using the same proportion, use resize(150, 0).<br />
-   * <br />
+   * change the height using the same proportion, use resize(150, 0).
+   * 
    * Even though a PGraphics is technically a PImage, it is not possible to
    * rescale the image data found in a PGraphics. (It's simply not possible to
    * do this consistently across renderers: technically infeasible with P3D, or
@@ -760,14 +760,14 @@ public class PImage implements PConstants, Cloneable {
    * display window by specifying an additional <b>width</b> and
    * <b>height</b> parameter. When getting an image, the <b>x</b> and
    * <b>y</b> parameters define the coordinates for the upper-left corner of the
-   * image, regardless of the current <b>imageMode()</b>.<br />
-   * <br />
+   * image, regardless of the current <b>imageMode()</b>.
+   * 
    * If the pixel requested is outside of the image window, black is returned.
    * The numbers returned are scaled according to the current color ranges, but
    * only RGB values are returned by this function. For example, even though you
    * may have drawn a shape with <b>colorMode(HSB)</b>, the numbers returned
-   * will be in RGB format.<br />
-   * <br />
+   * will be in RGB format.
+   * 
    * Getting the color of a single pixel with <b>get(x, y)</b> is easy, but not
    * as fast as grabbing the data directly from <b>pixels[]</b>. The equivalent
    * statement to <b>get(x, y)</b> using <b>pixels[]</b> is
@@ -928,8 +928,8 @@ public class PImage implements PConstants, Cloneable {
    * ( begin auto-generated from PImage_set.xml )
    *
    * Changes the color of any pixel or writes an image directly into the display
-   * window.<br />
-   * <br />
+   * window.
+   * 
    * The <b>x</b> and <b>y</b> parameters specify the pixel to change and the
    * <b>color</b> parameter specifies the color value. The color parameter is
    * affected by the current color mode (the default is RGB values from 0 to
@@ -1058,8 +1058,8 @@ public class PImage implements PConstants, Cloneable {
    * Masks part of an image from displaying by loading another image and using
    * it as an alpha channel. This mask image should only contain grayscale data,
    * but only the blue color channel is used. The mask image needs to be the
-   * same size as the image to which it is applied.<br />
-   * <br />
+   * same size as the image to which it is applied.
+   * 
    * In addition to using a mask image, an integer array containing the alpha
    * channel data can be specified directly. This method is useful for creating
    * dynamically generated alpha masks. This array must be of the same length as
@@ -1169,28 +1169,28 @@ public class PImage implements PConstants, Cloneable {
   /**
    * ( begin auto-generated from PImage_filter.xml )
    *
-   * Filters an image as defined by one of the following modes:<br /><br
+   * Filters an image as defined by one of the following modes:<br
    * />THRESHOLD - converts the image to black and white pixels depending if
    * they are above or below the threshold defined by the level parameter. The
    * level must be between 0.0 (black) and 1.0(white). If no level is specified,
-   * 0.5 is used.<br />
-   * <br />
-   * GRAY - converts any colors in the image to grayscale equivalents<br />
-   * <br />
-   * INVERT - sets each pixel to its inverse value<br />
-   * <br />
+   * 0.5 is used.
+   * 
+   * GRAY - converts any colors in the image to grayscale equivalents
+   * 
+   * INVERT - sets each pixel to its inverse value
+   * 
    * POSTERIZE - limits each channel of the image to the number of colors
-   * specified as the level parameter<br />
-   * <br />
+   * specified as the level parameter
+   * 
    * BLUR - executes a Guassian blur with the level parameter specifying the
    * extent of the blurring. If no level parameter is used, the blur is
-   * equivalent to Guassian blur of radius 1<br />
-   * <br />
-   * OPAQUE - sets the alpha channel to entirely opaque<br />
-   * <br />
+   * equivalent to Guassian blur of radius 1
+   * 
+   * OPAQUE - sets the alpha channel to entirely opaque
+   * 
    * ERODE - reduces the light areas with the amount defined by the level
-   * parameter<br />
-   * <br />
+   * parameter
+   * 
    * DILATE - increases the light areas with the amount defined by the level
    * parameter
    *
@@ -1929,47 +1929,47 @@ public class PImage implements PConstants, Cloneable {
    * Blends a region of pixels into the image specified by the <b>img</b>
    * parameter. These copies utilize full alpha channel support and a choice of
    * the following modes to blend the colors of source pixels (A) with the ones
-   * of pixels in the destination image (B):<br />
-   * <br />
-   * BLEND - linear interpolation of colours: C = A*factor + B<br />
-   * <br />
-   * ADD - additive blending with white clip: C = min(A*factor + B, 255)<br />
-   * <br />
+   * of pixels in the destination image (B):
+   * 
+   * BLEND - linear interpolation of colours: C = A*factor + B
+   * 
+   * ADD - additive blending with white clip: C = min(A*factor + B, 255)
+   * 
    * SUBTRACT - subtractive blending with black clip: C = max(B - A*factor,
-   * 0)<br />
-   * <br />
-   * DARKEST - only the darkest colour succeeds: C = min(A*factor, B)<br />
-   * <br />
-   * LIGHTEST - only the lightest colour succeeds: C = max(A*factor, B)<br />
-   * <br />
-   * DIFFERENCE - subtract colors from underlying image.<br />
-   * <br />
-   * EXCLUSION - similar to DIFFERENCE, but less extreme.<br />
-   * <br />
-   * MULTIPLY - Multiply the colors, result will always be darker.<br />
-   * <br />
-   * SCREEN - Opposite multiply, uses inverse values of the colors.<br />
-   * <br />
+   * 0)
+   * 
+   * DARKEST - only the darkest colour succeeds: C = min(A*factor, B)
+   * 
+   * LIGHTEST - only the lightest colour succeeds: C = max(A*factor, B)
+   * 
+   * DIFFERENCE - subtract colors from underlying image.
+   * 
+   * EXCLUSION - similar to DIFFERENCE, but less extreme.
+   * 
+   * MULTIPLY - Multiply the colors, result will always be darker.
+   * 
+   * SCREEN - Opposite multiply, uses inverse values of the colors.
+   * 
    * OVERLAY - A mix of MULTIPLY and SCREEN. Multiplies dark values, and screens
-   * light values.<br />
-   * <br />
-   * HARD_LIGHT - SCREEN when greater than 50% gray, MULTIPLY when lower.<br />
-   * <br />
+   * light values.
+   * 
+   * HARD_LIGHT - SCREEN when greater than 50% gray, MULTIPLY when lower.
+   * 
    * SOFT_LIGHT - Mix of DARKEST and LIGHTEST. Works like OVERLAY, but not as
-   * harsh.<br />
-   * <br />
+   * harsh.
+   * 
    * DODGE - Lightens light tones and increases contrast, ignores darks. Called
-   * "Color Dodge" in Illustrator and Photoshop.<br />
-   * <br />
+   * "Color Dodge" in Illustrator and Photoshop.
+   * 
    * BURN - Darker areas are applied, increasing contrast, ignores lights.
-   * Called "Color Burn" in Illustrator and Photoshop.<br />
-   * <br />
+   * Called "Color Burn" in Illustrator and Photoshop.
+   * 
    * All modes use the alpha information (highest byte) of source image pixels
    * as the blending factor. If the source and destination regions are different
    * sizes, the image will be automatically resized to match the destination
    * size. If the <b>srcImg</b> parameter is not used, the display window is
-   * used as the source image.<br />
-   * <br />
+   * used as the source image.
+   * 
    * As of release 0149, this function ignores <b>imageMode()</b>.
    *
    * ( end auto-generated )

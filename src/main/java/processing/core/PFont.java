@@ -384,7 +384,7 @@ public class PFont implements PConstants {
     // not a roman font, so throw an error and ask to re-build.
     // that way can avoid a bunch of error checking hacks in here.
     if ((ascent == 0) && (descent == 0)) {
-      throw new RuntimeException("Please use \"Create Font\" to "
+      throw new RuntimeException("Please use \"create_font\" to "
         + "re-create this font.");
     }
 
@@ -945,7 +945,7 @@ public class PFont implements PConstants {
       readHeader(is);
     }
 
-    protected void readHeader(DataInputStream is) throws IOException {
+    protected final void readHeader(DataInputStream is) throws IOException {
       value = is.readInt();
       height = is.readInt();
       width = is.readInt();
