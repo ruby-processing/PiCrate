@@ -46,10 +46,10 @@ Install a local version of rake:-
 ```bash
 jgem install rake
 ```
-To install picrate and its dependencies:-
+To install latest picrate and its dependencies:-
 
 ```bash
-jgem install picrate
+jgem install picrate --pre
 ```
 __For a first install:-__
 
