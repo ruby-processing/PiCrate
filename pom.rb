@@ -47,10 +47,8 @@ overrides do
     'detectOfflineLinks' => 'false',
     'links' => ['${processing.api}', '${jruby.api}']
   )
-  plugin(
-    :jar, '3.1.2',
-    'archive' => {
-      'manifestEntries' => { 'Class-Path' => 'gluegen-rt.jar jog-all.jar' }
+  plugin(:jar,
+        archive: {manifestEntries: {'Automatic-Module-Name' => 'org.jruby.processing'}
     }
   )
 end
