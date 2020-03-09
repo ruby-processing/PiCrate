@@ -20,7 +20,7 @@ Requires java to build, but uses a maven wrapper so you don't need to install ma
 ```bash
 cd PiCrate
 rake # assumes an installed version of vanilla processing
-jgem install picrate-1.2.4-java.gem
+jgem install picrate-2.0.0.pre-java.gem
 
 ```
 To create a template sketch:-
