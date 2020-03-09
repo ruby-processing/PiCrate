@@ -5,7 +5,7 @@ date:   2018-11-27 07:34:13
 categories: PiCrate update
 permalink: /geany_ide/
 ---
-The current version of raspbian installs jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use.
+The current version of raspbian installs jdk-11 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use.
 
 Then install JRuby see [jruby][jruby].
 
