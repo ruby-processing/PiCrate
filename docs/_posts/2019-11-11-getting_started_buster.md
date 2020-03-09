@@ -15,7 +15,7 @@ bash buster_install.sh
 ```bash
 sudo apt-get update # sync your local database with current release
 sudo update # update to latest release
-sudo apt install openjdk-8-jdk # installs latest jdk8
+sudo apt install openjdk-11-jdk # installs latest jdk11
 java -version # check installed version
 ```
 If you have already installed a version java the java version may not match you can control the _active_ java version on Debian using `update-alternatives` as follows:-
