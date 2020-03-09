@@ -6,7 +6,7 @@ categories: PiCrate update
 permalink: /install_picrate/
 ---
 
-For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/e9df8ea776aed58ce1c4de8e12982aad). To keep your system clean put the file in a folder say
+For a semi-automated setup and install, download and extract [this gist](https://gist.github.com/monkstone/04a1272ca9274a2c7e3e1bf170877bfb). To keep your system clean put the file in a folder say
 `~/install_picrate`
 
 ```bash
