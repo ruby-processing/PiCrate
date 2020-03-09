@@ -8,7 +8,7 @@ Create processing sketches in ruby on raspberry-pi and linux (this project is a 
 ### To install from rubygems ###
 
 ```bash
-jgem install picrate
+jgem install picrate --pre
 ```
 
 ### To Build and Test ###
