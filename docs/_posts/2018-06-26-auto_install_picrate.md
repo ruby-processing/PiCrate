@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Automated PiCrate Install"
-date:   2018-06-26 07:34:13
+date:   2020-03-09 07:34:13
 categories: PiCrate update
 permalink: /install_picrate/
 ---
@@ -18,11 +18,15 @@ bash picrate_install.sh # to run default task
 2. Installs JRuby to `/opt`
 3. Uses `update-alternatives` to configure `jruby`, `jgem` and `jirb`
 4. The script checks for `GEM_HOME`, if undefined it modifies `~/.profile` to define `GEM_HOME` and puts gem binaries on your path, at logon.
-5. Installs `picrate` gem
-6. Downloads and installs `picrate_samples` also configures `geanyIDE` for use with `picrate`
+5. Installs jdk11 if required sets `JAVA_HOME`, needed to support jruby (--add-opens)
+6. Creates `~/.gemrc` with `gem: no-document`
+7. Creates `~/.jruby.java_opts` with `--add-opens` to suppress reflective access warnings.
+8. Installs `picrate` gem
+To install `picrate_samples` also configures `geanyIDE` for use with `picrate` run
+`picrate --install` in a bash console
 
 #### Note ####
-`GEM_HOME` and path to `gem` binaries is not available until next logon, to use immediately you could:-
+`GEM_HOME`, `JAVA_HOME` and path to `gem` binaries are not available until next logon, to use immediately you could:-
 
 ```bash
 source ~/.profile

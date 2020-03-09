@@ -9,6 +9,7 @@ Geany is highly configurable, and we have created a `geany` project file `picrat
 ```bash
 picrate --install samples
 ```
+Examples get installed in `~/projects/examples`, you can use `~/projects/sketchbook` to save your own sketches.
 
 #### Using picrate.rb template ####
 

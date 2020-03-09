@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Getting Started Stretch"
-date:   2018-05-24 07:34:13
+title:  "Getting Started Buster"
+date:   2020-03-09 07:34:13
 categories: PiCrate update
 permalink: /getting/
 ---
-Raspbian Stretch installs Oracle jdk-1.8.0_65-bi17 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use. Will work with OpenJDK-11 but currently performance is sub-optimal.
+Raspbian Buster installs OpenJDK11 (hard float) and that is just fine, if you have more that one version of java installed you could use `update-alternatives` tool to manage their use. NB: Will not work with OpenJDK-8.
 
 __Then install JRuby see__ [jruby][jruby].
 
@@ -27,7 +27,7 @@ __Install processing libraries__
 
 ```bash
 picrate -i Sound
-picrate -i glvideo # preferred over vanilla video for now
+picrate -i video # install beta verion of vanilla video for now
 ```
 
 To create a template sketch from the command line:-

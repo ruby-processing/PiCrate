@@ -36,17 +36,11 @@ export GEM_PATH="$HOME/tux/.gem/ruby/2.5.0"
 export PATH="${PATH}:${GEM_PATH}/bin"
 ```
 
-### Automated install using Rakefile ###
-Get the `Rakefile` [here][rake_gist] however it assumes an existing ruby install (which is not needed by PiCrate).
+### Automated install using bash ###
 
-```bash
-mkdir installer
-cd installer
-rake
-```
-Currently installs jruby-9.2.11.0
+The [picrate2_install.sh][bash] script currently installs jruby-9.2.11.0 and picrate-2.0.pre.
 
 If you know better please post on wiki
 
 [download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.11.0/jruby-dist-9.2.11.0-bin.tar.gz"
-[rake_gist]:https://gist.github.com/monkstone/159c5a9813c9cd181040b4715e74f6b2
+[bash]:https://gist.github.com/monkstone/6ae9840d7b7008c177b4a9f589d14ec6

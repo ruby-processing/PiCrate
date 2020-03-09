@@ -18,7 +18,7 @@ NB: the arcball gem is installed as a picrate dependency
 jbox2d ([pbox2d][jbox2d])
 
 ### Stand Alone Gems
-[cf3][cf3] context free art in ruby
+[cf3][cf3] context free art in ruby, examples may need a bit of hacking
 
 [cf3]:https://github.com/monkstone/cf3ruby/
 [arcball]:https://github.com/ruby-processing/ArcBall/
