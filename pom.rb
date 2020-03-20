@@ -2,7 +2,7 @@
 
 project 'picrate', 'http://maven.apache.org' do
   model_version '4.0.0'
-  id 'ruby-processing:picrate:2.0.0.pre'
+  id 'ruby-processing:picrate:2.0.1'
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -22,7 +22,7 @@ project 'picrate', 'http://maven.apache.org' do
   license 'LGPL 2', 'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html'
 
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
-
+  # Need to update to jogl 2.4.1 as soon as available, then make a dependency
   properties('jogl.version' => '2.3.2',
              'jruby.api' => 'http://jruby.org/apidocs/',
              'source.directory' => 'src',

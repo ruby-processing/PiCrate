@@ -1756,7 +1756,7 @@ public class PShapeOpenGL extends PShape {
     }
 
     VertexAttribute attrib = polyAttribs.get(name);
-    float[] array = inGeo.fattribs.get(name);
+    float[] array = (float[]) inGeo.fattribs.get(name);
     for (int i = 0; i < values.length; i++) {
       array[attrib.size * index + 0] = values[i];
     }
@@ -1772,7 +1772,7 @@ public class PShapeOpenGL extends PShape {
     }
 
     VertexAttribute attrib = polyAttribs.get(name);
-    int[] array = inGeo.iattribs.get(name);
+    int[] array = (int[]) inGeo.iattribs.get(name);
     for (int i = 0; i < values.length; i++) {
       array[attrib.size * index + 0] = values[i];
     }
@@ -1788,7 +1788,7 @@ public class PShapeOpenGL extends PShape {
     }
 
     VertexAttribute attrib = polyAttribs.get(name);
-    byte[] array = inGeo.battribs.get(name);
+    byte[] array = (byte[]) inGeo.battribs.get(name);
     for (int i = 0; i < values.length; i++) {
       array[attrib.size * index + 0] = (byte)(values[i]?1:0);
     }
@@ -3968,8 +3968,7 @@ public class PShapeOpenGL extends PShape {
       tessGeo.updateAttribBuffer(attrib.name);
       if (!attrib.bufferCreated()) attrib.createBuffer(pgl);
       pgl.bindBuffer(PGL.ARRAY_BUFFER, attrib.buf.glId);
-      pgl.bufferData(PGL.ARRAY_BUFFER, attrib.sizeInBytes(size),
-                     tessGeo.polyAttribBuffers.get(name), glUsage);
+      pgl.bufferData(PGL.ARRAY_BUFFER, attrib.sizeInBytes(size), (Buffer) tessGeo.polyAttribBuffers.get(name), glUsage);
     }
 
     pgl.bindBuffer(PGL.ARRAY_BUFFER, 0);
@@ -4333,7 +4332,7 @@ public class PShapeOpenGL extends PShape {
   protected void copyPolyAttrib(VertexAttribute attrib, int offset, int size) {
     tessGeo.updateAttribBuffer(attrib.name, offset, size);
     pgl.bindBuffer(PGL.ARRAY_BUFFER, attrib.buf.glId);
-    Buffer buf = tessGeo.polyAttribBuffers.get(attrib.name);
+    Buffer buf = (Buffer) tessGeo.polyAttribBuffers.get(attrib.name);
     buf.position(attrib.size * offset);
     pgl.bufferSubData(PGL.ARRAY_BUFFER, attrib.sizeInBytes(offset),
                       attrib.sizeInBytes(size), buf);

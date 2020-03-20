@@ -1,3 +1,5 @@
+v2.0.1 Use JOGL-2.4.0-rc fixes reflection warnings, remove geomerative and wordcram gem dependencies since we will now be in step with JRubyArt and propane (re jdk compatibility), bump version for release.
+
 v2.0.0 Use JDK11+ update to processing-3.5.4 suggest jruby-9.2.11.0
 
 v1.2.4 Extract picrate examples to ~/projects/examples instead of ~/picrate_samples for tighter integration with geany editor. Remove non-functioning sound library as an install option (direct toward minim as option).
