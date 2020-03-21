@@ -1,7 +1,7 @@
 project 'picrate', 'http://maven.apache.org' do
 
   model_version '4.0.0'
-  id 'ruby-processing:picrate:1.2.4'
+  id 'ruby-processing:picrate:1.3.0'
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -31,7 +31,7 @@ project 'picrate', 'http://maven.apache.org' do
     'polyglot.dump.pom' => 'pom.xml'
   )
 
-  pom 'org.jruby:jruby:9.2.9.0'
+  pom 'org.jruby:jruby:9.2.11.0'
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'

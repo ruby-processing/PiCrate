@@ -3651,7 +3651,7 @@ public class PGraphicsOpenGL extends PGraphics {
    * Ported from the implementation of textCharShapeImpl() in 1.5.1
    *
    * <EM>No attempt has been made to optimize this code</EM>
-   * 
+   *
    * TODO: Implement a FontShape class where each glyph is tessellated and
    * stored inside a larger PShapeOpenGL object (which needs to be expanded as
    * new glyphs are added and exceed the initial capacity in a similar way as
@@ -3659,18 +3659,18 @@ public class PGraphicsOpenGL extends PGraphics {
    * in shape mode, then the correct sequences of vertex indices are computed
    * (akin to the texcoords in the texture case) and used to draw only those
    * parts of the PShape object that are required for the text.
-   * 
+   *
    *
    * Some issues of the original implementation probably remain, so they are
    * reproduced below:
-   * 
+   *
    * Also a problem where some fonts seem to be a bit slight, as if the
    * control points aren't being mapped quite correctly. Probably doing
    * something dumb that the control points don't map to P5's control
    * points. Perhaps it's returning b-spline data from the TrueType font?
    * Though it seems like that would make a lot of garbage rather than
    * just a little flattening.
-   * 
+   *
    * There also seems to be a bug that is causing a line (but not a filled
    * triangle) back to the origin on some letters (i.e. a capital L when
    * tested with Akzidenz Grotesk Light). But this won't be visible
@@ -5352,7 +5352,7 @@ public class PGraphicsOpenGL extends PGraphics {
   // showWarning() and showException() available from PGraphics.
 
   /**
-   * Report on anything from glError().Don't use this inside glBegin/glEnd 
+   * Report on anything from glError().Don't use this inside glBegin/glEnd
    * otherwise it'll throw an GL_INVALID_OPERATION error.
    * @param where
    */
@@ -6366,11 +6366,11 @@ public class PGraphicsOpenGL extends PGraphics {
 
 
   /**
-   * Not an approved function, this will change or be removed in the future.This 
-   * utility method returns the texture associated to the renderer's. drawing 
-   * surface, making sure is updated to reflect the current contents off the 
+   * Not an approved function, this will change or be removed in the future.This
+   * utility method returns the texture associated to the renderer's. drawing
+   * surface, making sure is updated to reflect the current contents off the
    * screen (or offscreen drawing surface).
-   * @return 
+   * @return
    */
   public Texture getTexture() {
     return getTexture(true);
@@ -6380,7 +6380,7 @@ public class PGraphicsOpenGL extends PGraphics {
   /**
    * Not an approved function either, don't use it.
    * @param load
-   * @return 
+   * @return
    */
   public Texture getTexture(boolean load) {
     if (load) loadTexture();
@@ -6393,7 +6393,7 @@ public class PGraphicsOpenGL extends PGraphics {
    * creating and/or updating it if needed.
    *
    * @param img the image to have a texture metadata associated to it
-   * @return 
+   * @return
    */
   public Texture getTexture(PImage img) {
     Texture tex = (Texture)initCache(img);
@@ -6419,7 +6419,7 @@ public class PGraphicsOpenGL extends PGraphics {
   /**
    * Not an approved function, test its use in libraries to grab the FB objects
    * for offscreen PGraphics.
-   * @return 
+   * @return
    */
   public FrameBuffer getFrameBuffer() {
     return getFrameBuffer(false);
@@ -6478,7 +6478,7 @@ public class PGraphicsOpenGL extends PGraphics {
    * This utility method creates a texture for the provided image, and adds it
    * to the metadata cache of the image.
    * @param img the image to have a texture metadata associated to it
-   * @return 
+   * @return
    */
   protected Texture addTexture(PImage img) {
     Texture.Parameters params =
@@ -6892,7 +6892,6 @@ public class PGraphicsOpenGL extends PGraphics {
     OPENGL_VERSION    = pgl.getString(PGL.VERSION);
     OPENGL_EXTENSIONS = pgl.getString(PGL.EXTENSIONS);
     GLSL_VERSION      = pgl.getString(PGL.SHADING_LANGUAGE_VERSION);
-
     npotTexSupported = pgl.hasNpotTexSupport();
     autoMipmapGenSupported = pgl.hasAutoMipmapGenSupport();
     fboMultisampleSupported = pgl.hasFboMultisampleSupport();
@@ -6900,45 +6899,28 @@ public class PGraphicsOpenGL extends PGraphics {
     anisoSamplingSupported = pgl.hasAnisoSamplingSupport();
     readBufferSupported = pgl.hasReadBuffer();
     drawBufferSupported = pgl.hasDrawBuffer();
-
     try {
       pgl.blendEquation(PGL.FUNC_ADD);
       blendEqSupported = true;
     } catch (Exception e) {
       blendEqSupported = false;
     }
-
     depthBits = pgl.getDepthBits();
     stencilBits = pgl.getStencilBits();
-
     pgl.getIntegerv(PGL.MAX_TEXTURE_SIZE, intBuffer);
     maxTextureSize = intBuffer.get(0);
-
-    // work around runtime exceptions in Broadcom's VC IV driver
-    if (false == OPENGL_RENDERER.equals("VideoCore IV HW")) {
-      pgl.getIntegerv(PGL.MAX_SAMPLES, intBuffer);
-      maxSamples = intBuffer.get(0);
-    }
-
+    pgl.getIntegerv(PGL.MAX_SAMPLES, intBuffer);
+    maxSamples = intBuffer.get(0);
     if (anisoSamplingSupported) {
       pgl.getFloatv(PGL.MAX_TEXTURE_MAX_ANISOTROPY, floatBuffer);
       maxAnisoAmount = floatBuffer.get(0);
     }
-
-    // overwrite the default shaders with vendor specific versions
-    // if needed
-    if (OPENGL_RENDERER.equals("VideoCore IV HW")) {  // Broadcom's binary driver for Raspberry Pi
-        defLightShaderVertURL =
-          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/LightVert-brcm.glsl");
-        defTexlightShaderVertURL =
-          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/TexLightVert-brcm.glsl");
-    } else if (OPENGL_RENDERER.contains("VC4")) {     // Mesa driver for same hardware
-        defLightShaderVertURL =
-          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/LightVert-vc4.glsl");
-        defTexlightShaderVertURL =
-          PGraphicsOpenGL.class.getResource("/processing/opengl/shaders/TexLightVert-vc4.glsl");
+    // Broadcom's binary drivers for Raspberry Pi don't work with PiCrate in Buster
+    if (OPENGL_RENDERER.equals("VideoCore IV HW")) {
+      pgl.dispose();
+      System.out.println("Use FakeKMS or FullKMS video driver for P2D and P3D sketches");
+      super.dispose();
     }
-
     glParamsRead = true;
   }
 
@@ -13160,6 +13142,7 @@ public class PGraphicsOpenGL extends PGraphics {
         else if (type == PGL.TRIANGLES) primitive = TRIANGLES;
       }
 
+      @Override
       public void end() {
         if (PGL.MAX_VERTEX_INDEX1 <= vertFirst + vertCount) {
           // We need a new index block for the new batch of
