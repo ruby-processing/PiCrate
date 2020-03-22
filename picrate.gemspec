@@ -22,15 +22,14 @@ Gem::Specification.new do |gem|
   gem.files << 'lib/jogl-all.jar'
   gem.files << 'lib/gluegen-rt-natives-linux-amd64.jar'
   gem.files << 'lib/gluegen-rt-natives-linux-armv6hf.jar'
-  # gem.files << 'lib/gluegen-rt-natives-linux-aarch64.jar'
   gem.files << 'lib/jogl-all-natives-linux-amd64.jar'
   gem.files << 'lib/jogl-all-natives-linux-armv6hf.jar'
-  # gem.files << 'lib/jogl-all-natives-linux-aarch64.jar'
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.add_development_dependency 'rake', '~> 12.3'
   gem.add_development_dependency 'minitest', '~> 5.10'
   gem.add_runtime_dependency 'arcball', '~> 1.0.1'
+  # geomerative + wordcram dependency since they may update to jdk11+ soon
   gem.add_runtime_dependency 'geomerative', '~> 1.1'
   gem.add_runtime_dependency 'ruby_wordcram', '~> 2.0.4'
   gem.require_paths = ['lib']
