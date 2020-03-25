@@ -15,7 +15,7 @@ jgem install picrate
 
 Clone jdk8 branch:-
 
-Requires java to build (and jogl-2.4.0-rc jars), but uses a maven wrapper so you don't need to install maven. Suggest build/test on regular linux box, but is designed for use on RaspberryPI 3B+. Needs installed jruby to test/run.
+Requires java to build (and jogl-2.4.0-rc jars), but uses a maven wrapper so you don't need to install maven. Suggest build/test on regular linux box, but is designed for use on both RaspberryPI 3B+ and RaspberryPI4. Needs installed jruby to test/run.
 
 ```bash
 cd PiCrate # or whatever you call it
