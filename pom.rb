@@ -38,19 +38,23 @@ project 'picrate', 'http://maven.apache.org' do
 end
 
 overrides do
-  plugin :resources, '2.7'
-  plugin :dependency, '2.8'
-  plugin(:compiler, '3.8.1', 'release' => '11')
-  plugin(
-    :javadoc,
-    '3.1.1',
-    'detectOfflineLinks' => 'false',
-    'links' => ['${processing.api}', '${jruby.api}']
-  )
-  plugin(:jar,
-        archive: {manifestEntries: {'Automatic-Module-Name' => 'org.jruby.processing'}
-    }
-  )
+  plugin :resources, '3.1.0'
+  plugin :dependency, '3.1.2'
+  plugin(:compiler, '3.8.1',
+         'release' => '11')
+  plugin(:javadoc, '2.10.4',
+         'detectOfflineLinks' => 'false',
+         'links' => ['${processing.api}',
+                     '${jruby.api}'])
+  plugin(:jar, '3.2.0',
+         'archive' => {
+           'manifestEntries' => {
+             'Class-Path' => 'gluegen-rt.jar jog-all.jar'
+           }
+         })
+  plugin :jdeps, '3.1.2' do
+    execute_goals 'jdkinternals', 'test-jdkinternals'
+  end
 end
 
 build do

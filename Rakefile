@@ -46,6 +46,11 @@ task :test do
   system 'jruby --dev test/vecmath_spec_test.rb'
 end
 
+desc 'JDeps Tool'
+task :jdeps do
+  system './mvnw jdeps:jdkinternals'
+end
+
 desc 'clean'
 task :clean do
   Dir['./**/*.{jar,gem}'].each do |path|
