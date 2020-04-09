@@ -1,26 +1,26 @@
 __C6H3N3O7__ [![Gem Version](https://badge.fury.io/rb/picrate.svg)](https://badge.fury.io/rb/picrate)![Travis CI](https://travis-ci.org/ruby-processing/PiCrate.svg)
 
 # PiCrate
-New version for `Buster` on raspberryPI 3B+ assumes self installed jdk11 or greater.
+New version for `Buster` on raspberryPI 3B+ works with jdk8 and jdk11 (reflective access warnings fixed for jdk11).
 Create processing sketches in ruby on raspberry-pi and linux (this project is a parallel development of [propane][propane] targetting the raspberry-pi, but will initially be developed on a regular linux box). The aim is to produce a gem installable app that can be run with jruby, with minimal dependencies. Drop the `C` and you get pirate, or and an `e` and get `PiCreate`, a happy coincidence?
 
 
 ### To install from rubygems ###
 
 ```bash
-jgem install picrate --pre
+jgem install picrate
 ```
 
 ### To Build and Test ###
 
-Clone this repo:-
+Clone jdk8 branch:-
 
-Requires java to build, but uses a maven wrapper so you don't need to install maven. Suggest build/test on regular linux box, but is designed for use on RaspberryPI 3B+. Needs installed jruby to test/run.
+Requires java to build (and jogl-2.4.0-rc jars), but uses a maven wrapper so you don't need to install maven. Suggest build/test on regular linux box, but is designed for use on both RaspberryPI 3B+ and RaspberryPI4. Needs installed jruby to test/run.
 
 ```bash
-cd PiCrate
+cd PiCrate # or whatever you call it
 rake # assumes an installed version of vanilla processing
-jgem install picrate-2.0.0.pre-java.gem
+jgem install picrate-1.3.0-java.gem
 
 ```
 To create a template sketch:-
