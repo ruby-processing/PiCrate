@@ -1,31 +1,12 @@
 ---
 layout: post
-title:  "Getting Started Buster"
-date:   2019-11-11 07:34:13
+title:  "Getting Started Manjaro"
+date:   2020-05-11 07:34:13
 categories: PiCrate update
-permalink: /getting_buster/
+permalink: /getting_manjaro/
 ---
-Raspbian Buster usually comes with a pre-installed jdk11. Before installing JRuby it is worth setting the `JAVA_HOME` environmental variable (needed to supress reflection warnings).
-
-  __Otherwise follow these instructions in order as needed:-__
-
-```bash
-sudo apt-get update # sync your local database with current release
-sudo update # update to latest release
-sudo apt install openjdk-11-jdk # installs latest jdk11
-java -version # check installed version
+Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing hotspot adopt-openjdk11 from the AdoptOpenJDK project. Setting the JDK_HOME environment and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
 ```
-If you have already installed a version java the java version may not match you can control the _active_ java version on Debian using `update-alternatives` as follows:-
-```bash
-sudo update-alternatives --config java
-sudo update-alternatives --config javac
-sudo update-alternatives --config jar
-```
-See [java][java] install for more explanations.
-
-__Then install JRuby see__ [jruby][jruby].
-
-We strongly recommend that you create a local storage for gems on your system, as follows:-
 
 ```bash
 mkdir -p ~/.gem/jruby/2.5.0
@@ -33,10 +14,10 @@ mkdir -p ~/.gem/jruby/2.5.0
 Now set your `GEM_HOME`, `GEM_PATH` and amend your `PATH` as follows:-
 
 ```bash
-echo "export GEM_HOME=\"\${HOME}/.gem/ruby/${MRI_RUBY}\"" >> ~/.profile
-echo "export GEM_PATH=\"\${HOME}/.gem/ruby/${MRI_RUBY}\"" >> ~/.profile
-echo "export PATH=\"\${PATH}:\${GEM_PATH}/bin\"" >> ~/.profile
-source ~/.profile # to update environment without re-logging in
+echo "export GEM_HOME=\"\${HOME}/.gem/ruby/${MRI_RUBY}\"" >> ~/.bashrc
+echo "export GEM_PATH=\"\${HOME}/.gem/ruby/${MRI_RUBY}\"" >> ~/.bashrc
+echo "export PATH=\"\${PATH}:\${GEM_PATH}/bin\"" >> ~/.bashrc
+source ~/.bashrc # to update environment without re-logging in
 ```
 Now should be ready to install `picrate` and other gems.
 Install a local version of rake:-
