@@ -46,7 +46,7 @@ jgem install rake
 To install latest picrate and its dependencies:-
 
 ```bash
-jgem install picrate --pre
+jgem install picrate
 ```
 __For a first install:-__
 

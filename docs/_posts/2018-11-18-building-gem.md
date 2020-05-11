@@ -6,9 +6,9 @@ categories: PiCrate update
 ---
 Requirements:-
 
-1. An installed version of vanilla processing to provide `processing.org` customised version of the `jogl` jars. The default `Rakefile` assumes root installation of processing, for debian distros you will need to adjust `processing_root` _ca. line 20_.
+1. Latest jogl-2.4.0-rc jars (place in ~/jogl24 folder).
 
-2. jdk-11+ and maven (builds for jdk-8)
+2. jdk-11+ and maven
 
 Simply clone this distribution, then rake to build and test gem
 ```bash
