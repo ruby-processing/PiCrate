@@ -5,12 +5,12 @@ date:   2020-05-11 07:34:13
 categories: PiCrate update
 permalink: /getting_manjaro/
 ---
-Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing hotspot adopt-openjdk11 from the AdoptOpenJDK project. Setting the JDK_HOME environment and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
-```
+Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing hotspot adopt-openjdk11 from the AdoptOpenJDK project. Setting the JDK_HOME environment (easiest done `/etc/profile.d`) and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
 
 ```bash
 mkdir -p ~/.gem/jruby/2.5.0
 ```
+
 Now set your `GEM_HOME`, `GEM_PATH` and amend your `PATH` as follows:-
 
 ```bash
@@ -27,7 +27,7 @@ jgem install rake
 To install latest picrate and its dependencies:-
 
 ```bash
-jgem install picrate --pre
+jgem install picrate
 ```
 __For a first install:-__
 
