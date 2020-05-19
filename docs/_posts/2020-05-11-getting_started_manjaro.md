@@ -5,7 +5,7 @@ date:   2020-05-11 07:34:13
 categories: PiCrate update
 permalink: /getting_manjaro/
 ---
-Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing hotspot adopt-openjdk11 from the AdoptOpenJDK project. Setting the JDK_HOME environment (easiest done `/etc/profile.d`) and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
+Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing hotspot adopt-openjdk11 from the AdoptOpenJDK project (there may be issues with distro version). Setting the JDK_HOME environment (easiest done `/etc/profile.d`) and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
 
 ```bash
 mkdir -p ~/.gem/jruby/2.5.0
@@ -37,7 +37,7 @@ picrate --install # no args, install samples and geany config
 picrate -i Samples # to omit geany config
 ```
 
-This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide.
+This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany` (_needs modification was designed for raspbian Buster_). It should also be possible to run sketches from the `geany` ide, however I've yet to get it to work on Manjaro (works fine on raspbian Buster).
 
 To create a template sketch from the command line:-
 
