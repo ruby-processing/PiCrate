@@ -29,7 +29,6 @@ import java.awt.font.TextAttribute;
 import java.awt.geom.*;
 import java.awt.image.*;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import processing.core.*;
@@ -295,10 +294,10 @@ public class PGraphicsJava2D extends PGraphics {
    * is going to return the {@link Graphics2D} object.
      * @return 
    */
-  @Override
-  public Image getImage() {
-    return image;
-  }
+//  @Override
+//  public Image getImage() {
+//    return image;
+//  }
 
 
   /** Returns the java.awt.Graphics2D object used by this renderer.
@@ -346,30 +345,30 @@ public class PGraphicsJava2D extends PGraphics {
 //        image = new BufferedImage(width * pixelFactor, height * pixelFactor
 //                                  format == RGB ?  BufferedImage.TYPE_INT_ARGB);
 
-      GraphicsConfiguration gc = null;
-      if (surface != null) {
-        Component comp = null;  //surface.getComponent();
-        if (comp == null) {
-//          System.out.println("component null, but parent.frame is " + parent.frame);
-          comp = parent.frame;
-        }
-        if (comp != null) {
-          gc = comp.getGraphicsConfiguration();
-        }
-      }
-      // If not realized (off-screen, i.e the Color Selector Tool), gc will be null.
-      if (gc == null) {
-        //System.err.println("GraphicsConfiguration null in initImage()");
-        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-      }
+//      GraphicsConfiguration gc = null;
+//      if (surface != null) {
+//        Component comp = null;  //surface.getComponent();
+//        if (comp == null) {
+////          System.out.println("component null, but parent.frame is " + parent.frame);
+//          comp = parent.frame;
+//        }
+//        if (comp != null) {
+//          gc = comp.getGraphicsConfiguration();
+//        }
+//      }
+//      // If not realized (off-screen, i.e the Color Selector Tool), gc will be null.
+//      if (gc == null) {
+//        //System.err.println("GraphicsConfiguration null in initImage()");
+//        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//        gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
+//      }
 
       // Formerly this was broken into separate versions based on offscreen or
       // not, but we may as well create a compatible image; it won't hurt, right?
       int wide = width * pixelDensity;
       int high = height * pixelDensity;
 //      System.out.println("re-creating image");
-      image = gc.createCompatibleImage(wide, high, Transparency.TRANSLUCENT);
+      image = new BufferedImage(wide, high, BufferedImage.TYPE_INT_ARGB);
 //      image = gc.createCompatibleVolatileImage(wide, high);
       //image = surface.getComponent().createImage(width, height);
     }
