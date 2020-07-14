@@ -72,9 +72,9 @@ task :install_config do
   end
   project_dir = File.join(HOME_DIR, 'projects')
   unless File.exist? File.join(project_dir, 'examples', 'picrate_sketches.geany')
-    FileUtils.mkdir_p "#{HOME_DIR}/projects/examples"    
+    FileUtils.mkdir_p "#{HOME_DIR}/projects/examples"
     config = GeanyConfig.new(project_dir, 'examples')
-    config.save(File.join(project_dir, 'examples', 'picrate_sketches.geany'))"
+    config.save(File.join(project_dir, 'examples', 'picrate_sketches.geany'))
   end
 end
 
