@@ -37,7 +37,7 @@ picrate --install # no args, install samples and geany config
 picrate -i Samples # to omit geany config
 ```
 
-This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany` (_needs modification was designed for raspbian Buster_). It should also be possible to run sketches from the `geany` ide. Sketches need to be run in VTE terminal on Manjaro ARM the terminal emulator, does not give access to local environment variables in the version of Geany supplied. The other thing that needs to change is name of user, defaults to `pi` in installer script.
+This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide. Sketches need to be run in VTE terminal on Manjaro ARM the terminal emulator, does not give access to local environment variables in the version of Geany supplied.
 
 To create a template sketch from the command line:-
 
