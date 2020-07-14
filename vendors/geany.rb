@@ -1,3 +1,9 @@
+# frozen_string_literal: true
+
+require 'erb'
+
+def geany_config
+  %(
 [editor]
 line_wrapping=false
 line_break_column=72
@@ -19,7 +25,7 @@ indent_mode=2
 
 [project]
 name=picrate_samples
-base_path=/home/pi/projects/picrate_sketches
+base_path=<%= home %>
 description=Exploring PiCrate
 file_patterns=*.rb;*.glsl;*.txt;
 
@@ -28,14 +34,9 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=3
-FILE_NAME_0=667;Ruby;0;EUTF-8;0;1;0;%2Fhome%2Fpi%2Fprojects%2Fpicrate_sketches%2Fbasics%2Farrays%2Farray.rb;0;2
-FILE_NAME_1=1664;Ruby;0;EUTF-8;0;1;0;%2Fhome%2Fpi%2Fprojects%2Fpicrate_sketches%2Fadvanced_data%2Fload_save_json.rb;0;2
-FILE_NAME_2=259;Sh;0;EUTF-8;0;1;0;%2Fhome%2Fpi%2Fjruby_install.sh;0;2
-FILE_NAME_3=236;Sh;0;EUTF-8;0;1;0;%2Fhome%2Fpi%2Ftest.sh;0;2
 
 [VTE]
-last_dir=/home/pi
+last_dir=<%= directory %>
 
 [build-menu]
 EX_00_LB=_Execute
@@ -60,3 +61,27 @@ NF_02_WD=
 RubyFT_02_LB=_Reek
 RubyFT_02_CM=reek --failure-exit-code=0 "%f"
 RubyFT_02_WD=
+  )
+end
+
+# Class to merge ERB template and write config to file
+class GeanyConfig
+  include ERB::Util
+  attr_accessor :home, :directory, :template
+
+  def initialize(home, directory, template = geany_config)
+    @home = home
+    @directory = File.join(home, directory)
+    @template = template
+  end
+
+  def render
+    ERB.new(@template).result(binding)
+  end
+
+  def save(file)
+    File.open(file, 'w+') do |f|
+      f.write(render)
+    end
+  end
+end

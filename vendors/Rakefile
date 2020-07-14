@@ -2,6 +2,7 @@
 
 require 'fileutils'
 require 'rake/clean'
+relative_require 'geany'
 WARNING = 'WARNING: wget download failed you could do a manual download'
 SOUND = 'sound.zip'
 SOUND_VERSION = 'v1.3.2'
@@ -69,9 +70,11 @@ task :install_config do
     FileUtils.mkdir_p "#{HOME_DIR}/.config/geany/templates/files"
     FileUtils.cp 'picrate.rb', "#{HOME_DIR}/.config/geany/templates/files"
   end
-  unless File.exist? "#{HOME_DIR}/projects/sketchbook/picrate_sketches.geany"
-    FileUtils.mkdir_p "#{HOME_DIR}/projects/sketchbook"
-    FileUtils.cp 'picrate_sketches.geany', "#{HOME_DIR}/projects/sketchbook"
+  project_dir = File.join(HOME_DIR, 'projects')
+  unless File.exist? File.join(project_dir, 'examples', 'picrate_sketches.geany')
+    FileUtils.mkdir_p "#{HOME_DIR}/projects/examples"    
+    config = GeanyConfig.new(project_dir, 'examples')
+    config.save(File.join(project_dir, 'examples', 'picrate_sketches.geany'))"
   end
 end
 
