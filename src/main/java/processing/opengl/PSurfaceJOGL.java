@@ -63,6 +63,10 @@ import com.jogamp.newt.awt.NewtCanvasAWT;
 import com.jogamp.newt.event.InputEvent;
 import com.jogamp.newt.opengl.GLWindow;
 import com.jogamp.opengl.util.FPSAnimator;
+import java.awt.EventQueue;
+import java.awt.FileDialog;
+import processing.awt.PImageAWT;
+import processing.awt.ShimAWT;
 
 import processing.core.PApplet;
 import processing.core.PConstants;
@@ -891,6 +895,148 @@ public class PSurfaceJOGL implements PSurface {
         });
     }
 
+// TODO rewrite before 4.0 release
+  @Override
+  public PImage loadImage(String path, Object... args) {
+    return ShimAWT.loadImage(sketch, path, args);
+  }
+
+
+  @Override
+  public void selectInput(String prompt, String callbackMethod,
+                          File file, Object callbackObject) {
+    EventQueue.invokeLater(() -> {
+      // https://github.com/processing/processing/issues/3831
+      boolean hide = (sketch != null) &&
+        (PApplet.platform == PConstants.WINDOWS);
+      if (hide) setVisible(false);
+
+      ShimAWT.selectImpl(prompt, callbackMethod, file,
+                         callbackObject, null, FileDialog.LOAD);
+
+      if (hide) setVisible(true);
+    });
+  }
+
+
+  @Override
+  public void selectOutput(String prompt, String callbackMethod,
+                           File file, Object callbackObject) {
+    EventQueue.invokeLater(() -> {
+      // https://github.com/processing/processing/issues/3831
+      boolean hide = (sketch != null) &&
+        (PApplet.platform == PConstants.WINDOWS);
+      if (hide) setVisible(false);
+
+      ShimAWT.selectImpl(prompt, callbackMethod, file,
+                         callbackObject, null, FileDialog.SAVE);
+
+      if (hide) setVisible(true);
+    });
+  }
+
+
+  @Override
+  public void selectFolder(String prompt, String callbackMethod,
+                           File file, Object callbackObject) {
+    EventQueue.invokeLater(() -> {
+      // https://github.com/processing/processing/issues/3831
+      boolean hide = (sketch != null) &&
+        (PApplet.platform == PConstants.WINDOWS);
+      if (hide) setVisible(false);
+      
+      ShimAWT.selectFolderImpl(prompt, callbackMethod, file,
+        callbackObject, null);
+      
+      if (hide) setVisible(true);
+    });
+  }
+
+   @Override
+  public void setCursor(int kind) {
+    if (!cursorNames.containsKey(kind)) {
+      PGraphics.showWarning("Unknown cursor type: " + kind);
+      return;
+    }
+    CursorInfo cursor = cursors.get(kind);
+    if (cursor == null) {
+      String name = cursorNames.get(kind);
+      if (name != null) {
+        ImageIcon icon =
+          new ImageIcon(getClass().getResource("cursors/" + name + ".png"));
+        PImage img = new PImageAWT(icon.getImage());
+        // Most cursors just use the center as the hotspot...
+        int x = img.width / 2;
+        int y = img.height / 2;
+        // ...others are more specific
+        switch (kind) {
+          case PConstants.ARROW:
+            x = 10;
+            y = 7;
+            break;
+          case PConstants.HAND:
+            x = 12;
+            y = 8;
+            break;
+          case PConstants.TEXT:
+            x = 16;
+            y = 22;
+            break;
+          default:
+            break;
+        }
+        cursor = new CursorInfo(img, x, y);
+        cursors.put(kind, cursor);
+      }
+    }
+    if (cursor != null) {
+      cursor.set();
+    } else {
+      PGraphics.showWarning("Cannot load cursor type: " + kind);
+    }
+  }
+
+
+  @Override
+  public void setCursor(PImage image, int hotspotX, int hotspotY) {
+    Display disp = window.getScreen().getDisplay();
+    BufferedImage bimg = (BufferedImage)image.getNative();
+    DataBufferInt dbuf = (DataBufferInt)bimg.getData().getDataBuffer();
+    int[] ipix = dbuf.getData();
+    ByteBuffer pixels = ByteBuffer.allocate(ipix.length * 4);
+    pixels.asIntBuffer().put(ipix);
+    PixelFormat format = PixelFormat.ARGB8888;
+    final Dimension size = new Dimension(bimg.getWidth(), bimg.getHeight());
+    PixelRectangle pixelrect = new PixelRectangle.GenericPixelRect(format, size, 0, false, pixels);
+    final PointerIcon pi = disp.createPointerIcon(pixelrect, hotspotX, hotspotY);
+    display.getEDTUtil().invoke(false, () -> {
+      window.setPointerVisible(true);
+      window.setPointerIcon(pi);
+    });
+  }
+
+
+  @Override
+  public void showCursor() {
+    display.getEDTUtil().invoke(false, () -> {
+      window.setPointerVisible(true);
+    });
+  }
+
+
+  @Override
+  public void hideCursor() {
+    display.getEDTUtil().invoke(false, () -> {
+      window.setPointerVisible(false);
+    });
+  }
+
+
+  @Override
+  public boolean openLink(String url) {
+    return ShimAWT.openLink(url);
+  }
+
     class DrawListener implements GLEventListener {
 
         @Override
@@ -1353,24 +1499,24 @@ public class PSurfaceJOGL implements PSurface {
         return def;
     }
 
-    // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+
+
     class CursorInfo {
+    PImage image;
+    int x, y;
 
-        PImage image;
-        int x, y;
-
-        CursorInfo(PImage image, int x, int y) {
-            this.image = image;
-            this.x = x;
-            this.y = y;
-        }
-
-        void set() {
-            setCursor(image, x, y);
-        }
+    CursorInfo(PImage image, int x, int y) {
+      this.image = image;
+      this.x = x;
+      this.y = y;
     }
 
-    static Map<Integer, CursorInfo> cursors = new HashMap<>();
+    void set() {
+      setCursor(image, x, y);
+    }
+  }
+
+  static Map<Integer, CursorInfo> cursors = new HashMap<>();
     static Map<Integer, String> cursorNames = Map.of(
           PConstants.ARROW, "arrow",
           PConstants.CROSS, "cross",
@@ -1381,79 +1527,67 @@ public class PSurfaceJOGL implements PSurface {
   );
 
 
-    @Override
-    public void setCursor(int kind) {
-        if (!cursorNames.containsKey(kind)) {
-            PGraphics.showWarning("Unknown cursor type: " + kind);
-            return;
-        }
-        CursorInfo cursor = cursors.get(kind);
-        if (cursor == null) {
-            String name = cursorNames.get(kind);
-            if (name != null) {
-                ImageIcon icon
-                        = new ImageIcon(getClass().getResource("cursors/" + name + ".png"));
-                PImage img = new PImage(icon.getImage());
-                // Most cursors just use the center as the hotspot...
-                int x = img.width / 2;
-                int y = img.height / 2;
-                // ...others are more specific
-                switch (kind) {
-                    case PConstants.ARROW:
-                        x = 10;
-                        y = 7;
-                        break;
-                    case PConstants.HAND:
-                        x = 12;
-                        y = 8;
-                        break;
-                    case PConstants.TEXT:
-                        x = 16;
-                        y = 22;
-                        break;
-                    default:
-                        break;
-                }
-                cursor = new CursorInfo(img, x, y);
-                cursors.put(kind, cursor);
-            }
-        }
-        if (cursor != null) {
-            cursor.set();
-        } else {
-            PGraphics.showWarning("Cannot load cursor type: " + kind);
-        }
-    }
+//    @Override
+//    public void setCursor(int kind) {
+//        if (!cursorNames.containsKey(kind)) {
+//            PGraphics.showWarning("Unknown cursor type: " + kind);
+//            return;
+//        }
+//        CursorInfo cursor = cursors.get(kind);
+//        if (cursor == null) {
+//            String name = cursorNames.get(kind);
+//            if (name != null) {
+//                ImageIcon icon
+//                        = new ImageIcon(getClass().getResource("cursors/" + name + ".png"));
+//                PImage img = new PImage(icon.getImage());
+//                // Most cursors just use the center as the hotspot...
+//                int x = img.width / 2;
+//                int y = img.height / 2;
+//                // ...others are more specific
+//                switch (kind) {
+//                    case PConstants.ARROW:
+//                        x = 10;
+//                        y = 7;
+//                        break;
+//                    case PConstants.HAND:
+//                        x = 12;
+//                        y = 8;
+//                        break;
+//                    case PConstants.TEXT:
+//                        x = 16;
+//                        y = 22;
+//                        break;
+//                    default:
+//                        break;
+//                }
+//                cursor = new CursorInfo(img, x, y);
+//                cursors.put(kind, cursor);
+//            }
+//        }
+//        if (cursor != null) {
+//            cursor.set();
+//        } else {
+//            PGraphics.showWarning("Cannot load cursor type: " + kind);
+//        }
+//    }
+//
+//    @Override
+//    public void setCursor(PImage image, int hotspotX, int hotspotY) {
+//        Display disp = window.getScreen().getDisplay();
+//        BufferedImage bimg = (BufferedImage) image.getNative();
+//        DataBufferInt dbuf = (DataBufferInt) bimg.getData().getDataBuffer();
+//        int[] ipix = dbuf.getData();
+//        ByteBuffer pixels = ByteBuffer.allocate(ipix.length * 4);
+//        pixels.asIntBuffer().put(ipix);
+//        PixelFormat format = PixelFormat.ARGB8888;
+//        final Dimension size = new Dimension(bimg.getWidth(), bimg.getHeight());
+//        PixelRectangle pixelrect = new PixelRectangle.GenericPixelRect(format, size, 0, false, pixels);
+//        final PointerIcon pi = disp.createPointerIcon(pixelrect, hotspotX, hotspotY);
+//        display.getEDTUtil().invoke(false, () -> {
+//            window.setPointerVisible(true);
+//            window.setPointerIcon(pi);
+//        });
+//    }
 
-    @Override
-    public void setCursor(PImage image, int hotspotX, int hotspotY) {
-        Display disp = window.getScreen().getDisplay();
-        BufferedImage bimg = (BufferedImage) image.getNative();
-        DataBufferInt dbuf = (DataBufferInt) bimg.getData().getDataBuffer();
-        int[] ipix = dbuf.getData();
-        ByteBuffer pixels = ByteBuffer.allocate(ipix.length * 4);
-        pixels.asIntBuffer().put(ipix);
-        PixelFormat format = PixelFormat.ARGB8888;
-        final Dimension size = new Dimension(bimg.getWidth(), bimg.getHeight());
-        PixelRectangle pixelrect = new PixelRectangle.GenericPixelRect(format, size, 0, false, pixels);
-        final PointerIcon pi = disp.createPointerIcon(pixelrect, hotspotX, hotspotY);
-        display.getEDTUtil().invoke(false, () -> {
-            window.setPointerVisible(true);
-            window.setPointerIcon(pi);
-        });
-    }
 
-    @Override
-    public void showCursor() {
-        display.getEDTUtil().invoke(false, () -> {
-            window.setPointerVisible(true);
-        });
-    }
-
-    @Override
-    public void hideCursor() {
-        display.getEDTUtil().invoke(false, () -> {
-            window.setPointerVisible(false);
-        });
-    }
 }
