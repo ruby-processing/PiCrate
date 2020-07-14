@@ -2,7 +2,7 @@
 
 require 'fileutils'
 require 'rake/clean'
-relative_require 'geany'
+require_relative './geany'
 WARNING = 'WARNING: wget download failed you could do a manual download'
 SOUND = 'sound.zip'
 SOUND_VERSION = 'v1.3.2'
