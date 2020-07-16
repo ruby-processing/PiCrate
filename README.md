@@ -26,7 +26,7 @@ To create a template sketch:-
 ```bash
 picrate -c my_sketch 200 200
 ```
-Edit sketch ([vim][vim] is a good choice, but we reccomend [geany][geany]) :-
+Edit sketch ([vim][vim] is a good choice, but we recommend [geany][geany]) :-
 ```ruby
 #!/usr/bin/env jruby
 # frozen_string_literal: false
