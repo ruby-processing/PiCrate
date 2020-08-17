@@ -26,7 +26,7 @@ To create a template sketch:-
 ```bash
 picrate -c my_sketch 200 200
 ```
-Edit sketch (vim is a good choice):-
+Edit sketch ([vim][vim] is a good choice, but we recommend [geany][geany]) :-
 ```ruby
 #!/usr/bin/env jruby
 # frozen_string_literal: false
@@ -57,3 +57,5 @@ jruby --dev my_sketch.rb # --dev flag speeds start-up
 
 [buster]:https://gist.github.com/monkstone/6ae9840d7b7008c177b4a9f589d14ec6
 [propane]:https://ruby-processing.github.io/propane/
+[vim]:https://github.com/ruby-processing/PiCrate/blob/master/docs/_editors/vim.md
+[geany]:https://github.com/ruby-processing/PiCrate/blob/master/docs/_editors/geany.md
