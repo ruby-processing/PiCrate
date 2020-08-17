@@ -1,3 +1,5 @@
+v2.1.1 Bump to JRuby-9.2.13.0, include examples using ruby `clamp` in place of processing `constrain`.
+
 v2.1.0 Refactor how we configure geany so we can use ENV['HOME'] rather hard code config file. Bump to JRuby-9.2.12.0, include Sam Pottingers July 2020 staging changes.
 
 v2.0.1 Use JOGL-2.4.0-rc fixes reflection warnings, remove geomerative and wordcram gem dependencies since can now be in step with JRubyArt and propane (re jdk compatibility), bump version for release. Removed Gottfreid Haider shaders, warn legacy driver doesn't work with P2D and P3D sketches. Support aarch64 architecture on RaspberriPI4.

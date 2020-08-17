@@ -8,7 +8,7 @@ permalink: /getting_manjaro/
 Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` we currently recommend installing hotspot adopt-openjdk11 from the AdoptOpenJDK project (there may be issues with distro version). Setting the JDK_HOME environment (easiest done `/etc/profile.d`) and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
 
 ```bash
-mkdir -p ~/.gem/jruby/2.5.0
+mkdir -p ~/.gem/ruby/2.5.0
 ```
 
 Now set your `GEM_HOME`, `GEM_PATH` and amend your `PATH` as follows:-
