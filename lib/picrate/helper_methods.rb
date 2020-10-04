@@ -1,7 +1,7 @@
 # frozen_string_literal: false
 
 # processing module wrapper
-require_relative 'helpers/numeric'
+require_relative 'helpers/radial_numeric'
 module Processing
   # Provides some convenience methods
   module HelperMethods

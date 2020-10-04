@@ -5,7 +5,7 @@ date:   2020-05-11 07:34:13
 categories: PiCrate update
 permalink: /getting_manjaro/
 ---
-Currently Manjaro does not come with a pre-installed java. So the first step is to install a `jdk` the distro version (jdk14) should work. Setting the JDK_HOME environment (easiest done `/etc/profile.d`) and then manually install the latest JRuby. It is probably worth creating a symbolic links to `/usr/bin/jruby` and `/usr/bin/jgem` from wherever you installed jruby eg /opt folder.
+If Manjaro does not come with a pre-installed java, then the first step is to install a `jdk` the distro version (jdk14) should work. Setting the JDK_HOME environment (easiest done `/etc/profile.d`). You can use pacman to install the latest jruby.
 
 ```bash
 mkdir -p ~/.gem/ruby/2.5.0
@@ -37,7 +37,7 @@ picrate --install # no args, install samples and geany config
 picrate -i Samples # to omit geany config
 ```
 
-This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide. Sketches need to be run in VTE terminal on Manjaro ARM the terminal emulator, does not give access to local environment variables in the version of Geany supplied.
+This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide.
 
 To create a template sketch from the command line:-
 
@@ -77,7 +77,7 @@ vim my_sketch.rb
 To run sketches from command line:-
 
 ```bash
-jruby my_sketch.rb
+jruby --dev my_sketch.rb
 ```
 
 Or even `chmod +x my_sketch.rb` to make an executable script.
