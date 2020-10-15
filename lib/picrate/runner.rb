@@ -32,7 +32,7 @@ module Processing
       opt_parser = OptionParser.new do |opts|
         # Set a banner, displayed at the top
         # of the help screen.
-        opts.banner = 'Usage: picrate [options] [<sketch.rb>]'
+        opts.banner = 'Usage: picrate [options] [<name>]'
 
         # Define the options, and what they do
         options[:version] = false
@@ -55,6 +55,8 @@ module Processing
         # assumed to have this option.
         opts.on_tail('-h', '--help', 'Display this screen') do
           puts opts
+          puts ''
+          puts 'Run a sketch: jruby [--dev] [<sketch.rb>]'
           exit
         end
       end
