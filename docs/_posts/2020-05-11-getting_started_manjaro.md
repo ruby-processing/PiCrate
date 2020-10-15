@@ -39,7 +39,7 @@ To install latest picrate and its dependencies:-
 jgem install picrate
 ```
 
-Geany is a good editor/ide for PiCrate on the RaspberryPI (install via pacman), but some may prefer vim. For geany you should edit/preferences.Terminal to `Execute programs in the VTE`.
+Geany is a good editor/ide for PiCrate on the RaspberryPI (install via pacman), but some may prefer vim. For geany you should edit/preferences/Terminal to `Execute programs in the VTE`.
 
 __For a first install:-__
 
