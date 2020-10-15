@@ -5,12 +5,20 @@ date:   2020-05-11 07:34:13
 categories: PiCrate update
 permalink: /getting_manjaro/
 ---
-If Manjaro does not come with a pre-installed java, then the first step is to install a `jdk` the distro version (jdk14) should work. Setting the JDK_HOME environment (easiest done `/etc/profile.d`). You can use pacman to install the latest jruby.
+If Manjaro does not come with a pre-installed java, then the first step is to install a `jdk` the distro version (jdk14) should work. 
 
 ```bash
-mkdir -p ~/.gem/ruby/2.5.0
+sudo pacman -S jdk-openjdk # current distro version jdk14
 ```
+You can also use pacman to install jruby
+```bash
+sudo pacman -S jruby # current version jruby-9.2.13.0
+```
+It is probably a good idea to create a local gem store (rather needing to use sudo to install gems)
 
+```bash
+mkdir -p ~/.gem/ruby/2.5.0 # current MRI version supported by jruby
+```
 Now set your `GEM_HOME`, `GEM_PATH` and amend your `PATH` as follows:-
 
 ```bash
@@ -19,16 +27,20 @@ echo "export GEM_PATH=\"\${HOME}/.gem/ruby/${MRI_RUBY}\"" >> ~/.bashrc
 echo "export PATH=\"\${PATH}:\${GEM_PATH}/bin\"" >> ~/.bashrc
 source ~/.bashrc # to update environment without re-logging in
 ```
-Now should be ready to install `picrate` and other gems.
-Install a local version of rake:-
+Now should be ready to install `picrate` and other gems. But speed up install time you should set `--no-document` option in ~/.gemrc
+
 ```bash
-jgem install rake
+touch ~/.gemrc
+echo "gem: --no-document" > ~/.gemrc
 ```
 To install latest picrate and its dependencies:-
 
 ```bash
 jgem install picrate
 ```
+
+Geany is a good editor/ide for PiCrate on the RaspberryPI (install via pacman), but some may prefer vim. For geany you should edit/preferences.Terminal to `Execute programs in the VTE`.
+
 __For a first install:-__
 
 ```bash
@@ -37,7 +49,7 @@ picrate --install # no args, install samples and geany config
 picrate -i Samples # to omit geany config
 ```
 
-This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide.
+This installs example sketches in `~/projects/examples` and ties them into a `geany` project `examples.geany`. It should also be possible to run sketches from the `geany` ide. The geany config creates `picrate.rb` template sketch so you can create a new sketch with template.
 
 To create a template sketch from the command line:-
 
