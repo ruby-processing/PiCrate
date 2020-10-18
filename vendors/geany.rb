@@ -69,9 +69,9 @@ class GeanyConfig
   include ERB::Util
   attr_accessor :home, :directory, :template
 
-  def initialize(home, directory, template = geany_config)
+  def initialize(directory, template = geany_config)
     @home = home
-    @directory = File.join(home, directory)
+    @directory = directory
     @template = template
   end
 
