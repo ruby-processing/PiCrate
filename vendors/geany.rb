@@ -25,7 +25,7 @@ indent_mode=2
 
 [project]
 name=picrate_samples
-base_path=<%= home %>
+base_path=examples
 description=Exploring PiCrate
 file_patterns=*.rb;*.glsl;*.txt;
 
