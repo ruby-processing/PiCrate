@@ -83,9 +83,7 @@ module Processing
       library ||= 'new'
       choice = library.downcase
       case choice
-      when /sound/
-        warn 'The sound library is broken, try minim instead'
-      when /samples|video/
+      when /samples|sound|video/
         system "cd #{PICRATE_ROOT}/vendors && rake install_#{choice}"
       when /new/
         # install samples and config geany

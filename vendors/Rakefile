@@ -5,9 +5,9 @@ require 'rake/clean'
 require_relative './geany'
 WARNING = 'WARNING: wget download failed you could do a manual download'
 SOUND = 'sound.zip'
-SOUND_VERSION = 'v1.3.2'
-VIDEO = 'video-2.0-beta4.zip'
-VIDEO_VERSION = 'r6-v2.0-beta4'
+PROCESSING_GITHUB = 'https://github.com/processing'
+VIDEO = 'video.zip'
+DOWNLOAD = 'releases/download/latest'
 EXAMPLES = '0.5.5'
 HOME_DIR = ENV['HOME']
 LIBRARY = File.join(HOME_DIR, '.picrate', 'libraries')
@@ -47,16 +47,24 @@ task download_samples: ["#{EXAMPLES}.tar.gz"]
 
 desc 'download sound library'
 task :download_sound do
-  wget_base = 'wget -P https://github.com/processing/processing-sound'
-  wget_string = [wget_base, 'releases/download/latest', SOUND].join('/')
-  system wget_string
+  wget_base = ['wget', PROCESSING_GITHUB].join(' ')
+  wget_string = [wget_base, 'processing-sound', DOWNLOAD, SOUND].join('/')
+  begin
+    sh wget_string
+  rescue StandardError
+    warn(WARNING)
+  end
 end
 
 desc 'download video library'
 task :download_video do
-  wget_base = 'wget -P /tmp https://github.com/processing/processing-video'
-  wget_string = [wget_base, 'releases/download', VIDEO_VERSION, VIDEO].join('/')
-  system wget_string
+  wget_base = ['wget', PROCESSING_GITHUB].join(' ')
+  wget_string = [wget_base, 'processing-video', DOWNLOAD, VIDEO].join('/')
+  begin
+    sh wget_string
+  rescue StandardError
+    warn(WARNING)
+  end
 end
 
 desc 'initialize ~/.picrate directories'
@@ -89,15 +97,16 @@ end
 
 desc 'copy sound library'
 task copy_sound: SOUND do
-  system "unzip -d /tmp /tmp/#{SOUND}"
-  FileUtils.rm_r "#{LIBRARY}/sound" if File.exist? "#{LIBRARY}/sound"
-  FileUtils.cp_r '/tmp/sound', LIBRARY
+  sh "unzip #{SOUND}"
+  sh "rm -r #{LIBRARY}/sound" if File.exist? "#{LIBRARY}/sound"
+  sh "cp -r sound #{LIBRARY}"
+  sh 'rm -r sound'
 end
 
 desc 'copy video library'
-task copy_video: "/tmp/#{VIDEO}" do
-  system "unzip -d /tmp /tmp/#{VIDEO}"
-  FileUtils.rm_r "#{LIBRARY}/video" if File.exist? "#{LIBRARY}/video"
-  FileUtils.mkdir_p "#{LIBRARY}/video/library"
-  FileUtils.mv Dir.glob('/tmp/video/library/*.jar'), "#{LIBRARY}/video/library"
+task copy_video: VIDEO do
+  sh "unzip #{VIDEO}"
+  sh "rm -r #{LIBRARY}/video" if File.exist? "#{LIBRARY}/video"
+  sh "cp -r video #{LIBRARY}"
+  sh 'rm -r video'
 end
