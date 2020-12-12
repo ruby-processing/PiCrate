@@ -38,7 +38,7 @@ export PATH="${PATH}:${GEM_PATH}/bin"
 
 ### Automated install using bash ###
 
-The [picrate2_install.sh][bash] script currently installs jruby-9.2.14.0 and picrate-2.1.1.
+The [picrate2_install.sh][bash] script currently installs jruby-9.2.14.0 and picrate-2.1.2.
 
 If you know better please post on wiki
 

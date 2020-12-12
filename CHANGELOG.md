@@ -1,4 +1,6 @@
-v2.1.1 Bump to JRuby-9.2.14.0, include examples using ruby `clamp` in place of processing `constrain`, update to video-2.0 release, add run instruction to help
+v2.1.2 Bump to JRuby-9.2.14.0
+
+v2.1.1 Bump to JRuby-9.2.13.0, include examples using ruby `clamp` in place of processing `constrain`, update to video-2.0 release, add run instruction to help
 
 v2.1.0 Refactor how we configure geany so we can use ENV['HOME'] rather hard code config file. Bump to JRuby-9.2.12.0, include Sam Pottingers July 2020 staging changes.
 
