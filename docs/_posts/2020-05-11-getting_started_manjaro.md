@@ -12,7 +12,7 @@ sudo pacman -S jdk-openjdk # current distro version jdk14
 ```
 You can also use pacman to install jruby
 ```bash
-sudo pacman -S jruby # current version jruby-9.2.13.0
+sudo pacman -S jruby # current version jruby-9.2.14.0
 ```
 It is probably a good idea to create a local gem store (rather needing to use sudo to install gems)
 
