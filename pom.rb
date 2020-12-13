@@ -47,11 +47,12 @@ overrides do
          'links' => ['${processing.api}',
                      '${jruby.api}'])
   plugin(:jar, '3.2.0',
-         'archive' => {
-           'manifestEntries' => {
-             'Class-Path' => 'gluegen-rt.jar jog-all.jar'
-           }
-         })
+    'archive' => {
+      'manifestEntries' => {
+        'Automatic-Module-Name' => 'processing.core'
+      }
+    }
+  )
   plugin :jdeps, '3.1.2' do
     execute_goals 'jdkinternals', 'test-jdkinternals'
   end
