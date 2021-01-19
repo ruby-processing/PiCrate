@@ -6,7 +6,7 @@ categories: PiCrate update
 ---
 Requirements:-
 
-1. Latest jogl-2.4.0-rc jars (place in ~/jogl24 folder).
+1. Latest jogl-2.4.0-rc jars (place in ~/jogl-2.4-rc2021011 folder see [jogl-jars][jars]).
 
 2. jdk-11+ and maven
 
@@ -16,3 +16,5 @@ git clone --depth 1 https://github.com/ruby-processing/PiCrate.git
 cd PiCrate
 rake # to build gem
 ```
+
+[jars]:https://jogamp.org/deployment/archive/rc/v2.4.0-rc-20210111/jar/
