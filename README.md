@@ -14,12 +14,12 @@ jgem install picrate
 
 Clone main branch:-
 
-Requires java to build (and jogl-2.4.0-rc jars), but uses a maven wrapper so you don't need to install maven. Suggest build/test on regular linux box, but is designed for use on both RaspberryPI 3B+ and RaspberryPI4. Needs installed jruby to test/run.
+Requires java to build (and [jogl-2.4.0-rc jars][jogl_jars]), but uses a maven wrapper so you don't need to install maven. Suggest build/test on regular linux box, but is designed for use on both RaspberryPI 3B+ and RaspberryPI4. Needs installed jruby to test/run.
 
 ```bash
 cd PiCrate # or whatever you call it
 rake # assumes an installed version of vanilla processing
-jgem install picrate-2.1.2-java.gem
+jgem install picrate-2.2.0-java.gem
 
 ```
 To create a template sketch:-
@@ -59,3 +59,4 @@ jruby --dev my_sketch.rb # --dev flag speeds start-up
 [propane]:https://ruby-processing.github.io/propane/
 [vim]:https://github.com/ruby-processing/PiCrate/blob/master/docs/_editors/vim.md
 [geany]:https://github.com/ruby-processing/PiCrate/blob/master/docs/_editors/geany.md
+[jogl_jars]:https://jogamp.org/deployment/archive/rc/v2.4.0-rc-20210111/jar/

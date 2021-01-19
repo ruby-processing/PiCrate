@@ -1,3 +1,5 @@
+v2.2.0 Bump to latest JOGL-rc January 2021
+
 v2.1.2 Bump to JRuby-9.2.14.0
 
 v2.1.1 Bump to JRuby-9.2.13.0, include examples using ruby `clamp` in place of processing `constrain`, update to video-2.0 release, add run instruction to help
