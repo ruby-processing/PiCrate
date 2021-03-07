@@ -186,7 +186,7 @@ public class PFont implements PConstants {
    * <b>createFont()</b> function for dynamically converting fonts into a format
    * to use with Processing.
    *
-   * ( end auto-generated )
+
    *
    * @nowebref
    * @param font font the font object to create from

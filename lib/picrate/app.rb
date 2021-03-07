@@ -5,7 +5,7 @@ require_relative 'helper_methods'
 require_relative 'library_loader'
 # A wrapper module for the processing App
 module Processing
-  include_package 'processing.core' # imports the processing jar.
+  include_package 'processing.core' # imports the processing classes.
   # Load vecmath, fastmath and mathtool modules
   Java::Monkstone::PicrateLibrary.load(JRuby.runtime)
   SKETCH_ROOT = File.absolute_path('.')
@@ -15,6 +15,9 @@ module Processing
     java_import 'monkstone.vecmath.GfxRender'
     java_import 'monkstone.vecmath.ShapeRender'
   end
+
+  VALUE = Java::MonkstoneNoise::NoiseMode::PERLIN
+  SIMPLEX = Java::MonkstoneNoise::NoiseMode::SIMPLEX
 
   # This class is the base class the user should inherit from when making
   # their own sketch.

@@ -75,7 +75,7 @@ public class PVector implements Serializable {
    * The x component of the vector. This field (variable) can be used to both
    * get and set the value (see above example.)
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:field
    * @usage web_application
@@ -89,7 +89,7 @@ public class PVector implements Serializable {
    * The y component of the vector. This field (variable) can be used to both
    * get and set the value (see above example.)
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:field
    * @usage web_application
@@ -103,7 +103,7 @@ public class PVector implements Serializable {
    * The z component of the vector. This field (variable) can be used to both
    * get and set the value (see above example.)
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:field
    * @usage web_application
@@ -153,7 +153,7 @@ public class PVector implements Serializable {
    * Sets the x, y, and z component of the vector using two or three separate
    * variables, the data from a PVector, or the values from a float array.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -339,7 +339,7 @@ public class PVector implements Serializable {
    *
    * Make a new 2D unit vector from an angle.
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:method
    * @usage web_application
@@ -374,7 +374,7 @@ public class PVector implements Serializable {
    *
    * Gets a copy of the vector, returns a PVector object.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -421,7 +421,7 @@ public class PVector implements Serializable {
    * Calculates the magnitude (length) of the vector and returns the result
    * as a float (this is simply the equation <em>sqrt(x*x + y*y + z*z)</em>.)
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:method
    * @usage web_application
@@ -442,7 +442,7 @@ public class PVector implements Serializable {
    * Faster if the real length is not required in the
    * case of comparing vectors, etc.
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:method
    * @usage web_application
@@ -464,7 +464,7 @@ public class PVector implements Serializable {
    * others have no return value -- they act directly on the vector. See the
    * examples for more context.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -543,7 +543,7 @@ public class PVector implements Serializable {
    * PVector, the others have no return value -- they act directly on the
    * vector. See the examples for more context.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -618,7 +618,7 @@ public class PVector implements Serializable {
    *
    * Multiplies a vector by a scalar or multiplies one vector by another.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -666,7 +666,7 @@ public class PVector implements Serializable {
    *
    * Divides a vector by a scalar or divides one vector by another.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -716,7 +716,7 @@ public class PVector implements Serializable {
    * Calculates the Euclidean distance between two points (considering a
    * point as a vector object).
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -750,7 +750,7 @@ public class PVector implements Serializable {
    *
    * Calculates the dot product of two vectors.
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:method
    * @usage web_application
@@ -790,7 +790,7 @@ public class PVector implements Serializable {
    * Calculates and returns a vector composed of the cross product between
    * two vectors.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -846,7 +846,7 @@ public class PVector implements Serializable {
    *
    * Normalize the vector to length 1 (make it a unit vector).
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -885,7 +885,7 @@ public class PVector implements Serializable {
    *
    * Limit the magnitude of this vector to the value used for the <b>max</b> parameter.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -907,7 +907,7 @@ public class PVector implements Serializable {
    *
    * Set the magnitude of this vector to the value used for the <b>len</b> parameter.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -940,7 +940,7 @@ public class PVector implements Serializable {
    *
    * Calculate the angle of rotation for this vector (only 2D vectors)
    *
-   * ( end auto-generated )
+
    *
    * @webref pvector:method
    * @usage web_application
@@ -968,7 +968,7 @@ public class PVector implements Serializable {
    *
    * Rotate the vector by an angle (only 2D vectors), magnitude remains the same
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -990,7 +990,7 @@ public class PVector implements Serializable {
    *
    * Linear interpolate the vector to another vector
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -1043,7 +1043,7 @@ public class PVector implements Serializable {
    *
    * Calculates and returns the angle (in radians) between two vectors.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method
@@ -1094,7 +1094,7 @@ public class PVector implements Serializable {
    * for temporary use. If used in any other fashion, the contents should be
    * copied by using the <b>PVector.get()</b> method to copy into your own array.
    *
-   * ( end auto-generated )
+
    *
      * @return 
    * @webref pvector:method

@@ -49,7 +49,7 @@ import java.io.OutputStream;
    *  create a new image, use the <b>createImage()</b> function. Do not
    * use the syntax <b>new PImage()</b>.
    *
-   * ( end auto-generated )
+
    *
  * @webref image
  * @usage Web &amp; Application
@@ -96,7 +96,7 @@ public class PImage implements PConstants, Cloneable {
    * Without <b>loadPixels()</b>, running the code may (or will in future
    * releases) result in a NullPointerException.
    *
-   * ( end auto-generated )
+
    *
    * @webref image:pixels
    * @usage web_application
@@ -116,7 +116,7 @@ public class PImage implements PConstants, Cloneable {
    *
    * The width of the image in units of pixels.
    *
-   * ( end auto-generated )
+
    * @webref pimage:field
    * @usage web_application
    * @brief     Image width
@@ -128,7 +128,7 @@ public class PImage implements PConstants, Cloneable {
    *
    * The height of the image in units of pixels.
    *
-   * ( end auto-generated )
+
    * @webref pimage:field
    * @usage web_application
    * @brief     Image height
@@ -204,7 +204,7 @@ public class PImage implements PConstants, Cloneable {
    *
    * To create a new image, use the <b>createImage()</b> function (do not use
    * <b>new PImage()</b>).
-   * ( end auto-generated )
+
    * @nowebref
    * @usage web_application
    * @see PApplet#loadImage(String, String)
@@ -394,7 +394,7 @@ public class PImage implements PConstants, Cloneable {
    * function in the current Processing release, this will always be subject
    * to change.
    *
-   * ( end auto-generated )
+
    *
    * <h3>Advanced</h3>
    * Call this when you want to mess with the pixels[] array.
@@ -436,7 +436,7 @@ public class PImage implements PConstants, Cloneable {
    * Currently, none of the renderers use the additional parameters to
    * <b>updatePixels()</b>, however this may be implemented in the future.
    *
-   * ( end auto-generated )
+
    * <h3>Advanced</h3>
    * Mark the pixels in this region as needing an update.
    * This is not currently used by any of the renderers, however the api
@@ -509,7 +509,7 @@ public class PImage implements PConstants, Cloneable {
    * content, first get a copy of its image data using the <b>get()</b>
    * method, and call <b>resize()</b> on the PImage that is returned.
    *
-   * ( end auto-generated )
+
    * @webref pimage:method
    * @brief Changes the size of an image to a new width and height
    * @usage web_application
@@ -569,7 +569,7 @@ public class PImage implements PConstants, Cloneable {
    * equivalent statement to <b>get(x, y)</b> using <b>pixels[]</b> is
    * <b>pixels[y*width+x]</b>. See the reference for <b>pixels[]</b> for more information.
    *
-   * ( end auto-generated )
+
    *
    * <h3>Advanced</h3>
    * Returns an ARGB "color" type (a packed 32 bit int with the color.
@@ -725,7 +725,7 @@ public class PImage implements PConstants, Cloneable {
    * is <b>pixels[y*width+x] = #000000</b>. See the reference for
    * <b>pixels[]</b> for more information.
    *
-   * ( end auto-generated )
+
    *
    * @webref image:pixels
    * @brief writes a color to any pixel or writes an image into another
@@ -842,7 +842,7 @@ public class PImage implements PConstants, Cloneable {
    * same length as the target image's pixels array and should contain only
    * grayscale data of values between 0-255.
    *
-   * ( end auto-generated )
+
    *
    * <h3>Advanced</h3>
    *
@@ -973,7 +973,7 @@ public class PImage implements PConstants, Cloneable {
    *
    * DILATE - increases the light areas with the amount defined by the level parameter
    *
-   * ( end auto-generated )
+
    *
    * <h3>Advanced</h3>
    * Method to apply a variety of basic filters to this image.
@@ -1515,7 +1515,7 @@ public class PImage implements PConstants, Cloneable {
    *
    * As of release 0149, this function ignores <b>imageMode()</b>.
    *
-   * ( end auto-generated )
+
    *
    * @webref image:pixels
    * @brief Copies the entire image
@@ -1560,7 +1560,7 @@ public class PImage implements PConstants, Cloneable {
    * <b>MODE</b> parameter. The possible modes are described in the reference
    * for the <b>blend()</b> function.
    *
-   * ( end auto-generated )
+
    * <h3>Advanced</h3>
    * <UL>
    * <LI>REPLACE - destination colour equals colour of source pixel: C = A.
@@ -1611,18 +1611,18 @@ public class PImage implements PConstants, Cloneable {
    * </UL>
    * <P>A useful reference for blending modes and their algorithms can be
    * found in the <A HREF="http://www.w3.org/TR/SVG12/rendering.html">SVG</A>
-   * specification.</P>
+   * specification.
    * <P>It is important to note that Processing uses "fast" code, not
    * necessarily "correct" code. No biggie, most software does. A nitpicker
    * can find numerous "off by 1 division" problems in the blend code where
    * <TT>&gt;&gt;8</TT> or <TT>&gt;&gt;7</TT> is used when strictly speaking
-   * <TT>/255.0</TT> or <TT>/127.0</TT> should have been used.</P>
+   * <TT>/255.0</TT> or <TT>/127.0</TT> should have been used.
    * <P>For instance, exclusion (not intended for real-time use) reads
    * <TT>r1 + r2 - ((2 * r1 * r2) / 255)</TT> because <TT>255 == 1.0</TT>
    * not <TT>256 == 1.0</TT>. In other words, <TT>(255*255)>>8</TT> is not
    * the same as <TT>(255*255)/255</TT>. But for real-time use the shifts
    * are preferrable, and the difference is insignificant for applications
-   * built with Processing.</P>
+   * built with Processing.
    *
    * @webref color:creating_reading
    * @usage web_application
@@ -1715,7 +1715,7 @@ public class PImage implements PConstants, Cloneable {
    *
    * As of release 0149, this function ignores <b>imageMode()</b>.
    *
-   * ( end auto-generated )
+
    *
    * @webref image:pixels
    * @brief  Copies a pixel or rectangle of pixels using different blending modes
@@ -3127,7 +3127,7 @@ int testFunction(int dst, int src) {
    * <p>
    * Also figured out how to avoid parsing the image upside-down
    * (there's a header flag to set the image origin to top-left)
-   * </p>
+   * 
    * Starting with revision 0092, the format setting is taken into account:
    * <UL>
    * <LI><TT>ALPHA</TT> images written as 8bit grayscale (uses lowest byte)
@@ -3291,7 +3291,7 @@ int testFunction(int dst, int src) {
    * program and can therefore save the file to the right place. See the
    * <b>createImage()</b> reference for more information.
    *
-   * ( end auto-generated )
+
    * <h3>Advanced</h3>
    * Save this image to disk.
    * <p>

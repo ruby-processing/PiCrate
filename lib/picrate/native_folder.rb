@@ -1,5 +1,3 @@
-require 'rbconfig'
-
 # Utility to load native binaries on Java CLASSPATH
 #HACK until jruby returns a more specific 'host_os' than 'linux'
 class NativeFolder
@@ -10,7 +8,7 @@ class NativeFolder
   ARM64 = '-aarch64'.freeze
 
   def initialize
-    @os = RbConfig::CONFIG['host_os'].downcase
+    @os = java.lang.System.get_property('os.name')
     @bit = java.lang.System.get_property('os.arch')
   end
 

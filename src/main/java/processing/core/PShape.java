@@ -61,12 +61,12 @@ import java.util.Map;
  * For the time being, this class and its shape() and loadShape() friends in
  * PApplet exist as placeholders for more exciting things to come. If you'd like
  * to work with this class, make a subclass (see how PShapeSVG works) and you
- * can play with its internal methods all you like.</p>
+ * can play with its internal methods all you like.
  *
  * <p>
  * Library developers are encouraged to create PShape objects when loading shape
  * data, so that they can eventually hook into the bounty that will be the
- * PShape interface, and the ease of loadShape() and shape().</p>
+ * PShape interface, and the ease of loadShape() and shape().
  *
  * @webref shape
  * @usage Web &amp; Application
@@ -171,7 +171,7 @@ public class PShape implements PConstants {
    *
    * The width of the PShape document.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:field
    * @usage web_application
@@ -184,7 +184,7 @@ public class PShape implements PConstants {
    *
    * The height of the PShape document.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:field
    * @usage web_application
@@ -597,7 +597,7 @@ public class PShape implements PConstants {
    * SVG file. For instance, this parameter is controlled by showing or hiding
    * the shape in the layers palette in Adobe Illustrator.
    *
-   * ( end auto-generated )
+
    *
    * @return
    * @webref pshape:method
@@ -620,7 +620,7 @@ public class PShape implements PConstants {
    * the SVG file. For instance, this parameter is controlled by showing or
    * hiding the shape in the layers palette in Adobe Illustrator.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:mathod
    * @usage web_application
@@ -639,7 +639,7 @@ public class PShape implements PConstants {
    * Disables the shape's style data and uses Processing's current styles.
    * Styles include attributes such as colors, stroke weight, and stroke joints.
    *
-   * ( end auto-generated )
+
    * <h3>Advanced</h3>
    * Overrides this shape's style information and uses PGraphics styles and
    * colors. Identical to ignoreStyles(true). Also disables styles for all child
@@ -664,7 +664,7 @@ public class PShape implements PConstants {
    * Enables the shape's style data and ignores Processing's current styles.
    * Styles include attributes such as colors, stroke weight, and stroke joints.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -2419,7 +2419,7 @@ public class PShape implements PConstants {
    * with the <b>target</b> parameter. The shape is returned as a
    * <b>PShape</b> object, or <b>null</b> is returned if there is an error.
    *
-   * ( end auto-generated )
+
    *
    * @return
    * @webref pshape:method
@@ -3025,7 +3025,7 @@ public class PShape implements PConstants {
    * created, only the <b>setFill()</b> method can define a new fill value for
    * the <b>PShape</b>.
    *
-   * ( end auto-generated )
+
    *
    * @webref
    * @param fill
@@ -3202,7 +3202,7 @@ public class PShape implements PConstants {
    * after the shape is created, only the <b>setStroke()</b> method can define a
    * new stroke value for the <b>PShape</b>.
    *
-   * ( end auto-generated )
+
    *
    * @webref
    * @param stroke
@@ -3678,7 +3678,7 @@ public class PShape implements PConstants {
    * Using this method with the <b>z</b> parameter requires using the P3D
    * parameter in combination with size.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -3721,7 +3721,7 @@ public class PShape implements PConstants {
    * This method requires a 3D renderer. You need to use P3D as a third
    * parameter for the <b>size()</b> function as shown in the example above.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -3755,7 +3755,7 @@ public class PShape implements PConstants {
    * This method requires a 3D renderer. You need to use P3D as a third
    * parameter for the <b>size()</b> function as shown in the example above.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -3789,7 +3789,7 @@ public class PShape implements PConstants {
    * This method requires a 3D renderer. You need to use P3D as a third
    * parameter for the <b>size()</b> function as shown in the example above.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -3821,7 +3821,7 @@ public class PShape implements PConstants {
    * <b>rotate(PI)</b>. This transformation is applied directly to the shape,
    * it's not refreshed each time <b>draw()</b> is run.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -3875,7 +3875,7 @@ public class PShape implements PConstants {
    * Using this method with the <b>z</b> parameter requires using the P3D
    * parameter in combination with size.
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @usage web_application
@@ -3917,7 +3917,7 @@ public class PShape implements PConstants {
    * Replaces the current matrix of a shape with the identity matrix. The
    * equivalent function in OpenGL is glLoadIdentity().
    *
-   * ( end auto-generated )
+
    *
    * @webref pshape:method
    * @brief Replaces the current matrix of a shape with the identity matrix

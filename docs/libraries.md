@@ -6,8 +6,8 @@ It is possible to use vanilla <a href="https://www.processing.org/reference/libr
 
 {% for library in site.libraries %}
   <h2>{{ item.title }}</h2>
-  <p>{{ item.description }}</p>
-  <p><h2><a href="{{ library.url | prepend: site.github.url }}">{{ library.title }}</a></h2></p>
+  <p>{{ item.description }}
+  <p><h2><a href="{{ library.url | prepend: site.github.url }}">{{ library.title }}</a></h2>
 {% endfor %}
 
 <h4>Key To Library Types</h4>

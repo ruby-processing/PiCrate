@@ -119,7 +119,7 @@ public class Server implements Runnable {
    * 
    * Disconnect a particular client.
    * 
-   * ( end auto-generated )
+
    * @brief Disconnect a particular client.
    * @webref server:server
    * @param client the client to disconnect
@@ -191,7 +191,7 @@ public class Server implements Runnable {
    * Returns true if this server is still active and hasn't run
    * into any trouble.
    * 
-   * ( end auto-generated )
+
    * @webref server:server
    * @brief Return true if this server is still active.
    */
@@ -220,7 +220,7 @@ public class Server implements Runnable {
    * 
    * Returns the next client in line with a new message.
    * 
-   * ( end auto-generated )
+
    * @brief Returns the next client in line with a new message.
    * @webref server
    * @usage application
@@ -258,7 +258,7 @@ public class Server implements Runnable {
    * 
    * Disconnects all clients and stops the server.
    * 
-   * ( end auto-generated )
+
    * <h3>Advanced</h3>
    * Use this to shut down the server if you finish using it while your applet 
    * is still running. Otherwise, it will be automatically be shut down by the 
@@ -337,7 +337,7 @@ public class Server implements Runnable {
    * Writes a value to all the connected clients. It sends bytes out from the 
    * Server object.
    * 
-   * ( end auto-generated )
+
    * @webref server
    * @brief Writes data to all connected clients
    * @param data data to write
