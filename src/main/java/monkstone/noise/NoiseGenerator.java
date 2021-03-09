@@ -16,20 +16,29 @@ public class NoiseGenerator implements Noise {
     private Long seed;
 
     public NoiseGenerator() {
-        this.implementation = new OpenSimplex2F(System.currentTimeMillis());
+      seed = System.currentTimeMillis();
+        this.implementation = new OpenSimplex2F(seed);
         this.mode = NoiseMode.DEFAULT;
     }
 
     @Override
     public void noiseMode(NoiseMode mode) {
         if (this.mode != mode && this.mode != NoiseMode.DEFAULT) {
-            seed = System.currentTimeMillis();
             this.implementation = new OpenSimplex2F(seed);
             this.mode = NoiseMode.DEFAULT;
         }
         if (this.mode != mode && this.mode != NoiseMode.OPEN_DETAIL) {
             this.implementation = new OpenSimplex2S(seed);
             this.mode = NoiseMode.OPEN_DETAIL;
+        }
+        if (this.mode != mode && this.mode != NoiseMode.FAST_TERRAIN) {
+            this.implementation = new FastTerrain(seed);
+            this.mode = NoiseMode.FAST_TERRAIN;
+        }     
+        
+        if (this.mode != mode && this.mode != NoiseMode.SMOOTH_TERRAIN) {
+            this.implementation = new SmoothTerrain(seed);
+            this.mode = NoiseMode.SMOOTH_TERRAIN;
         }
     }
 
@@ -49,7 +58,7 @@ public class NoiseGenerator implements Noise {
 
     @Override
     public void noiseSeed(long seed) {
-        implementation.noiseSeed(seed);
+        this.seed = seed;
     }
 
 }

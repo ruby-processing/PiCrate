@@ -11,5 +11,7 @@ package monkstone.noise;
  */
 public enum NoiseMode {
    DEFAULT,
+   FAST_TERRAIN,
+   SMOOTH_TERRAIN,
    OPEN_DETAIL;
 }
