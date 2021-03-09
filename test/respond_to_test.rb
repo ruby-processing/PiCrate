@@ -104,7 +104,6 @@ METHODS = %i[
   no_stroke
   no_tint
   noise
-  noise_detail
   noise_seed
   normal
   ortho

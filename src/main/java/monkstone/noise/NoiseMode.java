@@ -10,6 +10,6 @@ package monkstone.noise;
  * @author tux
  */
 public enum NoiseMode {
-   SIMPLEX,
-   PERLIN;
+   DEFAULT,
+   OPEN_DETAIL;
 }
