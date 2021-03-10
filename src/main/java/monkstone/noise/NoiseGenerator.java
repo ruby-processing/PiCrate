@@ -16,33 +16,45 @@ public class NoiseGenerator implements Noise {
     private Long seed;
 
     public NoiseGenerator() {
-      seed = System.currentTimeMillis();
+        seed = System.currentTimeMillis();
         this.implementation = new OpenSimplex2F(seed);
         this.mode = NoiseMode.DEFAULT;
     }
 
     @Override
     public void noiseMode(NoiseMode mode) {
-        if (this.mode != mode && this.mode != NoiseMode.DEFAULT) {
-            this.implementation = new OpenSimplex2F(seed);
-            this.mode = NoiseMode.DEFAULT;
-        }
-        if (this.mode != mode && this.mode != NoiseMode.OPEN_SMOOTH) {
-            this.implementation = new OpenSimplex2S(seed);
-            this.mode = NoiseMode.OPEN_SMOOTH;
-        }
-        if (this.mode != mode && this.mode != NoiseMode.FAST_TERRAIN) {
-            this.implementation = new FastTerrain(seed);
-            this.mode = NoiseMode.FAST_TERRAIN;
-        }     
-        
-        if (this.mode != mode && this.mode != NoiseMode.SMOOTH_TERRAIN) {
-            this.implementation = new SmoothTerrain(seed);
-            this.mode = NoiseMode.SMOOTH_TERRAIN;
+        switch (mode) {
+            case DEFAULT:
+                if (this.mode != NoiseMode.DEFAULT) {
+                    this.implementation = new OpenSimplex2F(seed);
+                    this.mode = NoiseMode.DEFAULT;
+                }
+                break;
+            case OPEN_SMOOTH:
+                if (this.mode != NoiseMode.OPEN_SMOOTH) {
+                    this.implementation = new OpenSimplex2S(seed);
+                    this.mode = NoiseMode.OPEN_SMOOTH;
+                    break;
+                }
+            case SMOOTH_TERRAIN:
+                if (this.mode != NoiseMode.SMOOTH_TERRAIN) {
+                    this.implementation = new SmoothTerrain(seed);
+                    this.mode = NoiseMode.SMOOTH_TERRAIN;
+                }
+                break;
+            case FAST_TERRAIN:
+                if (this.mode != NoiseMode.FAST_TERRAIN) {
+                    this.implementation = new FastTerrain(seed);
+                    this.mode = NoiseMode.FAST_TERRAIN;
+                }
+                break;
+            default:
+                this.implementation = new OpenSimplex2F(seed);
+                this.mode = NoiseMode.DEFAULT;
         }
     }
 
-    public NoiseMode noiseMode(){
+    public NoiseMode noiseMode() {
         return this.mode;
     }
 
@@ -60,5 +72,4 @@ public class NoiseGenerator implements Noise {
     public void noiseSeed(long seed) {
         this.seed = seed;
     }
-
 }

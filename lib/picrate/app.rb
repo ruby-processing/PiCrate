@@ -149,7 +149,7 @@ module Processing
     def data_path(dat)
       dat_root = File.join(SKETCH_ROOT, 'data')
       Dir.mkdir(dat_root) unless File.exist?(dat_root)
-      File.join(dat_root, dat)
+      File.join(dat_root, dat).to_java(:string)
     end
 
     private

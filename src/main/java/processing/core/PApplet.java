@@ -1961,7 +1961,7 @@ public class PApplet implements PConstants {
                         + " renderer is not in the class path.");
             }
 
-        } catch (Exception e) {
+        } catch (IllegalAccessException | IllegalArgumentException | InstantiationException | NoSuchMethodException | SecurityException e) {
             if ((e instanceof IllegalArgumentException)
                     || (e instanceof NoSuchMethodException)
                     || (e instanceof IllegalAccessException)) {
@@ -5190,7 +5190,7 @@ public class PApplet implements PConstants {
         try {
             return XML.parse(xmlString, options);
 
-        } catch (Exception e) {
+        } catch (IOException | ParserConfigurationException | SAXException e) {
             throw new RuntimeException(e);
         }
     }
@@ -5243,8 +5243,8 @@ public class PApplet implements PConstants {
         JSONObject outgoing = new JSONObject(reader);
         try {
             reader.close();
-        } catch (IOException e) {  // not sure what would cause this
-            e.printStackTrace();
+        } catch (IOException e) {
+            // not sure what would cause this
         }
         return outgoing;
     }
@@ -5260,9 +5260,9 @@ public class PApplet implements PConstants {
         JSONObject outgoing = new JSONObject(reader);
         try {
             reader.close();
-        } catch (IOException e) {  // not sure what would cause this
-            e.printStackTrace();
-        }
+        } catch (IOException e) {
+            // not sure what would cause this
+            }
         return outgoing;
     }
 
@@ -5332,8 +5332,8 @@ public class PApplet implements PConstants {
         JSONArray outgoing = new JSONArray(reader);
         try {
             reader.close();
-        } catch (IOException e) {  // not sure what would cause this
-            e.printStackTrace();
+        } catch (IOException e) {
+            // not sure what would cause this
         }
         return outgoing;
     }
@@ -6660,7 +6660,6 @@ public class PApplet implements PConstants {
             return buffer;
 
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
     }
@@ -6682,7 +6681,6 @@ public class PApplet implements PConstants {
             try {
                 is.close();
             } catch (IOException e) {
-                e.printStackTrace();
             }
             return outgoing;
         }
@@ -6780,7 +6778,6 @@ public class PApplet implements PConstants {
                 lines[lineCount++] = line;
             }
             reader.close();
-
             if (lineCount == lines.length) {
                 return lines;
             }
