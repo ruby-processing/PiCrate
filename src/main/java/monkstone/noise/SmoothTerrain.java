@@ -125,28 +125,6 @@ public class SmoothTerrain implements Noise {
     }
 
     /**
-     * 3D Re-oriented 8-point BCC noise, classic orientation Proper substitute
-     * for what 3D SuperSimplex would be, in light of Forbidden Formulae.Use
-     * noise3_XYBeforeZ or noise3_XZBeforeY instead, wherever appropriate.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    public double noise3_Classic(double x, double y, double z) {
-
-        // Re-orient the cubic lattices via rotation, to produce the expected look on cardinal planar slices.
-        // If texturing objects that don't tend to have cardinal plane faces, you could even remove this.
-        // Orthonormal rotation. Not a skew transform.
-        double r = (2.0 / 3.0) * (x + y + z);
-        double xr = r - x, yr = r - y, zr = r - z;
-
-        // Evaluate both lattices to form a BCC lattice.
-        return noise3_BCC(xr, yr, zr);
-    }
-
-    /**
      * 3D Re-oriented 8-point BCC noise, with better visual isotropy in (X,
      * Y).Recommended for 3D terrain and time-varied animations.The Z coordinate
      * should always be the "different" coordinate in your use case.If Y is
@@ -242,24 +220,6 @@ public class SmoothTerrain implements Noise {
     }
 
     /**
-     * 4D SuperSimplex noise, classic lattice orientation.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param w
-     * @return
-     */
-    public double noise4_Classic(double x, double y, double z, double w) {
-
-        // Get points for A4 lattice
-        double s = 0.309016994374947 * (x + y + z + w);
-        double xs = x + s, ys = y + s, zs = z + s, ws = w + s;
-
-        return noise4_Base(xs, ys, zs, ws);
-    }
-
-    /**
      * 4D SuperSimplex noise, with XY and ZW forming orthogonal triangular-based
      * planes.Recommended for 3D terrain, where X and Y (or Z and W) are
      * horizontal.Recommended for noise(x, y, sin(time), cos(time)) trick.
@@ -299,26 +259,6 @@ public class SmoothTerrain implements Noise {
         return noise4_Base(xs, ys, zs, ws);
     }
 
-    /**
-     * 4D SuperSimplex noise, with XYZ oriented like noise3_Classic, and W for
-     * an extra degree of freedom.Recommended for time-varied animations which
-     * texture a 3D object (W=time)
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param w
-     * @return
-     */
-    public double noise4_XYZBeforeW(double x, double y, double z, double w) {
-
-        double xyz = x + y + z;
-        double ww = w * 1.118033988749894;
-        double s2 = xyz * -0.16666666666666666 + ww;
-        double xs = x + s2, ys = y + s2, zs = z + s2, ws = -0.5 * xyz + ww;
-
-        return noise4_Base(xs, ys, zs, ws);
-    }
 
     /**
      * 4D SuperSimplex noise base. Using ultra-simple 4x4x4x4 lookup

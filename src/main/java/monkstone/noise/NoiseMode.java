@@ -10,8 +10,19 @@ package monkstone.noise;
  * @author tux
  */
 public enum NoiseMode {
-   DEFAULT,
-   FAST_TERRAIN,
-   SMOOTH_TERRAIN,
-   OPEN_DETAIL;
+    DEFAULT("Fast OpenSimplex2"),
+    FAST_TERRAIN("Fast Terrain"),
+    SMOOTH_TERRAIN("Smooth Terrain"),
+    OPEN_SMOOTH("Smooth OpenSimplex2");
+
+    private final String description;
+
+    NoiseMode(String description) {
+        this.description = description;
+    }
+
+    public String description() {
+        return description;
+    }
+
 }

@@ -1,3 +1,5 @@
+v2.3.0 Abandon Processing Value Noise in favour of OpenSimplex2, whith choosable options
+
 v2.2.0 Bump to latest JOGL-rc January 2021
 
 v2.1.2 Bump to JRuby-9.2.14.0

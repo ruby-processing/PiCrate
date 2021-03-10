@@ -143,34 +143,6 @@ public class OpenSimplex2F implements Noise {
 
     /**
      * 3D Re-oriented 4-point BCC noise, with better visual isotropy in (X,
-     * Y).Recommended for 3D terrain and time-varied animations.The Z coordinate
-     * should always be the "different" coordinate in your use case.If Y is
-     * vertical in world coordinates, call noise3_XYBeforeZ(x, z, Y) or use
-     * noise3_XZBeforeY.If Z is vertical in world coordinates, call
-     * noise3_XYBeforeZ(x, y, Z). For a time varied animation, call
-     * noise3_XYBeforeZ(x, y, T).
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    public double noise3_XYBeforeZ(double x, double y, double z) {
-
-        // Re-orient the cubic lattices without skewing, to make X and Y triangular like 2D.
-        // Orthonormal rotation. Not a skew transform.
-        double xy = x + y;
-        double s2 = xy * -0.211324865405187;
-        double zz = z * 0.577350269189626;
-        double xr = x + s2 - zz, yr = y + s2 - zz;
-        double zr = xy * 0.577350269189626 + zz;
-
-        // Evaluate both lattices to form a BCC lattice.
-        return noise3_BCC(xr, yr, zr);
-    }
-
-    /**
-     * 3D Re-oriented 4-point BCC noise, with better visual isotropy in (X,
      * Z).Recommended for 3D terrain and time-varied animations.The Y coordinate
      * should always be the "different" coordinate in your use case.If Y is
      * vertical in world coordinates, call noise3_XZBeforeY(x, Y, z).If Z is
@@ -271,26 +243,6 @@ public class OpenSimplex2F implements Noise {
         double s2 = (x + y) * -0.178275657951399372 + (z + w) * 0.215623393288842828;
         double t2 = (z + w) * -0.403949762580207112 + (x + y) * -0.375199083010075342;
         double xs = x + s2, ys = y + s2, zs = z + t2, ws = w + t2;
-
-        return noise4_Base(xs, ys, zs, ws);
-    }
-
-    /**
-     * 4D OpenSimplex2F noise, with XZ and YW forming orthogonal
-     * triangular-based planes.Recommended for 3D terrain, where X and Z (or Y
-     * and W) are horizontal.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param w
-     * @return
-     */
-    public double noise4_XZBeforeYW(double x, double y, double z, double w) {
-
-        double s2 = (x + z) * -0.178275657951399372 + (y + w) * 0.215623393288842828;
-        double t2 = (y + w) * -0.403949762580207112 + (x + z) * -0.375199083010075342;
-        double xs = x + s2, ys = y + t2, zs = z + s2, ws = w + t2;
 
         return noise4_Base(xs, ys, zs, ws);
     }

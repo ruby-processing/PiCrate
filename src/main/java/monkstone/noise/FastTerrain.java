@@ -120,28 +120,6 @@ public class FastTerrain implements Noise {
     }
 
     /**
-     * 3D Re-oriented 4-point BCC noise, classic orientation.Proper substitute
-     * for 3D Simplex in light of Forbidden Formulae.Use noise3_XYBeforeZ or
-     * noise3_XZBeforeY instead, wherever appropriate.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @return
-     */
-    public double noise3_Classic(double x, double y, double z) {
-
-        // Re-orient the cubic lattices via rotation, to produce the expected look on cardinal planar slices.
-        // If texturing objects that don't tend to have cardinal plane faces, you could even remove this.
-        // Orthonormal rotation. Not a skew transform.
-        double r = (2.0 / 3.0) * (x + y + z);
-        double xr = r - x, yr = r - y, zr = r - z;
-
-        // Evaluate both lattices to form a BCC lattice.
-        return noise3_BCC(xr, yr, zr);
-    }
-
-    /**
      * 3D Re-oriented 4-point BCC noise, with better visual isotropy in (X,
      * Y).Recommended for 3D terrain and time-varied animations.The Z coordinate
      * should always be the "different" coordinate in your use case.If Y is
@@ -237,24 +215,6 @@ public class FastTerrain implements Noise {
     }
 
     /**
-     * 4D FastTerrain noise, classic lattice orientation.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param w
-     * @return
-     */
-    public double noise4_Classic(double x, double y, double z, double w) {
-
-        // Get points for A4 lattice
-        double s = -0.138196601125011 * (x + y + z + w);
-        double xs = x + s, ys = y + s, zs = z + s, ws = w + s;
-
-        return noise4_Base(xs, ys, zs, ws);
-    }
-
-    /**
      * 4D FastTerrain noise, with XY and ZW forming orthogonal
      * triangular-based planes.Recommended for 3D terrain, where X and Y (or Z
      * and W) are horizontal.Recommended for noise(x, y, sin(time), cos(time))
@@ -271,26 +231,6 @@ public class FastTerrain implements Noise {
         double s2 = (x + y) * -0.178275657951399372 + (z + w) * 0.215623393288842828;
         double t2 = (z + w) * -0.403949762580207112 + (x + y) * -0.375199083010075342;
         double xs = x + s2, ys = y + s2, zs = z + t2, ws = w + t2;
-
-        return noise4_Base(xs, ys, zs, ws);
-    }
-
-    /**
-     * 4D FastTerrain noise, with XZ and YW forming orthogonal
-     * triangular-based planes.Recommended for 3D terrain, where X and Z (or Y
-     * and W) are horizontal.
-     *
-     * @param x
-     * @param y
-     * @param z
-     * @param w
-     * @return
-     */
-    public double noise4_XZBeforeYW(double x, double y, double z, double w) {
-
-        double s2 = (x + z) * -0.178275657951399372 + (y + w) * 0.215623393288842828;
-        double t2 = (y + w) * -0.403949762580207112 + (x + z) * -0.375199083010075342;
-        double xs = x + s2, ys = y + t2, zs = z + s2, ws = w + t2;
 
         return noise4_Base(xs, ys, zs, ws);
     }
@@ -551,7 +491,7 @@ public class FastTerrain implements Noise {
 
     @Override
     public float noise(float x, float y, float z, float w) {
-        return (float)noise4_XZBeforeYW(x, y, z, w);
+        return (float)noise4_XYBeforeZW(x, y, z, w);
     }
 
     @Override

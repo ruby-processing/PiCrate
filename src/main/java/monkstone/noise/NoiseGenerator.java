@@ -27,9 +27,9 @@ public class NoiseGenerator implements Noise {
             this.implementation = new OpenSimplex2F(seed);
             this.mode = NoiseMode.DEFAULT;
         }
-        if (this.mode != mode && this.mode != NoiseMode.OPEN_DETAIL) {
+        if (this.mode != mode && this.mode != NoiseMode.OPEN_SMOOTH) {
             this.implementation = new OpenSimplex2S(seed);
-            this.mode = NoiseMode.OPEN_DETAIL;
+            this.mode = NoiseMode.OPEN_SMOOTH;
         }
         if (this.mode != mode && this.mode != NoiseMode.FAST_TERRAIN) {
             this.implementation = new FastTerrain(seed);
