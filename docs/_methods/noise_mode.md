@@ -31,20 +31,20 @@ class TestNoise < Processing::App
   end
 
   def mouse_pressed
-    mode = Processing::SIMPLEX
+    mode = NoiseMode::OPEN_SMOOTH # Smooth classic OpenSimplex2
     noise_mode mode
-    sketch_title "#{mode}"
+    sketch_title mode.description
   end
 
   def mouse_released
-    mode = Processing::VALUE # default mode "Perlin Noise" in vanilla processing
+    mode = NoiseMode::DEFAULT # Fast classic OpenSimplex2
     noise_mode(mode)
-    sketch_title "#{mode}"
+    sketch_title mode.description
   end
 
 
   def arrow(x, y, ang)
-    pushMatrix()
+    push_matrix()
     translate(x, y)
     rotate(ang)
     line(0, 0, 20, 0)
@@ -53,7 +53,7 @@ class TestNoise < Processing::App
     line(0, 0, 5, 0)
     rotate(-0.8)
     line(0, 0, 5, 0)
-    popMatrix()
+    pop_matrix()
   end
 
   def settings
@@ -67,16 +67,22 @@ TestNoise.new
 
 ### Description	###
 
-Currently supports two implementations of noise ValueNoise (Perlin noise in vanilla processing), up to 3D and SimplexNoise up to 4D.
+Currently supports four implementations of noise:-
+1. DEFAULT # fast classic OpenSimplex2
+2. OPEN_SMOOTH # smoother class OpenSimplex2F
+3. FAST_TERRAIN # more suited to terrain
+4. SMOOTH_TERRAIN # as above but smoother
 
 ### Syntax ###
 
 ```ruby
-noise_mode(mode) # default mode is Processing::VALUE, and Processing::SIMPLEX
+noise_mode(mode) # default is NoiseMode::DEFAULT, a fast classic OpenSimplex2
 ```
 
 ### Related ###
 
-`noise(x, y, z, w)` SimplexNoise only
+`noise(x, y, z, w)`
 
-`noise(x, y, z)` ValueNoise and SimplexNoise
+`noise(x, y, z)`
+
+`noise(x, y)`
