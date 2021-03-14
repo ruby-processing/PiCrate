@@ -26,6 +26,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.ByteBuffer;
 import com.itextpdf.text.pdf.PdfContentByte;
+import com.itextpdf.awt.PdfGraphics2D;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -67,7 +68,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     protected Document document;
     protected PdfWriter writer;
     protected PdfContentByte content;
-
+    protected PdfGraphics2D graphicContent;
     /**
      * Shared across instances because it's incredibly time-consuming to create.
      */
@@ -165,7 +166,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 
             }
 
-            g2 = content.createGraphicsShapes(width, height);
+            g2 = new PdfGraphics2D(content, width, height);
         }
 
         // super in Java2D now creates an image buffer, don't do that
@@ -249,9 +250,9 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 
     protected Graphics2D createGraphics() {
         if (textMode == SHAPE) {
-          return content.createGraphics(width, height);
+          return new PdfGraphics2D(content, width, height);
         } else if (textMode == MODEL) {
-            return content.createGraphics(width, height, getMapper());
+            return new PdfGraphics2D(content, width, height, getMapper());
         }
         // Should not be reachable...
         throw new RuntimeException("Invalid textMode() selected for PDF.");
