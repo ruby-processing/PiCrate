@@ -2012,7 +2012,7 @@ public class PApplet implements PConstants {
      * height (but no format) will produce a strange error.
      *
      * Advanced users please note that createImage() should be used instead of
-     * the syntax <tt>new PImage()</tt>.
+     * the syntax <b>new PImage()</b>.
      *
      *
      * <h3>Advanced</h3>
@@ -3364,7 +3364,6 @@ public class PApplet implements PConstants {
      */
     public void die(String what, Exception e) {
         if (e != null) {
-            e.printStackTrace();
         }
         die(what);
     }
@@ -4891,6 +4890,28 @@ public class PApplet implements PConstants {
     public void noiseMode(NoiseMode mode) {
         noiseGenerator.noiseMode(mode);
     }
+    /**
+     * 
+     * @param lod
+     * @deprecated unsupported with OpenSimplex2 use toxiclibs PerlinNoise if
+     * required
+     */
+
+    @Deprecated
+    public void noiseDetail(int lod) {
+
+    }
+    /**
+     * 
+     * @param lod
+     * @param falloff
+     * @deprecated unsupported with OpenSimplex2 use toxiclibs PerlinNoise if
+     * required
+     */
+    @Deprecated
+    public void noiseDetail(int lod, float falloff) {
+
+    }
 
     /**
      * @param x
@@ -4951,11 +4972,10 @@ public class PApplet implements PConstants {
     public float noise(float x, float y, float z) {
         return noiseGenerator.noise(x, y, z);
     }
-    
+
     public float noise(float x, float y, float z, float w) {
         return noiseGenerator.noise(x, y, z, w);
     }
-
 
     /**
      *
@@ -5262,7 +5282,7 @@ public class PApplet implements PConstants {
             reader.close();
         } catch (IOException e) {
             // not sure what would cause this
-            }
+        }
         return outgoing;
     }
 
@@ -6626,7 +6646,7 @@ public class PApplet implements PConstants {
             int length;
 
             if (file.getName().toLowerCase().endsWith(".gz")) {
-                try ( RandomAccessFile raf = new RandomAccessFile(file, "r")) {
+                try (RandomAccessFile raf = new RandomAccessFile(file, "r")) {
                     raf.seek(raf.length() - 4);
                     int b4 = raf.read();
                     int b3 = raf.read();
@@ -6788,8 +6808,8 @@ public class PApplet implements PConstants {
             return output;
 
         } catch (IOException e) {
-            e.printStackTrace();
             //throw new RuntimeException("Error inside loadStrings()");
+            
         }
         return null;
     }
@@ -6901,10 +6921,9 @@ public class PApplet implements PConstants {
             // make sure that this path actually exists before writing
             createPath(target);
             tempFile = createTempFile(target);
-            FileOutputStream targetStream = new FileOutputStream(tempFile);
-
-            saveStream(targetStream, source);
-            targetStream.close();
+            try (FileOutputStream targetStream = new FileOutputStream(tempFile)) {
+                saveStream(targetStream, source);
+            }
 
             if (target.exists()) {
                 if (!target.delete()) {
@@ -7056,7 +7075,6 @@ public class PApplet implements PConstants {
             output.flush();
 
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
@@ -7107,12 +7125,12 @@ public class PApplet implements PConstants {
      * @nowebref
      */
     static public void saveStrings(OutputStream output, String[] data) {
-        PrintWriter writer = createWriter(output);
-        for (int i = 0; i < data.length; i++) {
-            writer.println(data[i]);
+        try (PrintWriter writer = createWriter(output)) {
+            for (String data1 : data) {
+                writer.println(data1);
+            }
+            writer.flush();
         }
-        writer.flush();
-        writer.close();
     }
 
     //////////////////////////////////////////////////////////////
@@ -7305,7 +7323,6 @@ public class PApplet implements PConstants {
         try {
             jarPath = jarURL.toURI().getPath();
         } catch (URISyntaxException e) {
-            e.printStackTrace();
             return null;
         }
         if (jarPath.contains("Contents/Java/")) {
