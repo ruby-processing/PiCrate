@@ -230,58 +230,6 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     }
 
     /**
-     * Gives the same basic functionality of File.exists but can be used to look
-     * for removable media without showing a system dialog if the media is not
-     * present.Workaround pulled from the
-     * <A HREF="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=4089199">
-     * bug report</A> on bugs.sun.com.This bug was fixed in Java 6, and we can
-     * remove the workaround when we start requiring Java 6.
-     *
-     * @param file
-     * @return
-     */
-    protected static boolean fileExists(File file) {
-        try {
-            Process process
-                    = Runtime.getRuntime().exec(new String[]{
-                "cmd.exe", "/c", "dir", file.getAbsolutePath()
-            });
-
-            // We need to consume all available output or the process will block.
-            boolean haveExitCode = false;
-            int exitCode = -1;
-            InputStream out = process.getInputStream();
-            InputStream err = process.getErrorStream();
-
-            while (!haveExitCode) {
-                while (out.read() >= 0) {
-                }
-                while (err.read() >= 0) {
-                }
-
-                try {
-                    exitCode = process.exitValue();
-                    haveExitCode = true;
-                } catch (IllegalThreadStateException e) {
-                    // Not yet complete.
-                    Thread.sleep(100);
-                }
-            }
-            //int exitCode = process.waitFor();
-            return exitCode == 0;
-
-        } catch (IOException e) {
-            System.out.println("Unable to check for file: " + file + " : " + e);
-            return false;
-
-        } catch (InterruptedException e) {
-            System.out.println("Unable to check for file.  Interrupted: "
-                    + file + " : " + e);
-            return false;
-        }
-    }
-
-    /**
      * Call to explicitly go to the next page from within a single draw().
      */
     public void nextPage() {
@@ -321,7 +269,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 
     /**
      * Don't open a window for this renderer, it won't be used.
-     * @return 
+     * @return
      */
     @Override
     public boolean displayable() {
@@ -626,7 +574,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     /**
      * List the fonts known to the PDF renderer.This is like PFont.list(),
  however not all those fonts are available by default.
-     * @return 
+     * @return
      */
     static public String[] listFonts() {
         if (fontList == null) {

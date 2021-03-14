@@ -1,4 +1,4 @@
-v2.3.0 Abandon Processing Value Noise in favour of OpenSimplex2, whith choosable options
+v2.3.0 Abandon Processing Value Noise in favour of OpenSimplex2, with choosable options. Added pdf library using iText5.
 
 v2.2.0 Bump to latest JOGL-rc January 2021
 
