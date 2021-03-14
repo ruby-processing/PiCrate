@@ -24,6 +24,7 @@ project 'picrate', 'http://maven.apache.org' do
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
   # Need to update to jogl 2.4.1 as soon as available, then make a dependency
   properties('jogl.version' => '2.3.2',
+             'itextpdf.version' => '5.5.13.2',
              'jruby.api' => 'http://jruby.org/apidocs/',
              'source.directory' => 'src',
              'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
@@ -35,11 +36,23 @@ project 'picrate', 'http://maven.apache.org' do
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'
+  jar 'com.itextpdf:itextpdf:${itextpdf.version}'
 end
 
 overrides do
   plugin :resources, '3.1.0'
-  plugin :dependency, '3.1.2'
+  plugin :dependency, '3.1.2' do
+    execute_goals( id: 'default-cli',
+      artifactItems:[
+      { groupId: 'com.itextpdf',
+        artifactId: 'itextpdf',
+        version: '${itextpdf.version}',
+        type: 'jar',
+        outputDirectory: '${picrate.basedir}/lib'
+      }
+    ]
+    )
+  end
   plugin(:compiler, '3.8.1',
          'release' => '11')
   plugin(:javadoc, '2.10.4',

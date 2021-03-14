@@ -19,6 +19,7 @@ end
 
 desc 'Install'
 task :install do
+  sh "mvn dependency:copy"
   FileUtils.mv "target/picrate-#{PiCrate::VERSION}.jar", 'lib'
 end
 
