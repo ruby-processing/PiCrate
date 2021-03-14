@@ -21,27 +21,33 @@
 package processing.pdf;
 
 import com.itextpdf.awt.DefaultFontMapper;
-import com.itextpdf.text.Rectangle;
+import com.itextpdf.awt.PdfGraphics2D;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.ByteBuffer;
 import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.awt.PdfGraphics2D;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.io.*;
-import java.util.*;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-//import com.lowagie.text.*;
-//import com.lowagie.text.pdf.*;
-//import com.lowagie.text.pdf.ByteBuffer;
-
 import processing.awt.PGraphicsJava2D;
-import processing.core.*;
+import processing.core.PApplet;
+import processing.core.PConstants;
+import processing.core.PFont;
+import processing.core.PImage;
+import processing.core.PStyle;
+import processing.core.PSurface;
+import processing.core.PSurfaceNone;
 
 /**
  * Thin wrapper for the iText PDF library that handles writing PDF files. The
@@ -75,12 +81,9 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     static protected DefaultFontMapper mapper;
     static protected String[] fontList;
 
-
-    /*
-  public PGraphicsPDF() {
-    // PDF always likes native fonts. Always.
-    hint(ENABLE_NATIVE_FONTS);
-  }
+    /**
+     * 
+     * @param path 
      */
     @Override
     public void setPath(String path) {
@@ -105,15 +108,6 @@ public class PGraphicsPDF extends PGraphicsJava2D {
         this.output = output;
     }
 
-//  /**
-//   * all the init stuff happens in here, in case someone calls size()
-//   * along the way and wants to hork things up.
-//   */
-//  protected void allocate() {
-//    // can't do anything here, because this will be called by the
-//    // superclass PGraphics, and the file/path object won't be set yet
-//    // (since super() called right at the beginning of the constructor)
-//  }
     @Override
     public PSurface createSurface() {
         return surface = new PSurfaceNone(this);
@@ -127,19 +121,17 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 
     @Override
     public void beginDraw() {
-//    long t0 = System.currentTimeMillis();
-
         if (document == null) {
-            // https://github.com/processing/processing/issues/5801#issuecomment-466632459
             ByteBuffer.HIGH_PRECISION = true;
-
             document = new Document(new Rectangle(width, height));
             boolean missingPath = false;
             try {
                 if (file != null) {
-                    //BufferedOutputStream output = new BufferedOutputStream(stream, 16384);
-                    output = new BufferedOutputStream(new FileOutputStream(file), 16384);
-
+                    try {
+                        output = new BufferedOutputStream(new FileOutputStream(file), 16384);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(PGraphicsPDF.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 } else if (output == null) {
                     missingPath = true;
                     throw new RuntimeException("PGraphicsPDF requires a path "
@@ -160,12 +152,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
                 } else {
                     throw new RuntimeException("Problem saving the PDF file.", re);
                 }
-
-            } catch (FileNotFoundException fnfe) {
-                throw new RuntimeException("Can't save the PDF file to " + path, fnfe);
-
             }
-
             g2 = new PdfGraphics2D(content, width, height);
         }
 
@@ -174,23 +161,17 @@ public class PGraphicsPDF extends PGraphicsJava2D {
         checkSettings();
         resetMatrix(); // reset model matrix
         vertexCount = 0;
-
-        // Also need to push the matrix since the matrix doesn't reset on each run
-        // http://dev.processing.org/bugs/show_bug.cgi?id=1227
         pushMatrix();
     }
 
     static protected DefaultFontMapper getMapper() {
         if (mapper == null) {
-//      long t = System.currentTimeMillis();
             mapper = new DefaultFontMapper();
-
             if (PApplet.platform == PConstants.LINUX) {
                 checkDir("/usr/share/fonts/", mapper);
                 checkDir("/usr/local/share/fonts/", mapper);
                 checkDir(System.getProperty("user.home") + "/.fonts", mapper);
             }
-//      System.out.println("mapping " + (System.currentTimeMillis() - t));
         }
         return mapper;
     }
@@ -596,7 +577,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 //        //System.out.println(entry.getKey() + "-->" + entry.getValue());
 //        fontList[count++] = (String) entry.getKey();
 //      }
-            fontList = PApplet.sort(fontList);
+            Arrays.sort(fontList);
         }
         return fontList;
     }
