@@ -64,6 +64,7 @@ DO NOT MODIFY - GENERATED CODE
     <url>https://github.com/ruby-processing/PiCrate/issues</url>
   </issueManagement>
   <properties>
+    <batik.version>1.14</batik.version>
     <itextpdf.version>5.5.13.2</itextpdf.version>
     <jogl.version>2.3.2</jogl.version>
     <jruby.api>http://jruby.org/apidocs/</jruby.api>
@@ -94,6 +95,11 @@ DO NOT MODIFY - GENERATED CODE
       <groupId>org.processing</groupId>
       <artifactId>video</artifactId>
       <version>3.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.xmlgraphics</groupId>
+      <artifactId>batik-all</artifactId>
+      <version>${batik.version}</version>
     </dependency>
     <dependency>
       <groupId>com.itextpdf</groupId>
@@ -140,7 +146,14 @@ DO NOT MODIFY - GENERATED CODE
                     <artifactId>itextpdf</artifactId>
                     <version>${itextpdf.version}</version>
                     <type>jar</type>
-                    <outputDirectory>${picrate.basedir}/lib</outputDirectory>
+                    <outputDirectory>${propane.basedir}/library/pdf</outputDirectory>
+                  </artifactItem>
+                  <artifactItem>
+                    <groupId>org.apache.xmlgraphics</groupId>
+                    <artifactId>batik-all</artifactId>
+                    <version>${batik.version}</version>
+                    <type>jar</type>
+                    <outputDirectory>${propane.basedir}/library/svg</outputDirectory>
                   </artifactItem>
                 </artifactItems>
               </configuration>

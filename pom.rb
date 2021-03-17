@@ -24,6 +24,7 @@ project 'picrate', 'http://maven.apache.org' do
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
   # Need to update to jogl 2.4.1 as soon as available, then make a dependency
   properties('jogl.version' => '2.3.2',
+             'batik.version' => '1.14',
              'itextpdf.version' => '5.5.13.2',
              'jruby.api' => 'http://jruby.org/apidocs/',
              'source.directory' => 'src',
@@ -36,6 +37,7 @@ project 'picrate', 'http://maven.apache.org' do
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'
+  jar 'org.apache.xmlgraphics:batik-all:${batik.version}'
   jar 'com.itextpdf:itextpdf:${itextpdf.version}'
 end
 
@@ -44,13 +46,19 @@ overrides do
   plugin :dependency, '3.1.2' do
     execute_goals( id: 'default-cli',
       artifactItems:[
-      { groupId: 'com.itextpdf',
-        artifactId: 'itextpdf',
-        version: '${itextpdf.version}',
-        type: 'jar',
-        outputDirectory: '${picrate.basedir}/lib'
-      }
-    ]
+        { groupId: 'com.itextpdf',
+          artifactId: 'itextpdf',
+          version: '${itextpdf.version}',
+          type: 'jar',
+          outputDirectory: '${propane.basedir}/library/pdf'
+        },
+        { groupId: 'org.apache.xmlgraphics',
+          artifactId: 'batik-all',
+          version: '${batik.version}',
+          type: 'jar',
+          outputDirectory: '${propane.basedir}/library/svg'
+        }
+      ]
     )
   end
   plugin(:compiler, '3.8.1',

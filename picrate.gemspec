@@ -27,7 +27,8 @@ Gem::Specification.new do |gem|
   gem.files << 'lib/jogl-all-natives-linux-amd64.jar'
   gem.files << 'lib/jogl-all-natives-linux-armv6hf.jar'
   gem.files << 'lib/jogl-all-natives-linux-aarch64.jar'
-  gem.files << 'lib/itextpdf-5.5.13.2.jar'
+  gem.files << 'library/pdf/itextpdf-5.5.13.2.jar'
+  gem.files << 'library/svg/batik-all-1.14.jar'
   gem.executables   = gem.files.grep(%r{^bin/}).map { |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.add_development_dependency 'minitest', '~> 5.10'

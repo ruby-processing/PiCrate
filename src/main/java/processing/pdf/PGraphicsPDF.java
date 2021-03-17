@@ -52,13 +52,8 @@ import processing.core.PSurfaceNone;
 /**
  * Thin wrapper for the iText PDF library that handles writing PDF files. The
  * majority of the work in this library is done by
- * <a href="http://www.lowagie.com/iText/">iText</a>.
- * This is currently using iText 2.1.7.
- * The issue is that versions from the 5.x series were slow to handle lots of
- * fonts with the DefaultFontMapper. 2.x seemed a little slower than 1.x, but
- * 5.x took up to 10 times the time to load, meaning a lag of several seconds
- * when starting sketches on a machine that had a good handful of fonts
- * installed. (Like, say, anyone in our target audience. Or me.)
+ * <a href="https://github.com/itext/itextpdf">itextpdf</a>. This is currently using
+ * itextpdf-5.5.13.2.
  */
 public class PGraphicsPDF extends PGraphicsJava2D {
 
@@ -81,10 +76,6 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     static protected DefaultFontMapper mapper;
     static protected String[] fontList;
 
-    /**
-     * 
-     * @param path 
-     */
     @Override
     public void setPath(String path) {
         this.path = path;
@@ -167,12 +158,10 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     static protected DefaultFontMapper getMapper() {
         if (mapper == null) {
             mapper = new DefaultFontMapper();
-            if (PApplet.platform == PConstants.LINUX) {
-                checkDir("/usr/share/fonts/", mapper);
-                checkDir("/usr/local/share/fonts/", mapper);
-                checkDir(System.getProperty("user.home") + "/.fonts", mapper);
+                    checkDir("/usr/share/fonts/", mapper);
+                    checkDir("/usr/local/share/fonts/", mapper);
+                    checkDir(System.getProperty("user.home") + "/.fonts", mapper);
             }
-        }
         return mapper;
     }
 
@@ -186,8 +175,10 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 
     /**
      * Recursive walk to get all subdirectories for font fun.Patch submitted by
- Matthias Breuer.(<a href="http://dev.processing.org/bugs/show_bug.cgi?id=1566">Bug
- 1566</a>)
+     * Matthias
+     * Breuer.(<a href="http://dev.processing.org/bugs/show_bug.cgi?id=1566">Bug
+     * 1566</a>)
+     *
      * @param folder
      * @param mapper
      */
@@ -258,45 +249,6 @@ public class PGraphicsPDF extends PGraphicsJava2D {
         return false;
     }
 
-    /*
-  protected void finalize() throws Throwable {
-    System.out.println("calling finalize");
-  //document.close();  // do this in dispose instead?
-  }
-     */
-    //////////////////////////////////////////////////////////////
-    /*
-  public void endRecord() {
-    super.endRecord();
-    dispose();
-  }
-
-
-  public void endRaw() {
-    System.out.println("ending raw");
-    super.endRaw();
-    System.out.println("disposing");
-    dispose();
-    System.out.println("done");
-  }
-     */
-    //////////////////////////////////////////////////////////////
-    /*
-  protected void rectImpl(float x1, float y1, float x2, float y2) {
-    //rect.setFrame(x1, y1, x2-x1, y2-y1);
-    //draw_shape(rect);
-    System.out.println("rect implements");
-    g2.fillRect((int)x1, (int)y1, (int) (x2-x1), (int) (y2-y1));
-  }
-  *
-
-  /*
-  public void clear() {
-    g2.setColor(Color.red);
-    g2.fillRect(0, 0, width, height);
-  }
-     */
-    //////////////////////////////////////////////////////////////
     @Override
     protected void imageImpl(PImage image,
             float x1, float y1, float x2, float y2,
@@ -321,49 +273,36 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     public void textFont(PFont which) {
         super.textFont(which);
         checkFont();
-        // Make sure a native version of the font is available.
-//    if (textFont.getFont() == null) {
-//      throw new RuntimeException("Use createFont() instead of loadFont() " +
-//                                 "when drawing text using the PDF library.");
-//    }
-        // Make sure that this is a font that the PDF library can deal with.
-//    if ((textMode != SHAPE) && !checkFont(which.getName())) {
-//      System.err.println("Use PGraphicsPDF.listFonts() to get a list of available fonts.");
-//      throw new RuntimeException("The font “" + which.getName() + "” cannot be used with PDF Export.");
-//    }
     }
 
     /**
-     * Change the textMode() to either SHAPE or MODEL.
-     * This resets all renderer settings, and therefore must be called
+     * Change the textMode() to either SHAPE or MODEL. This resets all renderer
+     * settings, and therefore must be called
      * <EM>before</EM> any other commands that set the fill() or the textFont()
      * or anything. Unlike other renderers, use textMode() directly after the
      * size() command.
      */
-    @Override
-    public void textMode(int mode) {
-        if (textMode != mode) {
-            switch (mode) {
-                case SHAPE:
-                    textMode = SHAPE;
-                    g2.dispose();
-                    //        g2 = content.createGraphicsShapes(width, height);
-                    g2 = createGraphics();
-                    break;
-                case MODEL:
-                    textMode = MODEL;
-                    g2.dispose();
-                    //        g2 = content.createGraphics(width, height, mapper);
-                    g2 = createGraphics();
-//        g2 = template.createGraphics(width, height, mapper);
-                    break;
-                case SCREEN:
-                    throw new RuntimeException("textMode(SCREEN) not supported with PDF");
-                default:
-                    throw new RuntimeException("That textMode() does not exist");
-            }
-        }
-    }
+     @Override
+     public void textMode(int mode) {
+         if (textMode != mode) {
+             switch (mode) {
+                 case SHAPE:
+                     textMode = SHAPE;
+                     g2.dispose();
+                     g2 = createGraphics();
+                     break;
+                 case MODEL:
+                     textMode = MODEL;
+                     g2.dispose();
+                     g2 = createGraphics();
+                     break;
+                 case SCREEN:
+                     throw new RuntimeException("textMode(SCREEN) not supported with PDF");
+                 default:
+                     throw new RuntimeException("That textMode() does not exist");
+             }
+         }
+     }
 
     @Override
     protected void textLineImpl(char buffer[], int start, int stop,
@@ -418,7 +357,6 @@ public class PGraphicsPDF extends PGraphicsJava2D {
     }
 
     //
-
     /**
      *
      * @param alpha
@@ -516,6 +454,7 @@ public class PGraphicsPDF extends PGraphicsJava2D {
      * On Linux or any other platform, you'll need to add the directories by
      * hand. (If there are actual standards here that we can use as a starting
      * point, please file a bug to make a note of it)
+     *
      * @param directory
      */
     public void addFonts(String directory) {
@@ -555,7 +494,8 @@ public class PGraphicsPDF extends PGraphicsJava2D {
 
     /**
      * List the fonts known to the PDF renderer.This is like PFont.list(),
- however not all those fonts are available by default.
+     * however not all those fonts are available by default.
+     *
      * @return
      */
     static public String[] listFonts() {
