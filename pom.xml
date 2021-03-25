@@ -71,7 +71,7 @@ DO NOT MODIFY - GENERATED CODE
     <picrate.basedir>${project.basedir}</picrate.basedir>
     <polyglot.dump.pom>pom.xml</polyglot.dump.pom>
     <processing.api>http://processing.github.io/processing-javadocs/core/</processing.api>
-    <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <source.directory>src</source.directory>
   </properties>
   <dependencies>
@@ -146,14 +146,14 @@ DO NOT MODIFY - GENERATED CODE
                     <artifactId>itextpdf</artifactId>
                     <version>${itextpdf.version}</version>
                     <type>jar</type>
-                    <outputDirectory>${propane.basedir}/library/pdf</outputDirectory>
+                    <outputDirectory>${picrate.basedir}/library/pdf</outputDirectory>
                   </artifactItem>
                   <artifactItem>
                     <groupId>org.apache.xmlgraphics</groupId>
                     <artifactId>batik-all</artifactId>
                     <version>${batik.version}</version>
                     <type>jar</type>
-                    <outputDirectory>${propane.basedir}/library/svg</outputDirectory>
+                    <outputDirectory>${picrate.basedir}/library/svg</outputDirectory>
                   </artifactItem>
                 </artifactItems>
               </configuration>

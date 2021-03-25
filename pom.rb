@@ -30,7 +30,7 @@ project 'picrate', 'http://maven.apache.org' do
              'source.directory' => 'src',
              'processing.api' => 'http://processing.github.io/processing-javadocs/core/',
              'picrate.basedir' => '${project.basedir}',
-             'project.build.sourceEncoding' => 'utf-8',
+             'project.build.sourceEncoding' => 'UTF-8',
              'polyglot.dump.pom' => 'pom.xml')
 
   pom 'org.jruby:jruby:9.2.16.0'
@@ -50,13 +50,13 @@ overrides do
           artifactId: 'itextpdf',
           version: '${itextpdf.version}',
           type: 'jar',
-          outputDirectory: '${propane.basedir}/library/pdf'
+          outputDirectory: '${picrate.basedir}/library/pdf'
         },
         { groupId: 'org.apache.xmlgraphics',
           artifactId: 'batik-all',
           version: '${batik.version}',
           type: 'jar',
-          outputDirectory: '${propane.basedir}/library/svg'
+          outputDirectory: '${picrate.basedir}/library/svg'
         }
       ]
     )
