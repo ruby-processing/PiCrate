@@ -39,7 +39,6 @@ import java.util.zip.*;
 
 // loadXML() error handling
 import javax.xml.parsers.ParserConfigurationException;
-import monkstone.noise.NoiseGenerator;
 import org.xml.sax.SAXException;
 
 // TODO have this removed by 4.0 final
@@ -48,8 +47,6 @@ import processing.awt.ShimAWT;
 import processing.data.*;
 import processing.event.*;
 import processing.opengl.*;
-import monkstone.noise.Noise;
-import monkstone.noise.NoiseMode;
 
 /**
  * Base class for all sketches that use processing.core.
@@ -106,7 +103,6 @@ public class PApplet implements PConstants {
         }
     }
 
-    Noise noiseGenerator = new NoiseGenerator();
     /**
      * Whether to use native (AWT) dialogs for selectInput and selectOutput. The
      * native dialogs on some platforms can be ugly, buggy, or missing features.
@@ -4887,9 +4883,6 @@ public class PApplet implements PConstants {
         internalRandom.setSeed(seed);
     }
 
-    public void noiseMode(NoiseMode mode) {
-        noiseGenerator.noiseMode(mode);
-    }
     /**
      * 
      * @param lod
@@ -4913,91 +4906,7 @@ public class PApplet implements PConstants {
 
     }
 
-    /**
-     * @param x
-     * @return
-     */
-    public float noise(float x) {
-        return noiseGenerator.noise(x);
-    }
-
-    /**
-     * @param x
-     * @param y
-     * @return
-     */
-    public float noise(float x, float y) {
-        return noiseGenerator.noise(x, y);
-    }
-
-    /**
-     * ( begin auto-generated from noise.xml )
-     *
-     * Returns the Perlin noise value at specified coordinates.Perlin noise is a
-     * random sequence generator producing a more natural ordered, harmonic
-     * succession of numbers compared to the standard <b>random()</b> function.
-     * It was invented by Ken Perlin in the 1980s and been used since in
-     * graphical applications to produce procedural textures, natural motion,
-     * shapes, terrains etc. The main difference to the
-     * <b>random()</b> function is that Perlin noise is defined in an infinite
-     * n-dimensional space where each pair of coordinates corresponds to a fixed
-     * semi-random value (fixed only for the lifespan of the program). The
-     * resulting value will always be between 0.0 and 1.0. Processing can
-     * compute 1D, 2D and 3D noise, depending on the number of coordinates
-     * given. The noise value can be animated by moving through the noise space
-     * as demonstrated in the example above. The 2nd and 3rd dimension can also
-     * be interpreted as time.The actual noise is structured similar to an audio
-     * signal, in respect to the function's use of frequencies. Similar to the
-     * concept of harmonics in physics, perlin noise is computed over several
-     * octaves which are added together for the final result. Another way to
-     * adjust the character of the resulting sequence is the scale of the input
-     * coordinates. As the function works within an infinite space the value of
-     * the coordinates doesn't matter as such, only the distance between
-     * successive coordinates does (eg. when using <b>noise()</b> within a
-     * loop). As a general rule the smaller the difference between coordinates,
-     * the smoother the resulting noise sequence will be. Steps of 0.005-0.03
-     * work best for most applications, but this will differ depending on use.
-     *
-     *
-     *
-     * @return
-     * @webref math:random
-     * @param x x-coordinate in noise space
-     * @param y y-coordinate in noise space
-     * @param z z-coordinate in noise space
-     * @see PApplet#noiseSeed(long)
-     * @see PApplet#noiseDetail(int, float)
-     * @see PApplet#random(float,float)
-     */
-    public float noise(float x, float y, float z) {
-        return noiseGenerator.noise(x, y, z);
-    }
-
-    public float noise(float x, float y, float z, float w) {
-        return noiseGenerator.noise(x, y, z, w);
-    }
-
-    /**
-     *
-     *
-     * Sets the seed value for <b>noise()</b>. By default, <b>noise()</b>
-     * produces different results each time the program is run. Set the
-     * <b>value</b> parameter to a constant to return the same pseudo-random
-     * numbers each time the software is run.
-     *
-     *
-     * @webref math:random
-     * @param seed seed value
-     * @see PApplet#noise(float, float, float)
-     * @see PApplet#noiseDetail(int, float)
-     * @see PApplet#random(float,float)
-     * @see PApplet#randomSeed(long)
-     */
-    public void noiseSeed(long seed) {
-        noiseGenerator.noiseSeed(seed);
-    }
-
-    // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
+   // . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .
     /**
      * ( begin auto-generated from loadImage.xml )
      *
