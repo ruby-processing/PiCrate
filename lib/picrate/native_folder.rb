@@ -8,7 +8,7 @@ class NativeFolder
   ARM64 = '-aarch64'.freeze
 
   def initialize
-    @os = java.lang.System.get_property('os.name')
+    @os = java.lang.System.get_property('os.name').downcase
     @bit = java.lang.System.get_property('os.arch')
   end
 
