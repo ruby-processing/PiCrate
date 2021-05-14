@@ -1,3 +1,5 @@
+v2.4.1 patch library loader, add PGS library examples.
+
 v2.4.0 Refactor noise to two modules, FastNoise (default) & SmoothNoise, with terrain noise `:tnoise` option.
 
 v2.3.0 Abandon Processing Value Noise in favour of OpenSimplex2, with choosable options. Added pdf library using iText5.
