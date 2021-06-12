@@ -2,7 +2,7 @@
 
 project 'picrate', 'http://maven.apache.org' do
   model_version '4.0.0'
-  id 'ruby-processing:picrate:2.4.1'
+  id 'ruby-processing:picrate:2.4.2'
   packaging 'jar'
 
   description 'An integrated processing-core (somewhat hacked), with additional java code for a jruby version of processing.'
@@ -22,7 +22,7 @@ project 'picrate', 'http://maven.apache.org' do
   license 'LGPL 2', 'https://www.gnu.org/licenses/old-licenses/lgpl-2.1.en.html'
 
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
-  # Need to update to jogl 2.4.1 as soon as available, then make a dependency
+  # Need to update to jogl 2.4.2 as soon as available, then make a dependency
   properties('jogl.version' => '2.3.2',
              'batik.version' => '1.14',
              'itextpdf.version' => '5.5.13.2',
@@ -33,7 +33,7 @@ project 'picrate', 'http://maven.apache.org' do
              'project.build.sourceEncoding' => 'UTF-8',
              'polyglot.dump.pom' => 'pom.xml')
 
-  pom 'org.jruby:jruby:9.2.17.0'
+  pom 'org.jruby:jruby:9.2.18.0'
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'
