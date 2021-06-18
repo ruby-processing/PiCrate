@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 gem 'minitest'
-require 'java'
+require 'jruby'
 require_relative '../lib/picrate'
 require 'minitest/pride'
 require 'minitest/autorun'
