@@ -84,7 +84,7 @@ module Processing
     class << self
       # Handy getters and setters on the class go here:
       attr_accessor :sketch_class, :library_loader, :arguments, :options
-      attr_reader :surface
+      attr_reader :surface, :width, :height, :renderer
       def load_libraries(*args)
         library_loader ||= LibraryLoader.new
         library_loader.load_library(*args)
@@ -132,11 +132,11 @@ module Processing
     end
 
     def size(*args)
-      w, h, mode = *args
+      w, h, renderer = *args
       @width ||= w
       @height ||= h
-      @render_mode ||= mode
-      import_opengl if /opengl/ =~ mode
+      @renderer ||= renderer
+      import_opengl if /opengl/ =~ renderer
       super(*args)
     end
 
