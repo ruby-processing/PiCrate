@@ -1634,7 +1634,7 @@ public class PApplet implements PConstants {
      * @see PApplet#settings()
      * @see PApplet#fullScreen()
      */
-    public void size(int width, int height) {
+    public void psize(int width, int height) {
         // Check to make sure the width/height have actually changed. It's ok to
         // have size() duplicated (and may be better to not remove it from where
         // it sits in the code anyway when adding it to settings()). Only take
@@ -1654,7 +1654,7 @@ public class PApplet implements PConstants {
      * @param height
      * @param renderer
      */
-    public void size(int width, int height, String renderer) {
+    public void psize(int width, int height, String renderer) {
         if (width != this.width
                 || height != this.height
                 || !renderer.equals(this.renderer)) {
@@ -1674,7 +1674,7 @@ public class PApplet implements PConstants {
      * @param path
      * @nowebref
      */
-    public void size(int width, int height, String renderer, String path) {
+    public void psize(int width, int height, String renderer, String path) {
         // Don't bother checking path, it's probably been modified to absolute,
         // so it would always trigger. But the alternative is comparing the
         // canonical file, which seems overboard.

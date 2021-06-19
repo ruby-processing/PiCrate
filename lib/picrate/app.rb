@@ -137,7 +137,7 @@ module Processing
       @height ||= h
       @renderer ||= renderer
       import_opengl if /opengl/ =~ renderer
-      super(*args)
+      psize(*args)
     end
 
     def post_initialize(_args); end
