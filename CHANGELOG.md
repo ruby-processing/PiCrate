@@ -1,3 +1,5 @@
+v2.4.2 Update to JRuby-9.2.19, getting ready for JRuby-9.3+.
+
 v2.4.1 patch library loader, add PGS library examples.
 
 v2.4.0 Refactor noise to two modules, FastNoise (default) & SmoothNoise, with terrain noise `:tnoise` option.
