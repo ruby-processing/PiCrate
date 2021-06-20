@@ -5,7 +5,7 @@ date:   2019-11-11 07:34:13
 categories: PiCrate update
 permalink: /getting_buster/
 ---
-Raspbian Buster usually comes with a pre-installed jdk11. Before installing JRuby it is worth setting the `JAVA_HOME` environmental variable (needed to supress reflection warnings).
+RaspberryPI OS usually comes with a pre-installed jdk11. Before installing JRuby it might be worth setting the `JAVA_HOME` environmental variable (_to supress reflection warnings_).
 
   __Otherwise follow these instructions in order as needed:-__
 
