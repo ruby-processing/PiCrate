@@ -1757,16 +1757,10 @@ public class PShader implements PConstants {
     colorLoc = getAttributeLoc("color");
     texCoordLoc = getAttributeLoc("texCoord");
     normalLoc = getAttributeLoc("normal");
-
     ambientLoc = getAttributeLoc("ambient");
     specularLoc = getAttributeLoc("specular");
     emissiveLoc = getAttributeLoc("emissive");
     shininessLoc = getAttributeLoc("shininess");
-
-    directionLoc = getAttributeLoc("direction");
-
-    offsetLoc = getAttributeLoc("offset");
-
     directionLoc = getAttributeLoc("direction");
     offsetLoc = getAttributeLoc("offset");
 
