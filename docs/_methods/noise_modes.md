@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "noise_mode"
+title:  "Noise Modes"
 ---
 
 ### Name ###
 
 There are two noise modes available in PiCrate, both base on KdotJPG java noise.
-The default mode is a FastNoise module, the other SmoothNoise module can be used using the module name as a prefix see example below.
+The default noise uses the FastNoise module, the SmoothNoise module can be used using the module name as a prefix see example below.
 
 
 ### Examples ###
@@ -58,15 +58,14 @@ TestNoise.new
 ### Description	###
 
 Currently supports four implementations of noise:-
-1. DEFAULT # fast classic OpenSimplex2
-2. OPEN_SMOOTH # smoother class OpenSimplex2F
-3. FAST_TERRAIN # more suited to terrain
-4. SMOOTH_TERRAIN # as above but smoother
+1. Default is classic OpenSimplex2
+2. SmoothNoise use smoother class OpenSimplex2F
+3. Use tnoise instead of noise for a noise mode more suited to terrain
 
 ### Syntax ###
 
 ```ruby
-noise_mode(mode) # default is NoiseMode::DEFAULT, a fast classic OpenSimplex2
+SmoothNoise.noise(...) # no prefix for fast classic OpenSimplex2
 ```
 
 ### Related ###
