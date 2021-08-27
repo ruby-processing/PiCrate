@@ -5,7 +5,9 @@ title:  "noise_mode"
 
 ### Name ###
 
-`noise_mode` _NB: not currently available in vanilla processing_.
+There are two noise modes available in PiCrate, both base on KdotJPG java noise.
+The default mode is a FastNoise module, the other SmoothNoise module can be used using the module name as a prefix see example below.
+
 
 ### Examples ###
 
@@ -25,23 +27,11 @@ class TestNoise < Processing::App
     noise_scale = 0.01
     background(0)
     grid(width, height, 10, 10) do |x, y|
-      arrow(x, y, noise(x * noise_scale, y * noise_scale, z * noise_scale) * TWO_PI * 2)
+      arrow(x, y, SmoothNoise.noise(x * noise_scale, y * noise_scale, z * noise_scale) * TWO_PI * 2)
+      # arrow(x, y, noise(x * noise_scale, y * noise_scale, z * noise_scale) * TWO_PI * 2)
     end
     @z += 1
   end
-
-  def mouse_pressed
-    mode = NoiseMode::OPEN_SMOOTH # Smooth classic OpenSimplex2
-    noise_mode mode
-    sketch_title mode.description
-  end
-
-  def mouse_released
-    mode = NoiseMode::DEFAULT # Fast classic OpenSimplex2
-    noise_mode(mode)
-    sketch_title mode.description
-  end
-
 
   def arrow(x, y, ang)
     push_matrix()
