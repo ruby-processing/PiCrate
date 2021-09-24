@@ -24,6 +24,7 @@ project 'picrate', 'http://maven.apache.org' do
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
   # Need to update to jogl 2.4.1 as soon as available, then make a dependency
   properties('jogl.version' => '2.3.2',
+             'jruby.version' => '9.3.0.0',
              'batik.version' => '1.14',
              'itextpdf.version' => '5.5.13.2',
              'jruby.api' => 'http://jruby.org/apidocs/',
@@ -33,7 +34,7 @@ project 'picrate', 'http://maven.apache.org' do
              'project.build.sourceEncoding' => 'UTF-8',
              'polyglot.dump.pom' => 'pom.xml')
 
-  pom 'org.jruby:jruby:9.2.19.0'
+  jar 'org.jruby:jruby-base:9.3.0.0'
   jar 'org.jogamp.jogl:jogl-all:${jogl.version}'
   jar 'org.jogamp.gluegen:gluegen-rt-main:${jogl.version}'
   jar 'org.processing:video:3.0.2'

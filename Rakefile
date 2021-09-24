@@ -9,7 +9,7 @@ task default: %i[init compile install test gem]
 # Currently depends on local jogl-2.4.0 jars on path ~/jogl24
 desc 'Copy Jars'
 task :init do
-  jogl24 = File.join(HOME_DIR, 'jogl-2.4-rc2021011')
+  jogl24 = File.join(HOME_DIR, 'jogl24')
   opengl = Dir.entries(jogl24).grep(/amd64|armv6hf|aarch64/).select { |jar| jar =~ /linux/ }
   opengl.concat %w[jogl-all.jar gluegen-rt.jar]
   opengl.each do |gl|
