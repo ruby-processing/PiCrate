@@ -19,7 +19,7 @@ Requires java to build (and [jogl-2.4.0-rc jars][jogl_jars]), but uses a maven w
 ```bash
 cd PiCrate # or whatever you call it
 rake # assumes an installed version of vanilla processing
-jgem install picrate-2.4.2-java.gem
+jgem install picrate-2.5.0-java.gem
 
 ```
 To create a template sketch:-

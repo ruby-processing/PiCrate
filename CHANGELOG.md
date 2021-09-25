@@ -1,3 +1,5 @@
+v2.5.0 Update to JRuby-9.3.0.0.
+
 v2.4.2 Update to JRuby-9.2.19, getting ready for JRuby-9.3+.
 
 v2.4.1 patch library loader, add PGS library examples.
