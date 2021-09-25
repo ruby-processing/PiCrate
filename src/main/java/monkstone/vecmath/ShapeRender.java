@@ -4,7 +4,6 @@ import processing.core.PShape;
 
 /**
  *
- *
  * @author Martin Prout
  */
 public class ShapeRender implements JRender {
@@ -29,7 +28,7 @@ public class ShapeRender implements JRender {
     public void vertex(double x, double y) {
         shape.vertex((float) x, (float) y);
     }
-    
+
     /**
      *
      * @param x double
@@ -37,7 +36,7 @@ public class ShapeRender implements JRender {
      */
     @Override
     public void curveVertex(double x, double y) {
-        shape.curveVertex((float) x, (float) y);
+        throw new UnsupportedOperationException("Not implemented for this renderer");
     }
 
     /**
@@ -74,7 +73,7 @@ public class ShapeRender implements JRender {
     public void vertex(double x, double y, double z, double u, double v) {
         shape.vertex((float) x, (float) y, (float) z, (float) u, (float) v);
     }
-    
+
     /**
      *
      * @param x double
