@@ -14,7 +14,7 @@ Get the latest version from [http://jruby.org/download][download]
 
 ```bash
 cd /opt
-sudo tar xzvf /pathToDownload/jruby-bin-9.2.19.0.tar.gz
+sudo tar xzvf /pathToDownload/jruby-bin-9.3.0.0.tar.gz
 ```
 
 Then use the excellent `update-alternatives` tool to provide symbolic links to `jruby`, `jgem`, `jirb` and `rake` especially if you haven't installed `mri` ruby.
@@ -31,16 +31,16 @@ You should prefer to install gems locally (no need for sudo). To do that it is c
 ```bash
 alias jpry="jruby -e \"require 'pry'; binding.pry\""
 # export JAVA_HOME="/opt/jdk1.8.0_151" # if using oracle java openjdk-8 is fine though
-export GEM_HOME="$HOME/.gem/ruby/2.5.0"
-export GEM_PATH="$HOME/tux/.gem/ruby/2.5.0"
+export GEM_HOME="$HOME/.gem/ruby/2.6.0"
+export GEM_PATH="$HOME/tux/.gem/ruby/2.6.0"
 export PATH="${PATH}:${GEM_PATH}/bin"
 ```
 
 ### Automated install using bash ###
 
-The [picrate2_install.sh][bash] script currently installs jruby-9.2.19.0 and picrate-2.4.2.
+The [picrate2_install.sh][bash] script currently installs jruby-9.3.0.0 and picrate-2.5.0.
 
 If you know better please post on wiki
 
-[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.2.19.0/jruby-dist-9.2.19.0-bin.tar.gz"
+[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.3.0.0/jruby-dist-9.3.0.0-bin.tar.gz"
 [bash]:https://gist.github.com/monkstone/6ae9840d7b7008c177b4a9f589d14ec6

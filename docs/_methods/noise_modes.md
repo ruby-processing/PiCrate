@@ -8,7 +8,6 @@ title:  "Noise Modes"
 There are two noise modes available in PiCrate, both base on KdotJPG java noise.
 The default noise uses the FastNoise module, the SmoothNoise module can be used using the module name as a prefix see example below.
 
-
 ### Examples ###
 
 ```ruby
