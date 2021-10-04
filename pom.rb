@@ -87,6 +87,6 @@ build do
   end
   resource do
     directory '${source.directory}/main/resources'
-    includes '**/*.png', '*.txt', '**/*.glsl'
+    includes '**/*.png', '**/*.txt', '**/*.glsl'
   end
 end
