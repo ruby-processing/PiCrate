@@ -944,10 +944,10 @@ public class PSurfaceJOGL implements PSurface {
       boolean hide = (sketch != null) &&
         (PApplet.platform == PConstants.WINDOWS);
       if (hide) setVisible(false);
-      
+
       ShimAWT.selectFolderImpl(prompt, callbackMethod, file,
         callbackObject, null);
-      
+
       if (hide) setVisible(true);
     });
   }
@@ -963,7 +963,7 @@ public class PSurfaceJOGL implements PSurface {
       String name = cursorNames.get(kind);
       if (name != null) {
         ImageIcon icon =
-          new ImageIcon(getClass().getResource("cursors/" + name + ".png"));
+          new ImageIcon(getClass().getResource("/cursors/" + name + ".png"));
         PImage img = new PImageAWT(icon.getImage());
         // Most cursors just use the center as the hotspot...
         int x = img.width / 2;
@@ -1538,7 +1538,7 @@ public class PSurfaceJOGL implements PSurface {
 //            String name = cursorNames.get(kind);
 //            if (name != null) {
 //                ImageIcon icon
-//                        = new ImageIcon(getClass().getResource("cursors/" + name + ".png"));
+//                        = new ImageIcon(getClass().getResource("/cursors/" + name + ".png"));
 //                PImage img = new PImage(icon.getImage());
 //                // Most cursors just use the center as the hotspot...
 //                int x = img.width / 2;
