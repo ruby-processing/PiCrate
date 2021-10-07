@@ -5,19 +5,28 @@ date:   2020-05-11 07:34:13
 categories: PiCrate update
 permalink: /getting_manjaro/
 ---
-If Manjaro does not come with a pre-installed java, then the first step is to install a `jdk` the distro version (jdk14) should work. 
+If Manjaro does not come with a pre-installed java, then the first step is to install a `jdk` the distro version (jdk16) should work.
 
 ```bash
-sudo pacman -S jdk-openjdk # current distro version jdk14
+sudo pacman -S jre-openjdk # current distro version jdk14
 ```
 You can also use pacman to install jruby
 ```bash
-sudo pacman -S jruby # current version jruby-9.2.14.0
+sudo pacman -S jruby # current version jruby-9.3.0.0
 ```
 It is probably a good idea to create a local gem store (rather needing to use sudo to install gems)
+```bash
+sudo pacman -S vim # all you need if your happy with vim
+```
+Vim is not installed by default
+```bash
+sudo pacman -S geany # if you prefer a GUI
+```
+Geany is not installed by default
+
 
 ```bash
-mkdir -p ~/.gem/ruby/2.5.0 # current MRI version supported by jruby
+mkdir -p ~/.gem/ruby/2.6.0 # current MRI version supported by jruby
 ```
 Now set your `GEM_HOME`, `GEM_PATH` and amend your `PATH` as follows:-
 
