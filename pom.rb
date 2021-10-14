@@ -24,7 +24,7 @@ project 'picrate', 'http://maven.apache.org' do
   issue_management 'https://github.com/ruby-processing/PiCrate/issues', 'Github'
   # Need to update to jogl 2.4.1 as soon as available, then make a dependency
   properties('jogl.version' => '2.3.2',
-             'jruby.version' => '9.3.0.0',
+             'jruby.version' => '9.3.1.0',
              'batik.version' => '1.14',
              'itextpdf.version' => '5.5.13.2',
              'jruby.api' => 'http://jruby.org/apidocs/',
