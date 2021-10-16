@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Getting Started Buster"
+title:  "Getting Started RaspbianOS"
 date:   2019-11-11 07:34:13
 categories: PiCrate update
 permalink: /getting_buster/

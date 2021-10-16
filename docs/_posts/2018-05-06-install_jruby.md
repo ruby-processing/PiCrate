@@ -14,7 +14,7 @@ Get the latest version from [http://jruby.org/download][download]
 
 ```bash
 cd /opt
-sudo tar xzvf /pathToDownload/jruby-bin-9.3.0.0.tar.gz
+sudo tar xzvf /pathToDownload/jruby-bin-9.3.1.0.tar.gz
 ```
 
 Then use the excellent `update-alternatives` tool to provide symbolic links to `jruby`, `jgem`, `jirb` and `rake` especially if you haven't installed `mri` ruby.
@@ -42,5 +42,5 @@ The [picrate2_install.sh][bash] script currently installs jruby-9.3.0.0 and picr
 
 If you know better please post on wiki
 
-[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.3.0.0/jruby-dist-9.3.0.0-bin.tar.gz"
+[download]:"https://repo1.maven.org/maven2/org/jruby/jruby-dist/9.3.1.0/jruby-dist-9.3.1.0-bin.tar.gz"
 [bash]:https://gist.github.com/monkstone/6ae9840d7b7008c177b4a9f589d14ec6

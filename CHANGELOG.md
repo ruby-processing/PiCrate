@@ -1,3 +1,5 @@
+v2.5.1 Update to JRuby-9.3.1.0, under the hood changes in how we access java fields, no using `field` in place of `declared_field`, possible since JRuby-9.3.0.0 required since JRuby-9.3.1.0.
+
 v2.5.0 Update to JRuby-9.3.0.0.
 
 v2.4.2 Update to JRuby-9.2.19, getting ready for JRuby-9.3+.

@@ -8,7 +8,7 @@ permalink: /getting_manjaro/
 If Manjaro does not come with a pre-installed java, then the first step is to install a `jdk` the distro version (jdk16) should work.
 
 ```bash
-sudo pacman -S jre-openjdk # current distro version jdk14
+sudo pacman -S jre-openjdk # current distro version jdk16
 ```
 You can also use pacman to install jruby
 ```bash
