@@ -159,12 +159,6 @@ module Processing
       end
     end
 
-    def proxy_java_fields
-      fields = %w[sketchPath key frameRate mousePressed keyPressed]
-      methods = fields.map { |field| java_class.declared_field(field) }
-      @declared_fields = Hash[fields.zip(methods)]
-    end
-
     # When certain special methods get added to the sketch, we need to let
     # Processing call them by their expected Java names.
     def method_added(method_name) #:nodoc:

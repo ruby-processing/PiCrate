@@ -167,8 +167,8 @@ public class PApplet implements PConstants {
      * that people use the sketchPath() method and it's inited properly. Call
      * sketchPath() once to set the default.
      */
+   
     private String sketchPath;
-//  public String sketchPath;
 
     static final boolean DEBUG = false;
 //  static final boolean DEBUG = true;
