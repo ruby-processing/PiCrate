@@ -4,7 +4,7 @@ title: "Vec2D"
 permalink: /classes/vec2d/
 ---
 
-The Vec2D class is a direct replacement for processings PVector class (when used for 2D work, see Vec3D for 3D version).
+The Vec2D class is a direct replacement for processings PVector class (when used for 2D work, see Vec3D for 3D version). Recently cross product is deprecated in favor of the more correct wedge `^` product
 
 ### Methods:-
 ```ruby
@@ -15,7 +15,7 @@ a / b # where a is instance of Vec2D and b is a scalar
 a == b # where both a and b are both instances of Vec2D
 a.angle_between(b) # where both a and b are both instances of Vec2D
 a.copy # where a is instance of Vec2D returns a deep copy
-a.cross(b) # where both a and b are both instances of Vec2D
+a ^ b # wedge product where both a and b are both instances of Vec2D
 a.dist(b) # where both a and b are both instances of Vec2D
 a.dot(b) # where both a and b are both instances of Vec2D
 a.heading # where a is instance of Vec2D
