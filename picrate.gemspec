@@ -36,5 +36,5 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'arcball', '~> 1.2'
   gem.require_paths = ['lib']
   gem.platform      = 'java'
-  gem.requirements << 'java runtime == 11+'
+  gem.requirements << 'java runtime == 17+'
 end

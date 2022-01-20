@@ -1,7 +1,7 @@
 __C6H3N3O7__ [![Gem Version](https://badge.fury.io/rb/picrate.svg)](https://badge.fury.io/rb/picrate)![Travis CI](https://travis-ci.org/ruby-processing/PiCrate.svg)
 
 # PiCrate
-Version for `Raspberry Pi OS` on raspberryPI 3B+ works with jdk11 (reflective access warnings fixed for jdk11). That also works on 64 bit `ManjaroArm` distro on RaspberryPI4. Create processing sketches in ruby on raspberry-pi and linux (this project is a parallel development of [propane][propane] targetting the raspberry-pi, but will initially be developed on a regular linux box). The aim is to produce a gem installable app that can be run with jruby, with minimal dependencies. Drop the `C` and you get pirate, or and an `e` and get `PiCreate`, a happy coincidence?
+Version for `Raspberry Pi OS` on raspberryPI 3B+ works with jdk17. That also works on 64 bit `ManjaroArm` distro on RaspberryPI4. Create processing sketches in ruby on raspberry-pi and linux (this project is a parallel development of [propane][propane] targetting the raspberry-pi, but will initially be developed on a regular linux box). The aim is to produce a gem installable app that can be run with jruby, with minimal dependencies. Drop the `C` and you get pirate, or and an `e` and get `PiCreate`, a happy coincidence?
 
 
 ### To install from rubygems ###
