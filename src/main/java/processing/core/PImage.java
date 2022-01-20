@@ -43,12 +43,12 @@ import processing.awt.ShimAWT;
  * <b>height</b> of the image, as well as an array called <b>pixels[]</b> that
  * contains the values for every pixel in the image. The methods described below
  * allow easy access to the image's pixels and alpha channel and simplify the
- * process of compositing.<br />
- * <br />
+ * process of compositing.<br>
+ * <br>
  * Before using the <b>pixels[]</b> array, be sure to use the
  * <b>loadPixels()</b> method on the image to make sure that the pixel data is
- * properly loaded.<br />
- * <br />
+ * properly loaded.<br>
+ * <br>
  * To create a new image, use the <b>createImage()</b> function. Do not use the
  * syntax <b>new PImage()</b>.
  *
@@ -86,8 +86,8 @@ public class PImage implements PConstants, Cloneable {
    * The pixels[] array contains the values for all the pixels in the image. These
    * values are of the color datatype. This array is the size of the image,
    * meaning if the image is 100 x 100 pixels, there will be 10,000 values and if
-   * the window is 200 x 300 pixels, there will be 60,000 values. <br />
-   * <br />
+   * the window is 200 x 300 pixels, there will be 60,000 values. <br>
+   * <br>
    * Before accessing this array, the data must loaded with the
    * <b>loadPixels()</b> method. Failure to do so may result in a
    * NullPointerException. After the array data has been modified, the
@@ -187,11 +187,11 @@ public class PImage implements PConstants, Cloneable {
    * pixel in the image. A group of methods, described below, allow easy
    * access to the image's pixels and alpha channel and simplify the process
    * of compositing.
-   * <br/> <br/>
+   * <br> <br>
    * Before using the <b>pixels[]</b> array, be sure to use the
    * <b>loadPixels()</b> method on the image to make sure that the pixel data
    * is properly loaded.
-   * <br/> <br/>
+   * <br> <br>
    * To create a new image, use the <b>createImage()</b> function (do not use
    * <b>new PImage()</b>).
    * @nowebref
@@ -464,8 +464,8 @@ public class PImage implements PConstants, Cloneable {
    * Resize the image to a new width and height. To make the image scale
    * proportionally, use 0 as the value for the <b>wide</b> or <b>high</b>
    * parameter. For instance, to make the width of an image 150 pixels, and
-   * change the height using the same proportion, use resize(150, 0).<br />
-   * <br />
+   * change the height using the same proportion, use resize(150, 0).<br>
+   * <br>
    * Even though a PGraphics is technically a PImage, it is not possible to
    * rescale the image data found in a PGraphics. (It's simply not possible
    * to do this consistently across renderers: technically infeasible with
@@ -512,20 +512,20 @@ public class PImage implements PConstants, Cloneable {
 
   /**
    *
-   * Reads the color of any pixel or grabs a section of an image. If no
-   * parameters are specified, the entire image is returned. Use the <b>x</b>
+   * Reads the color of any pixel or grabs a section of an image.If no
+ parameters are specified, the entire image is returned. Use the <b>x</b>
    * and <b>y</b> parameters to get the value of one pixel. Get a section of
    * the display window by specifying an additional <b>width</b> and
    * <b>height</b> parameter. When getting an image, the <b>x</b> and
    * <b>y</b> parameters define the coordinates for the upper-left corner of
-   * the image, regardless of the current <b>imageMode()</b>.<br />
-   * <br />
+   * the image, regardless of the current <b>imageMode()</b>.<br>
+   * <br>
    * If the pixel requested is outside of the image window, black is
    * returned. The numbers returned are scaled according to the current color
    * ranges, but only RGB values are returned by this function. For example,
    * even though you may have drawn a shape with <b>colorMode(HSB)</b>, the
-   * numbers returned will be in RGB format.<br />
-   * <br />
+   * numbers returned will be in RGB format.<br>
+   * <br>
    * Getting the color of a single pixel with <b>get(x, y)</b> is easy, but
    * not as fast as grabbing the data directly from <b>pixels[]</b>. The
    * equivalent statement to <b>get(x, y)</b> using <b>pixels[]</b> is
@@ -550,6 +550,7 @@ public class PImage implements PConstants, Cloneable {
    * type it is. If you want things to be more efficient, access the
    * pixels[] array directly.
    *
+     * @return 
    * @webref image:pixels
    * @webBrief Reads the color of any pixel or grabs a rectangle of pixels.
    * @usage web_application
@@ -563,22 +564,28 @@ public class PImage implements PConstants, Cloneable {
     if ((x < 0) || (y < 0) || (x >= pixelWidth) || (y >= pixelHeight)) return 0;
 
     switch (format) {
-      case RGB:
-        return pixels[y*pixelWidth + x] | 0xff000000;
+      case RGB -> {
+          return pixels[y*pixelWidth + x] | 0xff000000;
+          }
 
-      case ARGB:
-        return pixels[y*pixelWidth + x];
+      case ARGB -> {
+          return pixels[y*pixelWidth + x];
+          }
 
-      case ALPHA:
-        return (pixels[y*pixelWidth + x] << 24) | 0xffffff;
+      case ALPHA -> {
+          return (pixels[y*pixelWidth + x] << 24) | 0xffffff;
+          }
     }
     return 0;
   }
 
 
   /**
+   * @param x
+   * @param y
    * @param w width of pixel rectangle to get
    * @param h height of pixel rectangle to get
+   * @return 
    */
   public PImage get(int x, int y, int w, int h) {
     int targetX = 0;
@@ -670,15 +677,15 @@ public class PImage implements PConstants, Cloneable {
   /**
    *
    * Changes the color of any pixel or writes an image directly into the
-   * display window.<br />
-   * <br />
+   * display window.<br>
+   * <br>
    * The <b>x</b> and <b>y</b> parameters specify the pixel to change and the
    * <b>color</b> parameter specifies the color value. The color parameter is
    * affected by the current color mode (the default is RGB values from 0 to
    * 255). When setting an image, the <b>x</b> and <b>y</b> parameters define
    * the coordinates for the upper-left corner of the image, regardless of
    * the current <b>imageMode()</b>.
-   * <br /><br />
+   * <br><br>
    * Setting the color of a single pixel with <b>set(x, y)</b> is easy, but
    * not as fast as putting the data directly into <b>pixels[]</b>. The
    * equivalent statement to <b>set(x, y, #000000)</b> using <b>pixels[]</b>
@@ -792,8 +799,8 @@ public class PImage implements PConstants, Cloneable {
    * Masks part of an image from displaying by loading another image and
    * using it as an alpha channel. This mask image should only contain
    * grayscale data, but only the blue color channel is used. The mask image
-   * needs to be the same size as the image to which it is applied.<br />
-   * <br />
+   * needs to be the same size as the image to which it is applied.<br>
+   * <br>
    * In addition to using a mask image, an integer array containing the alpha
    * channel data can be specified directly. This method is useful for
    * creating dynamically generated alpha masks. This array must be of the
@@ -836,107 +843,95 @@ public class PImage implements PConstants, Cloneable {
     loadPixels();
 
     switch (kind) {
-      case BLUR:
-        // TODO write basic low-pass filter blur here
+      case BLUR -> // TODO write basic low-pass filter blur here
         // what does photoshop do on the edges with this guy?
         // better yet.. why bother? just use gaussian with radius 1
         filter(BLUR, 1);
-        break;
 
-      case GRAY:
-        if (format == ALPHA) {
-          // for an alpha image, convert it to an opaque grayscale
+      case GRAY -> {
+          if (format == ALPHA) {
+              // for an alpha image, convert it to an opaque grayscale
+              for (int i = 0; i < pixels.length; i++) {
+                  int col = 255 - pixels[i];
+                  pixels[i] = 0xff000000 | (col << 16) | (col << 8) | col;
+              }
+              format = RGB;
+              
+          } else {
+              // Converts RGB image data into grayscale using
+              // weighted RGB components, and keeps alpha channel intact.
+              // [toxi 040115]
+              for (int i = 0; i < pixels.length; i++) {
+                  int col = pixels[i];
+                  // luminance = 0.3*red + 0.59*green + 0.11*blue
+                  // 0.30 * 256 =  77
+                  // 0.59 * 256 = 151
+                  // 0.11 * 256 =  28
+                  int lum = (77*(col>>16&0xff) + 151*(col>>8&0xff) + 28*(col&0xff))>>8;
+                  pixels[i] = (col & ALPHA_MASK) | lum<<16 | lum<<8 | lum;
+              }
+          } }
+
+      case INVERT -> {
           for (int i = 0; i < pixels.length; i++) {
-            int col = 255 - pixels[i];
-            pixels[i] = 0xff000000 | (col << 16) | (col << 8) | col;
-          }
-          format = RGB;
+              //pixels[i] = 0xff000000 |
+              pixels[i] ^= 0xffffff;
+          } }
 
-        } else {
-          // Converts RGB image data into grayscale using
-          // weighted RGB components, and keeps alpha channel intact.
-          // [toxi 040115]
-          for (int i = 0; i < pixels.length; i++) {
-            int col = pixels[i];
-            // luminance = 0.3*red + 0.59*green + 0.11*blue
-            // 0.30 * 256 =  77
-            // 0.59 * 256 = 151
-            // 0.11 * 256 =  28
-            int lum = (77*(col>>16&0xff) + 151*(col>>8&0xff) + 28*(col&0xff))>>8;
-            pixels[i] = (col & ALPHA_MASK) | lum<<16 | lum<<8 | lum;
-          }
-        }
-        break;
-
-      case INVERT:
-        for (int i = 0; i < pixels.length; i++) {
-          //pixels[i] = 0xff000000 |
-          pixels[i] ^= 0xffffff;
-        }
-        break;
-
-      case POSTERIZE:
-        throw new RuntimeException("Use filter(POSTERIZE, int levels) " +
+      case POSTERIZE -> throw new RuntimeException("Use filter(POSTERIZE, int levels) " +
         "instead of filter(POSTERIZE)");
 
-      case OPAQUE:
-        for (int i = 0; i < pixels.length; i++) {
-          pixels[i] |= 0xff000000;
-        }
-        format = RGB;
-        break;
+      case OPAQUE -> {
+          for (int i = 0; i < pixels.length; i++) {
+              pixels[i] |= 0xff000000;
+          }
+          format = RGB;
+          }
 
-      case THRESHOLD:
-        filter(THRESHOLD, 0.5f);
-        break;
+      case THRESHOLD -> filter(THRESHOLD, 0.5f);
+      case ERODE -> erode();  // former dilate(true);
 
-        // [toxi 050728] added new filters
-      case ERODE:
-        erode();  // former dilate(true);
-        break;
-
-      case DILATE:
-        dilate();  // former dilate(false);
-        break;
+      case DILATE -> dilate();  // former dilate(false);
     }
+      // [toxi 050728] added new filters
     updatePixels();  // mark as modified
   }
 
 
   /**
    *
-   * Filters the image as defined by one of the following modes:<br />
-   * <br />
-   * THRESHOLD<br />
+   * Filters the image as defined by one of the following modes:<br>
+   * <br>
+   * THRESHOLD<br>
    * Converts the image to black and white pixels depending if they are above or
    * below the threshold defined by the level parameter. The parameter must be
    * between 0.0 (black) and 1.0 (white). If no level is specified, 0.5 is
-   * used.<br />
-   * <br />
-   * GRAY<br />
+   * used.<br>
+   * <br>
+   * GRAY<br>
    * Converts any colors in the image to grayscale equivalents. No parameter is
-   * used.<br />
-   * <br />
-   * OPAQUE<br />
-   * Sets the alpha channel to entirely opaque. No parameter is used.<br />
-   * <br />
-   * INVERT<br />
-   * Sets each pixel to its inverse value. No parameter is used.<br />
-   * <br />
-   * POSTERIZE<br />
+   * used.<br>
+   * <br>
+   * OPAQUE<br>
+   * Sets the alpha channel to entirely opaque. No parameter is used.<br>
+   * <br>
+   * INVERT<br>
+   * Sets each pixel to its inverse value. No parameter is used.<br>
+   * <br>
+   * POSTERIZE<br>
    * Limits each channel of the image to the number of colors specified as the
    * parameter. The parameter can be set to values between 2 and 255, but results
-   * are most noticeable in the lower ranges.<br />
-   * <br />
-   * BLUR<br />
+   * are most noticeable in the lower ranges.<br>
+   * <br>
+   * BLUR<br>
    * Executes a Gaussian blur with the level parameter specifying the extent of
    * the blurring. If no parameter is used, the blur is equivalent to Gaussian
-   * blur of radius 1. Larger values increase the blur.<br />
-   * <br />
-   * ERODE<br />
-   * Reduces the light areas. No parameter is used.<br />
-   * <br />
-   * DILATE<br />
+   * blur of radius 1. Larger values increase the blur.<br>
+   * <br>
+   * ERODE<br>
+   * Reduces the light areas. No parameter is used.<br>
+   * <br>
+   * DILATE<br>
    * Increases the light areas. No parameter is used.
    *
    *
@@ -1042,11 +1037,12 @@ public class PImage implements PConstants, Cloneable {
 
 
   /**
-   * Optimized code for building the blur kernel.
-   * further optimized blur code (approx. 15% for radius=20)
-   * bigger speed gains for larger radii (~30%)
-   * added support for various image types (ALPHA, RGB, ARGB)
-   * [toxi 050728]
+   * Optimized code for building the blur kernel.further optimized blur code (approx.
+   * 15% for radius=20)
+ bigger speed gains for larger radii (~30%)
+ added support for various image types (ALPHA, RGB, ARGB)
+ [toxi 050728]
+   * @param r
    */
   protected void buildBlurKernel(float r) {
     int radius = (int) (r * 3.5f);
@@ -1471,7 +1467,7 @@ public class PImage implements PConstants, Cloneable {
    * source pixels to fit the specified target region. No alpha information
    * is used in the process, however if the source image has an alpha channel
    * set, it will be copied as well.
-   * <br /><br />
+   * <br><br>
    * As of release 0149, this function ignores <b>imageMode()</b>.
    *
    *
@@ -1572,7 +1568,7 @@ public class PImage implements PConstants, Cloneable {
    * necessarily "correct" code. No biggie, most software does. A nitpicker
    * can find numerous "off by 1 division" problems in the blend code where
    * <code>&gt;&gt;8</code> or <code>&gt;&gt;7</code> is used when strictly speaking
-   * <code>/255.0</T> or <code>/127.0</code> should have been used.</P>
+   * <code>/255.0</code> or <code>/127.0</code> should have been used.</P>
    * <P>For instance, exclusion (not intended for real-time use) reads
    * <code>r1 + r2 - ((2 * r1 * r2) / 255)</code> because <code>255 == 1.0</code>
    * not <code>256 == 1.0</code>. In other words, <code>(255*255)>>8</code> is not
@@ -1592,27 +1588,57 @@ public class PImage implements PConstants, Cloneable {
    */
   static public int blendColor(int c1, int c2, int mode) {  // ignore
     switch (mode) {
-    case REPLACE:    return c2;
-    case BLEND:      return blend_blend(c1, c2);
+    case REPLACE -> {
+        return c2;
+          }
+    case BLEND -> {
+        return blend_blend(c1, c2);
+          }
 
-    case ADD:        return blend_add_pin(c1, c2);
-    case SUBTRACT:   return blend_sub_pin(c1, c2);
+    case ADD -> {
+        return blend_add_pin(c1, c2);
+          }
+    case SUBTRACT -> {
+        return blend_sub_pin(c1, c2);
+          }
 
-    case LIGHTEST:   return blend_lightest(c1, c2);
-    case DARKEST:    return blend_darkest(c1, c2);
+    case LIGHTEST -> {
+        return blend_lightest(c1, c2);
+          }
+    case DARKEST -> {
+        return blend_darkest(c1, c2);
+          }
 
-    case DIFFERENCE: return blend_difference(c1, c2);
-    case EXCLUSION:  return blend_exclusion(c1, c2);
+    case DIFFERENCE -> {
+        return blend_difference(c1, c2);
+          }
+    case EXCLUSION -> {
+        return blend_exclusion(c1, c2);
+          }
 
-    case MULTIPLY:   return blend_multiply(c1, c2);
-    case SCREEN:     return blend_screen(c1, c2);
+    case MULTIPLY -> {
+        return blend_multiply(c1, c2);
+          }
+    case SCREEN -> {
+        return blend_screen(c1, c2);
+          }
 
-    case HARD_LIGHT: return blend_hard_light(c1, c2);
-    case SOFT_LIGHT: return blend_soft_light(c1, c2);
-    case OVERLAY:    return blend_overlay(c1, c2);
+    case HARD_LIGHT -> {
+        return blend_hard_light(c1, c2);
+          }
+    case SOFT_LIGHT -> {
+        return blend_soft_light(c1, c2);
+          }
+    case OVERLAY -> {
+        return blend_overlay(c1, c2);
+          }
 
-    case DODGE:      return blend_dodge(c1, c2);
-    case BURN:       return blend_burn(c1, c2);
+    case DODGE -> {
+        return blend_dodge(c1, c2);
+          }
+    case BURN -> {
+        return blend_burn(c1, c2);
+          }
     }
     return 0;
   }
@@ -1629,47 +1655,47 @@ public class PImage implements PConstants, Cloneable {
    * Blends a region of pixels into the image specified by the <b>img</b>
    * parameter. These copies utilize full alpha channel support and a choice
    * of the following modes to blend the colors of source pixels (A) with the
-   * ones of pixels in the destination image (B):<br />
-   * <br />
-   * BLEND - linear interpolation of colours: C = A*factor + B<br />
-   * <br />
-   * ADD - additive blending with white clip: C = min(A*factor + B, 255)<br />
-   * <br />
+   * ones of pixels in the destination image (B):<br>
+   * <br>
+   * BLEND - linear interpolation of colours: C = A*factor + B<br>
+   * <br>
+   * ADD - additive blending with white clip: C = min(A*factor + B, 255)<br>
+   * <br>
    * SUBTRACT - subtractive blending with black clip: C = max(B - A*factor,
-   * 0)<br />
-   * <br />
-   * DARKEST - only the darkest colour succeeds: C = min(A*factor, B)<br />
-   * <br />
-   * LIGHTEST - only the lightest colour succeeds: C = max(A*factor, B)<br />
-   * <br />
-   * DIFFERENCE - subtract colors from underlying image.<br />
-   * <br />
-   * EXCLUSION - similar to DIFFERENCE, but less extreme.<br />
-   * <br />
-   * MULTIPLY - Multiply the colors, result will always be darker.<br />
-   * <br />
-   * SCREEN - Opposite multiply, uses inverse values of the colors.<br />
-   * <br />
+   * 0)<br>
+   * <br>
+   * DARKEST - only the darkest colour succeeds: C = min(A*factor, B)<br>
+   * <br>
+   * LIGHTEST - only the lightest colour succeeds: C = max(A*factor, B)<br>
+   * <br>
+   * DIFFERENCE - subtract colors from underlying image.<br>
+   * <br>
+   * EXCLUSION - similar to DIFFERENCE, but less extreme.<br>
+   * <br>
+   * MULTIPLY - Multiply the colors, result will always be darker.<br>
+   * <br>
+   * SCREEN - Opposite multiply, uses inverse values of the colors.<br>
+   * <br>
    * OVERLAY - A mix of MULTIPLY and SCREEN. Multiplies dark values,
-   * and screens light values.<br />
-   * <br />
-   * HARD_LIGHT - SCREEN when greater than 50% gray, MULTIPLY when lower.<br />
-   * <br />
+   * and screens light values.<br>
+   * <br>
+   * HARD_LIGHT - SCREEN when greater than 50% gray, MULTIPLY when lower.<br>
+   * <br>
    * SOFT_LIGHT - Mix of DARKEST and LIGHTEST.
-   * Works like OVERLAY, but not as harsh.<br />
-   * <br />
+   * Works like OVERLAY, but not as harsh.<br>
+   * <br>
    * DODGE - Lightens light tones and increases contrast, ignores darks.
-   * Called "Color Dodge" in Illustrator and Photoshop.<br />
-   * <br />
+   * Called "Color Dodge" in Illustrator and Photoshop.<br>
+   * <br>
    * BURN - Darker areas are applied, increasing contrast, ignores lights.
-   * Called "Color Burn" in Illustrator and Photoshop.<br />
-   * <br />
+   * Called "Color Burn" in Illustrator and Photoshop.<br>
+   * <br>
    * All modes use the alpha information (highest byte) of source image
    * pixels as the blending factor. If the source and destination regions are
    * different sizes, the image will be automatically resized to match the
    * destination size. If the <b>srcImg</b> parameter is not used, the
-   * display window is used as the source image.<br />
-   * <br />
+   * display window is used as the source image.<br>
+   * <br>
    * As of release 0149, this function ignores <b>imageMode()</b>.
    *
    *
@@ -1830,204 +1856,188 @@ public class PImage implements PConstants, Cloneable {
 
     switch (mode) {
 
-      case BLEND:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            // davbol  - renamed old blend_multiply to blend_blend
-            destPixels[destOffset + x] =
-                    blend_blend(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case BLEND -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  // davbol  - renamed old blend_multiply to blend_blend
+                  destPixels[destOffset + x] =
+                          blend_blend(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case ADD:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_add_pin(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case ADD -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_add_pin(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case SUBTRACT:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_sub_pin(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case SUBTRACT -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_sub_pin(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case LIGHTEST:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_lightest(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case LIGHTEST -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_lightest(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case DARKEST:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_darkest(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case DARKEST -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_darkest(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case REPLACE:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] = filter_bilinear();
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case REPLACE -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] = filter_bilinear();
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case DIFFERENCE:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_difference(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case DIFFERENCE -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_difference(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case EXCLUSION:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_exclusion(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case EXCLUSION -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_exclusion(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case MULTIPLY:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_multiply(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case MULTIPLY -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_multiply(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case SCREEN:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_screen(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case SCREEN -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_screen(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case OVERLAY:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_overlay(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case OVERLAY -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_overlay(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case HARD_LIGHT:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_hard_light(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case HARD_LIGHT -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_hard_light(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      case SOFT_LIGHT:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_soft_light(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case SOFT_LIGHT -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_soft_light(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
+      case DODGE -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_dodge(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
-      // davbol - proposed 2007-01-09
-      case DODGE:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_dodge(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
-
-      case BURN:
-        for (int y = 0; y < destH; y++) {
-          filter_new_scanline();
-          for (int x = 0; x < destW; x++) {
-            destPixels[destOffset + x] =
-                    blend_burn(destPixels[destOffset + x], filter_bilinear());
-            sX += dx;
-          }
-          destOffset += screenW;
-          srcYOffset += dy;
-        }
-        break;
+      case BURN -> {
+          for (int y = 0; y < destH; y++) {
+              filter_new_scanline();
+              for (int x = 0; x < destW; x++) {
+                  destPixels[destOffset + x] =
+                          blend_burn(destPixels[destOffset + x], filter_bilinear());
+                  sX += dx;
+              }
+              destOffset += screenW;
+              srcYOffset += dy;
+          } }
 
     }
-  }
+      // davbol - proposed 2007-01-09
+        }
 
   private void blitResizeNearest(PImage img,
                                  int[] destPixels, int destOffset, int screenW,
@@ -2038,232 +2048,216 @@ public class PImage implements PConstants, Cloneable {
     int sY;
     switch (mode) {
 
-    case BLEND:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          // davbol - renamed old blend_multiply to blend_blend
-          destPixels[destOffset + x] =
-            blend_blend(destPixels[destOffset + x],
-                        srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case BLEND -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                // davbol - renamed old blend_multiply to blend_blend
+                destPixels[destOffset + x] =
+                        blend_blend(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case ADD:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_add_pin(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case ADD -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_add_pin(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case SUBTRACT:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_sub_pin(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case SUBTRACT -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_sub_pin(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case LIGHTEST:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_lightest(destPixels[destOffset + x],
-                           srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case LIGHTEST -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_lightest(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case DARKEST:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_darkest(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case DARKEST -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_darkest(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case REPLACE:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] = srcBuffer[sY + (sX >> PRECISIONB)];
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case REPLACE -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] = srcBuffer[sY + (sX >> PRECISIONB)];
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case DIFFERENCE:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_difference(destPixels[destOffset + x],
-                             srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case DIFFERENCE -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_difference(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case EXCLUSION:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_exclusion(destPixels[destOffset + x],
-                            srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case EXCLUSION -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_exclusion(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case MULTIPLY:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_multiply(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case MULTIPLY -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_multiply(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case SCREEN:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_screen(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case SCREEN -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_screen(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case OVERLAY:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_overlay(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case OVERLAY -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_overlay(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case HARD_LIGHT:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_hard_light(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case HARD_LIGHT -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_hard_light(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    case SOFT_LIGHT:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_soft_light(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case SOFT_LIGHT -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_soft_light(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
+    case DODGE -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_dodge(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
 
-    // davbol - proposed 2007-01-09
-    case DODGE:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_dodge(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
-
-    case BURN:
-      for (int y = 0; y < destH; y++) {
-        sX = srcXOffset;
-        sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
-        for (int x = 0; x < destW; x++) {
-          destPixels[destOffset + x] =
-            blend_burn(destPixels[destOffset + x],
-                          srcBuffer[sY + (sX >> PRECISIONB)]);
-          sX += dx;
-        }
-        destOffset += screenW;
-        srcYOffset += dy;
-      }
-      break;
+    case BURN -> {
+        for (int y = 0; y < destH; y++) {
+            sX = srcXOffset;
+            sY = (srcYOffset >> PRECISIONB) * img.pixelWidth;
+            for (int x = 0; x < destW; x++) {
+                destPixels[destOffset + x] =
+                        blend_burn(destPixels[destOffset + x],
+                                srcBuffer[sY + (sX >> PRECISIONB)]);
+                sX += dx;
+            }
+            destOffset += screenW;
+            srcYOffset += dy;
+        }   }
     }
-  }
+      // davbol - proposed 2007-01-09
+        }
 
 
   private void filter_new_scanline() {
@@ -2890,7 +2884,6 @@ int testFunction(int dst, int src) {
       return true;
 
     } catch (IOException e) {
-      e.printStackTrace();
     }
     return false;
   }
@@ -2909,188 +2902,171 @@ int testFunction(int dst, int src) {
    * Known issue with RLE encoding and odd behavior in some apps:
    * https://github.com/processing/processing/issues/2096
    * Please help!
+   * @param input
+   * @return 
+   * @throws java.io.IOException
    */
   static public PImage loadTGA(InputStream input) throws IOException {  // ignore
-    byte[] header = new byte[18];
-    int offset = 0;
-    do {
-      int count = input.read(header, offset, header.length - offset);
-      if (count == -1) return null;
-      offset += count;
-    } while (offset < 18);
-
-    /*
-      header[2] image type code
-      2  (0x02) - Uncompressed, RGB images.
-      3  (0x03) - Uncompressed, black and white images.
-      10 (0x0A) - Run-length encoded RGB images.
-      11 (0x0B) - Compressed, black and white images. (grayscale?)
-
-      header[16] is the bit depth (8, 24, 32)
-
-      header[17] image descriptor (packed bits)
-      0x20 is 32 = origin upper-left
-      0x28 is 32 + 8 = origin upper-left + 32 bits
-
-        7  6  5  4  3  2  1  0
-      128 64 32 16  8  4  2  1
-    */
-
-    int format = 0;
-
-    if (((header[2] == 3) || (header[2] == 11)) &&  // B&W, plus RLE or not
-        (header[16] == 8) &&  // 8 bits
-        ((header[17] == 0x8) || (header[17] == 0x28))) {  // origin, 32 bit
-      format = ALPHA;
-
-    } else if (((header[2] == 2) || (header[2] == 10)) &&  // RGB, RLE or not
-               (header[16] == 24) &&  // 24 bits
-               ((header[17] == 0x20) || (header[17] == 0))) {  // origin
-      format = RGB;
-
-    } else if (((header[2] == 2) || (header[2] == 10)) &&
-               (header[16] == 32) &&
-               ((header[17] == 0x8) || (header[17] == 0x28))) {  // origin, 32
-      format = ARGB;
-    }
-
-    if (format == 0) {
-      System.err.println("Unknown .tga file format");
-      return null;
-    }
-
-    int w = ((header[13] & 0xff) << 8) + (header[12] & 0xff);
-    int h = ((header[15] & 0xff) << 8) + (header[14] & 0xff);
-    PImage outgoing = new PImage(w, h, format);
-
-    // where "reversed" means upper-left corner (normal for most of
-    // the modernized world, but "reversed" for the tga spec)
-    //boolean reversed = (header[17] & 0x20) != 0;
-    // https://github.com/processing/processing/issues/1682
-    boolean reversed = (header[17] & 0x20) == 0;
-
-    if ((header[2] == 2) || (header[2] == 3)) {  // not RLE encoded
-      if (reversed) {
-        int index = (h-1) * w;
-        switch (format) {
-        case ALPHA:
-          for (int y = h-1; y >= 0; y--) {
-            for (int x = 0; x < w; x++) {
-              outgoing.pixels[index + x] = input.read();
-            }
-            index -= w;
-          }
-          break;
-        case RGB:
-          for (int y = h-1; y >= 0; y--) {
-            for (int x = 0; x < w; x++) {
-              outgoing.pixels[index + x] =
-                input.read() | (input.read() << 8) | (input.read() << 16) |
-                0xff000000;
-            }
-            index -= w;
-          }
-          break;
-        case ARGB:
-          for (int y = h-1; y >= 0; y--) {
-            for (int x = 0; x < w; x++) {
-              outgoing.pixels[index + x] =
-                input.read() | (input.read() << 8) | (input.read() << 16) |
-                (input.read() << 24);
-            }
-            index -= w;
-          }
-        }
-      } else {  // not reversed
-        int count = w * h;
-        switch (format) {
-        case ALPHA:
-          for (int i = 0; i < count; i++) {
-            outgoing.pixels[i] = input.read();
-          }
-          break;
-        case RGB:
-          for (int i = 0; i < count; i++) {
-            outgoing.pixels[i] =
-              input.read() | (input.read() << 8) | (input.read() << 16) |
-              0xff000000;
-          }
-          break;
-        case ARGB:
-          for (int i = 0; i < count; i++) {
-            outgoing.pixels[i] =
-              input.read() | (input.read() << 8) | (input.read() << 16) |
-              (input.read() << 24);
-          }
-          break;
-        }
-      }
-
-    } else {  // header[2] is 10 or 11
-      int index = 0;
-      int[] px = outgoing.pixels;
-
-      while (index < px.length) {
-        int num = input.read();
-        boolean isRLE = (num & 0x80) != 0;
-        if (isRLE) {
-          num -= 127;  // (num & 0x7F) + 1
-          int pixel = 0;
-          switch (format) {
-          case ALPHA:
-            pixel = input.read();
-            break;
-          case RGB:
-            pixel = 0xFF000000 |
-              input.read() | (input.read() << 8) | (input.read() << 16);
-            //(is.read() << 16) | (is.read() << 8) | is.read();
-            break;
-          case ARGB:
-            pixel = input.read() |
-              (input.read() << 8) | (input.read() << 16) | (input.read() << 24);
-            break;
-          }
-          for (int i = 0; i < num; i++) {
-            px[index++] = pixel;
-            if (index == px.length) break;
-          }
-        } else {  // write up to 127 bytes as uncompressed
-          num += 1;
-          switch (format) {
-          case ALPHA:
-            for (int i = 0; i < num; i++) {
-              px[index++] = input.read();
-            }
-            break;
-          case RGB:
-            for (int i = 0; i < num; i++) {
-              px[index++] = 0xFF000000 |
-                input.read() | (input.read() << 8) | (input.read() << 16);
-              //(is.read() << 16) | (is.read() << 8) | is.read();
-            }
-            break;
-          case ARGB:
-            for (int i = 0; i < num; i++) {
-              px[index++] = input.read() | //(is.read() << 24) |
-                (input.read() << 8) | (input.read() << 16) | (input.read() << 24);
-              //(is.read() << 16) | (is.read() << 8) | is.read();
-            }
-            break;
-          }
-        }
-      }
-
-      if (!reversed) {
-        int[] temp = new int[w];
-        for (int y = 0; y < h/2; y++) {
-          int z = (h-1) - y;
-          System.arraycopy(px, y*w, temp, 0, w);
-          System.arraycopy(px, z*w, px, y*w, w);
-          System.arraycopy(temp, 0, px, z*w, w);
-        }
-      }
-    }
-    input.close();
+      PImage outgoing;
+      try (input) {
+          // ignore
+          byte[] header = new byte[18];
+          int offset = 0;
+          do {
+              int count = input.read(header, offset, header.length - offset);
+              if (count == -1) return null;
+              offset += count;
+          } while (offset < 18);
+          /*
+          header[2] image type code
+          2  (0x02) - Uncompressed, RGB images.
+          3  (0x03) - Uncompressed, black and white images.
+          10 (0x0A) - Run-length encoded RGB images.
+          11 (0x0B) - Compressed, black and white images. (grayscale?)
+          
+          header[16] is the bit depth (8, 24, 32)
+          
+          header[17] image descriptor (packed bits)
+          0x20 is 32 = origin upper-left
+          0x28 is 32 + 8 = origin upper-left + 32 bits
+          
+          7  6  5  4  3  2  1  0
+          128 64 32 16  8  4  2  1
+          */
+          
+          int format = 0;
+          if (((header[2] == 3) || (header[2] == 11)) &&  // B&W, plus RLE or not
+                  (header[16] == 8) &&  // 8 bits
+                  ((header[17] == 0x8) || (header[17] == 0x28))) {  // origin, 32 bit
+              format = ALPHA;
+              
+          } else if (((header[2] == 2) || (header[2] == 10)) &&  // RGB, RLE or not
+                  (header[16] == 24) &&  // 24 bits
+                  ((header[17] == 0x20) || (header[17] == 0))) {  // origin
+              format = RGB;
+              
+          } else if (((header[2] == 2) || (header[2] == 10)) &&
+                  (header[16] == 32) &&
+                  ((header[17] == 0x8) || (header[17] == 0x28))) {  // origin, 32
+              format = ARGB;
+          }     if (format == 0) {
+              System.err.println("Unknown .tga file format");
+              return null;
+          }     int w = ((header[13] & 0xff) << 8) + (header[12] & 0xff);
+          int h = ((header[15] & 0xff) << 8) + (header[14] & 0xff);
+          outgoing = new PImage(w, h, format);
+          // where "reversed" means upper-left corner (normal for most of
+          // the modernized world, but "reversed" for the tga spec)
+          //boolean reversed = (header[17] & 0x20) != 0;
+          // https://github.com/processing/processing/issues/1682
+          boolean reversed = (header[17] & 0x20) == 0;
+          if ((header[2] == 2) || (header[2] == 3)) {  // not RLE encoded
+              if (reversed) {
+                  int index = (h-1) * w;
+                  switch (format) {
+                      case ALPHA -> {
+                          for (int y = h-1; y >= 0; y--) {
+                              for (int x = 0; x < w; x++) {
+                                  outgoing.pixels[index + x] = input.read();
+                              }
+                              index -= w;
+                          }   }
+                      case RGB -> {
+                          for (int y = h-1; y >= 0; y--) {
+                              for (int x = 0; x < w; x++) {
+                                  outgoing.pixels[index + x] =
+                                          input.read() | (input.read() << 8) | (input.read() << 16) |
+                                          0xff000000;
+                              }
+                              index -= w;
+                          }   }
+                      case ARGB -> {
+                          for (int y = h-1; y >= 0; y--) {
+                              for (int x = 0; x < w; x++) {
+                                  outgoing.pixels[index + x] =
+                                          input.read() | (input.read() << 8) | (input.read() << 16) |
+                                          (input.read() << 24);
+                              }
+                              index -= w;
+                          }   }
+                  }
+              } else {  // not reversed
+                  int count = w * h;
+                  switch (format) {
+                      case ALPHA -> {
+                          for (int i = 0; i < count; i++) {
+                              outgoing.pixels[i] = input.read();
+                          }   }
+                      case RGB -> {
+                          for (int i = 0; i < count; i++) {
+                              outgoing.pixels[i] =
+                                      input.read() | (input.read() << 8) | (input.read() << 16) |
+                                      0xff000000;
+                          }   }
+                      case ARGB -> {
+                          for (int i = 0; i < count; i++) {
+                              outgoing.pixels[i] =
+                                      input.read() | (input.read() << 8) | (input.read() << 16) |
+                                      (input.read() << 24);
+                          }   }
+                  }
+              }
+              
+          } else {  // header[2] is 10 or 11
+              int index = 0;
+              int[] px = outgoing.pixels;
+              
+              while (index < px.length) {
+                  int num = input.read();
+                  boolean isRLE = (num & 0x80) != 0;
+                  if (isRLE) {
+                      num -= 127;  // (num & 0x7F) + 1
+                      int pixel = 0;
+                      switch (format) {
+                          case ALPHA -> pixel = input.read();
+                          case RGB -> pixel = 0xFF000000 |
+                                  input.read() | (input.read() << 8) | (input.read() << 16);
+                          //(is.read() << 16) | (is.read() << 8) | is.read();
+                          case ARGB -> pixel = input.read() |
+                                  (input.read() << 8) | (input.read() << 16) | (input.read() << 24);
+                      }
+                      for (int i = 0; i < num; i++) {
+                          px[index++] = pixel;
+                          if (index == px.length) break;
+                      }
+                  } else {  // write up to 127 bytes as uncompressed
+                      num += 1;
+                      switch (format) {
+                          case ALPHA -> {
+                              for (int i = 0; i < num; i++) {
+                                  px[index++] = input.read();
+                              }   }
+                          case RGB -> {
+                              for (int i = 0; i < num; i++) {
+                                  px[index++] = 0xFF000000 |
+                                          input.read() | (input.read() << 8) | (input.read() << 16);
+                                  //(is.read() << 16) | (is.read() << 8) | is.read();
+                              }   }
+                          case ARGB -> {
+                              for (int i = 0; i < num; i++) {
+                                  px[index++] = input.read() | //(is.read() << 24) |
+                                          (input.read() << 8) | (input.read() << 16) | (input.read() << 24);
+                                  //(is.read() << 16) | (is.read() << 8) | is.read();
+                              }   }
+                      }
+                  }
+              }
+              
+              if (!reversed) {
+                  int[] temp = new int[w];
+                  for (int y = 0; y < h/2; y++) {
+                      int z = (h-1) - y;
+                      System.arraycopy(px, y*w, temp, 0, w);
+                      System.arraycopy(px, z*w, px, y*w, w);
+                      System.arraycopy(temp, 0, px, z*w, w);
+                  }
+              }
+          } }
     return outgoing;
   }
 
@@ -3098,10 +3074,10 @@ int testFunction(int dst, int src) {
   /**
    * Creates a Targa32 formatted byte sequence of specified
    * pixel buffer using RLE compression.
-   * </p>
+   * <p>
    * Also figured out how to avoid parsing the image upside-down
    * (there's a header flag to set the image origin to top-left)
-   * </p>
+   * <p>
    * Starting with revision 0092, the format setting is taken into account:
    * <UL>
    * <LI><code>ALPHA</code> images written as 8bit grayscale (uses lowest byte)
@@ -3109,31 +3085,34 @@ int testFunction(int dst, int src) {
    * <LI><code>ARGB</code> &rarr; 32 bits
    * </UL>
    * All versions are RLE compressed.
-   * </p>
+   * <p>
    * Contributed by toxi 8-10 May 2005, based on this RLE
    * <A HREF="http://www.wotsit.org/download.asp?f=tga">specification</A>
+     * @param output
+     * @return 
    */
   protected boolean saveTGA(OutputStream output) {
     byte[] header = new byte[18];
 
-     if (format == ALPHA) {  // save ALPHA images as 8bit grayscale
-       header[2] = 0x0B;
-       header[16] = 0x08;
-       header[17] = 0x28;
-
-     } else if (format == RGB) {
-       header[2] = 0x0A;
-       header[16] = 24;
-       header[17] = 0x20;
-
-     } else if (format == ARGB) {
-       header[2] = 0x0A;
-       header[16] = 32;
-       header[17] = 0x28;
-
-     } else {
-       throw new RuntimeException("Image format not recognized inside save()");
-     }
+      switch (format) {
+          case ALPHA -> {
+              // save ALPHA images as 8bit grayscale
+              header[2] = 0x0B;
+              header[16] = 0x08;
+              header[17] = 0x28;
+          }
+          case RGB -> {
+              header[2] = 0x0A;
+              header[16] = 24;
+              header[17] = 0x20;
+          }
+          case ARGB -> {
+              header[2] = 0x0A;
+              header[16] = 32;
+              header[17] = 0x28;
+          }
+          default -> throw new RuntimeException("Image format not recognized inside save()");
+      }
      // set image dimensions lo-hi byte order
      header[12] = (byte) (pixelWidth & 0xff);
      header[13] = (byte) (pixelWidth >> 8);
@@ -3243,7 +3222,6 @@ int testFunction(int dst, int src) {
        return true;
 
      } catch (IOException e) {
-       e.printStackTrace();
        return false;
      }
   }
@@ -3251,13 +3229,13 @@ int testFunction(int dst, int src) {
 
   /**
    *
-   * Saves the image into a file. Append a file extension to the name of
-   * the file, to indicate the file format to be used: either TIFF (.tif),
-   * TARGA (.tga), JPEG (.jpg), or PNG (.png). If no extension is included
-   * in the filename, the image will save in TIFF format and .tif will be
-   * added to the name.  These files are saved to the sketch's folder, which
-   * may be opened by selecting "Show sketch folder" from the "Sketch" menu.
-   * <br /><br />To save an image created within the code, rather
+   * Saves the image into a file.Append a file extension to the name of
+ the file, to indicate the file format to be used: either TIFF (.tif),
+ TARGA (.tga), JPEG (.jpg), or PNG (.png). If no extension is included
+ in the filename, the image will save in TIFF format and .tif will be
+ added to the name.  These files are saved to the sketch's folder, which
+ may be opened by selecting "Show sketch folder" from the "Sketch" menu.
+ <br><br>To save an image created within the code, rather
    * than through loading, it's necessary to make the image with the
    * <b>createImage()</b> function so it is aware of the location of the
    * program and can therefore save the file to the right place. See the
@@ -3288,6 +3266,7 @@ int testFunction(int dst, int src) {
    * require a black and white image. Basic testing produced a zero-length
    * file with no error.
    *
+   * @return 
    * @webref pimage:method
    * @webBrief Saves the image to a TIFF, TARGA, PNG, or JPEG file.
    * @usage application
@@ -3324,9 +3303,9 @@ int testFunction(int dst, int src) {
       }
 
       if (lower.endsWith(".tga")) {
-        OutputStream os = new BufferedOutputStream(new FileOutputStream(filename), 32768);
-        success = saveTGA(os); //, pixels, width, height, format);
-        os.close();
+          try (OutputStream os = new BufferedOutputStream(new FileOutputStream(filename), 32768)) {
+              success = saveTGA(os); //, pixels, width, height, format);
+          } //, pixels, width, height, format);
 
       } else {  // fall-through case is TIFF
         // add a default extension and save uncompressed
@@ -3335,14 +3314,13 @@ int testFunction(int dst, int src) {
         if (!lower.endsWith(".tif") && !lower.endsWith(".tiff")) {
           filename += ".tif";
         }
-        OutputStream os = new BufferedOutputStream(new FileOutputStream(filename), 32768);
-        success = saveTIFF(os); //, pixels, width, height);
-        os.close();
+          try (OutputStream os = new BufferedOutputStream(new FileOutputStream(filename), 32768)) {
+              success = saveTIFF(os); //, pixels, width, height);
+          } //, pixels, width, height);
       }
 
     } catch (IOException e) {
       System.err.println("Error while saving image.");
-      e.printStackTrace();
       success = false;
     }
     return success;
@@ -3351,10 +3329,11 @@ int testFunction(int dst, int src) {
 
   /**
    * Override this in subclasses to intercept save calls for other formats
-   * or higher-performance implementations. When reaching this code, pixels
+   * or higher-performance implementations.When reaching this code, pixels
    * must be loaded and that path should be absolute.
    *
    * @param path must be a full path (not relative or simply a filename)
+   * @return 
    */
   protected boolean saveImpl(String path) {
     // TODO Imperfect/temporary solution for alpha 2.

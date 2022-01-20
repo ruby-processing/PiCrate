@@ -62,8 +62,7 @@ public class PImageAWT extends PImage {
    */
   public PImageAWT(Image img) {
     format = RGB;
-    if (img instanceof BufferedImage) {
-      BufferedImage bi = (BufferedImage) img;
+    if (img instanceof BufferedImage bi) {
       width = bi.getWidth();
       height = bi.getHeight();
       int type = bi.getType();
@@ -78,8 +77,8 @@ public class PImageAWT extends PImage {
         }
       } else {
         DataBuffer db = bi.getRaster().getDataBuffer();
-        if (db instanceof DataBufferInt) {
-          pixels = ((DataBufferInt) db).getData();
+        if (db instanceof DataBufferInt dataBufferInt) {
+          pixels = dataBufferInt.getData();
           if (type == BufferedImage.TYPE_INT_ARGB) {
             format = ARGB;
           } else if (type == BufferedImage.TYPE_INT_RGB) {
@@ -108,8 +107,8 @@ public class PImageAWT extends PImage {
 
   /**
    * Use the getNative() method instead, which allows library interfaces to be
-   * written in a cross-platform fashion for desktop, Android, and others.
-   * This is still included for PGraphics objects, which may need the image.
+   * written in a cross-platform fashion for desktop, Android, and others.This is still included for PGraphics objects, which may need the image.
+   * @return
    */
   public Image getImage() {  // ignore
     return (Image) getNative();
@@ -118,6 +117,7 @@ public class PImageAWT extends PImage {
 
   /**
    * Returns a native BufferedImage from this PImage.
+   * @return 
    */
   @Override
   public Object getNative() {  // ignore
@@ -259,11 +259,12 @@ public class PImageAWT extends PImage {
 
 
   /**
-   * Use ImageIO functions from Java 1.4 and later to handle image save.
-   * Various formats are supported, typically jpeg, png, bmp, and wbmp.
-   * To get a list of the supported formats for writing, use: <BR>
-   * <code>println(javax.imageio.ImageIO.getReaderFormatNames())</code>
+   * Use ImageIO functions from Java 1.4 and later to handle image save.Various formats are supported, typically jpeg, png, bmp, and wbmp.To get a list of the supported formats for writing, use: <BR>
+    <code>println(javax.imageio.ImageIO.getReaderFormatNames())</code>
    *
+   * @param path
+   * @return 
+   * @throws java.io.IOException
    * @path The path to which the file should be written.
    */
   protected boolean saveImageIO(String path) throws IOException {

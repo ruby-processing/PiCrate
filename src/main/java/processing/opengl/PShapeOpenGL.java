@@ -413,9 +413,9 @@ public class PShapeOpenGL extends PShape {
 
   @Override
   public void addChild(PShape who) {
-    if (who instanceof PShapeOpenGL) {
+    if (who instanceof PShapeOpenGL pShapeOpenGL) {
       if (family == GROUP) {
-        PShapeOpenGL c3d = (PShapeOpenGL)who;
+        PShapeOpenGL c3d = pShapeOpenGL;
 
         super.addChild(c3d);
         c3d.updateRoot(root);
@@ -454,9 +454,9 @@ public class PShapeOpenGL extends PShape {
 
   @Override
   public void addChild(PShape who, int idx) {
-    if (who instanceof PShapeOpenGL) {
+    if (who instanceof PShapeOpenGL pShapeOpenGL) {
       if (family == GROUP) {
-        PShapeOpenGL c3d = (PShapeOpenGL)who;
+        PShapeOpenGL c3d = pShapeOpenGL;
 
         super.addChild(c3d, idx);
         c3d.updateRoot(root);
@@ -847,7 +847,7 @@ public class PShapeOpenGL extends PShape {
 
   protected void addTexture(PImage tex) {
     if (textures == null) {
-      textures = new HashSet<PImage>();
+      textures = new HashSet<>();
     }
     textures.add(tex);
     if (parent != null) {
@@ -873,7 +873,7 @@ public class PShapeOpenGL extends PShape {
     if (!childHasTex) {
       // ...if not, it is safe to remove from this shape.
       textures.remove(tex);
-      if (textures.size() == 0) {
+      if (textures.isEmpty()) {
         textures = null;
       }
     }
@@ -948,7 +948,7 @@ public class PShapeOpenGL extends PShape {
 
   protected boolean hasTexture() {
     if (family == GROUP) {
-      return textures != null && 0 < textures.size();
+      return textures != null && !textures.isEmpty();
     } else {
       return image != null;
     }
@@ -1377,38 +1377,34 @@ public class PShapeOpenGL extends PShape {
     }
 
     switch (type) {
-    case TRANSLATE:
-      if (ncoords == 3) {
-        transform.translate(args[0], args[1], args[2]);
-      } else {
-        transform.translate(args[0], args[1]);
-      }
-      break;
-    case ROTATE:
-      if (ncoords == 3) {
-        transform.rotate(args[0], args[1], args[2], args[3]);
-      } else {
-        transform.rotate(args[0]);
-      }
-      break;
-    case SCALE:
-      if (ncoords == 3) {
-        transform.scale(args[0], args[1], args[2]);
-      } else {
-        transform.scale(args[0], args[1]);
-      }
-      break;
-    case MATRIX:
-      if (ncoords == 3) {
-        transform.set(args[ 0], args[ 1], args[ 2], args[ 3],
-                      args[ 4], args[ 5], args[ 6], args[ 7],
-                      args[ 8], args[ 9], args[10], args[11],
-                      args[12], args[13], args[14], args[15]);
-      } else {
-        transform.set(args[0], args[1], args[2],
-                      args[3], args[4], args[5]);
-      }
-      break;
+    case TRANSLATE -> {
+        if (ncoords == 3) {
+            transform.translate(args[0], args[1], args[2]);
+        } else {
+            transform.translate(args[0], args[1]);
+        }   }
+    case ROTATE -> {
+        if (ncoords == 3) {
+            transform.rotate(args[0], args[1], args[2], args[3]);
+        } else {
+            transform.rotate(args[0]);
+        }   }
+    case SCALE -> {
+        if (ncoords == 3) {
+            transform.scale(args[0], args[1], args[2]);
+        } else {
+            transform.scale(args[0], args[1]);
+        }   }
+    case MATRIX -> {
+        if (ncoords == 3) {
+            transform.set(args[ 0], args[ 1], args[ 2], args[ 3],
+                    args[ 4], args[ 5], args[ 6], args[ 7],
+                    args[ 8], args[ 9], args[10], args[11],
+                    args[12], args[13], args[14], args[15]);
+        } else {
+            transform.set(args[0], args[1], args[2],
+                    args[3], args[4], args[5]);
+        }   }
     }
     matrix.preApply(transform);
     pushTransform();
@@ -1417,7 +1413,7 @@ public class PShapeOpenGL extends PShape {
 
 
   protected void pushTransform() {
-    if (transformStack == null) transformStack = new Stack<PMatrix>();
+    if (transformStack == null) transformStack = new Stack<>();
     PMatrix mat;
     if (transform instanceof PMatrix2D) {
       mat = new PMatrix2D();
@@ -1430,7 +1426,7 @@ public class PShapeOpenGL extends PShape {
 
 
   protected PMatrix popTransform() {
-    if (transformStack == null || transformStack.size() == 0) return null;
+    if (transformStack == null || transformStack.isEmpty()) return null;
     return transformStack.pop();
   }
 
@@ -2652,67 +2648,80 @@ public class PShapeOpenGL extends PShape {
   public float[] getTessellation(int kind, int data) {
     updateTessellation();
 
-    if (kind == TRIANGLES) {
-      if (data == POSITION) {
-        if (is3D()) {
-          root.setModifiedPolyVertices(firstPolyVertex, lastPolyVertex);
-        } else if (is2D()) {
-          int last1 = lastPolyVertex + 1;
-          if (-1 < firstLineVertex) last1 = firstLineVertex;
-          if (-1 < firstPointVertex) last1 = firstPointVertex;
-          root.setModifiedPolyVertices(firstPolyVertex, last1 - 1);
-        }
-        return tessGeo.polyVertices;
-      } else if (data == NORMAL) {
-        if (is3D()) {
-          root.setModifiedPolyNormals(firstPolyVertex, lastPolyVertex);
-        } else if (is2D()) {
-          int last1 = lastPolyVertex + 1;
-          if (-1 < firstLineVertex) last1 = firstLineVertex;
-          if (-1 < firstPointVertex) last1 = firstPointVertex;
-          root.setModifiedPolyNormals(firstPolyVertex, last1 - 1);
-        }
-        return tessGeo.polyNormals;
-      } else if (data == TEXCOORD) {
-        if (is3D()) {
-          root.setModifiedPolyTexCoords(firstPolyVertex, lastPolyVertex);
-        } else if (is2D()) {
-          int last1 = lastPolyVertex + 1;
-          if (-1 < firstLineVertex) last1 = firstLineVertex;
-          if (-1 < firstPointVertex) last1 = firstPointVertex;
-          root.setModifiedPolyTexCoords(firstPolyVertex, last1 - 1);
-        }
-        return tessGeo.polyTexCoords;
+      switch (kind) {
+          case TRIANGLES -> {
+              switch (data) {
+                  case POSITION -> {
+                      if (is3D()) {
+                          root.setModifiedPolyVertices(firstPolyVertex, lastPolyVertex);
+                      } else if (is2D()) {
+                          int last1 = lastPolyVertex + 1;
+                          if (-1 < firstLineVertex) last1 = firstLineVertex;
+                          if (-1 < firstPointVertex) last1 = firstPointVertex;
+                          root.setModifiedPolyVertices(firstPolyVertex, last1 - 1);
+                      }
+                      return tessGeo.polyVertices;
+                  }
+                  case NORMAL -> {
+                      if (is3D()) {
+                          root.setModifiedPolyNormals(firstPolyVertex, lastPolyVertex);
+                      } else if (is2D()) {
+                          int last1 = lastPolyVertex + 1;
+                          if (-1 < firstLineVertex) last1 = firstLineVertex;
+                          if (-1 < firstPointVertex) last1 = firstPointVertex;
+                          root.setModifiedPolyNormals(firstPolyVertex, last1 - 1);
+                      }
+                      return tessGeo.polyNormals;
+                  }
+                  case TEXCOORD -> {
+                      if (is3D()) {
+                          root.setModifiedPolyTexCoords(firstPolyVertex, lastPolyVertex);
+                      } else if (is2D()) {
+                          int last1 = lastPolyVertex + 1;
+                          if (-1 < firstLineVertex) last1 = firstLineVertex;
+                          if (-1 < firstPointVertex) last1 = firstPointVertex;
+                          root.setModifiedPolyTexCoords(firstPolyVertex, last1 - 1);
+                      }
+                      return tessGeo.polyTexCoords;
+                  }
+                  default -> {
+                          }
+              } }
+
+
+          case LINES -> {
+              if (data == POSITION) {
+                  if (is3D()) {
+                      root.setModifiedLineVertices(firstLineVertex, lastLineVertex);
+                  } else if (is2D()) {
+                      root.setModifiedPolyVertices(firstLineVertex, lastLineVertex);
+                  }
+                  return tessGeo.lineVertices;
+              } else if (data == DIRECTION) {
+                  if (is2D()) {
+                      root.setModifiedLineAttributes(firstLineVertex, lastLineVertex);
+                  }
+                  return tessGeo.lineDirections;
+              }
+          }
+          case POINTS -> {
+              if (data == POSITION) {
+                  if (is3D()) {
+                      root.setModifiedPointVertices(firstPointVertex, lastPointVertex);
+                  } else if (is2D()) {
+                      root.setModifiedPolyVertices(firstPointVertex, lastPointVertex);
+                  }
+                  return tessGeo.pointVertices;
+              } else if (data == OFFSET) {
+                  if (is2D()) {
+                      root.setModifiedPointAttributes(firstPointVertex, lastPointVertex);
+                  }
+                  return tessGeo.pointOffsets;
+              }
+          }
+          default -> {
+          }
       }
-    } else if (kind == LINES) {
-      if (data == POSITION) {
-        if (is3D()) {
-          root.setModifiedLineVertices(firstLineVertex, lastLineVertex);
-        } else if (is2D()) {
-          root.setModifiedPolyVertices(firstLineVertex, lastLineVertex);
-        }
-        return tessGeo.lineVertices;
-      } else if (data == DIRECTION) {
-        if (is2D()) {
-          root.setModifiedLineAttributes(firstLineVertex, lastLineVertex);
-        }
-        return tessGeo.lineDirections;
-      }
-    } else if (kind == POINTS) {
-      if (data == POSITION) {
-        if (is3D()) {
-          root.setModifiedPointVertices(firstPointVertex, lastPointVertex);
-        } else if (is2D()) {
-          root.setModifiedPolyVertices(firstPointVertex, lastPointVertex);
-        }
-        return tessGeo.pointVertices;
-      } else if (data == OFFSET) {
-        if (is2D()) {
-          root.setModifiedPointAttributes(firstPointVertex, lastPointVertex);
-        }
-        return tessGeo.pointOffsets;
-      }
-    }
     return null;
   }
 
@@ -2911,78 +2920,82 @@ public class PShapeOpenGL extends PShape {
         tessellator.setTransform(matrix);
         tessellator.set3D(is3D());
 
-        if (family == GEOMETRY) {
-          if (kind == POINTS) {
-            tessellator.tessellatePoints();
-          } else if (kind == LINES) {
-            tessellator.tessellateLines();
-          } else if (kind == LINE_STRIP) {
-            tessellator.tessellateLineStrip();
-          } else if (kind == LINE_LOOP) {
-            tessellator.tessellateLineLoop();
-          } else if (kind == TRIANGLE || kind == TRIANGLES) {
-            if (stroke) inGeo.addTrianglesEdges();
-            if (normalMode == NORMAL_MODE_AUTO) inGeo.calcTrianglesNormals();
-            tessellator.tessellateTriangles();
-          } else if (kind == TRIANGLE_FAN) {
-            if (stroke) inGeo.addTriangleFanEdges();
-            if (normalMode == NORMAL_MODE_AUTO) inGeo.calcTriangleFanNormals();
-            tessellator.tessellateTriangleFan();
-          } else if (kind == TRIANGLE_STRIP) {
-            if (stroke) inGeo.addTriangleStripEdges();
-            if (normalMode == NORMAL_MODE_AUTO) inGeo.calcTriangleStripNormals();
-            tessellator.tessellateTriangleStrip();
-          } else if (kind == QUAD || kind == QUADS) {
-            if (stroke) inGeo.addQuadsEdges();
-            if (normalMode == NORMAL_MODE_AUTO) inGeo.calcQuadsNormals();
-            tessellator.tessellateQuads();
-          } else if (kind == QUAD_STRIP) {
-            if (stroke) inGeo.addQuadStripEdges();
-            if (normalMode == NORMAL_MODE_AUTO) inGeo.calcQuadStripNormals();
-            tessellator.tessellateQuadStrip();
-          } else if (kind == POLYGON) {
-            boolean bez = inGeo.hasBezierVertex();
-            boolean quad = inGeo.hasQuadraticVertex();
-            boolean curv = inGeo.hasCurveVertex();
-            if (bez || quad) saveBezierVertexSettings();
-            if (curv) {
-              saveCurveVertexSettings();
-              tessellator.resetCurveVertexCount();
+          switch (family) {
+              case GEOMETRY -> {
+            switch (kind) {
+                case POINTS -> tessellator.tessellatePoints();
+                case LINES -> tessellator.tessellateLines();
+                case LINE_STRIP -> tessellator.tessellateLineStrip();
+                case LINE_LOOP -> tessellator.tessellateLineLoop();
+                case TRIANGLE, TRIANGLES -> {
+                    if (stroke) inGeo.addTrianglesEdges();
+                    if (normalMode == NORMAL_MODE_AUTO) inGeo.calcTrianglesNormals();
+                    tessellator.tessellateTriangles();
+                }
+                case TRIANGLE_FAN -> {
+                    if (stroke) inGeo.addTriangleFanEdges();
+                    if (normalMode == NORMAL_MODE_AUTO) inGeo.calcTriangleFanNormals();
+                    tessellator.tessellateTriangleFan();
+                }
+                case TRIANGLE_STRIP -> {
+                    if (stroke) inGeo.addTriangleStripEdges();
+                    if (normalMode == NORMAL_MODE_AUTO) inGeo.calcTriangleStripNormals();
+                    tessellator.tessellateTriangleStrip();
+                }
+                case QUAD, QUADS -> {
+                    if (stroke) inGeo.addQuadsEdges();
+                    if (normalMode == NORMAL_MODE_AUTO) inGeo.calcQuadsNormals();
+                    tessellator.tessellateQuads();
+                }
+                case QUAD_STRIP -> {
+                    if (stroke) inGeo.addQuadStripEdges();
+                    if (normalMode == NORMAL_MODE_AUTO) inGeo.calcQuadStripNormals();
+                    tessellator.tessellateQuadStrip();
+                }
+                case POLYGON -> {
+                    boolean bez = inGeo.hasBezierVertex();
+                    boolean quad = inGeo.hasQuadraticVertex();
+                    boolean curv = inGeo.hasCurveVertex();
+                    if (bez || quad) saveBezierVertexSettings();
+                    if (curv) {
+                        saveCurveVertexSettings();
+                        tessellator.resetCurveVertexCount();
+                    }
+                    tessellator.tessellatePolygon(solid, close,
+                            normalMode == NORMAL_MODE_AUTO);
+                    if (bez ||quad) restoreBezierVertexSettings();
+                    if (curv) restoreCurveVertexSettings();
+                }
+                default -> {
+                }
             }
-            tessellator.tessellatePolygon(solid, close,
-                                          normalMode == NORMAL_MODE_AUTO);
-            if (bez ||quad) restoreBezierVertexSettings();
-            if (curv) restoreCurveVertexSettings();
+              }
+              case PRIMITIVE -> {
+                  // The input geometry needs to be cleared because the geometry
+                  // generation methods in InGeometry add the vertices of the
+                  // new primitive to what is already stored.
+                  inGeo.clear();
+            switch (kind) {
+                case POINT -> tessellatePoint();
+                case LINE -> tessellateLine();
+                case TRIANGLE -> tessellateTriangle();
+                case QUAD -> tessellateQuad();
+                case RECT -> tessellateRect();
+                case ELLIPSE -> tessellateEllipse();
+                case ARC -> tessellateArc();
+                case BOX -> tessellateBox();
+                case SPHERE -> tessellateSphere();
+                default -> {
+                }
+            }
+              }
+              case PATH -> {
+                  inGeo.clear();
+                  tessellatePath();
+              }
+              default -> {
+              }
           }
-        } else if (family == PRIMITIVE) {
-          // The input geometry needs to be cleared because the geometry
-          // generation methods in InGeometry add the vertices of the
-          // new primitive to what is already stored.
-          inGeo.clear();
-
-          if (kind == POINT) {
-            tessellatePoint();
-          } else if (kind == LINE) {
-            tessellateLine();
-          } else if (kind == TRIANGLE) {
-            tessellateTriangle();
-          } else if (kind == QUAD) {
-            tessellateQuad();
-          } else if (kind == RECT) {
-            tessellateRect();
-          } else if (kind == ELLIPSE) {
-            tessellateEllipse();
-          } else if (kind == ARC) {
-            tessellateArc();
-          } else if (kind == BOX) {
-            tessellateBox();
-          } else if (kind == SPHERE) {
-            tessellateSphere();
-          }
-        } else if (family == PATH) {
-          inGeo.clear();
-          tessellatePath();
-        }
 
         if (image != null && parent != null) {
           ((PShapeOpenGL)parent).addTexture(image);
@@ -3137,26 +3150,27 @@ public class PShapeOpenGL extends PShape {
 
     float hradius, vradius;
     switch (mode) {
-    case CORNERS:
-      break;
-    case CORNER:
-      c += a; d += b;
-      break;
-    case RADIUS:
-      hradius = c;
-      vradius = d;
-      c = a + hradius;
-      d = b + vradius;
-      a -= hradius;
-      b -= vradius;
-      break;
-    case CENTER:
-      hradius = c / 2.0f;
-      vradius = d / 2.0f;
-      c = a + hradius;
-      d = b + vradius;
-      a -= hradius;
-      b -= vradius;
+    case CORNERS -> {
+          }
+    case CORNER -> {
+        c += a; d += b;
+          }
+    case RADIUS -> {
+        hradius = c;
+        vradius = d;
+        c = a + hradius;
+        d = b + vradius;
+        a -= hradius;
+        b -= vradius;
+          }
+    case CENTER -> {
+        hradius = c / 2.0f;
+        vradius = d / 2.0f;
+        c = a + hradius;
+        d = b + vradius;
+        a -= hradius;
+        b -= vradius;
+          }
     }
 
     if (a > c) {
@@ -3204,20 +3218,24 @@ public class PShapeOpenGL extends PShape {
     float w = c;
     float h = d;
 
-    if (mode == CORNERS) {
-      w = c - a;
-      h = d - b;
-
-    } else if (mode == RADIUS) {
-      x = a - c;
-      y = b - d;
-      w = c * 2;
-      h = d * 2;
-
-    } else if (mode == DIAMETER) {
-      x = a - c/2f;
-      y = b - d/2f;
-    }
+      switch (mode) {
+          case CORNERS -> {
+              w = c - a;
+              h = d - b;
+          }
+          case RADIUS -> {
+              x = a - c;
+              y = b - d;
+              w = c * 2;
+              h = d * 2;
+          }
+          case DIAMETER -> {
+              x = a - c/2f;
+              y = b - d/2f;
+          }
+          default -> {
+          }
+      }
 
     if (w < 0) {  // undo negative width
       x += w;
@@ -3260,20 +3278,24 @@ public class PShapeOpenGL extends PShape {
     float w = c;
     float h = d;
 
-    if (mode == CORNERS) {
-      w = c - a;
-      h = d - b;
-
-    } else if (mode == RADIUS) {
-      x = a - c;
-      y = b - d;
-      w = c * 2;
-      h = d * 2;
-
-    } else if (mode == CENTER) {
-      x = a - c/2f;
-      y = b - d/2f;
-    }
+      switch (mode) {
+          case CORNERS -> {
+              w = c - a;
+              h = d - b;
+          }
+          case RADIUS -> {
+              x = a - c;
+              y = b - d;
+              w = c * 2;
+              h = d * 2;
+          }
+          case CENTER -> {
+              x = a - c/2f;
+              y = b - d/2f;
+          }
+          default -> {
+          }
+      }
 
     // make sure the loop will exit before starting while
     if (!Float.isInfinite(start) && !Float.isInfinite(stop)) {
@@ -3377,88 +3399,86 @@ public class PShapeOpenGL extends PShape {
         for (int j = 0; j < vertexCodeCount; j++) {
           switch (vertexCodes[j]) {
 
-          case VERTEX:
-            inGeo.addVertex(vertices[idx][X], vertices[idx][Y], VERTEX, brk);
-            brk = false;
-            idx++;
-            break;
+          case VERTEX -> {
+              inGeo.addVertex(vertices[idx][X], vertices[idx][Y], VERTEX, brk);
+              brk = false;
+              idx++;
+                }
 
-          case QUADRATIC_VERTEX:
-            inGeo.addQuadraticVertex(vertices[idx+0][X], vertices[idx+0][Y], 0,
-                                     vertices[idx+1][X], vertices[idx+1][Y], 0,
-                                     brk);
-            brk = false;
-            idx += 2;
-            break;
+          case QUADRATIC_VERTEX -> {
+              inGeo.addQuadraticVertex(vertices[idx+0][X], vertices[idx+0][Y], 0,
+                      vertices[idx+1][X], vertices[idx+1][Y], 0,
+                      brk);
+              brk = false;
+              idx += 2;
+                }
 
-          case BEZIER_VERTEX:
-            inGeo.addBezierVertex(vertices[idx+0][X], vertices[idx+0][Y], 0,
-                                  vertices[idx+1][X], vertices[idx+1][Y], 0,
-                                  vertices[idx+2][X], vertices[idx+2][Y], 0,
-                                  brk);
-            brk = false;
-            idx += 3;
-            break;
+          case BEZIER_VERTEX -> {
+              inGeo.addBezierVertex(vertices[idx+0][X], vertices[idx+0][Y], 0,
+                      vertices[idx+1][X], vertices[idx+1][Y], 0,
+                      vertices[idx+2][X], vertices[idx+2][Y], 0,
+                      brk);
+              brk = false;
+              idx += 3;
+                }
 
-          case CURVE_VERTEX:
-            inGeo.addCurveVertex(vertices[idx][X], vertices[idx][Y], 0, brk);
-            brk = false;
-            idx++;
-            break;
+          case CURVE_VERTEX -> {
+              inGeo.addCurveVertex(vertices[idx][X], vertices[idx][Y], 0, brk);
+              brk = false;
+              idx++;
+                }
 
-          case BREAK:
-            brk = true;
+          case BREAK -> brk = true;
           }
         }
       } else {  // tessellating a 3D path
         for (int j = 0; j < vertexCodeCount; j++) {
           switch (vertexCodes[j]) {
 
-          case VERTEX:
-            inGeo.addVertex(vertices[idx][X], vertices[idx][Y],
-                            vertices[idx][Z], brk);
-            brk = false;
-            idx++;
-            break;
+          case VERTEX -> {
+              inGeo.addVertex(vertices[idx][X], vertices[idx][Y],
+                      vertices[idx][Z], brk);
+              brk = false;
+              idx++;
+                }
 
-          case QUADRATIC_VERTEX:
-            inGeo.addQuadraticVertex(vertices[idx+0][X],
-                                     vertices[idx+0][Y],
-                                     vertices[idx+0][Z],
-                                     vertices[idx+1][X],
-                                     vertices[idx+1][Y],
-                                     vertices[idx+0][Z],
-                                     brk);
-            brk = false;
-            idx += 2;
-            break;
+          case QUADRATIC_VERTEX -> {
+              inGeo.addQuadraticVertex(vertices[idx+0][X],
+                      vertices[idx+0][Y],
+                      vertices[idx+0][Z],
+                      vertices[idx+1][X],
+                      vertices[idx+1][Y],
+                      vertices[idx+0][Z],
+                      brk);
+              brk = false;
+              idx += 2;
+                }
 
-          case BEZIER_VERTEX:
-            inGeo.addBezierVertex(vertices[idx+0][X],
-                                  vertices[idx+0][Y],
-                                  vertices[idx+0][Z],
-                                  vertices[idx+1][X],
-                                  vertices[idx+1][Y],
-                                  vertices[idx+1][Z],
-                                  vertices[idx+2][X],
-                                  vertices[idx+2][Y],
-                                  vertices[idx+2][Z],
-                                  brk);
-            brk = false;
-            idx += 3;
-            break;
+          case BEZIER_VERTEX -> {
+              inGeo.addBezierVertex(vertices[idx+0][X],
+                      vertices[idx+0][Y],
+                      vertices[idx+0][Z],
+                      vertices[idx+1][X],
+                      vertices[idx+1][Y],
+                      vertices[idx+1][Z],
+                      vertices[idx+2][X],
+                      vertices[idx+2][Y],
+                      vertices[idx+2][Z],
+                      brk);
+              brk = false;
+              idx += 3;
+                }
 
-          case CURVE_VERTEX:
-            inGeo.addCurveVertex(vertices[idx][X],
-                                 vertices[idx][Y],
-                                 vertices[idx][Z],
-                                 brk);
-            brk = false;
-            idx++;
-            break;
+          case CURVE_VERTEX -> {
+              inGeo.addCurveVertex(vertices[idx][X],
+                      vertices[idx][Y],
+                      vertices[idx][Z],
+                      brk);
+              brk = false;
+              idx++;
+                }
 
-          case BREAK:
-            brk = true;
+          case BREAK -> brk = true;
           }
         }
       }
@@ -3963,8 +3983,8 @@ public class PShapeOpenGL extends PShape {
     pgl.bufferData(PGL.ARRAY_BUFFER, sizef,
                    tessGeo.polyShininessBuffer, glUsage);
 
-    for (String name: polyAttribs.keySet()) {
-      VertexAttribute attrib = polyAttribs.get(name);
+    for (String lname: polyAttribs.keySet()) {
+      VertexAttribute attrib = polyAttribs.get(lname);
       tessGeo.updateAttribBuffer(attrib.name);
       if (!attrib.bufferCreated()) attrib.createBuffer(pgl);
       pgl.bindBuffer(PGL.ARRAY_BUFFER, attrib.buf.glId);
@@ -4175,17 +4195,20 @@ public class PShapeOpenGL extends PShape {
       firstModifiedPolyShininess = PConstants.MAX_INT;
       lastModifiedPolyShininess = PConstants.MIN_INT;
     }
-    for (String name: polyAttribs.keySet()) {
-      VertexAttribute attrib = polyAttribs.get(name);
-      if (attrib.modified) {
+    polyAttribs.keySet().stream().map(lname -> polyAttribs.get(lname)).filter(attrib -> (attrib.modified)).map(attrib -> {
         int offset = firstModifiedPolyVertex;
         int size = lastModifiedPolyVertex - offset + 1;
         copyPolyAttrib(attrib, offset, size);
-        attrib.modified = false;
-        attrib.firstModified = PConstants.MAX_INT;
-        attrib.lastModified = PConstants.MIN_INT;
-      }
-    }
+          return attrib;
+      }).map(attrib -> {
+          attrib.modified = false;
+          return attrib;
+      }).map(attrib -> {
+          attrib.firstModified = PConstants.MAX_INT;
+          return attrib;
+      }).forEachOrdered(attrib -> {
+          attrib.lastModified = PConstants.MIN_INT;
+      });
 
     if (modifiedLineVertices) {
       int offset = firstModifiedLineVertex;
@@ -4653,8 +4676,7 @@ public class PShapeOpenGL extends PShape {
 
   @Override
   public void draw(PGraphics g) {
-    if (g instanceof PGraphicsOpenGL) {
-      PGraphicsOpenGL gl = (PGraphicsOpenGL)g;
+    if (g instanceof PGraphicsOpenGL gl) {
       if (visible) {
         pre(gl);
 
@@ -4710,63 +4732,64 @@ public class PShapeOpenGL extends PShape {
       for (int j = 0; j < inGeo.codeCount; j++) {
         switch (inGeo.codes[j]) {
 
-        case VERTEX:
-          v = 3 * idx;
-          x = inGeo.vertices[v++];
-          y = inGeo.vertices[v  ];
-          super.vertex(x, y);
+        case VERTEX -> {
+            v = 3 * idx;
+            x = inGeo.vertices[v++];
+            y = inGeo.vertices[v  ];
+            super.vertex(x, y);
+            
+            idx++;
+              }
 
-          idx++;
-          break;
+        case QUADRATIC_VERTEX -> {
+            v = 3 * idx;
+            cx = inGeo.vertices[v++];
+            cy = inGeo.vertices[v];
+            
+            v = 3 * (idx + 1);
+            x3 = inGeo.vertices[v++];
+            y3 = inGeo.vertices[v];
+            
+            super.quadraticVertex(cx, cy, x3, y3);
+            
+            idx += 2;
+              }
 
-        case QUADRATIC_VERTEX:
-          v = 3 * idx;
-          cx = inGeo.vertices[v++];
-          cy = inGeo.vertices[v];
+        case BEZIER_VERTEX -> {
+            v = 3 * idx;
+            x2 = inGeo.vertices[v++];
+            y2 = inGeo.vertices[v  ];
+            
+            v = 3 * (idx + 1);
+            x3 = inGeo.vertices[v++];
+            y3 = inGeo.vertices[v  ];
+            
+            v = 3 * (idx + 2);
+            x4 = inGeo.vertices[v++];
+            y4 = inGeo.vertices[v  ];
+            
+            super.bezierVertex(x2, y2, x3, y3, x4, y4);
+            
+            idx += 3;
+              }
 
-          v = 3 * (idx + 1);
-          x3 = inGeo.vertices[v++];
-          y3 = inGeo.vertices[v];
+        case CURVE_VERTEX -> {
+            v = 3 * idx;
+            x = inGeo.vertices[v++];
+            y = inGeo.vertices[v  ];
+            
+            super.curveVertex(x, y);
+            
+            idx++;
+              }
 
-          super.quadraticVertex(cx, cy, x3, y3);
-
-          idx += 2;
-          break;
-
-        case BEZIER_VERTEX:
-          v = 3 * idx;
-          x2 = inGeo.vertices[v++];
-          y2 = inGeo.vertices[v  ];
-
-          v = 3 * (idx + 1);
-          x3 = inGeo.vertices[v++];
-          y3 = inGeo.vertices[v  ];
-
-          v = 3 * (idx + 2);
-          x4 = inGeo.vertices[v++];
-          y4 = inGeo.vertices[v  ];
-
-          super.bezierVertex(x2, y2, x3, y3, x4, y4);
-
-          idx += 3;
-          break;
-
-        case CURVE_VERTEX:
-          v = 3 * idx;
-          x = inGeo.vertices[v++];
-          y = inGeo.vertices[v  ];
-
-          super.curveVertex(x, y);
-
-          idx++;
-          break;
-
-        case BREAK:
-          if (insideContour) {
-            super.endContourImpl();
-          }
-          super.beginContourImpl();
-          insideContour = true;
+        case BREAK -> {
+            if (insideContour) {
+                super.endContourImpl();
+            }
+            super.beginContourImpl();
+            insideContour = true;
+              }
         }
       }
       if (insideContour) {

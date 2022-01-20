@@ -241,8 +241,8 @@ public class PJOGL extends PGL {
     PSurface surf = sketch.getSurface();
     if (surf == null) {
       return graphics.pixelDensity;
-    } else if (surf instanceof PSurfaceJOGL) {
-      return ((PSurfaceJOGL)surf).getPixelScale();
+    } else if (surf instanceof PSurfaceJOGL pSurfaceJOGL) {
+      return pSurfaceJOGL.getPixelScale();
     } else {
       throw new RuntimeException("Renderer cannot find a JOGL surface");
     }
@@ -637,6 +637,7 @@ public class PJOGL extends PGL {
       setProperty(GLU.GLU_TESS_WINDING_RULE, rule);
     }
 
+    @Override
     public void setProperty(int property, int value) {
       GLU.gluTessProperty(tess, property, value);
     }

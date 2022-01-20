@@ -32,8 +32,6 @@ import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.metadata.IIOMetadataNode;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 // used by desktopFile() method
 import javax.swing.filechooser.FileSystemView;
@@ -62,10 +60,10 @@ public class ShimAWT implements PConstants {
   */
   static private ShimAWT instance;
 
-  private GraphicsDevice[] displayDevices;
+  private final GraphicsDevice[] displayDevices;
 
-  private int displayWidth;
-  private int displayHeight;
+  private final int displayWidth;
+  private final int displayHeight;
 
 
   /** Only needed for display functions */
@@ -198,7 +196,6 @@ public class ShimAWT implements PConstants {
         return image;
 
       } catch (IOException e) {
-        e.printStackTrace();
         return null;
       }
     }
@@ -223,8 +220,7 @@ public class ShimAWT implements PConstants {
           //Image awtImage = Toolkit.getDefaultToolkit().createImage(bytes);
           Image awtImage = new ImageIcon(bytes).getImage();
 
-          if (awtImage instanceof BufferedImage) {
-            BufferedImage buffImage = (BufferedImage) awtImage;
+          if (awtImage instanceof BufferedImage buffImage) {
             int space = buffImage.getColorModel().getColorSpace().getType();
             if (space == ColorSpace.TYPE_CMYK) {
               System.err.println(filename + " is a CMYK image, " +
@@ -261,19 +257,19 @@ public class ShimAWT implements PConstants {
         }
       }
     } catch (Exception e) {
-      // show error, but move on to the stuff below, see if it'll work
-      e.printStackTrace();
+        // show error, but move on to the stuff below, see if it'll work
+
     }
 
     if (loadImageFormats == null) {
       loadImageFormats = ImageIO.getReaderFormatNames();
     }
     if (loadImageFormats != null) {
-      for (int i = 0; i < loadImageFormats.length; i++) {
-        if (extension.equals(loadImageFormats[i])) {
-          return loadImageIO(sketch, filename);
+        for (String loadImageFormat : loadImageFormats) {
+            if (extension.equals(loadImageFormat)) {
+                return loadImageIO(sketch, filename);
+            }
         }
-      }
     }
 
     // failed, could not load image after all those attempts
@@ -284,6 +280,9 @@ public class ShimAWT implements PConstants {
 
   /**
    * Use Java 1.4 ImageIO methods to load an image.
+   * @param sketch
+   * @param filename
+   * @return 
    */
   static protected PImage loadImageIO(PApplet sketch, String filename) {
     InputStream stream = sketch.createInput(filename);
@@ -314,8 +313,7 @@ public class ShimAWT implements PConstants {
       // return the image
       return outgoing;
 
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (IOException e) {
       return null;
     }
   }
@@ -330,18 +328,17 @@ public class ShimAWT implements PConstants {
     }
     try {
       if (saveImageFormats != null) {
-        for (int i = 0; i < saveImageFormats.length; i++) {
-          if (path.endsWith("." + saveImageFormats[i])) {
-            if (!saveImageIO(image, path)) {
-              System.err.println("Error while saving image.");
-              return false;
-            }
-            return true;
+          for (String saveImageFormat : saveImageFormats) {
+              if (path.endsWith("." + saveImageFormat)) {
+                  if (!saveImageIO(image, path)) {
+                      System.err.println("Error while saving image.");
+                      return false;
+                  }
+                  return true;
+              }
           }
-        }
       }
     } catch (IOException e) {
-      e.printStackTrace();
     }
     return false;
   }
@@ -351,10 +348,12 @@ public class ShimAWT implements PConstants {
 
 
   /**
-   * Use ImageIO functions from Java 1.4 and later to handle image save.
-   * Various formats are supported, typically jpeg, png, bmp, and wbmp.
-   * To get a list of the supported formats for writing, use: <BR>
-   * <code>println(javax.imageio.ImageIO.getReaderFormatNames())</code>
+   * Use ImageIO functions from Java 1.4 and later to handle image save.Various formats are supported, typically jpeg, png, bmp, and wbmp.To get a list of the supported formats for writing, use: <BR>
+    <code>println(javax.imageio.ImageIO.getReaderFormatNames())</code>
+   * @param image
+   * @param path
+   * @return 
+   * @throws java.io.IOException
    */
   static protected boolean saveImageIO(PImage image, String path) throws IOException {
     try {
@@ -402,22 +401,20 @@ public class ShimAWT implements PConstants {
       }
 
       if (writer != null) {
-        BufferedOutputStream output =
-          new BufferedOutputStream(PApplet.createOutput(file));
-        writer.setOutput(ImageIO.createImageOutputStream(output));
+          try (BufferedOutputStream output = new BufferedOutputStream(PApplet.createOutput(file))) {
+              writer.setOutput(ImageIO.createImageOutputStream(output));
 //        writer.write(null, new IIOImage(bimage, null, null), param);
-        writer.write(metadata, new IIOImage(bimage, null, metadata), param);
-        writer.dispose();
+writer.write(metadata, new IIOImage(bimage, null, metadata), param);
+writer.dispose();
 
-        output.flush();
-        output.close();
+output.flush();
+          }
         return true;
       }
       // If iter.hasNext() somehow fails up top, it falls through to here
       return javax.imageio.ImageIO.write(bimage, extension, file);
 
-    } catch (Exception e) {
-      e.printStackTrace();
+    } catch (IOException e) {
       throw new IOException("image save failed.");
     }
   }
@@ -462,7 +459,6 @@ public class ShimAWT implements PConstants {
 
       } catch (IIOInvalidTreeException e) {
         System.err.println("Could not set the DPI of the output image");
-        e.printStackTrace();
       }
     }
     return null;
@@ -510,8 +506,10 @@ public class ShimAWT implements PConstants {
 
 
  /**
-  * @param display the display number to check
-  * (1-indexed to match the Preferences dialog box)
+     * @param prompt
+     * @param callbackMethod
+     * @param file
+     * @param callbackObject
   */
   /*
   public int displayDensity(int display) {

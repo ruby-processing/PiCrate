@@ -187,7 +187,7 @@ public class PSurfaceAWT extends PSurfaceNone {
   public class SmoothCanvas extends Canvas {
 
     private Dimension oldSize = new Dimension(0, 0);
-    private Dimension newSize = new Dimension(0, 0);
+    private final Dimension newSize = new Dimension(0, 0);
 
     // Turns out getParent() returns a JPanel on a JFrame. Yech.
     /**
@@ -493,8 +493,8 @@ public class PSurfaceAWT extends PSurfaceNone {
 //      backgroundColor = WINDOW_BGCOLOR;
 //    }
     final Color windowColor = new Color(sketch.sketchWindowColor(), false);
-    if (frame instanceof JFrame) {
-      ((JFrame) frame).getContentPane().setBackground(windowColor);
+    if (frame instanceof JFrame jFrame) {
+          jFrame.getContentPane().setBackground(windowColor);
     } else {
       frame.setBackground(windowColor);
     }
@@ -1225,42 +1225,28 @@ public class PSurfaceAWT extends PSurfaceNone {
 
     int peAction = 0;
     switch (nativeEvent.getID()) {
-      case java.awt.event.MouseEvent.MOUSE_PRESSED:
-        peAction = MouseEvent.PRESS;
-        break;
-      case java.awt.event.MouseEvent.MOUSE_RELEASED:
-        peAction = MouseEvent.RELEASE;
-        break;
-      case java.awt.event.MouseEvent.MOUSE_CLICKED:
-        peAction = MouseEvent.CLICK;
-        break;
-      case java.awt.event.MouseEvent.MOUSE_DRAGGED:
-        peAction = MouseEvent.DRAG;
-        break;
-      case java.awt.event.MouseEvent.MOUSE_MOVED:
-        peAction = MouseEvent.MOVE;
-        break;
-      case java.awt.event.MouseEvent.MOUSE_ENTERED:
-        peAction = MouseEvent.ENTER;
-        break;
-      case java.awt.event.MouseEvent.MOUSE_EXITED:
-        peAction = MouseEvent.EXIT;
-        break;
-      //case java.awt.event.MouseWheelEvent.WHEEL_UNIT_SCROLL:
-      case java.awt.event.MouseEvent.MOUSE_WHEEL:
-        peAction = MouseEvent.WHEEL;
-        /*
-      if (preciseWheelMethod != null) {
-        try {
+      case java.awt.event.MouseEvent.MOUSE_PRESSED -> peAction = MouseEvent.PRESS;
+      case java.awt.event.MouseEvent.MOUSE_RELEASED -> peAction = MouseEvent.RELEASE;
+      case java.awt.event.MouseEvent.MOUSE_CLICKED -> peAction = MouseEvent.CLICK;
+      case java.awt.event.MouseEvent.MOUSE_DRAGGED -> peAction = MouseEvent.DRAG;
+      case java.awt.event.MouseEvent.MOUSE_MOVED -> peAction = MouseEvent.MOVE;
+      case java.awt.event.MouseEvent.MOUSE_ENTERED -> peAction = MouseEvent.ENTER;
+      case java.awt.event.MouseEvent.MOUSE_EXITED -> peAction = MouseEvent.EXIT;
+      case java.awt.event.MouseEvent.MOUSE_WHEEL -> {
+          peAction = MouseEvent.WHEEL;
+          /*
+          if (preciseWheelMethod != null) {
+          try {
           peAmount = ((Double) preciseWheelMethod.invoke(nativeEvent, (Object[]) null)).floatValue();
-        } catch (Exception e) {
+          } catch (Exception e) {
           preciseWheelMethod = null;
-        }
-      }
-         */
-        peCount = ((MouseWheelEvent) nativeEvent).getWheelRotation();
-        break;
+          }
+          }
+          */
+          peCount = ((MouseWheelEvent) nativeEvent).getWheelRotation();
+          }
     }
+      //case java.awt.event.MouseWheelEvent.WHEEL_UNIT_SCROLL:
 
     //System.out.println(nativeEvent);
     //int modifiers = nativeEvent.getModifiersEx();
@@ -1314,15 +1300,9 @@ public class PSurfaceAWT extends PSurfaceNone {
   protected void nativeKeyEvent(java.awt.event.KeyEvent event) {
     int peAction = 0;
     switch (event.getID()) {
-      case java.awt.event.KeyEvent.KEY_PRESSED:
-        peAction = KeyEvent.PRESS;
-        break;
-      case java.awt.event.KeyEvent.KEY_RELEASED:
-        peAction = KeyEvent.RELEASE;
-        break;
-      case java.awt.event.KeyEvent.KEY_TYPED:
-        peAction = KeyEvent.TYPE;
-        break;
+      case java.awt.event.KeyEvent.KEY_PRESSED -> peAction = KeyEvent.PRESS;
+      case java.awt.event.KeyEvent.KEY_RELEASED -> peAction = KeyEvent.RELEASE;
+      case java.awt.event.KeyEvent.KEY_TYPED -> peAction = KeyEvent.TYPE;
     }
 
 //    int peModifiers = event.getModifiersEx() &
